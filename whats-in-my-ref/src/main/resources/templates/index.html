@@ -1,0 +1,19 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="/img/elephant.png" rel="shortcut icon" type="image/x-icon">
+    <title>Session Home</title>
+</head>
+<body>
+    <header th:replace="~{fragments/header::header}"/>
+
+    <div class="Content">
+        <div id="Search_recipe">
+            <button><span>재료 검색</span></button>
+        </div>
+        <div id="Make_recipe">
+            <button><span>레시피 등록</span></button>
+        </div>
+    </div>
+</body>
