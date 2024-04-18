@@ -1,0 +1,169 @@
+@font-face {
+  font-family: 'YEONGJUSeonbiTTF';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2403@1.0/YEONGJUSeonbiTTF.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  font-family: "Open Sans", sans-serif;
+  color: #444;
+  margin: 0;
+}
+
+a {
+  color: #4fa6d5;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #45beff;
+  text-decoration: none;
+}
+
+
+/*--------------------------------------------------------------
+# Header
+--------------------------------------------------------------*/
+#header {
+  height: 90px; /*헤더 높이*/
+  transition: all 0.5s;
+  z-index: 997;
+  transition: all 0.5s;
+  background: rgba(12, 12, 11, 0.7);
+  overflow: hidden;
+  position: relative;
+  z-index: 9999;
+}
+
+#header.header-transparent {
+  background: none;
+}
+
+#header .logo{
+  display: grid;
+  grid-template-columns: 100px 300px 500px;
+}
+
+#header .logo h1 {
+  font:600 40px 'YEONGJUSeonbiTTF';;
+  margin: 0;
+  padding: 6px 0px 6px; /*위 좌-우 아래*/
+  line-height: 1;
+  font-weight: 600;
+  letter-spacing: 2px; /*글자 간격*/
+}
+
+#header .logo h1 a,
+#header .logo h1 a:hover {
+  color: #fff;
+  text-decoration: none;
+}
+
+#header .logo img {
+  padding: 0;
+  margin: 0;
+}
+
+/*--------------------------------------------------------------
+# Navigation Menu
+--------------------------------------------------------------*/
+/**
+* Desktop Navigation 
+*/
+.navbar {
+  padding: 0;
+}
+
+.navbar ul {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  list-style: none;
+  align-items: center;
+}
+
+.navbar li {
+  position: relative;
+}
+
+.navbar a,
+.navbar a:focus {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0 10px 30px;
+  font-family: "Open Sans", sans-serif;
+  font-size: 20px;
+  color: #fff;
+  white-space: nowrap;
+  transition: 0.3s;
+}
+
+.navbar a i,
+.navbar a:focus i {
+  font-size: 12px;
+  line-height: 0;
+  margin-left: 5px;
+}
+
+.navbar a:hover,
+.navbar .active,
+.navbar .active:focus,
+.navbar li:hover>a {
+  color: #a2cce3;
+}
+
+.Content{
+  width: 100%;
+  position: relative;
+  transform: translate(0,-90px);
+  height:100%;
+  z-index: 0;
+}
+
+#Make_recipe, #Search_recipe{
+  float:left;
+  width:50%;
+  overflow: hidden;
+  button{
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    border:0;
+    font:600 60px 'YEONGJUSeonbiTTF';;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  button:hover{
+    transform: scale(1.2);
+    span{
+      background-color: rgb(255, 254, 200);
+      border-radius: 50%;
+    }
+  }
+}
+
+.Content #Search_recipe button{
+  background-image: url('../img/ref2-1.jpg');
+  span{
+    color:rgb(216, 138, 20);
+    
+  }
+}
+
+
+.Content #Make_recipe button{
+  background-image: url('../img/baked-goods.jpg');
+  span{
+    display: inline-block;
+    transform: rotate(-8deg);
+    position: relative;
+    bottom: 30px;
+    right: 45px;
+    color:rgb(33, 156, 46);
+    
+  }
+}
