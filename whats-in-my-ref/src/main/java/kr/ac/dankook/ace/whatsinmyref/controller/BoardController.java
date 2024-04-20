@@ -34,4 +34,10 @@ public class BoardController {
         return "";
     }
 
+    @GetMapping("/boardView") //localhosr:8080/boardView?id=1
+    public String boardView(Model model,Integer id){
+        model.addAttribute("board",boardService.boardView(id));
+        return "/board/boardView";
+    }
+
 }
