@@ -8,5 +8,6 @@
   <body>
     <h2 th:text="${board.title}">제목입니다</h2>
     <p th:text="${board.content}">내용이 들어갈 부분</p>
+    <a th:href="@{/boardDelete(id=${board.id})}">글 삭제</a>
   </body>
 </html>
