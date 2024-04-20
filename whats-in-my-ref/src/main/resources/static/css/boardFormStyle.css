@@ -1,0 +1,28 @@
+body {
+  background-color: darksalmon;
+}
+
+#writeForm {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+#title {
+  width: 400px;
+}
+
+#content {
+  width: 400px;
+  height: 400px;
+}
+
+textarea {
+  resize: none;
+}
+
+h2 {
+  display: flex;
+  justify-content: center;
+}
