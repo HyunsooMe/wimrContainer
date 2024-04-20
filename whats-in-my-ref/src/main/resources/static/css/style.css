@@ -5,10 +5,19 @@
   font-style: normal;
 }
 
+:root{
+  --window-width:0;
+  --window-height:0;
+}
 body {
+  min-width: 1500px;
+  max-width: 3000px;
+  width: 100vw;
+  aspect-ratio: 140/75;
   font-family: "Open Sans", sans-serif;
   color: #444;
   margin: 0;
+  background-color: rgba(184, 184, 184, 0.411);
 }
 
 a {
@@ -26,14 +35,16 @@ a:hover {
 # Header
 --------------------------------------------------------------*/
 #header {
-  height: 90px; /*헤더 높이*/
-  transition: all 0.5s;
-  z-index: 997;
-  transition: all 0.5s;
-  background: rgba(12, 12, 11, 0.7);
-  overflow: hidden;
+  min-width: 1400px;
+  aspect-ratio: 32/1;
+  width: 100%;
   position: relative;
-  z-index: 9999;
+  z-index: 2;
+  display: flex;
+  justify-content: left;
+  background: rgba(230, 57, 57, 0.9);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+  /*border-radius: 40px 40px 0px 0px;*/
 }
 
 #header.header-transparent {
@@ -41,16 +52,15 @@ a:hover {
 }
 
 #header .logo{
-  display: grid;
-  grid-template-columns: 100px 300px 500px;
+  position: relative;
 }
 
 #header .logo h1 {
-  font:600 40px 'YEONGJUSeonbiTTF';;
+  font-family:  'YEONGJUSeonbiTTF';
   margin: 0;
   padding: 6px 0px 6px; /*위 좌-우 아래*/
   line-height: 1;
-  font-weight: 600;
+  font-weight: 500;
   letter-spacing: 2px; /*글자 간격*/
 }
 
@@ -61,8 +71,11 @@ a:hover {
 }
 
 #header .logo img {
+  width:4%;
+  height:auto;
   padding: 0;
   margin: 0;
+  float: left;
 }
 
 /*--------------------------------------------------------------
@@ -72,7 +85,9 @@ a:hover {
 * Desktop Navigation 
 */
 .navbar {
+  display: block;
   padding: 0;
+  position: relative;
 }
 
 .navbar ul {
@@ -92,9 +107,8 @@ a:hover {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px 0 10px 30px;
+  padding: 10px 10px 10px 30px;
   font-family: "Open Sans", sans-serif;
-  font-size: 20px;
   color: #fff;
   white-space: nowrap;
   transition: 0.3s;
@@ -114,56 +128,131 @@ a:hover {
   color: #a2cce3;
 }
 
+.navbar .dropdown ul {
+  display: block;
+  position: absolute;
+  left: -80px;
+  top: calc(100% + 30px);
+  margin: 0;
+  padding: 10px 0;
+  border-radius: 10px;
+  z-index: 99;
+  opacity: 0;
+  visibility: hidden;
+  background: #fff;
+  box-shadow: 0px 0px 30px rgba(127, 137, 161, 0.25);
+  transition: 0.3s;
+}
+
+.navbar .dropdown ul li {
+  min-width: 200px;
+}
+
+.navbar .dropdown ul a {
+  padding: 10px 20px;
+  font-size: 14px;
+  text-transform: none;
+  color: #1c3745;
+}
+
+.navbar .dropdown ul a i {
+  font-size: 12px;
+}
+
+.navbar .dropdown ul a:hover,
+.navbar .dropdown ul .active:hover,
+.navbar .dropdown ul li:hover>a {
+  color: #68A4C4;
+}
+
+.navbar .dropdown:hover>ul {
+  opacity: 1;
+  top: 100%;
+  visibility: visible;
+}
+
+.navbar .dropdown .dropdown ul {
+  top: 0;
+  left: -100%;
+  visibility: hidden;
+}
+
+.navbar .dropdown .dropdown:hover>ul {
+  opacity: 1;
+  top: 0;
+  right:100%;
+  visibility: visible;
+}
+
+@media (max-width: 1550px) {
+  .navbar .dropdown .dropdown ul {
+    left: -90%;
+  }
+
+  .navbar .dropdown .dropdown:hover>ul {
+    left: -100%;
+  }
+}
+
+.Container2{
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  /*border-radius: 40px;*/
+  background: url("../img/index_img-1\ \(6\).jpeg") no-repeat center center local;
+  background-size: cover;
+  overflow: hidden;
+}
+
 .Content{
   width: 100%;
-  position: relative;
-  transform: translate(0,-90px);
-  height:100%;
-  z-index: 0;
 }
 
-#Make_recipe, #Search_recipe{
-  float:left;
-  width:50%;
-  overflow: hidden;
-  button{
-    background-size: cover;
-    background-repeat: no-repeat;
+.box{
+  width: 20vw;
+  min-width: 260px ;
+  aspect-ratio: 1;
+  padding: 0;
+  font:600 60px 'YEONGJUSeonbiTTF';
+  cursor: pointer;
+  perspective: 1100px; 
+  .front{
+    position: absolute;
     width: 100%;
     height: 100%;
-    background-color: transparent;
-    border:0;
-    font:600 60px 'YEONGJUSeonbiTTF';;
-    cursor: pointer;
-    transition: all 0.3s ease;
+    border:3px solid black;
+    
   }
-  button:hover{
-    transform: scale(1.2);
-    span{
-      background-color: rgb(255, 254, 200);
-      border-radius: 50%;
-    }
+  .back{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    backdrop-filter: blur(4px);
   }
 }
 
-.Content #Search_recipe button{
-  background-image: url('../img/ref2-1.jpg');
-  span{
+.box div{
+  transition:.15s ;
+}
+
+
+.Content #Search_recipe {
+  position: relative;
+  left:420px;top:43px;
+  z-index: 1;
+  div{
     color:rgb(216, 138, 20);
     
   }
 }
 
 
-.Content #Make_recipe button{
-  background-image: url('../img/baked-goods.jpg');
-  span{
+.Content #Make_recipe {
+  position: relative;
+  left:1000px; top:20px;
+  z-index: 0;
+  div{
     display: inline-block;
-    transform: rotate(-8deg);
-    position: relative;
-    bottom: 30px;
-    right: 45px;
     color:rgb(33, 156, 46);
-    
-  }
+  }  
 }

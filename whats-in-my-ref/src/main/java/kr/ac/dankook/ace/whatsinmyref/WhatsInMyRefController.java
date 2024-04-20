@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class WhatsInMyRefController {
     @GetMapping("")
     public String getMethodName() {
-        return "home";
+        return "index";
     }
     
 }
