@@ -2,18 +2,39 @@
 <head>
     <meta charset="UTF-8">
     <link href="/css/style.css" rel="stylesheet">
+    <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.conditional.min.css"
+  />
     <link href="/img/elephant.png" rel="shortcut icon" type="image/x-icon">
+
+    <!--menu icon
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
+      </svg>-->
+      
     <title>Session Home</title>
 </head>
 <body>
     <header th:replace="~{fragments/header::header}"/>
-
-    <div class="Content">
-        <div id="Search_recipe">
-            <button><span>재료 검색</span></button>
-        </div>
-        <div id="Make_recipe">
-            <button><span>레시피 등록</span></button>
-        </div>
+    <div class="Container2">
+        <section class="Contents">
+            <div id="Search_recipe" class="box">
+                <div class="back pico">재료 검색<br/>
+                    <button onclick="redirectToPage(''/*검색 페이지*/)">enter</button>
+                </div>
+                <div class="front"></div>
+            </div>
+            
+            <div id="Make_recipe" class="box">
+                <div class="back pico">레시피 등록<br/>
+                    <button onclick="redirectToPage(''/*레시피 등록 페이지*/)">enter</button>
+                </div>
+                <div class="front"></div>
+            </div>
+        </section>
     </div>
+
+    <script src="/js/index.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
 </body>
