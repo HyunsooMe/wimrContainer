@@ -1,14 +1,58 @@
 package kr.ac.dankook.ace.whatsinmyref;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+
+
 
 
 @Controller
+@RequestMapping("/Wimr")
 public class WhatsInMyRefController {
     @GetMapping("")
     public String getMethodName() {
-        return "home";
+        return "index";
+    }
+
+    @GetMapping("/recipe") //localhost:8080/Wimr/recipe?foodID=""
+    public String recipe(@RequestParam String foodID,Model model) {
+        String foodImg="/img/ingredients.jpg";  //이미지가 없는 경우 default
+        /*
+        model.addAttribute("foodName",foodName)         //요리 이름
+        model.addAttribute("ingredients", ingredients); //재료 리스트
+        model.addAttribute("recipe", recipe);           //레시피 리스트
+        */
+        model.addAttribute("foodImg", foodImg);         //음식 사진 path
+        return "recipe";
+    }
+
+    @GetMapping("/register")
+    public String register(@ModelAttribute("User") User user) {
+        return "register";
+    }
+    
+    
+    @GetMapping("/login")
+    public String login(@ModelAttribute("User") User user, Model model) {
+        return "login";
+    }
+    
+    @PostMapping("/login")
+    public String loginUser(@ModelAttribute("User") User user) {
+        //TODO: process POST request
+        
+        return "redirect:/Wimr/";
+    }
+    
+    @GetMapping("/myPage")
+    public String myPage() {
+        return "myPage";
     }
     
 }
