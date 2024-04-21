@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
 //헤더
 function updateFontSize() {
-    let clientWidth = document.querySelector('.Container2').scrollWidth;
+    let clientWidth = document.querySelector('body').scrollWidth;
     let fontScale = clientWidth / 80; // 원하는 비율로 조정하세요.
     document.querySelector("#header").style.fontSize = fontScale + 'px';
     document.querySelector(".navbar").style.fontSize = fontScale -5+ 'px';
@@ -37,14 +37,21 @@ function updateFontSize() {
 window.addEventListener("load", updateFontSize); // 페이지 로드 시
 window.addEventListener("resize", updateFontSize); // 창 크기 변경 시
 
+
+//index
 function updateBoxPlace(){
     let height = document.querySelector('.Container2').scrollHeight,
         width=document.querySelector('.Container2').scrollWidth;
     
         document.getElementById("Search_recipe").style.left = width/57*16+ 'px';
-        document.getElementById("Search_recipe").style.top = height/12+ 'px';
+        document.getElementById("Search_recipe").style.top = height/5+ 'px';
         document.getElementById("Make_recipe").style.left = width/3*2+ 'px';
-        document.getElementById("Make_recipe").style.top = height/19+ 'px';
+        document.getElementById("Make_recipe").style.top = height/9.5+ 'px';
 }
 window.addEventListener("load", updateBoxPlace); // 페이지 로드 시
 window.addEventListener("resize", updateBoxPlace); // 창 크기 변경 시
+
+//웹페이지 이동
+function redirectToPage(str){
+    window.location.href=str;
+}

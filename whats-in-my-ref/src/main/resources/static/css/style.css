@@ -15,9 +15,6 @@ body {
   width: 100vw;
   aspect-ratio: 140/75;
   font-family: "Open Sans", sans-serif;
-  color: #444;
-  margin: 0;
-  background-color: rgba(184, 184, 184, 0.411);
 }
 
 a {
@@ -38,7 +35,7 @@ a:hover {
   min-width: 1400px;
   aspect-ratio: 32/1;
   width: 100%;
-  position: relative;
+  position: fixed;
   z-index: 2;
   display: flex;
   justify-content: left;
@@ -88,6 +85,7 @@ a:hover {
   display: block;
   padding: 0;
   position: relative;
+  right:5px;
 }
 
 .navbar ul {
@@ -114,6 +112,10 @@ a:hover {
   transition: 0.3s;
 }
 
+.navbar li:focus{
+  color: #a2cce3;
+}
+
 .navbar a i,
 .navbar a:focus i {
   font-size: 12px;
@@ -131,7 +133,7 @@ a:hover {
 .navbar .dropdown ul {
   display: block;
   position: absolute;
-  left: -80px;
+  left: -130px;
   top: calc(100% + 30px);
   margin: 0;
   padding: 10px 0;
@@ -171,28 +173,7 @@ a:hover {
   visibility: visible;
 }
 
-.navbar .dropdown .dropdown ul {
-  top: 0;
-  left: -100%;
-  visibility: hidden;
-}
 
-.navbar .dropdown .dropdown:hover>ul {
-  opacity: 1;
-  top: 0;
-  right:100%;
-  visibility: visible;
-}
-
-@media (max-width: 1550px) {
-  .navbar .dropdown .dropdown ul {
-    left: -90%;
-  }
-
-  .navbar .dropdown .dropdown:hover>ul {
-    left: -100%;
-  }
-}
 
 .Container2{
   width: 100%;
@@ -204,7 +185,7 @@ a:hover {
   overflow: hidden;
 }
 
-.Content{
+.Contents{
   width: 100%;
 }
 
@@ -228,6 +209,7 @@ a:hover {
     height: 100%;
     position: absolute;
     backdrop-filter: blur(4px);
+    opacity: 0;
   }
 }
 
@@ -236,7 +218,7 @@ a:hover {
 }
 
 
-.Content #Search_recipe {
+.Contents #Search_recipe {
   position: relative;
   left:420px;top:43px;
   z-index: 1;
@@ -247,7 +229,7 @@ a:hover {
 }
 
 
-.Content #Make_recipe {
+.Contents #Make_recipe {
   position: relative;
   left:1000px; top:20px;
   z-index: 0;
@@ -256,3 +238,82 @@ a:hover {
     color:rgb(33, 156, 46);
   }  
 }
+
+/*recipe css*/
+#recipeBody{
+}
+
+#empty{
+  visibility: hidden;
+  height:100px;
+  width: 1px;
+}
+
+.container{
+  text-align: center;
+}
+
+.inner_container{
+  position: relative;
+  margin: 0 auto;
+  background-color: #ffffff;
+  width:100%;
+  min-width: 600px;
+  max-width: 1200px;
+  border-radius: 20px;
+  box-shadow: 2px 2px 13px -1px rgb(12, 12, 12);
+}
+
+#foodImg{
+  width:100%;
+  height:650px;
+  /*background-image: url("[[${foodImg}]]");*/
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+  border-radius: 20px 20px 20px 20px;
+
+  #blur{
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.363);
+    position: relative;
+    z-index: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+  }
+}
+
+#foodName{
+  position:relative;
+  z-index: 1;
+  font:600 90px 'YEONGJUSeonbiTTF' ;
+  color: aliceblue;
+}
+
+.inner_container ul li{
+  text-align: left;
+}
+
+
+/*로그인*/
+body#login{
+  height:500px;
+}
+#loginBox{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100%;
+  position: relative; 
+  margin: 0;
+}
+
+#loginBox button{
+  background-color: rgb(241, 56, 56);
+}
+
+
