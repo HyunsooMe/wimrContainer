@@ -173,6 +173,12 @@ a:hover {
   visibility: visible;
 }
 
+.navbar #toRegister{
+  padding-top: 0;
+  font-size: 10px;
+  display: flex;
+  justify-content: right;
+}
 
 
 .Container2{
@@ -243,7 +249,7 @@ a:hover {
 #recipeBody{
 }
 
-#empty{
+.emptyBox{
   visibility: hidden;
   height:100px;
   width: 1px;
@@ -299,10 +305,10 @@ a:hover {
 
 
 /*로그인*/
-body#login{
+body.noscroll{
   height:500px;
 }
-#loginBox{
+.centerBox{
   display: flex;
   align-items: center;
   justify-content: center;
@@ -316,4 +322,35 @@ body#login{
   background-color: rgb(241, 56, 56);
 }
 
+#registerBox button{
+  background-color: rgb(241, 56, 56);
+}
 
+/*마이페이지*/
+.container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+#userImg{
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background-color: #1c3745;
+}
+
+#userName{
+  font-size: 50px;
+}
+
+article.item{
+  margin-top: 5px;
+  width:500px;
+  text-align: left;
+}
+
+.infoTitle{
+  width: 500px;
+  text-align: left;
+}

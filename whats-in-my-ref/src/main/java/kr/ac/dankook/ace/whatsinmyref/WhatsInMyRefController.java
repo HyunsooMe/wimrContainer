@@ -8,8 +8,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-
 
 
 
@@ -33,6 +31,12 @@ public class WhatsInMyRefController {
         model.addAttribute("foodImg", foodImg);         //음식 사진 path
         return "recipe";
     }
+
+    @GetMapping("/register")
+    public String register(@ModelAttribute("User") User user) {
+        return "register";
+    }
+    
     
     @GetMapping("/login")
     public String login(@ModelAttribute("User") User user, Model model) {
@@ -44,6 +48,11 @@ public class WhatsInMyRefController {
         //TODO: process POST request
         
         return "redirect:/Wimr/";
+    }
+    
+    @GetMapping("/myPage")
+    public String myPage() {
+        return "myPage";
     }
     
 }

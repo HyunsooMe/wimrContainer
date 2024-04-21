@@ -3,11 +3,25 @@
     <meta charset="UTF-8">
     <link href="/css/style.css" rel="stylesheet">
     <link href="/img/elephant.png" rel="shortcut icon" type="image/x-icon">
+    <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.conditional.min.css"
+  />
+
     <title>my page</title>
 </head>
-<body>
+<body class="noscroll">
     <header th:replace="~{fragments/header::header}"/>
-
+    <div class="emptyBox"></div>
     
+    <div class="container pico"> 
+        <div id="userImg" class="item"></div>
+        <div id="userName" class="item"><strong><u>정동재</u></strong></div>
+        <div class="infoTitle">Self-introduce:</div><article id="introduce" class="item">안녕</article>
+        <div id="userItem">
+            <div class="infoTitle">Email:</div><article id="email" class="item">32204045@dankook.ac.kr</article>
+        </div>
+    </div>
+
     <script src="/js/index.js"></script>
 </body>

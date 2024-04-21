@@ -4,15 +4,24 @@
     <link href="/css/style.css" rel="stylesheet">
     <link href="/img/elephant.png" rel="shortcut icon" type="image/x-icon">
     <title>Session Home</title>
+    <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.conditional.min.css"
+  />
+
 </head>
-<body>
+<body class="noscroll">
     <header th:replace="~{fragments/header::header}"/>
     
-    <form th:action="@{/register}" method="post" th:object="${User}">
-        Login ID: <input type="text" id="loginId" th:field="*{loginId}" class="form_input" /> <br/>
-        Login Password: <input type="text" id="password" th:field="*{password}" class="form_input" /> <br/>
-        Name: <input type="text" id="name" th:field="*{name}" class="form_input" /> <br/>
-        <button type="submit">register</button>
-    </form>
+    <div id="registerBox" class="centerBox pico">
+        <form th:action="@{/register}" method="post" th:object="${User}">
+            ID: <input type="text" id="loginId" th:field="*{loginId}" class="form_input" /> <br/>
+            Password: <input type="text" id="password" th:field="*{password}" class="form_input" /> <br/>
+            email: <input type="text" id="email" th:field="*{email}" class="form_input" /> <br/>
+            <button type="submit">register</button>
+        </form>
+    </div>
+
+    <script src="/js/index.js"></script>
 </body>
 </html>
