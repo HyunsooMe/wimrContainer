@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
             t3=gsap.timeline({ paused: true });
 
     tl.to(info, {rotationY:0 ,ease:"none"});
-    t2.to(front,{rotationY:180,opacity:0,ease:"none"});
+    t2.to(front,{rotationY:180, opacity:0,ease:"none"});
     t3.to(info, {opacity:1 ,delay:0.8,ease:"none"});
 
     container.addEventListener("mouseenter", () => tl.timeScale(2).play());
