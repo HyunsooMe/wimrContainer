@@ -3,11 +3,18 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>게시글 상세페이지</title>
+    <link rel="stylesheet" href="/css/boardViewStyle.css" />
   </head>
   <body>
-    <h2 th:text="${board.title}">제목입니다</h2>
-    <p th:text="${board.content}">내용이 들어갈 부분</p>
-    <a th:href="@{/boardDelete(id=${board.id})}">글 삭제</a>
+    <div class="board_wrap">
+      <h2 th:text="${board.title}">제목입니다</h2>
+      <p th:text="${board.content}">내용이 들어갈 부분</p>
+      <div class="btn">
+        <a th:href="@{/boardDelete(id=${board.id})}" id="delete">글 삭제</a>
+        <a th:href="@{/boardModify(id=${board.id})}"></a>
+        <a th:href="@{/boardList}">목록 보기</a>
+      </div>
+    </div>
   </body>
 </html>

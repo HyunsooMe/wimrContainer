@@ -8,26 +8,33 @@
   </head>
   <body>
     <h2>게시판 리스트</h2>
-    <table border="1">
-      <thead>
-        <tr>
-          <th>번호</th>
-          <th>글제목</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr th:each="board : ${list}">
-          <td th:text="${board.id}">1</td>
-          <!-- localhost:8080/boardList?id=board.id -->
-          <td>
-            <a
-              th:text="${board.title}"
-              th:href="@{/boardView(id=${board.id})}"
-            ></a>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <a th:href="@{/boardForm}">글 작성</a>
+    <div class="table_wrap">
+      <table border="1">
+        <thead>
+          <tr>
+            <th>번호</th>
+            <th>글제목</th>
+            <th>작성자</th>
+            <th>작성일</th>
+            <th>조회수</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="board : ${list}">
+            <td th:text="${board.id}"></td>
+            <!-- localhost:8080/boardList?id=board.id -->
+            <td>
+              <a
+                th:text="${board.title}"
+                th:href="@{/boardView(id=${board.id})}"
+              ></a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="btn">
+        <a th:href="@{/boardForm}">글 작성</a>
+      </div>
+    </div>
   </body>
 </html>
