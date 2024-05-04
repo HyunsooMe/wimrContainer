@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.conditional.min.css"
+    />
+    <link href="/img/elephant.png" rel="shortcut icon" type="image/x-icon" />
+  </head>
+  <body>
+    <header th:replace="~{fragments/header::header}"></header>
+    <h2><a href="/boardList">게시판</a></h2>
+
+    <form id="writeForm" method="post" action="/board/writedo">
+      <table>
+        <tr>
+          <td>제목</td>
+          <td>
+            <input
+              type="text"
+              id="title"
+              name="title"
+              placeholder="제목을 입력하세요"
+            />
+          </td>
+        </tr>
+        <tr>
+          <td>작성자</td>
+          <td>
+            <input type="text" id="writer" name="writer" />
+          </td>
+        </tr>
+        <tr>
+          <td>내용</td>
+          <td colspan="2">
+            <textarea
+              id="content"
+              name="content"
+              placeholder="내용을 입력하세요"
+            ></textarea>
+          </td>
+        </tr>
+      </table>
+      <div class="btn">
+        <input type="submit" id="submit" value="등록" />
+        <input type="submit" id="cancel" value="취소" />
+      </div>
+    </form>
+  </body>
+</html>

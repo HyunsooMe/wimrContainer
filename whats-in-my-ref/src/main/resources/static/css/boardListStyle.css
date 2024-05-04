@@ -1,0 +1,29 @@
+body {
+  background-color: darkseagreen;
+}
+
+h2 {
+  display: flex;
+  justify-content: center;
+}
+
+.table_wrap {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding: 50px 50px;
+}
+
+.btn {
+  display: flex;
+  position: relative;
+  margin: auto 0 0 auto;
+}
+
+th {
+  background-color: gainsboro;
+}
+
+td {
+  text-align: center;
+}

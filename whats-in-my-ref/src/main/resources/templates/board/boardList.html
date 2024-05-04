@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.conditional.min.css"
+    />
+    <link href="/img/elephant.png" rel="shortcut icon" type="image/x-icon" />
+  </head>
+  <body>
+    <header th:replace="~{fragments/header::header}"></header>
+    <h2>게시판 리스트</h2>
+    <div class="table_wrap">
+      <table border="1">
+        <thead>
+          <tr>
+            <th>번호</th>
+            <th>글제목</th>
+            <th>작성자</th>
+            <th>작성일</th>
+            <th>조회수</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="board : ${list}">
+            <td th:text="${board.id}"></td>
+            <!-- localhost:8080/boardList?id=board.id -->
+            <td>
+              <a
+                th:text="${board.title}"
+                th:href="@{/boardView(id=${board.id})}"
+              ></a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="btn">
+        <a th:href="@{/boardForm}">글 작성</a>
+      </div>
+    </div>
+  </body>
+</html>
