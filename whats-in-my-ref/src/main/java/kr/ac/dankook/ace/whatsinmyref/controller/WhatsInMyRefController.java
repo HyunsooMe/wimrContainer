@@ -18,8 +18,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 @RequestMapping("/Wimr")
 public class WhatsInMyRefController {
     @GetMapping("")
-    public String getMethodName() {
-        return "index";
+    public String mainPage() {
+        return "index_copy";
     }
 
     @GetMapping("/recipe") //localhost:8080/Wimr/recipe?foodID=""
