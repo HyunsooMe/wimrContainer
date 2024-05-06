@@ -3,25 +3,23 @@ document.documentElement.style.setProperty('--window-height',document.documentEl
 
 //index.html 애니메이션 처리 gsap
 document.addEventListener("DOMContentLoaded", (event) => {
-    gsap.set(".back", { opacity:0,rotationY:-180 });
+    gsap.set(".back", { opacity:0,y:30 });
+    
 
-    gsap.utils.toArray(".box").forEach((container) => {
+    gsap.utils.toArray(".big-box").forEach((container) => {
         let back = container.querySelector(".back"),
-            front=container.querySelector(".front"),
+            box=container.querySelector(".box"),
             tl = gsap.timeline({ paused: true }),
-            t2=gsap.timeline({ paused: true }),
-            t3=gsap.timeline({ paused: true });
+            t2 = gsap.timeline({ paused: true });
 
-    tl.to(back, {rotationY:0 ,ease:"none"});
-    t2.to(front,{ rotationY:180, opacity:0,ease:"none"});
-    t3.to(back, { opacity:1 ,delay:0.8,ease:"none"});
+    tl.to(back, { opacity:1,y:0 ,ease:"none"});
+    t2.to(box,{scale:1.05,duration:1});
 
-    container.addEventListener("mouseenter", () => tl.timeScale(2).play());
-    container.addEventListener("mouseenter", () => t2.timeScale(2).play());
-    container.addEventListener("mouseenter", () => t3.timeScale(4).play());
-    container.addEventListener("mouseleave", () => tl.timeScale(3).reverse());
-    container.addEventListener("mouseleave", () => t2.timeScale(3).reverse());
-    container.addEventListener("mouseleave", () => t3.timeScale(3).reverse());
+
+    box.addEventListener("mouseenter", () => tl.timeScale(5).play());
+    box.addEventListener("mouseenter", () => t2.timeScale(3).play());
+    box.addEventListener("mouseleave", () => tl.timeScale(3).reverse());
+    box.addEventListener("mouseleave", () => t2.timeScale(3).reverse());
     });
 });
 
