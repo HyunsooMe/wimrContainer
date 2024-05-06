@@ -47,7 +47,6 @@ public class WhatsInMyRefController {
     
     @PostMapping("/login")
     public String loginUser(@ModelAttribute("User") User user) {
-        //TODO: process POST request
         
         return "redirect:/Wimr/";
     }
@@ -56,6 +55,8 @@ public class WhatsInMyRefController {
     public String myPage() {
         return "myPage";
     }
+
+  
 }
 
 

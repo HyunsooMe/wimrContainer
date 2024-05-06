@@ -10,13 +10,13 @@
   --window-width: 0;
   --window-height: 0;
 }
-body {
+/* #header {
   min-width: 1500px;
   max-width: 3000px;
   width: 100vw;
   aspect-ratio: 140/75;
   font-family: "Open Sans", sans-serif;
-}
+} */
 
 a {
   color: #4fa6d5;
@@ -41,7 +41,6 @@ a:hover {
   justify-content: left;
   background: rgba(230, 57, 57, 0.9);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
-  /*border-radius: 40px 40px 0px 0px;*/
 }
 
 #header.header-transparent {
@@ -352,3 +351,5 @@ article.item {
   width: 500px;
   text-align: left;
 }
+
+/* boardList 스타일 */

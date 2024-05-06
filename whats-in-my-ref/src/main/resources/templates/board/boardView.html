@@ -16,6 +16,7 @@
     <div class="board_wrap">
       <h2 th:text="${board.title}">제목입니다</h2>
       <p th:text="${board.content}">내용이 들어갈 부분</p>
+      <p th:text="${board.nickname}">작성자</p>
       <div class="btn">
         <a th:href="@{/boardDelete(id=${board.id})}" id="delete">글 삭제</a>
         <a th:href="@{/boardModify(id=${board.id})}"></a>

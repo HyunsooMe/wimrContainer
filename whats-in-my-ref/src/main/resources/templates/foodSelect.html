@@ -10,6 +10,9 @@
     <!-- <div th:include="other :: header"></div> -->
     <h1>재료 선택</h1>
     <div class="food_list">
+      <input type="text" id="searchInput" placeholder="재료 입력" />
+      <button type="submit" class="searchBtn" id="searchBtn">검색</button>
+
       <!-- 고기 체크박스 -->
       <dl class="food_item">
         <dt class="item_title">고기</dt>
@@ -658,6 +661,6 @@
     <div>선택한 재료</div>
     <ul id="selectedItems"></ul>
     <button type="submit">검색</button>
-    <script src="/static/js/script.js"></script>
+    <script src="script.js"></script>
   </body>
 </html>

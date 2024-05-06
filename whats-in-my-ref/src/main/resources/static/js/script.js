@@ -10,6 +10,7 @@ const seafoodItemAll = document.querySelector(".seafood_item_all");
 const dairyItemAll = document.querySelector(".dairy_item_all");
 const checkboxes = document.querySelectorAll(".checkbox");
 const selectedItemsList = document.getElementById("selectedItems");
+const searchBtn = document.getElementById("searchBtn");
 
 function showMoreMeat() {
   meatItemAll.style.display = "block";
@@ -101,8 +102,14 @@ checkboxes.forEach(function (checkbox) {
   });
 });
 
+function getMealList() {
+  console.log("click");
+}
+
 showMoreMeatBtn.addEventListener("click", toggleMeat);
 showMoreVegetableBtn.addEventListener("click", toggleVegetable);
 showMoreFruitBtn.addEventListener("click", toggleFruit);
 showMoreSeafoodBtn.addEventListener("click", toggleSeafood);
 showMoreDairyBtn.addEventListener("click", toggleDairy);
+
+searchBtn.addEventListener("click", getMealList);

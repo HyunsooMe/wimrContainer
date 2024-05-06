@@ -17,8 +17,8 @@ public class BoardController {
     private BoardService boardService;
 
     @GetMapping("/boardList")
-    public String boardList(Model model){
-        model.addAttribute("list",boardService.boardList());
+    public String BoardList(Model model){
+        model.addAttribute("boardList",boardService.boardList());
         return "/board/boardList";
     }
 
@@ -27,14 +27,14 @@ public class BoardController {
         return "/board/boardForm";
     }
     
-    @PostMapping("/board/writedo")
-    public String boardwriteDo(Board board){
+    @PostMapping("/board/writePro")
+    public String boardwritePro(Board board){
 
         boardService.write(board);
-        return "";
+        return "redirect:/boardList";
     }
 
-    @GetMapping("/boardView") //localhosr:8080/boardView?id=1
+    @GetMapping("/boardView") //localhost:8080/boardView?id=1
     public String boardView(Model model,Integer id){
         model.addAttribute("board",boardService.boardView(id));
         return "/board/boardView";
@@ -46,6 +46,11 @@ public class BoardController {
         boardService.boardDelete(id);
 
         return "redirect:/boardList";
+    }
+
+    @GetMapping("/food")
+    public String Food() {
+        return "/foodSelect";
     }
 
 }
