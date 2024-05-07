@@ -56,8 +56,6 @@ public class WhatsInMyRefController {
     public String myPage() {
         return "myPage";
     }
-
-    
 }
 
 

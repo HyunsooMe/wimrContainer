@@ -298,6 +298,8 @@ footer
 
 .box div {
   transition: 0.15s;
+.box div {
+  transition: 0.15s;
 }
 
 .Contents #Search_recipe {
