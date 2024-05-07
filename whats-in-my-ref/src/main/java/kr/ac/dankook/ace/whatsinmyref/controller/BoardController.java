@@ -60,6 +60,8 @@ public class BoardController {
     @GetMapping("/boardView") //localhost:8080/boardView?id=1
     public String boardView(Model model,Integer id){
         model.addAttribute("board",boardService.boardView(id));
+        // 조회수 증가
+        boardService.increaseViewCount(id);
         return "/board/boardView";
     }
     // 게시글 삭제
