@@ -11,10 +11,6 @@
   --window-height: 0;
 }
 body {
-  min-width: 1500px;
-  max-width: 3000px;
-  width: 100vw;
-  aspect-ratio: 140/75;
   font-family: "Open Sans", sans-serif;
 }
 
@@ -28,19 +24,20 @@ a:hover {
   text-decoration: none;
 }
 
+
+
 /*--------------------------------------------------------------
 # Header
 --------------------------------------------------------------*/
 #header {
-  min-height: 50px;
-  aspect-ratio: 32/1;
   width: 100%;
+  height: 60px;
   position: fixed;
   z-index: 2;
   display: flex;
-  justify-content: left;
-  background: rgba(230, 57, 57, 0.9);
+  background: rgb(67, 121, 85);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+  font-size: 25px;
   /*border-radius: 40px 40px 0px 0px;*/
 }
 
@@ -50,6 +47,8 @@ a:hover {
 
 #header .logo {
   position: relative;
+  width: 100%;
+  padding-left: 30px;
 }
 
 #header .logo h1 {
@@ -68,12 +67,7 @@ a:hover {
 }
 
 #header .logo img {
-  width: 4%;
-  min-width: 50px;
-  height: auto;
-  padding: 0;
-  margin: 0;
-  float: left;
+
 }
 
 /*--------------------------------------------------------------
@@ -86,7 +80,10 @@ a:hover {
   display: block;
   padding: 0;
   position: relative;
-  right: 5px;
+  margin-left: auto;
+  margin-right: 15px;
+  font-size: 20px;
+  margin-top:5px;
 }
 
 .navbar ul {
@@ -95,6 +92,7 @@ a:hover {
   display: flex;
   list-style: none;
   align-items: center;
+  
 }
 
 .navbar li {
@@ -174,75 +172,146 @@ a:hover {
   visibility: visible;
 }
 
+.navbar .login-btn{
+  position: relative; 
+}
+
+.navbar .after-login{
+  display: none;
+  visibility: hidden;
+}
+
 .navbar #toRegister {
+  margin: 0;
   padding-top: 0;
   font-size: 10px;
   display: flex;
   justify-content: right;
 }
 
-.Container2 {
-  width: 100%;
-  height: 100%;
-  margin: 0 auto;
-  /*border-radius: 40px;*/
-  background: url("../img/index_img-1\ \(6\).jpeg") no-repeat center center
-    local;
+/*---------------------------------------------------
+footer
+-----------------------------------------------------*/
+
+#footer{
+  width:100%;
+  height: 50px;
+  background-color: #838383;
+}
+
+/*index.html*/
+
+.overlay::before{
+  position: absolute;
+  content: "";
+  left: 0;
+  bottom: 0;
+  right: 0;
+  top: 0;
+  background: rgba(0, 0, 0, 0.3);
+}
+.site-cover {
+  min-height: 600px;
+  height: calc(100vh);
   background-size: cover;
-  overflow: hidden;
+  background-repeat: no-repeat;
+}
+
+.site-cover .search-container{
+  max-width: 1140px;
+  height: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.site-cover .search-container .welcome{
+  z-index: 1;
+  color: #ffffff;
+}
+
+.site-cover .search-container .search-form-wrap{
+  width: 100%;
+  z-index: 1;
+  background-color: #ffffffb4;
+  padding: 20px;
+  padding-bottom: 0;
+  border-radius: 6px;
+}
+
+.site-cover .search-container .search-form-wrap div{
+  --pico-spacing: 0rem;
+}
+
+.site-cover .search-container .search-form-wrap button:hover{
+  background-color: #2d84e7 !important;
 }
 
 .Contents {
+  width:100%;
+  display: block;
+  text-align: center;
+  background-color: #f8f8f8;
+}
+
+.Contents h1{
   width: 100%;
+  position: relative;
+  padding-top: 50px;
+  font-family: "YEONGJUSeonbiTTF";
+}
+
+.Contents .box_div{
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap; /* 만약 요소가 가로로 넘칠 경우 다음 줄에 배치하도록 설정 */
+  margin-top: 50px;
+}
+
+.Contents .box_div .big-box{
+  font-family: "YEONGJUSeonbiTTF";
 }
 
 .box {
-  width: 20vw;
-  min-width: 260px;
-  aspect-ratio: 1;
-  padding: 0;
+  width:300px;
+  aspect-ratio: 1/1.3;
+  position:relative;
+  margin:0 80px;
+  margin-bottom: 30px;
+  border-radius: 10%;
   font: 600 60px "YEONGJUSeonbiTTF";
-  perspective: 1100px;
-  .front {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    border: 3px solid black;
-    pointer-events: none;
-  }
-  .back {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    backdrop-filter: blur(4px);
-    opacity: 0;
-  }
+  cursor:pointer;
+  color:#fff;
 }
 
+.box .back{
+  width: 100%;
+  height: 100%;
+  padding: 0 20px;
+  border-radius: 10%;
+  position: relative;
+  backdrop-filter: blur(4px);
+  background-color: #464646c5;
+  opacity: 0;
+}
+
+.box div {
+  transition: 0.15s;
 .box div {
   transition: 0.15s;
 }
 
 .Contents #Search_recipe {
-  position: relative;
-  left: 420px;
-  top: 43px;
-  z-index: 1;
-  div {
-    color: rgb(216, 138, 20);
-  }
 }
 
 .Contents #Make_recipe {
-  position: relative;
-  left: 1000px;
-  top: 20px;
-  z-index: 0;
-  div {
-    display: inline-block;
-    color: rgb(33, 156, 46);
-  }
 }
+
+.Contents #bBorad{
+}
+
+
 
 /*recipe css*/
 /* #recipeBody {
@@ -258,13 +327,12 @@ a:hover {
   text-align: center;
 }
 
-.inner_container {
+.recipe_container {
   position: relative;
   margin: 0 auto;
   background-color: #ffffff;
   width: 100%;
-  min-width: 600px;
-  max-width: 1200px;
+  max-width: 1500px;
   border-radius: 20px;
   box-shadow: 2px 2px 13px -1px rgb(12, 12, 12);
 }
@@ -298,7 +366,7 @@ a:hover {
   color: aliceblue;
 }
 
-.inner_container ul li {
+.recipe_container ul li {
   text-align: left;
 }
 
@@ -335,7 +403,6 @@ body.noscroll {
   width: 200px;
   height: 200px;
   border-radius: 50%;
-  background-color: #1c3745;
 }
 
 #userName {
@@ -352,3 +419,131 @@ article.item {
   width: 500px;
   text-align: left;
 }
+
+/*반응형 변경 사항들*/
+@media (max-width:1536px){
+  /*===========================header.html==========================*/
+  #header{
+    height: 50px;
+    font-size: 20px;
+  }
+  #header .logo img{
+    width: 50px;
+  }
+  .navbar{
+    font-size: 15px;
+    margin-top:4px;
+  }
+   /*===========================index.html===========================*/
+  .site-cover{
+  }
+  .site-cover .search-container{
+    max-width: 1000px;
+  }
+  .box{
+    width:250px;
+    margin:0 60px 30px;
+  }
+  /*==============================recipe.html=============================*/
+  .recipe_container{
+    max-width: 1000px;
+  }
+}
+
+@media (max-width:1150px){
+  /*===========================header.html==========================*/
+  #header{
+    height: 36px;
+    font-size: 14px;
+  }
+  #header .logo img{
+    width: 35px;
+  }
+  .navbar{
+    font-size: 11px;
+    margin-top:0px;
+  }
+   /*===========================index.html===========================*/
+  .site-cover{
+  }
+  .site-cover .search-container{
+    max-width: 700px;
+  }
+  .box{
+    width:200px;
+    margin:0 40px 30px;
+  }
+
+  /*==============================recipe.html=============================*/
+  .recipe_container{
+    max-width: 700px;
+  }
+}
+
+/*모바일*/
+@media (max-width:853px){
+  /*===========================header.html==========================*/
+  .navbar{
+    content-visibility:hidden;
+  }
+
+  /*===========================index.html===========================*/
+  .site-cover .search-container{
+    max-width: 400px;
+  }
+
+  .search-form-wrap form div{
+    flex-direction: column;
+    
+  }
+  .search-form-wrap form div input{
+    --pico-spacing: 1rem ;
+  }
+  
+  .Contents .box_div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .box{
+    width: 400px;
+  }
+
+
+  /*==============================recipe.html=============================*/
+  .emptyBox{
+    height:40px;
+  }
+
+  .recipe_container{
+    width: calc(97vw);
+  }
+}
+
+
+
+
+
+
+.text-center{
+  text-align: center;
+}
+
+.align-items-center{
+  align-items: center ;
+  align-content: center;
+}
+
+.justify-content-center{
+  justify-content: center;
+}
+
+.row{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  margin-right: -15px;
+  margin-left: -15px;
+}
+

@@ -18,28 +18,26 @@
 
 <body id="recipeBody">
     <header th:replace="~{fragments/header::header}"/>
-
-    <div class="container pico">
-        <div class="emptyBox">hidden</div>
-        <div class="inner_container">
-            <div id="foodImg" class="item"><div id="blur"><span id="foodName" th:text="${foodName}">food name</span></div></div>
+    
+    <div class="emptyBox">hidden</div>
+    <div class="recipe_container pico">
+        <div id="foodImg" class="item"><div id="blur"><span id="foodName" th:text="${foodName}">food name</span></div></div>
+        <hr />
+        <ul>
+            <li id="ingredients"><h2><strong>Ingredients</strong></h2> <br/> 
+                <ul th:each="ingredient : ${ingredients}">
+                    <li  th:text="${ingredient}"></li>
+                </ul>
+            </li>
+            <hr/>
+            <li id="recipeDetail"><h2><strong>Recipe</strong></h2> <br/> 
+                <ol th:each="num : ${recipe}">
+                    <li th:text="${num}"></li>
+                </ol>
+            </li>
             <hr />
-            <ul>
-                <li id="ingredients"><h2><strong>Ingredients</strong></h2> <br/> 
-                    <ul>
-                        <li th:each="ingredient : ${ingredients}" th:text="${ingredient}"></li>
-                    </ul>
-                </li>
-                <hr/>
-                <li id="recipeDetail"><h2><strong>Recipe</strong></h2> <br/> 
-                    <span th:each="num : ${recipe}">
-                        <span th:text="${num.index+1}"></span>: <span th:text="${num}"></span> <br/>
-                    </span>
-                </li>
-                <hr />
-                <li id="others"><h2><strong>Others</strong></h2></li>
-            </ul>
-        </div>
+            <li id="others"><h2><strong>Others</strong></h2></li>
+        </ul>
     </div>
 
     <script src="/js/index.js"></script>

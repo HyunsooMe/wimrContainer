@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 @RequestMapping("/Wimr")
 public class WhatsInMyRefController {
     @GetMapping("")
-    public String getMethodName() {
+    public String mainPage() {
         return "index";
     }
 
