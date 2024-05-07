@@ -45,6 +45,20 @@
           <a th:href="@{/boardForm}">글 작성</a>
         </div>
       </div>
+      <th:block th:each="page : ${#numbers.sequence(startPage, endPage)}">
+        <!-- 페이지가 현재 페이지와 다를 때 -->
+        <a
+          th:if="${page != nowPage}"
+          th:href="@{/boardList(page = ${page-1})}"
+          th:text="${page}"
+        ></a>
+        <!-- 페이지가 현재 페이지와 같을 때 -->
+        <strong
+          th:if="${page == nowPage}"
+          th:text="${page}"
+          style="color: red"
+        ></strong>
+      </th:block>
     </div>
   </body>
 </html>
