@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class WhatsInMyRefController {
     @GetMapping("")
     public String mainPage() {
-        return "index_copy";
+        return "index";
     }
 
     @GetMapping("/recipe") //localhost:8080/Wimr/recipe?foodID=""
@@ -56,6 +56,8 @@ public class WhatsInMyRefController {
     public String myPage() {
         return "myPage";
     }
+
+    
 }
 
 

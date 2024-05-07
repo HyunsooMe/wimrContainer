@@ -15,11 +15,12 @@
     <div class="emptyBox"></div>
     
     <div class="container pico"> 
-        <div id="userImg" class="item"></div>
-        <div id="userName" class="item"><strong><u>정동재</u></strong></div>
-        <div class="infoTitle">Self-introduce:</div><article id="introduce" class="item">안녕</article>
+        <div id="userImg" class="item"><img src="/img/pen.jpg" th:src="@{${imagePath}}"/></div>
+        <div id="userName" class="item" ><strong><u><span th:text="userName"></span></u></strong></div>
+        <div class="infoTitle">Self-introduce:<article id="introduce" class="item"><sapn th:text="${introduce}"></article></div>
         <div id="userItem">
-            <div class="infoTitle">Email:</div><article id="email" class="item">32204045@dankook.ac.kr</article>
+            <div class="infoTitle">Email:<article id="email" class="item"><span th:text="${eamil}"></span></article></div>
+
         </div>
     </div>
 

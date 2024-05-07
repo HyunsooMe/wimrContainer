@@ -14,19 +14,21 @@
       <!-- ========= Nav =========-->
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a href="#">레시피 검색</a></li>
-          <li><a href="/Wimr/recipe">게시판</a></li>
+          <li><a href="/Wimr/search">레시피 검색</a></li>
+          <li><a href="/boardList">게시판</a></li>
           <li class="dropdown">
             <a><span>My</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
-              <li style="text-align: center" class="pico">
-                <button onclick="redirectToPage('/Wimr/login')">
-                  로그인 하기
-                </button>
-                <br />
-                <a id="toRegister" href="/Wimr/register"
-                  ><span>회원가입</span></a
-                >
+              <li class="pico text-center">
+                <div>
+                  <div class="before-login">
+                    <button class="login-btn" onclick="redirectToPage('/Wimr/login')">로그인 하기</button>
+                    <a id="toRegister" href="/Wimr/register"><span>회원가입</span></a>
+                  </div>
+                  <div class="my-info after-login">
+                    <div class="text-center"><p th:text="${userName}"></p></div>
+                  </div>
+                </div>
               </li>
               <li><a href="#">Drop Down 2</a></li>
               <li><a href="#">Drop Down 3</a></li>
