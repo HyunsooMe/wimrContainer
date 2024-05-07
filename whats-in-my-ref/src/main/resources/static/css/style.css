@@ -298,8 +298,6 @@ footer
 
 .box div {
   transition: 0.15s;
-.box div {
-  transition: 0.15s;
 }
 
 .Contents #Search_recipe {
@@ -546,4 +544,3 @@ article.item {
   margin-right: -15px;
   margin-left: -15px;
 }
-
