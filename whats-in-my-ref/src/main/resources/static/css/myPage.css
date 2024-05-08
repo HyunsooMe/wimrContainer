@@ -1,0 +1,34 @@
+/*마이페이지*/
+.myPage-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  #userImg {
+    margin-top: 10px;
+  }
+  
+  #userImg img{
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+  }
+  
+  #userName {
+    font-size: 50px;
+    margin-bottom: 20px;
+  }
+  
+  article.item {
+    margin-top: 5px;
+    width: 500px;
+    text-align: left;
+  }
+  
+  .infoTitle {
+    width: 500px;
+    text-align: left;
+  }
+  
+  

@@ -1,0 +1,22 @@
+/*로그인*/
+body.noscroll {
+    height: 500px;
+  }
+  .centerBox {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 100%;
+    position: relative;
+    margin: 0;
+  }
+  
+  #loginBox button {
+    background-color: rgb(241, 56, 56);
+  }
+  
+  #registerBox button {
+    background-color: rgb(241, 56, 56);
+  }
+  
