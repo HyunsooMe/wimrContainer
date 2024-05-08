@@ -5,7 +5,7 @@
   </head>
   <body>
     <!-- ======= Header ======= -->
-    <header id="header" class="fixed-top d-flex align-items-center">
+    <header id="header" class="align-items-center">
       <div class="logo">
         <h1 class="brandName">
           <a href="/Wimr"><span>What's in my 냉장고</span></a>
@@ -26,7 +26,13 @@
                     <a id="toRegister" href="/Wimr/register"><span>회원가입</span></a>
                   </div>
                   <div class="my-info after-login">
-                    <div class="text-center"><p th:text="${userName}"></p></div>
+                    <div class="text-center">
+                      <p>안녕하세요,</p>
+                      <p th:text="|${userName}님|"></p>
+                      <form th:action="@{/logout}" method="post">
+                        <button class="logout-btn" type="submit">로그아웃</button>
+                      </form>
+                    </div>
                   </div>
                 </div>
               </li>
