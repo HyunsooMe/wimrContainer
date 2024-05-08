@@ -10,13 +10,14 @@
     />
     <link href="/img/elephant.png" rel="shortcut icon" type="image/x-icon" />
     <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <link rel="stylesheet" th:href="@{/css/boardListStyle.css}" />
   </head>
   <body>
     <header th:replace="~{fragments/header::header}"></header>
     <div class="board-wrap">
-      <h2>게시판 리스트</h2>
+      <h2>자유게시판</h2>
       <div class="table_wrap">
-        <table border="1">
+        <table>
           <thead>
             <tr>
               <th>번호</th>
@@ -45,23 +46,25 @@
           </tbody>
         </table>
         <div class="btn">
-          <a th:href="@{/boardForm}">글 작성</a>
+          <a th:href="@{/boardForm}" id="btn">글쓰기</a>
         </div>
       </div>
-      <th:block th:each="page : ${#numbers.sequence(startPage, endPage)}">
-        <!-- 페이지가 현재 페이지와 다를 때 -->
-        <a
-          th:if="${page != nowPage}"
-          th:href="@{/boardList(page = ${page-1})}"
-          th:text="${page}"
-        ></a>
-        <!-- 페이지가 현재 페이지와 같을 때 -->
-        <strong
-          th:if="${page == nowPage}"
-          th:text="${page}"
-          style="color: red"
-        ></strong>
-      </th:block>
+      <div class="pages">
+        <th:block th:each="page : ${#numbers.sequence(startPage, endPage)}">
+          <!-- 페이지가 현재 페이지와 다를 때 -->
+          <a
+            th:if="${page != nowPage}"
+            th:href="@{/boardList(page = ${page-1})}"
+            th:text="${page}"
+          ></a>
+          <!-- 페이지가 현재 페이지와 같을 때 -->
+          <strong
+            th:if="${page == nowPage}"
+            th:text="${page}"
+            style="color: red"
+          ></strong>
+        </th:block>
+      </div>
     </div>
   </body>
 </html>

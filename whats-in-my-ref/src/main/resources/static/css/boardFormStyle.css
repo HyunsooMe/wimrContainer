@@ -1,6 +1,6 @@
-body {
+/* body {
   background-color: darksalmon;
-}
+} */
 
 #writeForm {
   display: flex;
@@ -9,12 +9,31 @@ body {
   flex-direction: column;
 }
 
-#title {
-  width: 400px;
+table,
+td,
+tr {
+  border: 1px solid black;
+}
+
+td:nth-child(odd) {
+  background-color: #ddd;
+  text-align: center;
+}
+
+input[type="text"],
+textarea {
+  width: 100%;
+  height: calc(100%-10px);
+  padding: 10px;
+  border: none;
+}
+
+::placeholder {
+  font-size: 14px;
 }
 
 #content {
-  width: 400px;
+  width: 800px;
   height: 400px;
 }
 
@@ -25,4 +44,28 @@ textarea {
 h2 {
   display: flex;
   justify-content: center;
+  padding-top: 60px;
 }
+
+.btn {
+  /* display: inline-block; */
+  text-align: right;
+}
+
+.form-wrap {
+  margin: 0 200px;
+}
+
+table {
+  width: 100%;
+}
+
+/* .btn input[type="submit"] {
+  display: inline-block;
+  background-color: blue;
+}
+
+a > #canel {
+  display: inline-block;
+  background-color: blue;
+} */

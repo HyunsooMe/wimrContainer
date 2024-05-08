@@ -42,11 +42,12 @@ public class BoardService {
 
     // 조회수 증가
     @Transactional
-    public void increaseViewCount(int id){
+    public void increaseViewCount(Integer id){
         Board board = boardRepository.findById(id).get();
         if(board != null){
             board.setViewcount(board.getViewcount() + 1); // 조회수 증가
             boardRepository.save(board); // 변경 내용 저장
+            
         }
     }
 }

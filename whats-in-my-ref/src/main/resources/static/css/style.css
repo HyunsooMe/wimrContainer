@@ -247,7 +247,7 @@ a:hover {
 /* #recipeBody {
 } */
 
-.emptyBox {
+/* .emptyBox {
   visibility: hidden;
   height: 100px;
   width: 1px;
@@ -270,9 +270,9 @@ a:hover {
 
 #foodImg {
   width: 100%;
-  height: 650px;
-  /*background-image: url("[[${foodImg}]]");*/
-  background-size: cover;
+  height: 650px; */
+/*background-image: url("[[${foodImg}]]");*/
+/* background-size: cover;
   background-attachment: scroll;
   background-position: center;
   border-radius: 20px 20px 20px 20px;
@@ -299,10 +299,10 @@ a:hover {
 
 .inner_container ul li {
   text-align: left;
-}
+} */
 
 /*로그인*/
-body.noscroll {
+/* body.noscroll {
   height: 500px;
 }
 .centerBox {
@@ -321,10 +321,10 @@ body.noscroll {
 
 #registerBox button {
   background-color: rgb(241, 56, 56);
-}
+} */
 
 /*마이페이지*/
-.container {
+/* .container {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -350,6 +350,6 @@ article.item {
 .infoTitle {
   width: 500px;
   text-align: left;
-}
+} */
 
 /* boardList 스타일 */
