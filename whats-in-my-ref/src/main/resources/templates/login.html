@@ -1,13 +1,16 @@
 <html xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="UTF-8" />
-    <link href="/css/style.css" rel="stylesheet" />
-    <link href="/img/elephant.png" rel="shortcut icon" type="image/x-icon" />
-
+    
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.conditional.min.css"
     />
+    <link href="/css/login.css" rel="stylesheet" />
+    <link href="/css/header.css" rel="stylesheet" />
+    <link href="/css/common.css" rel="stylesheet" />
+
+    
     <title>login</title>
   </head>
   <body class="noscroll">
@@ -19,7 +22,7 @@
         <input
           type="text"
           id="loginId"
-          th:field="*{loginId}"
+          th:value="*{loginId}"
           class="form_input"
         />
         <br />
@@ -27,7 +30,7 @@
         <input
           type="text"
           id="password"
-          th:field="*{password}"
+          th:value="*{password}"
           class="form_input"
         />
         <br />
@@ -36,6 +39,7 @@
     </div>
 
     <script>
+      //로그인 실패 메시지
       let message = "[[${msg}]]";
       if (message != "") {
         alert(message);

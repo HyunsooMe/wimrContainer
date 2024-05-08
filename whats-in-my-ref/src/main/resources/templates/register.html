@@ -1,24 +1,30 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <link href="/css/style.css" rel="stylesheet">
-    <link href="/img/elephant.png" rel="shortcut icon" type="image/x-icon">
-    <title>Session Home</title>
+    
+    <title>Register</title>
     <link
     rel="stylesheet"
     href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.conditional.min.css"
   />
+    <link href="/css/login.css" rel="stylesheet"/>
+    <link href="/css/header.css" rel="stylesheet" />
+    <link href="/css/common.css" rel="stylesheet" />
 
 </head>
-<body class="noscroll">
+<body>
     <header th:replace="~{fragments/header::header}"/>
     
+    <div class="emptyBox"></div>
     <div id="registerBox" class="centerBox pico">
         <form th:action="@{/register}" method="post" th:object="${User}">
-            ID: <input type="text" id="loginId" th:field="*{loginId}" class="form_input" /> <br/>
-            Password: <input type="text" id="password" th:field="*{password}" class="form_input" /> <br/>
-            email: <input type="text" id="email" th:field="*{email}" class="form_input" /> <br/>
-            <button type="submit">register</button>
+            아이디: <input type="text" id="loginId" th:field="*{loginId}" class="form_input" /> <br/>
+            비밀번호: <input type="text" id="password" th:field="*{password}" class="form_input" /> <br/>
+            비밀번호 확인:<input type="text" id="password-check" class="form_input" /> <br/>
+            닉네임: <input type="text" id="name" th:field="*{name}" class="form_input" /><br/>
+            이메일: <input type="text" id="email" th:field="*{email}" class="form_input" /> <br/>
+            <button type="submit">가입하기</button>
+            <button id="clear" type="reset">초기화</button>
         </form>
     </div>
 

@@ -1,12 +1,14 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <link href="/css/style.css" rel="stylesheet">
-    <link href="/img/elephant.png" rel="shortcut icon" type="image/x-icon">
+    
     <link
     rel="stylesheet"
     href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.conditional.min.css"
   />
+    <link href="/css/myPage.css" rel="stylesheet"/>
+    <link href="/css/header.css" rel="stylesheet" />
+    <link href="/css/common.css" rel="stylesheet" />
 
     <title>my page</title>
 </head>
@@ -14,12 +16,12 @@
     <header th:replace="~{fragments/header::header}"/>
     <div class="emptyBox"></div>
     
-    <div class="container pico"> 
-        <div id="userImg" class="item"></div>
-        <div id="userName" class="item"><strong><u>정동재</u></strong></div>
-        <div class="infoTitle">Self-introduce:</div><article id="introduce" class="item">안녕</article>
+    <div class="container myPage-container pico"> 
+        <div id="userImg" class="item justify-content-center-m"><img th:src="${imagePath != null ? imagePath : '/img/userDefaultImg.png'}"/></div>      <!--이미지를 못 받았을 때 default 이미지 경로(현재 /img/pen.jpg)-->
+        <div id="userName" class="item justify-content-center-m" ><strong><u><span th:text="userName"></span></u></strong></div>
+        <div class="infoTitle item">Self-introduce:<article id="introduce"><sapn th:text="${introduce}"></article></div>
         <div id="userItem">
-            <div class="infoTitle">Email:</div><article id="email" class="item">32204045@dankook.ac.kr</article>
+            <div class="infoTitle item">Email:<article id="email"><span th:text="${eamil}"></span></article></div>
         </div>
     </div>
 
