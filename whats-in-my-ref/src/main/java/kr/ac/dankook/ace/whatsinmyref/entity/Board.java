@@ -2,6 +2,7 @@ package kr.ac.dankook.ace.whatsinmyref.entity;
 
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -22,11 +23,13 @@ public class Board extends BaseEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
-    private int id;
+    private int bno;
     private String title;
     private String content;
     private String nickname;
     private int viewcount;
+    private Date time;
+    private int likes;
 
     @Column(name = "created_date", nullable = false, updatable = false)
     private LocalDateTime created_date;
