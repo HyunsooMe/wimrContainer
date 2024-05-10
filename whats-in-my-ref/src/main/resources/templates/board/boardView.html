@@ -10,16 +10,36 @@
       href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.conditional.min.css"
     />
     <link href="/img/elephant.png" rel="shortcut icon" type="image/x-icon" />
+    <link rel="stylesheet" th:href="@{/css/header.css}" />
+    <link rel="stylesheet" th:href="@{/css/common.css}" />
+    <link rel="stylesheet" th:href="@{/css/boardViewStyle.css}" />
   </head>
   <body>
     <header th:replace="~{fragments/header::header}"></header>
     <div class="board_wrap">
-      <h2 th:text="${board.title}">제목입니다</h2>
-      <p th:text="${board.content}">내용이 들어갈 부분</p>
-      <p th:text="${board.nickname}">작성자</p>
+      <h2>게시글 상세보기</h2>
+      <div class="table_wrap">
+        <table>
+          <tr>
+            <th>번호</th>
+            <td th:text="${board.id}"></td>
+            <th>제목</th>
+            <td th:text="${board.title}"></td>
+          </tr>
+          <tr>
+            <th>작성자</th>
+            <td th:text="${board.nickname}"></td>
+            <th>날짜</th>
+            <td
+              th:text="${#temporals.format(board.created_date, 'yyyy-MM-dd')}"
+            ></td>
+          </tr>
+        </table>
+        <div id="content" th:text="${board.content}"></div>
+      </div>
       <div class="btn">
         <a th:href="@{/boardDelete(id=${board.id})}" id="delete">글 삭제</a>
-        <a th:href="@{/boardModify(id=${board.id})}"></a>
+        <a th:href="@{/boardModify(id=${board.id})}">글 수정</a>
         <a th:href="@{/boardList}">목록 보기</a>
       </div>
     </div>

@@ -1,165 +1,154 @@
 @font-face {
-    font-family: "YEONGJUSeonbiTTF";
-    src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/2403@1.0/YEONGJUSeonbiTTF.woff2")
-      format("woff2");
-    font-weight: normal;
-    font-style: normal;
+  font-family: "YEONGJUSeonbiTTF";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/2403@1.0/YEONGJUSeonbiTTF.woff2")
+    format("woff2");
+  font-weight: normal;
+  font-style: normal;
 }
 
 body {
-    font-family: "Open Sans", sans-serif;
+  font-family: "Open Sans", sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
 a {
-    color: #4fa6d5;
-    text-decoration: none;
+  color: #4fa6d5;
+  text-decoration: none;
 }
 
 a:hover {
-    color: #45beff;
-    text-decoration: none;
+  color: #45beff;
+  text-decoration: none;
 }
 
 .emptyBox {
-    visibility: hidden;
-    height: 100px;
-    width: 1px;
-  }
-  
-  
-  
+  visibility: hidden;
+  height: 100px;
+  width: 1px;
+}
+
 /*반응형 변경 사항들*/
-@media (max-width:1536px){
-    /*===========================header.html==========================*/
-    #header{
-      height: 50px;
-      font-size: 20px;
-    }
-    #header .logo img{
-      width: 50px;
-    }
-    .navbar{
-      font-size: 15px;
-      margin-top:4px;
-    }
-     /*===========================index.html===========================*/
-    .site-cover{
-    }
-    .site-cover .search-container{
-      max-width: 1000px;
-    }
-    .box{
-      width:250px;
-      margin:0 60px 30px;
-    }
-    /*==============================recipe.html=============================*/
-    .recipe_container{
-      max-width: 1000px;
-    }
-}
-  
-  @media (max-width:1150px){
-    /*===========================header.html==========================*/
-    #header{
-      height: 36px;
-      font-size: 14px;
-    }
-    #header .logo img{
-      width: 35px;
-    }
-    .navbar{
-      font-size: 11px;
-      margin-top:0px;
-    }
-     /*===========================index.html===========================*/
-    .site-cover{
-    }
-    .site-cover .search-container{
-      max-width: 700px;
-    }
-    .box{
-      width:200px;
-      margin:0 40px 30px;
-    }
-  
-    /*==============================recipe.html=============================*/
-    .recipe_container{
-      max-width: 700px;
-    }
-}
-  
-  /*모바일*/
-  @media (max-width:853px){
-    /*===========================header.html==========================*/
-    .navbar{
-      content-visibility:hidden;
-    }
-  
-    /*===========================index.html===========================*/
-    .site-cover .search-container{
-      max-width: 400px;
-    }
-  
-    .search-form-wrap form div{
-      flex-direction: column;
-      
-    }
-    .search-form-wrap form div input{
-      --pico-spacing: 1rem ;
-    }
-    
-    .Contents .box_div{
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-    }
-    .box{
-      width: 400px;
-    }
-  
-  
-    /*==============================recipe.html=============================*/
-    .emptyBox{
-      height:40px;
-    }
-  
-    .recipe_container{
-      width: calc(96vw);
-      box-shadow: none;
-    }
-  
-    .myPage-container .item{
-      width: calc(90vw);
-    }
-    .justify-content-center-m{
-        display: flex;
-        justify-content: center;
-    }
-}
-  
-  
-  
-  
-  
-  
-.text-center{
-    text-align: center;
+@media (max-width: 1536px) {
+  /*===========================header.html==========================*/
+  #header {
+    height: 50px;
+    font-size: 20px;
+  }
+  #header .logo img {
+    width: 50px;
+  }
+  .navbar {
+    font-size: 15px;
+    margin-top: 4px;
+  }
+  /*===========================index.html===========================*/
+  .site-cover .search-container {
+    max-width: 1000px;
+  }
+  .box {
+    width: 250px;
+    margin: 0 60px 30px;
+  }
+  /*==============================recipe.html=============================*/
+  .recipe_container {
+    max-width: 1000px;
+  }
 }
 
-.align-items-center{
-    align-items: center ;
-    align-content: center;
+@media (max-width: 1150px) {
+  /*===========================header.html==========================*/
+  #header {
+    height: 36px;
+    font-size: 14px;
+  }
+  #header .logo img {
+    width: 35px;
+  }
+  .navbar {
+    font-size: 11px;
+    margin-top: 0px;
+  }
+  /*===========================index.html===========================*/
+  .site-cover .search-container {
+    max-width: 700px;
+  }
+  .box {
+    width: 200px;
+    margin: 0 40px 30px;
+  }
+
+  /*==============================recipe.html=============================*/
+  .recipe_container {
+    max-width: 700px;
+  }
 }
 
-.justify-content-center{
-    justify-content: center;
-}
+/*모바일*/
+@media (max-width: 853px) {
+  /*===========================header.html==========================*/
+  .navbar {
+    content-visibility: hidden;
+  }
 
-.row{
+  /*===========================index.html===========================*/
+  .site-cover .search-container {
+    max-width: 400px;
+  }
+
+  .search-form-wrap form div {
+    flex-direction: column;
+  }
+  .search-form-wrap form div input {
+    --pico-spacing: 1rem;
+  }
+
+  .Contents .box_div {
     display: flex;
     flex-direction: column;
-    flex-wrap: wrap;
-    margin-right: -15px;
-    margin-left: -15px;
+    align-items: center;
+    justify-content: center;
+  }
+  .box {
+    width: 400px;
+  }
+
+  /*==============================recipe.html=============================*/
+  .emptyBox {
+    height: 40px;
+  }
+
+  .recipe_container {
+    width: calc(96vw);
+    box-shadow: none;
+  }
+
+  .myPage-container .item {
+    width: calc(90vw);
+  }
+  .justify-content-center-m {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+.text-center {
+  text-align: center;
+}
+
+.align-items-center {
+  align-items: center;
+  align-content: center;
+}
+
+.justify-content-center {
+  justify-content: center;
+}
+
+.row {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  margin-right: -15px;
+  margin-left: -15px;
 }
