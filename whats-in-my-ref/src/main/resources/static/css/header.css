@@ -2,171 +2,217 @@
 # Header
 --------------------------------------------------------------*/
 #header {
-    width: 100%;
-    height: 60px;
-    position: fixed;
-    z-index: 2;
-    display: flex;
-    background: rgb(67, 121, 85);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
-    font-size: 25px;
-    /*border-radius: 40px 40px 0px 0px;*/
-  }
+  width: 100%;
+  height: 60px;
+  position: fixed;
+  z-index: 2;
+  display: flex;
+  background: rgb(67, 121, 85);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+  font-size: 25px;
+  /*border-radius: 40px 40px 0px 0px;*/
+}
+
+#header.header-transparent {
+  background: none;
+}
+
+#header .logo {
+  position: relative;
+  width: 100%;
+  padding-left: 30px;
+}
+
+#header .logo h1 {
+  font-family: "YEONGJUSeonbiTTF";
+  margin: 0;
+  padding: 6px 0px 6px; /*위 좌-우 아래*/
+  line-height: 1;
+  font-weight: 500;
+  letter-spacing: 2px; /*글자 간격*/
+}
+
+#header .logo h1 a,
+#header .logo h1 a:hover {
+  color: #fff;
+  text-decoration: none;
+}
+
+#header .logo img {
+
+}
+
+/*--------------------------------------------------------------
+# Navigation Menu
+--------------------------------------------------------------*/
+/**
+* Desktop Navigation 
+*/
+.navbar {
+  display: block;
+  padding: 0;
+  position: relative;
+  margin-left: auto;
+  margin-right: 15px;
+  font-size: 20px;
+  margin-top:5px;
+}
+
+.navbar ul {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  list-style: none;
+  align-items: center;
   
-  #header.header-transparent {
-    background: none;
-  }
+}
+
+.navbar li {
+  position: relative;
+}
+
+.navbar a,
+.navbar a:focus {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 10px 10px 30px;
+  font-family: "Open Sans", sans-serif;
+  color: #fff;
+  white-space: nowrap;
+  transition: 0.3s;
+}
+
+.navbar li:focus {
+  color: #a2cce3;
+}
+
+.navbar a i,
+.navbar a:focus i {
+  font-size: 12px;
+  line-height: 0;
+  margin-left: 5px;
+}
+
+.navbar a:hover,
+.navbar .active,
+.navbar .active:focus,
+.navbar li:hover > a {
+  color: #a2cce3;
+}
+
+.navbar .dropdown ul {
+  display: block;
+  position: absolute;
+  left: -130px;
+  top: calc(100% + 30px);
+  margin: 0;
+  padding: 10px 0;
+  border-radius: 10px;
+  z-index: 99;
+  opacity: 0;
+  visibility: hidden;
+  background: #fff;
+  box-shadow: 0px 0px 30px rgba(127, 137, 161, 0.25);
+  transition: 0.3s;
+}
+
+.navbar .dropdown ul li {
+  min-width: 200px;
+}
+
+.navbar .dropdown ul a {
+  padding: 10px 20px;
+  font-size: 14px;
+  text-transform: none;
+  color: #1c3745;
+}
+
+.navbar .dropdown ul a i {
+  font-size: 12px;
+}
+
+.navbar .dropdown ul a:hover,
+.navbar .dropdown ul .active:hover,
+.navbar .dropdown ul li:hover > a {
+  color: #68a4c4;
+}
+
+.navbar .dropdown:hover > ul {
+  opacity: 1;
+  top: 100%;
+  visibility: visible;
+}
+
+.navbar .login-btn{
+  position: relative; 
+}
+
+.navbar .after-login{
+}
+
+.navbar #toRegister {
+  margin: 0;
+  padding-top: 0;
+  font-size: 10px;
+  display: flex;
+  justify-content: right;
+}
+
+
+
+/*---------------------------------------------------
+footer
+-----------------------------------------------------*/
   
-  #header .logo {
-    position: relative;
-    width: 100%;
-    padding-left: 30px;
-  }
-  
-  #header .logo h1 {
-    font-family: "YEONGJUSeonbiTTF";
-    margin: 0;
-    padding: 6px 0px 6px; /*위 좌-우 아래*/
-    line-height: 1;
-    font-weight: 500;
-    letter-spacing: 2px; /*글자 간격*/
-  }
-  
-  #header .logo h1 a,
-  #header .logo h1 a:hover {
-    color: #fff;
-    text-decoration: none;
-  }
-  
-  #header .logo img {
-  
-  }
-  
-  /*--------------------------------------------------------------
-  # Navigation Menu
-  --------------------------------------------------------------*/
-  /**
-  * Desktop Navigation 
-  */
-  .navbar {
-    display: block;
-    padding: 0;
-    position: relative;
-    margin-left: auto;
-    margin-right: 15px;
-    font-size: 20px;
-    margin-top:5px;
-  }
-  
-  .navbar ul {
-    margin: 0;
-    padding: 0;
-    display: flex;
-    list-style: none;
-    align-items: center;
-    
-  }
-  
-  .navbar li {
-    position: relative;
-  }
-  
-  .navbar a,
-  .navbar a:focus {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px 10px 10px 30px;
-    font-family: "Open Sans", sans-serif;
-    color: #fff;
-    white-space: nowrap;
-    transition: 0.3s;
-  }
-  
-  .navbar li:focus {
-    color: #a2cce3;
-  }
-  
-  .navbar a i,
-  .navbar a:focus i {
-    font-size: 12px;
-    line-height: 0;
-    margin-left: 5px;
-  }
-  
-  .navbar a:hover,
-  .navbar .active,
-  .navbar .active:focus,
-  .navbar li:hover > a {
-    color: #a2cce3;
-  }
-  
-  .navbar .dropdown ul {
-    display: block;
-    position: absolute;
-    left: -130px;
-    top: calc(100% + 30px);
-    margin: 0;
-    padding: 10px 0;
-    border-radius: 10px;
-    z-index: 99;
-    opacity: 0;
-    visibility: hidden;
-    background: #fff;
-    box-shadow: 0px 0px 30px rgba(127, 137, 161, 0.25);
-    transition: 0.3s;
-  }
-  
-  .navbar .dropdown ul li {
-    min-width: 200px;
-  }
-  
-  .navbar .dropdown ul a {
-    padding: 10px 20px;
-    font-size: 14px;
-    text-transform: none;
-    color: #1c3745;
-  }
-  
-  .navbar .dropdown ul a i {
-    font-size: 12px;
-  }
-  
-  .navbar .dropdown ul a:hover,
-  .navbar .dropdown ul .active:hover,
-  .navbar .dropdown ul li:hover > a {
-    color: #68a4c4;
-  }
-  
-  .navbar .dropdown:hover > ul {
-    opacity: 1;
-    top: 100%;
-    visibility: visible;
-  }
-  
-  .navbar .login-btn{
-    position: relative; 
-  }
-  
-  .navbar .after-login{
-    display: none;
-    visibility: hidden;
-  }
-  
-  .navbar #toRegister {
-    margin: 0;
-    padding-top: 0;
-    font-size: 10px;
-    display: flex;
-    justify-content: right;
-  }
-  
-  /*---------------------------------------------------
-  footer
-  -----------------------------------------------------*/
-  
-  #footer{
-    width:100%;
-    height: 50px;
-    background-color: #838383;
-  }
+#footer{
+  width:100%;
+  height: 50px;
+  background-color: #838383;
+}
+
+
+/*--------------------------------------------------
+menu bar
+----------------------------------------------------*/
+#mobile-nav-toggle{
+  display: none;
+  content-visibility: hidden;
+  margin-right:10px;
+  cursor: pointer;
+}
+
+.bar {
+  display: block;
+  height: 3px;
+  width: 20px;
+  background: #ffffff;
+  margin: 5px auto;
+  -webkit-transition: all .2s ease;
+  transition: all .2s ease;
+}
+.sidebar-wrap{
+  display: flex;
+  justify-content: right;
+}
+
+#sidebar{
+  visibility: hidden;
+  height:100%;
+  width: 500px;
+  background-color: rgba(37, 37, 37, 0.952);
+  position:fixed;
+  top:36px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.904), 0 6px 6px rgba(0, 0, 0, 0.23);
+  z-index: 3;
+}
+
+#sidebar ul li{
+  text-align: left;
+  color: rgb(255, 255, 255);
+  margin-bottom: 50px;
+}
+
+ul li a{
+  color:white;
+}

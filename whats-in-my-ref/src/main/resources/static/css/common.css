@@ -79,7 +79,7 @@ a:hover {
     }
     .box{
       width:200px;
-      margin:0 40px 30px;
+      margin:0 38px 30px;
     }
   
     /*==============================recipe.html=============================*/
@@ -93,6 +93,15 @@ a:hover {
     /*===========================header.html==========================*/
     .navbar{
       content-visibility:hidden;
+    }
+
+    #mobile-nav-toggle{
+      display:block;
+      content-visibility: visible;
+    }
+
+    #sidebar{
+      visibility: visible;
     }
   
     /*===========================index.html===========================*/
@@ -115,8 +124,9 @@ a:hover {
       justify-content: center;
     }
     .box{
-      width: 400px;
+      width: 360px;
     }
+
   
   
     /*==============================recipe.html=============================*/
