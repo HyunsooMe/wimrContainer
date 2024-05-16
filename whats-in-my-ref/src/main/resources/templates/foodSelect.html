@@ -5,18 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link
-    rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.conditional.min.css"
-  />
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.conditional.min.css"
+    />
     <link rel="stylesheet" src="style.css" />
   </head>
   <body>
     <header th:replace="fragments/header :: header"></header>
     <h1>재료 선택</h1>
     <div class="food_list">
-      <input type="text" id="searchInput" placeholder="재료 입력" />
-      <button type="submit" class="searchBtn" id="searchBtn">검색</button>
-
+      <!-- 재료 검색어 입력창 -->
+      <section>
+        <input
+          type="text"
+          id="search"
+          placeholder="재료 입력"
+          autocomplete="off"
+        />
+        <button type="submit" class="searchBtn" id="searchBtn">검색</button>
+        <!-- 자동완성 단어 리스트 -->
+        <div class="autocomplete"></div>
+      </section>
       <!-- 고기 체크박스 -->
       <dl class="food_item">
         <dt class="item_title">고기</dt>
@@ -109,7 +118,7 @@
               </label>
             </li>
             <li class="vegetable">
-              <label th:title="당근"> 
+              <label th:title="당근">
                 <input
                   type="checkbox"
                   class="checkbox"
