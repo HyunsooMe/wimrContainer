@@ -12,6 +12,8 @@
   </head>
   <body>
     <header th:replace="fragments/header :: header"></header>
+    <div class="sidebar-wrap"><div th:replace="~{fragments/sideNav::sidebar}"/></div>
+    
     <h1>재료 선택</h1>
     <div class="food_list">
       <input type="text" id="searchInput" placeholder="재료 입력" />
