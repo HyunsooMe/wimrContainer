@@ -4,6 +4,7 @@ package kr.ac.dankook.ace.whatsinmyref.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -11,6 +12,7 @@ import kr.ac.dankook.ace.whatsinmyref.entity.Board;
 import kr.ac.dankook.ace.whatsinmyref.repository.BoardRepository;
 
 @Service
+@Component
 public class BoardService {
 
     @Autowired
@@ -47,7 +49,7 @@ public class BoardService {
         if(board != null){
             board.setViewcount(board.getViewcount() + 1); // 조회수 증가
             boardRepository.save(board); // 변경 내용 저장
-            
+
         }
     }
 }
