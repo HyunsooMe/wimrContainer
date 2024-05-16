@@ -1,8 +1,9 @@
 package kr.ac.dankook.ace.whatsinmyref.dto;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
-public class boardDTO {
+public class boardDTO implements Serializable {
 
     private int id;
     private String title;
