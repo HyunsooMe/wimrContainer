@@ -2,33 +2,29 @@ package kr.ac.dankook.ace.whatsinmyref.entity;
 
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.PrePersist;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+// import kr.ac.dankook.ace.whatsinmyref.dto.boardDTO;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
+// import lombok.EqualsAndHashCode;
 
-@Entity
 @Table(name = "board")
 @Data
-@EqualsAndHashCode(callSuper = false)
-public class Board extends BaseEntity{
+@Entity
+@Embeddable
+public class Board{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
-    private int id;
+    private int bno;
     private String title;
     private String content;
     private String nickname;
     private int viewcount;
+    private Date time;
+    private int likes;
 
-    @Column(name = "created_date", nullable = false, updatable = false)
     private LocalDateTime created_date;
 
     // 엔티티가 저장되기 전에 초기화
