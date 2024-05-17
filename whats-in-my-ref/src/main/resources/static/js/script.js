@@ -1,115 +1,194 @@
-const showMoreMeatBtn = document.querySelector(".show_more_meat");
-const showMoreVegetableBtn = document.querySelector(".show_more_vegetable");
-const showMoreFruitBtn = document.querySelector(".show_more_fruit");
-const showMoreSeafoodBtn = document.querySelector(".show_more_seafood");
-const showMoreDairyBtn = document.querySelector(".show_more_dairy");
-const meatItemAll = document.querySelector(".meat_item_all");
-const vegetableItemAll = document.querySelector(".vegetable_item_all");
-const fruitItemAll = document.querySelector(".fruit_item_all");
-const seafoodItemAll = document.querySelector(".seafood_item_all");
-const dairyItemAll = document.querySelector(".dairy_item_all");
 const checkboxes = document.querySelectorAll(".checkbox");
-const selectedItemsList = document.getElementById("selectedItems");
-const searchBtn = document.getElementById("searchBtn");
-
-function showMoreMeat() {
-  meatItemAll.style.display = "block";
-}
-
-function showMoreVegetable() {
-  vegetableItemAll.style.display = "block";
-}
-
-function showMoreFruit() {
-  fruitItemAll.style.display = "block";
-}
-
-function showMoreSeafood() {
-  seafoodItemAll.style.display = "block";
-}
-
-function showMoreDairy() {
-  dairyItemAll.style.display = "block";
-}
-
-function toggleMeat() {
-  if (meatItemAll.style.display === "none") {
-    meatItemAll.style.display = "block";
-    showMoreMeatBtn.innerText = "닫기";
-  } else {
-    meatItemAll.style.display = "none";
-    showMoreMeatBtn.innerText = "1개";
-  }
-}
-
-function toggleVegetable() {
-  if (vegetableItemAll.style.display === "none") {
-    vegetableItemAll.style.display = "block";
-    showMoreVegetableBtn.innerText = "닫기";
-  } else {
-    vegetableItemAll.style.display = "none";
-    showMoreVegetableBtn.innerText = "20개";
-  }
-}
-
-function toggleFruit() {
-  if (fruitItemAll.style.display === "none") {
-    fruitItemAll.style.display = "block";
-    showMoreFruitBtn.innerText = "닫기";
-  } else {
-    fruitItemAll.style.display = "none";
-    showMoreFruitBtn.innerText = "10개";
-  }
-}
-
-function toggleSeafood() {
-  if (seafoodItemAll.style.display === "none") {
-    seafoodItemAll.style.display = "block";
-    showMoreSeafoodBtn.innerText = "닫기";
-  } else {
-    seafoodItemAll.style.display = "none";
-    showMoreSeafoodBtn.innerText = "8개";
-  }
-}
-
-function toggleDairy() {
-  if (dairyItemAll.style.display === "none") {
-    dairyItemAll.style.display = "block";
-    showMoreDairyBtn.innerText = "닫기";
-  } else {
-    dairyItemAll.style.display = "none";
-    showMoreDairy.innerText = "1개";
-  }
-}
+const selectedItemsList = document.querySelector(".addedlist");
+const $search = document.querySelector("#search");
+const $autoComplete = document.querySelector(".autocomplete");
+const $searchBtn = document.querySelector("#searchBtn");
+const $addedList = document.querySelector(".addedlist");
+let selectedItems = []; // 선택한 항목을 저장할 배열
 
 // 선택된 체크박스 리스트에 추가, 해제되면 삭제
 checkboxes.forEach(function (checkbox) {
   checkbox.addEventListener("change", function () {
     if (this.checked) {
-      // 체크박스가 선택되었을 때 리스트에 추가
-      const listItem = document.createElement("li");
-      listItem.textContent = this.value;
-      selectedItemsList.appendChild(listItem);
+      addToAddedList(this.value);
+      console.log(`"${this.value}" 가 선택되어 리스트에 추가되었습니다.`);
     } else {
-      // 체크박스가 선택 해제되었을 때 리스트에서 제거
-      const items = selectedItemsList.querySelectorAll("li");
-      items.forEach(function (item) {
-        if (item.textContent === checkbox.value) {
-          selectedItemsList.removeChild(item);
-        }
-      });
+      removeFromAddedList(checkbox.value);
+      console.log(
+        `"${checkbox.value}" 가 선택 해제되어 리스트에서 제거되었습니다.`
+      );
     }
   });
 });
 
-function getMealList() {
+function getFoodRecipe() {
   console.log("click");
+  let apiUrl = `http://openapi.foodsafetykorea.go.kr/api/f415b345bda946528b8e/COOKRCP01/json/0/1000/`;
+
+  fetch(apiUrl)
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Network response was not ok " + response.statusText);
+      }
+      return response.json();
+    })
+    .then((data) => {
+      // console.log(data);
+      if (data && data.COOKRCP01 && data.COOKRCP01.row) {
+        const recipes = data.COOKRCP01.row;
+        // console.log(recipes);
+        const filteredRecipes = recipes.filter((recipe) =>
+          selectedItems.every((item) => recipe.RCP_PARTS_DTLS.includes(item))
+        );
+        console.log(filteredRecipes);
+        displayRecipes(filteredRecipes);
+      } else {
+        console.error("Unexpected data structure", data);
+      }
+    })
+    .catch((error) => {
+      console.error(
+        "There has been a problem with your fetch operation:",
+        error
+      );
+    });
 }
 
-showMoreMeatBtn.addEventListener("click", toggleMeat);
-showMoreVegetableBtn.addEventListener("click", toggleVegetable);
-showMoreFruitBtn.addEventListener("click", toggleFruit);
-showMoreSeafoodBtn.addEventListener("click", toggleSeafood);
-showMoreDairyBtn.addEventListener("click", toggleDairy);
+function displayRecipes(recipes) {
+  const recipesDiv = document.getElementById("recipe-results");
+  recipesDiv.innerHTML = "";
+  if (recipes.length === 0) {
+    recipesDiv.textContent = "해당 재료를 포함한 레시피가 없습니다.";
+    return;
+  }
+  recipes.forEach((recipe) => {
+    const recipeDiv = document.createElement("div");
+    recipeDiv.className = "recipe";
+    const title = document.createElement("h2");
+    title.textContent = recipe.RCP_NM;
+    const img = document.createElement("img");
+    img.src = recipe.ATT_FILE_NO_MAIN || recipe.ATT_FILE_NO_MK;
+    const parts = document.createElement("p");
+    parts.textContent = "재료: " + recipe.RCP_PARTS_DTLS;
+    const instructions = document.createElement("p");
+    instructions.innerHTML =
+      recipe.MANUAL01 + "<br>" + recipe.MANUAL02 + "<br>" + recipe.MANUAL03;
+    // 필요한 경우 추가 매뉴얼 필드를 여기에 추가
+    recipeDiv.appendChild(title);
+    recipeDiv.appendChild(img);
+    recipeDiv.appendChild(parts);
+    recipeDiv.appendChild(instructions);
+    recipesDiv.appendChild(recipeDiv);
+  });
+}
 
-searchBtn.addEventListener("click", getMealList);
+findRecipeBtn.addEventListener("click", getFoodRecipe);
+
+const dataList = [
+  "양파",
+  "토마토",
+  "상추",
+  "소고기",
+  "닭고기",
+  "돼지고기",
+  "양고기",
+  "고추",
+  "감자",
+  "고구마",
+  "당근",
+  "오이",
+];
+
+$searchBtn.addEventListener("click", () => {
+  const value = $search.value.trim();
+  if (value) {
+    addToAddedList(value); // 선택한 항목을 추가
+    $search.value = ""; // 검색어 입력란 초기화
+    $autoComplete.innerHTML = ""; // 자동완성 리스트 초기화
+  }
+});
+
+let nowIndex = 0;
+
+$search.onkeyup = (event) => {
+  // 검색어
+  const value = $search.value.trim();
+
+  // 자동완성 필터링
+  const matchDataList = value
+    ? dataList.filter((label) => label.includes(value))
+    : [];
+
+  switch (event.keyCode) {
+    // UP KEY
+    case 38:
+      nowIndex = Math.max(nowIndex - 1, 0);
+      break;
+
+    // DOWN KEY
+    case 40:
+      nowIndex = Math.min(nowIndex + 1, matchDataList.length - 1);
+      break;
+
+    // ENTER KEY
+    case 13:
+      document.querySelector("#search").value = matchDataList[nowIndex] || "";
+
+      // 초기화
+      nowIndex = 0;
+      matchDataList.length = 0;
+      break;
+
+    // 그외 다시 초기화
+    default:
+      nowIndex = 0;
+      break;
+  }
+
+  // 리스트 보여주기
+  showList(matchDataList, value, nowIndex);
+};
+
+const showList = (data, value, nowIndex) => {
+  // 정규식으로 변환
+  const regex = new RegExp(`(${value})`, "g");
+
+  $autoComplete.innerHTML = data
+    .map(
+      (label, index) => `
+      <div class='${nowIndex === index ? "active" : ""}'>
+        ${label.replace(regex, "<mark>$1</mark>")}
+      </div>
+    `
+    )
+    .join("");
+};
+
+const selectItem = (index) => {
+  $search.value = matchDataList[index];
+  addToAddedList($search.value); // 선택한 항목을 추가
+  $autoComplete.innerHTML = "";
+  nowIndex = 0;
+};
+
+const addToAddedList = (item) => {
+  if (!selectedItems.includes(item)) {
+    // 중복 추가 방지
+    selectedItems.push(item); // 선택한 항목을 배열에 추가
+    renderAddedList(); // addedlist 업데이트
+  }
+};
+
+const removeFromAddedList = (item) => {
+  selectedItems = selectedItems.filter((selectedItem) => selectedItem !== item);
+  renderAddedList(); // addedlist 업데이트
+};
+
+const renderAddedList = () => {
+  $addedList.innerHTML = ""; // 기존 리스트 초기화
+  selectedItems.forEach((item) => {
+    const listItem = document.createElement("div");
+    listItem.textContent = item;
+    $addedList.appendChild(listItem);
+  });
+};

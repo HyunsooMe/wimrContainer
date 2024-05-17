@@ -30,12 +30,12 @@
           </thead>
           <tbody>
             <tr th:each="board : ${boardList}">
-              <td th:text="${board.id}"></td>
-              <!-- localhost:8080/boardList?id=board.id -->
+              <td th:text="${board.bno}"></td>
+              <!-- localhost:8080/boardList?bno=board.bno -->
               <td>
                 <a
                   th:text="${board.title}"
-                  th:href="@{/boardView(id=${board.id})}"
+                  th:href="@{/boardView(bno=${board.bno})}"
                 ></a>
               </td>
               <td th:text="${board.nickname}"></td>
@@ -47,7 +47,7 @@
           </tbody>
         </table>
         <div class="btn">
-          <a th:href="@{/boardForm}" id="btn">글쓰기</a>
+          <a th:href="@{/boardForm}" bno="btn">글쓰기</a>
         </div>
       </div>
       <div class="pages">
