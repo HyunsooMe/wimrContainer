@@ -5,15 +5,15 @@ import java.time.LocalDateTime;
 import java.util.Date;
 
 import jakarta.persistence.*;
-import kr.ac.dankook.ace.whatsinmyref.dto.boardDTO;
+// import kr.ac.dankook.ace.whatsinmyref.dto.boardDTO;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
+// import lombok.EqualsAndHashCode;
 
 @Table(name = "board")
 @Data
 @Entity
 @Embeddable
-public class Board{
+public class Board {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,6 +24,70 @@ public class Board{
     private int viewcount;
     private Date time;
     private int likes;
+
+    public int getBno() {
+        return this.bno;
+    }
+
+    public void setBno(int bno) {
+        this.bno = bno;
+    }
+
+    public String getTitle() {
+        return this.title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getContent() {
+        return this.content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public String getNickname() {
+        return this.nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+    public int getViewcount() {
+        return this.viewcount;
+    }
+
+    public void setViewcount(int viewcount) {
+        this.viewcount = viewcount;
+    }
+
+    public Date getTime() {
+        return this.time;
+    }
+
+    public void setTime(Date time) {
+        this.time = time;
+    }
+
+    public int getLikes() {
+        return this.likes;
+    }
+
+    public void setLikes(int likes) {
+        this.likes = likes;
+    }
+
+    public LocalDateTime getCreated_date() {
+        return this.created_date;
+    }
+
+    public void setCreated_date(LocalDateTime created_date) {
+        this.created_date = created_date;
+    }
 
     private LocalDateTime created_date;
 

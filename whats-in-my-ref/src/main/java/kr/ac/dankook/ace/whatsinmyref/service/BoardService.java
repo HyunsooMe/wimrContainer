@@ -31,21 +31,21 @@ public class BoardService {
     }
 
     // 특정 게시글 불러오기
-    public Board boardView(Integer id){
+    public Board boardView(Integer bno){
 
-        return boardRepository.findById(id).get();
+        return boardRepository.findById(bno).get();
     }
 
     // 특정 게시글 삭제
-    public void boardDelete(Integer id){
+    public void boardDelete(Integer bno){
 
-        boardRepository.deleteById(id);
+        boardRepository.deleteById(bno);
     }
 
     // 조회수 증가
     @Transactional
-    public void increaseViewCount(Integer id){
-        Board board = boardRepository.findById(id).get();
+    public void increaseViewCount(Integer bno){
+        Board board = boardRepository.findById(bno).get();
         if(board != null){
             board.setViewcount(board.getViewcount() + 1); // 조회수 증가
             boardRepository.save(board); // 변경 내용 저장

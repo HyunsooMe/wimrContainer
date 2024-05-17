@@ -5,666 +5,361 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link
-    rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.conditional.min.css"
-  />
-    <link rel="stylesheet" src="style.css" />
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.conditional.min.css"
+    />
+    <link href="/img/elephant.png" rel="shortcut icon" type="image/x-icon" />
+    <link rel="stylesheet" th:href="@{/css/header.css}" />
+    <link rel="stylesheet" th:href="@{/css/common.css}" />
+    <link rel="stylesheet" href="/css/foodSelectStyle.css" />
   </head>
   <body>
-    <header th:replace="fragments/header :: header"></header>
-    <h1>재료 선택</h1>
+    <header th:replace="~{fragments/header::header}"></header>
+    <h1>레시피 검색</h1>
     <div class="food_list">
-      <input type="text" id="searchInput" placeholder="재료 입력" />
-      <button type="submit" class="searchBtn" id="searchBtn">검색</button>
-
-      <!-- 고기 체크박스 -->
-      <dl class="food_item">
-        <dt class="item_title">고기</dt>
-        <dd class="item_content">
-          <ul class="meat_item">
-            <li class="meat">
-              <label th:title="돼지고기">
-                <input
-                  type="checkbox"
-                  class="checkbox"
-                  value="돼지고기"
-                  data-attribute-name="고기"
-                  th:field="*{meat}"
-                />
-                돼지고기
-              </label>
-            </li>
-            <li class="meat">
-              <label th:title="소고기">
-                <input
-                  type="checkbox"
-                  class="checkbox"
-                  value="소고기"
-                  data-attribute-name="고기"
-                  th:field="*{meat}"
-                />
-                소고기
-              </label>
-            </li>
-            <li class="meat">
-              <label th:title="닭고기">
-                <input
-                  type="checkbox"
-                  class="checkbox"
-                  value="닭고기"
-                  data-attribute-name="고기"
-                  th:field="*{meat}"
-                />
-                닭고기
-              </label>
-            </li>
-            <li class="meat">
-              <label th:title="오리고기">
-                <input
-                  type="checkbox"
-                  class="checkbox"
-                  value="오리고기"
-                  data-attribute-name="고기"
-                  th:field="*{meat}"
-                />
-                오리고기
-              </label>
-            </li>
-          </ul>
-          <ul class="meat_item_all" style="display: none">
-            <li class="meat">
-              <label th:title="양고기">
-                <input
-                  type="checkbox"
-                  class="checkbox"
-                  value="양고기"
-                  data-attribute-name="고기"
-                  th:field="*{meat}"
-                />
-                양고기
-              </label>
-            </li>
-          </ul>
-          <div class="more_item">
-            <button class="show_more_meat">1개</button>
+      <div class="food_search">
+        <input
+          type="text"
+          id="search"
+          placeholder="재료 입력"
+          autocomplete="off"
+        />
+        <button type="button" id="searchBtn">추가</button>
+        <button type="button" id="findRecipeBtn">검색</button>
+      </div>
+      <!-- 자동완성 단어 리스트 -->
+      <div class="autocomplete"></div>
+      <!-- 선택한 재료 -->
+      <div class="selectedFood">
+        <p>선택한 재료</p>
+        <div class="addedlist"></div>
+      </div>
+      
+      <div class="all_food">
+        <!-- 고기 체크박스 -->
+        <div class="food_item">
+          <div class="item_title">고기</div>
+          <div class="item_content">
+            <ul class="meat_item">
+              <li class="meat">
+                <label title="돼지고기">
+                  <input
+                    type="checkbox"
+                    class="checkbox"
+                    value="돼지고기"
+                    name="고기"
+                  />
+                  돼지고기
+                </label>
+              </li>
+              <li class="meat">
+                <label title="소고기">
+                  <input
+                    type="checkbox"
+                    class="checkbox"
+                    value="소고기"
+                    name="고기"
+                  />
+                  소고기
+                </label>
+              </li>
+              <li class="meat">
+                <label title="닭고기">
+                  <input
+                    type="checkbox"
+                    class="checkbox"
+                    value="닭고기"
+                    name="고기"
+                  />
+                  닭고기
+                </label>
+              </li>
+              <li class="meat">
+                <label title="오리고기">
+                  <input
+                    type="checkbox"
+                    class="checkbox"
+                    value="오리고기"
+                    name="고기"
+                  />
+                  오리고기
+                </label>
+              </li>
+              <li class="meat">
+                <label title="양고기">
+                  <input
+                    type="checkbox"
+                    class="checkbox"
+                    value="양고기"
+                    name="고기"
+                  />
+                  양고기
+                </label>
+              </li>
+            </ul>
           </div>
-        </dd>
-      </dl>
+        </div>
 
-      <!-- 채소 체크박스 -->
-      <dl class="food_item">
-        <dt class="item_title">채소</dt>
-        <dd class="item_content">
-          <ul class="vegetable_item">
-            <li class="vegetable">
-              <label th:title="오이">
-                <input
-                  type="checkbox"
-                  class="checkbox"
-                  value="오이"
-                  data-attribute-name="채소"
-                  th:field="*{vegetable}"
-                />
-                오이
-              </label>
-            </li>
-            <li class="vegetable">
-              <label th:title="당근"> 
-                <input
-                  type="checkbox"
-                  class="checkbox"
-                  value="당근"
-                  data-attribute-name="채소"
-                  th:field="*{vegetable}"
-                />
-                당근
-              </label>
-            </li>
-            <li class="vegetable">
-              <label th:title="감자">
-                <input
-                  type="checkbox"
-                  class="checkbox"
-                  value="감자"
-                  data-attribute-name="채소"
-                  th:field="*{vegetable}"
-                />
-                감자
-              </label>
-            </li>
-            <li class="vegetable">
-              <label th:title="고구마">
-                <input
-                  type="checkbox"
-                  class="checkbox"
-                  value="고구마"
-                  data-attribute-name="채소"
-                  th:field="*{vegetable}"
-                />
-                고구마
-              </label>
-            </li>
-          </ul>
-          <ul class="vegetable_item_all" style="display: none">
-            <li class="vegetable">
-              <label th:title="대파">
-                <input
-                  type="checkbox"
-                  class="checkbox"
-                  value="대파"
-                  data-attribute-name="채소"
-                  th:field="*{vegetable}"
-                />
-                대파
-              </label>
-            </li>
-            <li class="vegetable">
-              <label th:title="콩나물">
-                <input
-                  type="checkbox"
-                  class="checkbox"
-                  value="콩나물"
-                  data-attribute-name="채소"
-                  th:field="*{vegetable}"
-                />
-                콩나물
-              </label>
-            </li>
-            <li class="vegetable">
-              <label th:title="상추">
-                <input
-                  type="checkbox"
-                  class="checkbox"
-                  value="상추"
-                  data-attribute-name="채소"
-                  th:field="*{vegetable}"
-                />
-                상추
-              </label>
-            </li>
-            <li class="vegetable">
-              <label th:title="무">
-                <input
-                  type="checkbox"
-                  class="checkbox"
-                  value="무"
-                  data-attribute-name="채소"
-                  th:field="*{vegetable}"
-                />
-                무
-              </label>
-            </li>
-            <li class="vegetable">
-              <label th:title="버섯">
-                <input
-                  type="checkbox"
-                  class="checkbox"
-                  value="버섯"
-                  data-attribute-name="채소"
-                  th:field="*{vegetable}"
-                />
-                버섯
-              </label>
-            </li>
-            <li class="vegetable">
-              <label th:title="깻잎">
-                <input
-                  type="checkbox"
-                  class="checkbox"
-                  value="깻잎"
-                  data-attribute-name="채소"
-                  th:field="*{vegetable}"
-                />
-                깻잎
-              </label>
-            </li>
-            <li class="vegetable">
-              <label th:title="호박">
-                <input
-                  type="checkbox"
-                  class="checkbox"
-                  value="호박"
-                  data-attribute-name="채소"
-                  th:field="*{vegetable}"
-                />
-                호박
-              </label>
-            </li>
-            <li class="vegetable">
-              <label th:title="고추">
-                <input
-                  type="checkbox"
-                  class="checkbox"
-                  value="고추"
-                  data-attribute-name="채소"
-                  th:field="*{vegetable}"
-                />
-                고추
-              </label>
-            </li>
-            <li class="vegetable">
-              <label th:title="가지">
-                <input
-                  type="checkbox"
-                  class="checkbox"
-                  data-attribute-name="채소"
-                  th:field="*{vegetable}"
-                />
-                가지
-              </label>
-            </li>
-            <li class="vegetable">
-              <label th:title="시금치">
-                <input
-                  type="checkbox"
-                  class="checkbox"
-                  value="시금치"
-                  data-attribute-name="채소"
-                  th:field="*{vegetable}"
-                />
-                시금치
-              </label>
-            </li>
-          </ul>
-          <div class="more_item">
-            <button class="show_more_vegetable">20개</button>
+        <!-- 채소 체크박스 -->
+        <div class="food_item">
+          <div class="item_title">채소</div>
+          <div class="item_content">
+            <ul class="vegetable_item">
+              <li class="vegetable">
+                <label title="오이">
+                  <input
+                    type="checkbox"
+                    class="checkbox"
+                    value="오이"
+                    name="채소"
+                  />
+                  오이
+                </label>
+              </li>
+              <li class="vegetable">
+                <label title="당근">
+                  <input
+                    type="checkbox"
+                    class="checkbox"
+                    value="당근"
+                    name="채소"
+                  />
+                  당근
+                </label>
+              </li>
+              <li class="vegetable">
+                <label title="감자">
+                  <input
+                    type="checkbox"
+                    class="checkbox"
+                    value="감자"
+                    name="채소"
+                  />
+                  감자
+                </label>
+              </li>
+              <li class="vegetable">
+                <label title="고구마">
+                  <input
+                    type="checkbox"
+                    class="checkbox"
+                    value="고구마"
+                    name="채소"
+                  />
+                  고구마
+                </label>
+              </li>
+              <li class="vegetable">
+                <label title="대파">
+                  <input
+                    type="checkbox"
+                    class="checkbox"
+                    value="대파"
+                    name="채소"
+                  />
+                  대파
+                </label>
+              </li>
+            </ul>
           </div>
-        </dd>
-      </dl>
+        </div>
 
-      <!-- 과일 체크박스 -->
-      <dl class="food_item">
-        <dt class="item_title">과일</dt>
-        <dd class="item_content">
-          <ul class="fruit_item">
-            <li class="fruit">
-              <label th:title="사과">
-                <input
-                  type="checkbox"
-                  class="checkbox"
-                  value="사과"
-                  data-attribute-name="과일"
-                  th:field="*{fruit}"
-                />
-                사과
-              </label>
-            </li>
-            <li class="fruit">
-              <label th:title="배">
-                <input
-                  type="checkbox"
-                  class="checkbox"
-                  value="배"
-                  data-attribute-name="과일"
-                  th:field="*{fruit}"
-                />
-                배
-              </label>
-            </li>
-            <li class="fruit">
-              <label th:title="딸기">
-                <input
-                  type="checkbox"
-                  class="checkbox"
-                  value="딸기"
-                  data-attribute-name="과일"
-                  th:field="*{fruit}"
-                />
-                딸기
-              </label>
-            </li>
-            <li class="fruit">
-              <label th:title="수박">
-                <input
-                  type="checkbox"
-                  class="checkbox"
-                  value="수박"
-                  data-attribute-name="과일"
-                  th:field="*{fruit}"
-                />
-                수박
-              </label>
-            </li>
-          </ul>
-          <ul class="fruit_item_all" style="display: none">
-            <li class="fruit">
-              <label th:title="포도">
-                <input
-                  type="checkbox"
-                  class="checkbox"
-                  value="포도"
-                  data-attribute-name="과일"
-                  th:field="*{fruit}"
-                />
-                포도
-              </label>
-            </li>
-            <li class="fruit">
-              <label th:title="참외">
-                <input
-                  type="checkbox"
-                  class="checkbox"
-                  value="참외"
-                  data-attribute-name="과일"
-                  th:field="*{fruit}"
-                />
-                참외
-              </label>
-            </li>
-            <li class="fruit">
-              <label th:title="블루베리">
-                <input
-                  type="checkbox"
-                  class="checkbox"
-                  value="블루베리"
-                  data-attribute-name="과일"
-                  th:field="*{fruit}"
-                />
-                블루베리
-              </label>
-            </li>
-            <li class="fruit">
-              <label th:title="귤">
-                <input
-                  type="checkbox"
-                  class="checkbox"
-                  value="귤"
-                  data-attribute-name="과일"
-                  th:field="*{fruit}"
-                />
-                귤
-              </label>
-            </li>
-            <li class="fruit">
-              <label th:title="바나나">
-                <input
-                  type="checkbox"
-                  class="checkbox"
-                  value="바나나"
-                  data-attribute-name="과일"
-                  th:field="*{fruit}"
-                />
-                바나나
-              </label>
-            </li>
-            <li class="fruit">
-              <label th:title="파인애플">
-                <input
-                  type="checkbox"
-                  class="checkbox"
-                  value="파인애플"
-                  data-attribute-name="과일"
-                  th:field="*{fruit}"
-                />
-                파인애플
-              </label>
-            </li>
-            <li class="fruit">
-              <label th:title="샤인머스캣">
-                <input
-                  type="checkbox"
-                  class="checkbox"
-                  value="샤인머스캣"
-                  data-attribute-name="과일"
-                  th:field="*{fruit}"
-                />
-                샤인머스캣
-              </label>
-            </li>
-            <li class="fruit">
-              <label th:title="멜론">
-                <input
-                  type="checkbox"
-                  class="checkbox"
-                  value="멜론"
-                  data-attribute-name="과일"
-                  th:field="*{fruit}"
-                />
-                멜론
-              </label>
-            </li>
-            <li class="fruit">
-              <label th:title="체리">
-                <input
-                  type="checkbox"
-                  class="checkbox"
-                  value="체리"
-                  data-attribute-name="과일"
-                  th:field="*{fruit}"
-                />
-                체리
-              </label>
-            </li>
-            <li class="fruit">
-              <label th:title="복숭아">
-                <input
-                  type="checkbox"
-                  class="checkbox"
-                  value="복숭아"
-                  data-attribute-name="과일"
-                  th:field="*{fruit}"
-                />
-                복숭아
-              </label>
-            </li>
-            <li class="fruit">
-              <label th:title="자두">
-                <input
-                  type="checkbox"
-                  class="checkbox"
-                  value="자두"
-                  data-attribute-name="과일"
-                  th:field="*{fruit}"
-                />
-                자두
-              </label>
-            </li>
-          </ul>
-          <div class="more_item">
-            <button class="show_more_fruit">10개</button>
+        <!-- 과일 체크박스 -->
+        <div class="food_item">
+          <div class="item_title">과일</div>
+          <div class="item_content">
+            <ul class="fruit_item">
+              <li class="fruit">
+                <label title="사과">
+                  <input
+                    type="checkbox"
+                    class="checkbox"
+                    value="사과"
+                    name="과일"
+                  />
+                  사과
+                </label>
+              </li>
+              <li class="fruit">
+                <label title="배">
+                  <input
+                    type="checkbox"
+                    class="checkbox"
+                    value="배"
+                    name="과일"
+                  />
+                  배
+                </label>
+              </li>
+              <li class="fruit">
+                <label title="딸기">
+                  <input
+                    type="checkbox"
+                    class="checkbox"
+                    value="딸기"
+                    name="과일"
+                  />
+                  딸기
+                </label>
+              </li>
+              <li class="fruit">
+                <label title="수박">
+                  <input
+                    type="checkbox"
+                    class="checkbox"
+                    value="수박"
+                    name="과일"
+                  />
+                  수박
+                </label>
+              </li>
+              <li class="fruit">
+                <label title="포도">
+                  <input
+                    type="checkbox"
+                    class="checkbox"
+                    value="포도"
+                    name="과일"
+                  />
+                  포도
+                </label>
+              </li>
+            </ul>
+            
           </div>
-        </dd>
-      </dl>
+        </div>
 
-      <!-- 해산물 체크박스 -->
-      <dl class="food_item">
-        <dt class="item_title">해산물</dt>
-        <dd class="item_content">
-          <ul class="seafood_item">
-            <li class="seafood">
-              <label th:title="새우">
-                <input
-                  type="checkbox"
-                  class="checkbox"
-                  value="새우"
-                  data-attribute-name="해산물"
-                  th:field="*{seafood}"
-                />
-                새우
-              </label>
-            </li>
-            <li class="seafood">
-              <label th:title="고등어">
-                <input
-                  type="checkbox"
-                  class="checkbox"
-                  value="고등어"
-                  data-attribute-name="해산물"
-                  th:field="*{seafood}"
-                />
-                고등어
-              </label>
-            </li>
-            <li class="seafood">
-              <label th:title="참치">
-                <input
-                  type="checkbox"
-                  class="checkbox"
-                  value="참치"
-                  data-attribute-name="해산물"
-                  th:field="*{seafood}"
-                />
-                참치
-              </label>
-            </li>
-            <li class="seafood">
-              <label th:title="오징어">
-                <input
-                  type="checkbox"
-                  class="checkbox"
-                  value="오징어"
-                  data-attribute-name="해산물"
-                  th:field="*{seafood}"
-                />
-                오징어
-              </label>
-            </li>
-          </ul>
-          <ul class="seafood_item_all" style="display: none">
-            <li class="seafood">
-              <label th:title="문어">
-                <input
-                  type="checkbox"
-                  class="checkbox"
-                  value="문어"
-                  data-attribute-name="해산물"
-                  th:field="*{seafood}"
-                />
-                문어
-              </label>
-            </li>
-            <li class="seafood">
-              <label th:title="쭈꾸미">
-                <input
-                  type="checkbox"
-                  class="checkbox"
-                  value="쭈꾸미"
-                  data-attribute-name="해산물"
-                  th:field="*{seafood}"
-                />
-                쭈꾸미
-              </label>
-            </li>
-            <li class="seafood">
-              <label th:title="소라">
-                <input
-                  type="checkbox"
-                  class="checkbox"
-                  value="소라"
-                  data-attribute-name="해산물"
-                  th:field="*{seafood}"
-                />
-                소라
-              </label>
-            </li>
-            <li class="seafood">
-              <label th:title="장어">
-                <input
-                  type="checkbox"
-                  class="checkbox"
-                  value="장어"
-                  data-attribute-name="해산물"
-                  th:field="*{seafood}"
-                />
-                장어
-              </label>
-            </li>
-            <li class="seafood">
-              <label th:title="갈치">
-                <input
-                  type="checkbox"
-                  class="checkbox"
-                  value="갈치"
-                  data-attribute-name="해산물"
-                  th:field="*{seafood}"
-                />
-                갈치
-              </label>
-            </li>
-          </ul>
-          <div class="more_item">
-            <button class="show_more_seafood">8개</button>
+        <!-- 해산물 체크박스 -->
+        <div class="food_item">
+          <div class="item_title">해산물</div>
+          <div class="item_content">
+            <ul class="seafood_item">
+              <li class="seafood">
+                <label title="새우">
+                  <input
+                    type="checkbox"
+                    class="checkbox"
+                    value="새우"
+                    name="해산물"
+                  />
+                  새우
+                </label>
+              </li>
+              <li class="seafood">
+                <label title="고등어">
+                  <input
+                    type="checkbox"
+                    class="checkbox"
+                    value="고등어"
+                    name="해산물"
+                  />
+                  고등어
+                </label>
+              </li>
+              <li class="seafood">
+                <label title="참치">
+                  <input
+                    type="checkbox"
+                    class="checkbox"
+                    value="참치"
+                    name="해산물"
+                  />
+                  참치
+                </label>
+              </li>
+              <li class="seafood">
+                <label title="오징어">
+                  <input
+                    type="checkbox"
+                    class="checkbox"
+                    value="오징어"
+                    name="해산물"
+                  />
+                  오징어
+                </label>
+              </li>
+              <li class="seafood">
+                <label title="문어">
+                  <input
+                    type="checkbox"
+                    class="checkbox"
+                    value="문어"
+                    name="해산물"
+                  />
+                  문어
+                </label>
+              </li>
+            </ul>
+            
           </div>
-        </dd>
-      </dl>
+        </div>
 
-      <!-- 유제품 체크박스 -->
-      <dl class="food_item">
-        <dt class="item_title">유제품</dt>
-        <dd class="item_content">
-          <ul class="dairy_item">
-            <li class="dairy">
-              <label th:title="우유">
-                <input
-                  type="checkbox"
-                  class="checkbox"
-                  value="우유"
-                  data-attribute-name="유제품"
-                  th:field="*{dairy}"
-                />
-                우유
-              </label>
-            </li>
-            <li class="dairy">
-              <label th:title="치즈">
-                <input
-                  type="checkbox"
-                  class="checkbox"
-                  value="치즈"
-                  data-attribute-name="유제품"
-                  th:field="*{dairy}"
-                />
-                치즈
-              </label>
-            </li>
-            <li class="dairy">
-              <label th:title="버터">
-                <input
-                  type="checkbox"
-                  class="checkbox"
-                  value="버터"
-                  data-attribute-name="유제품"
-                  th:field="*{dairy}"
-                />
-                버터
-              </label>
-            </li>
-            <li class="dairy">
-              <label th:title="요거트">
-                <input
-                  type="checkbox"
-                  class="checkbox"
-                  value="요거트"
-                  data-attribute-name="유제품"
-                  th:field="*{dairy}"
-                />
-                요거트
-              </label>
-            </li>
-          </ul>
-          <ul class="dairy_item_all" style="display: none">
-            <li class="dairy">
-              <label th:title="아이스크림">
-                <input
-                  type="checkbox"
-                  class="checkbox"
-                  value="아이스크림"
-                  data-attribute-name="유제품"
-                  th:field="*{dairy}"
-                />
-                아이스크림
-              </label>
-            </li>
-          </ul>
-          <div class="more_item">
-            <button class="show_more_dairy">1개</button>
-          </div>
-        </dd>
-      </dl>
+        <!-- 유제품 체크박스 -->
+        <div class="food_item">
+          <div class="item_title">유제품</div>
+          <div class="item_content">
+            <ul class="dairy_item">
+              <li class="dairy">
+                <label title="우유">
+                  <input
+                    type="checkbox"
+                    class="checkbox"
+                    value="우유"
+                    name="유제품"
+                  />
+                  우유
+                </label>
+              </li>
+              <li class="dairy">
+                <label title="치즈">
+                  <input
+                    type="checkbox"
+                    class="checkbox"
+                    value="치즈"
+                    name="유제품"
+                  />
+                  치즈
+                </label>
+              </li>
+              <li class="dairy">
+                <label title="버터">
+                  <input
+                    type="checkbox"
+                    class="checkbox"
+                    value="버터"
+                    name="유제품"
+                  />
+                  버터
+                </label>
+              </li>
+              <li class="dairy">
+                <label title="요거트">
+                  <input
+                    type="checkbox"
+                    class="checkbox"
+                    value="요거트"
+                    name="유제품"
+                  />
+                  요거트
+                </label>
+              </li>
+              <li class="dairy">
+                <label title="아이스크림">
+                  <input
+                    type="checkbox"
+                    class="checkbox"
+                    value="아이스크림"
+                    name="유제품"
+                  />
+                  아이스크림
+                </label>
+              </li>
+            </ul>
+            
+        </div>
+      </div>
     </div>
-    <div>선택한 재료</div>
-    <ul id="selectedItems"></ul>
-    <button type="submit">검색</button>
-    <script src="script.js"></script>
+    <div id="recipe-results"></div>
+    <script src="/js/script.js"></script>
   </body>
 </html>

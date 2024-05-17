@@ -9,6 +9,13 @@
   flex-direction: column;
 }
 
+h2 {
+  padding: 70px 0 50px;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+}
+
 table,
 td,
 tr {
@@ -47,25 +54,35 @@ h2 {
   padding-top: 60px;
 }
 
-.btn {
-  /* display: inline-block; */
-  text-align: right;
-}
-
 .form-wrap {
   margin: 0 200px;
 }
 
 table {
   width: 100%;
+  border-collapse: collapse;
 }
 
-/* .btn input[type="submit"] {
-  display: inline-block;
-  background-color: blue;
+.btn {
+  display: flex;
+  justify-content: flex-end;
 }
 
-a > #canel {
-  display: inline-block;
-  background-color: blue;
-} */
+.btn input[type="submit"],
+.btn a {
+  margin-left: 10px;
+  margin-top: 5px;
+  background-color: skyblue;
+  color: white;
+  padding: 4px;
+}
+
+.btn a:hover {
+  background-color: rgb(70, 70, 196);
+  transition: 0.2s ease;
+}
+
+.btn input[type="submit"]:hover {
+  background-color: rgb(70, 70, 196);
+  transition: 0.2s ease;
+}
