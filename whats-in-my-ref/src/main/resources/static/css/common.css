@@ -1,23 +1,25 @@
 @font-face {
-    font-family: "YEONGJUSeonbiTTF";
-    src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/2403@1.0/YEONGJUSeonbiTTF.woff2")
-      format("woff2");
-    font-weight: normal;
-    font-style: normal;
+  font-family: "YEONGJUSeonbiTTF";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/2403@1.0/YEONGJUSeonbiTTF.woff2")
+    format("woff2");
+  font-weight: normal;
+  font-style: normal;
 }
 
 body {
-    font-family: "Open Sans", sans-serif;
+  font-family: "Open Sans", sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
 a {
-    color: #4fa6d5;
-    text-decoration: none;
+  color: #4fa6d5;
+  text-decoration: none;
 }
 
 a:hover {
-    color: #45beff;
-    text-decoration: none;
+  color: #45beff;
+  text-decoration: none;
 }
 
 .emptyBox {
@@ -154,29 +156,24 @@ a:hover {
       max-width: 400px !important;
     }
 }
-  
-  
-  
-  
-  
-  
-.text-center{
-    text-align: center;
+
+.text-center {
+  text-align: center;
 }
 
-.align-items-center{
-    align-items: center ;
-    align-content: center;
+.align-items-center {
+  align-items: center;
+  align-content: center;
 }
 
-.justify-content-center{
-    justify-content: center;
+.justify-content-center {
+  justify-content: center;
 }
 
-.row{
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    margin-right: -15px;
-    margin-left: -15px;
+.row {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  margin-right: -15px;
+  margin-left: -15px;
 }

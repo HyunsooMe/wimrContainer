@@ -6,7 +6,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Service;
+// import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,7 +24,7 @@ public class BoardController {
     // 게시글 목록
     @GetMapping("/boardList")
     // 게시글 리스트 10개씩 보여주고, 마지막에 쓴 글을 맨 앞으로 정렬.
-    public String BoardList(Model model, @PageableDefault(page = 0, size = 10, sort = "id", direction = Sort.Direction.DESC) Pageable pageable){
+    public String BoardList(Model model, @PageableDefault(page = 0, size = 10, sort = "bno", direction = Sort.Direction.DESC) Pageable pageable){
         Page<Board> boardList = boardService.boardList(pageable);
 
         // 현재 페이지
@@ -58,18 +58,18 @@ public class BoardController {
         return "redirect:/boardList";
     }
     // 게시글 상세보기
-    @GetMapping("/boardView") //localhost:8080/boardView?id=1
-    public String boardView(Model model,Integer id){
-        model.addAttribute("board",boardService.boardView(id));
+    @GetMapping("/boardView") //localhost:8080/boardView?bno=1
+    public String boardView(Model model,Integer bno){
+        model.addAttribute("board",boardService.boardView(bno));
         // 조회수 증가
-        boardService.increaseViewCount(id);
+        boardService.increaseViewCount(bno);
         return "/board/boardView";
     }
     // 게시글 삭제
     @GetMapping("/boardDelete")
-    public String boardDelete(Integer id){
+    public String boardDelete(Integer bno){
 
-        boardService.boardDelete(id);
+        boardService.boardDelete(bno);
 
         return "redirect:/boardList";
     }

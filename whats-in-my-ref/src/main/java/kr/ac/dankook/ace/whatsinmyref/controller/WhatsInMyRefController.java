@@ -55,6 +55,11 @@ public class WhatsInMyRefController {
         return "myPage";
     }
 
+    @GetMapping("/foodSelect")
+    public String foodSelect(){
+        return "foodSelect";
+    }
+
   
 }
 

@@ -3,7 +3,8 @@ body {
 }
 
 h2 {
-  padding-top: 60px;
+  padding: 70px 0 50px;
+  margin: 0;
   display: flex;
   justify-content: center;
 }
@@ -26,7 +27,7 @@ th {
   display: flex;
   justify-content: center;
   flex-direction: column;
-  margin: 0 30px;
+  margin: 0 60px;
 }
 
 .table_wrap th {
