@@ -4,7 +4,8 @@ var recent_longinId="";
 유효성 검사
 ----------------------------------------------------------------*/
 function loginChk() {
-    var form = document.login-form;
+    //console.log("loginChk 함수 호출됨");
+    var form=document.getElementById("login-form");
     //아이디 입력 없음.
     if (!form.loginId.value) {
         alert("아이디를 입력해 주십시오.");
@@ -17,6 +18,7 @@ function loginChk() {
         form.password.focus();
         return;
     }
+    //계정 로그인 시도 제한를 위한 아이디 저장
     recent_longinId=form.loginId.value;
     form.submit();
 }

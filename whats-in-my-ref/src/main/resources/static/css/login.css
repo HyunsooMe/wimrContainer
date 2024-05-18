@@ -5,19 +5,27 @@ body.noscroll {
 .centerBox {
   display: flex;
   height: 100vh;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.form-wrap{
   width: 100%;
-  position: relative;
-  margin: 0;
 }
 
 #loginBox button {
   background-color: rgb(241, 56, 56);
+  display: inline-block;
 }
 
-#registerBox button {
-  background-color: rgb(241, 56, 56);
+
+
+.centerBox .link-div{
+  width:100%;
+  text-align: right;
 }
 
-.centerBox .link-box a{
-  margin:0 10px;
+.centerBox .link-div a{
+  margin: 10px ;
+  font-size: small;
 }

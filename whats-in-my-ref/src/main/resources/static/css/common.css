@@ -28,9 +28,11 @@ a:hover {
   
   
   
-/*반응형 변경 사항들*/
+/*------------------------------------------------------------
+반응형 변경 사항들
+--------------------------------------------------------------*/
 @media (max-width:1536px){
-    /*===========================header.html==========================*/
+    /*header.html*/
     #header{
       height: 50px;
       font-size: 20px;
@@ -42,24 +44,24 @@ a:hover {
       font-size: 15px;
       margin-top:4px;
     }
-     /*===========================index.html===========================*/
+     /*index.html*/
     .site-cover{
     }
-    .site-cover .search-container{
-      max-width: 1000px;
+    .input-width{
+      max-width: 1000px !important;
     }
     .box{
       width:250px;
       margin:0 60px 30px;
     }
-    /*==============================recipe.html=============================*/
+    /*recipe.html*/
     .recipe_container{
       max-width: 1000px;
     }
 }
   
   @media (max-width:1150px){
-    /*===========================header.html==========================*/
+    /*header.html*/
     #header{
       height: 36px;
       font-size: 14px;
@@ -71,18 +73,18 @@ a:hover {
       font-size: 11px;
       margin-top:0px;
     }
-     /*===========================index.html===========================*/
+     /*index.html*/
     .site-cover{
     }
-    .site-cover .search-container{
-      max-width: 700px;
+    .input-width{
+      max-width: 700px !important;
     }
     .box{
       width:200px;
       margin:0 38px 30px;
     }
   
-    /*==============================recipe.html=============================*/
+    /*recipe.html*/
     .recipe_container{
       max-width: 700px;
     }
@@ -90,7 +92,7 @@ a:hover {
   
   /*모바일*/
   @media (max-width:853px){
-    /*===========================header.html==========================*/
+    /*header.html*/
     .navbar{
       content-visibility:hidden;
     }
@@ -104,9 +106,9 @@ a:hover {
       visibility: visible;
     }
   
-    /*===========================index.html===========================*/
-    .site-cover .search-container{
-      max-width: 400px;
+    /*index.html*/
+    .input-width{
+      max-width: 400px !important;
     }
   
     .search-form-wrap form div{
@@ -129,7 +131,7 @@ a:hover {
 
   
   
-    /*==============================recipe.html=============================*/
+    /*recipe.html*/
     .emptyBox{
       height:40px;
     }
@@ -145,6 +147,11 @@ a:hover {
     .justify-content-center-m{
         display: flex;
         justify-content: center;
+    }
+
+    /*login.html*/
+    .centerBox{
+      max-width: 400px !important;
     }
 }
   

@@ -38,10 +38,6 @@
   text-decoration: none;
 }
 
-#header .logo img {
-
-}
-
 /*--------------------------------------------------------------
 # Navigation Menu
 --------------------------------------------------------------*/
@@ -213,6 +209,6 @@ menu bar
   margin-bottom: 50px;
 }
 
-ul li a{
+#sidebar ul li a{
   color:white;
 }

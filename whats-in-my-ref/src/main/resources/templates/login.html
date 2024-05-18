@@ -18,34 +18,39 @@
     <div class="sidebar-wrap"><div th:replace="~{fragments/sideNav::sidebar}"/></div>
 
     <div id="loginBox" class="centerBox pico justify-content-center align-items-center">
-      <form name="login-form" th:action="@{/Wimr/login}" method="post" th:object="${User}">
-        Login ID:
-        <input
-          type="text"
-          id="loginId"
-          name="loginId"
-          th:value="*{loginId}"
-          class="form_input"
-        />
-        <br />
-        Login Password:
-        <input
-          type="password"
-          id="password"
-          name="password"
-          th:value="*{password}"
-          class="form_input"
-        />
-        <br />
-        <button type="button" onclick="loginChk()">Login</button>
-      </form>
-      <div class="link-div">
-        <a>아이디/비밀번호 찾기</a>
-        <a href="/Wimr/register">회원가입</a>
+      <div class="form-wrap">
+        <form name="login-form" id="login-form" th:action="@{/Wimr/login}" method="post" th:object="${User}">
+          Login ID:
+          <input
+            type="text"
+            id="loginId"
+            name="loginId"
+            th:value="*{loginId}"
+            class="form_input"
+          />
+          <br />
+          Login Password:
+          <input
+            type="password"
+            id="password"
+            name="password"
+            th:value="*{password}"
+            class="form_input"
+            style="margin-bottom: 0;"
+          />
+          <div class="link-div">
+            <a href="/Wimr/findACC">아이디/비밀번호 찾기</a>
+            <a href="/Wimr/register">회원가입</a>
+          </div>
+          <button type="button" onclick="loginChk()">Login</button>
+        </form>
       </div>
     </div>
     
+    
 
-    <script src="/js/login.js" />
+    <script src="/js/login.js"></script>
+    <script src="/js/index.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
   </body>
 </html>
