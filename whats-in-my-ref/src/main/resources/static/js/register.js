@@ -53,9 +53,6 @@ function form_check() {
     form.submit();
 }
 
-function clear(){
-    
-}
 
 function change_email(){
     var email_add=document.getElementById("email_add");
