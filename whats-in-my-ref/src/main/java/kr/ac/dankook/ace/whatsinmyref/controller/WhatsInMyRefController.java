@@ -45,9 +45,9 @@ public class WhatsInMyRefController {
     }
     
     @PostMapping("/login")
-    public String loginUser(@ModelAttribute("User") User user) {
+    public String loginUser(@ModelAttribute("User") User user,Model model) {
         
-        return "redirect:/Wimr/";
+        return "redirect:/Wimr";
     }
     
     @GetMapping("/myPage")

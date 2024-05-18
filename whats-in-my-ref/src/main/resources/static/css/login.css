@@ -1,22 +1,31 @@
 /*로그인*/
 body.noscroll {
     height: 500px;
-  }
-  .centerBox {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    width: 100%;
-    position: relative;
-    margin: 0;
-  }
-  
-  #loginBox button {
-    background-color: rgb(241, 56, 56);
-  }
-  
-  #registerBox button {
-    background-color: rgb(241, 56, 56);
-  }
-  
+}
+.centerBox {
+  display: flex;
+  height: 100vh;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.form-wrap{
+  width: 100%;
+}
+
+#loginBox button {
+  background-color: rgb(241, 56, 56);
+  display: inline-block;
+}
+
+
+
+.centerBox .link-div{
+  width:100%;
+  text-align: right;
+}
+
+.centerBox .link-div a{
+  margin: 10px ;
+  font-size: small;
+}
