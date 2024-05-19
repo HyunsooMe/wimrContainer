@@ -1,3 +1,5 @@
+import foodList from "./foodList.js";
+
 const checkboxes = document.querySelectorAll(".checkbox");
 const selectedItemsList = document.querySelector(".addedlist");
 const $search = document.querySelector("#search");
@@ -11,30 +13,6 @@ const recipeResults = document.getElementById("recipe-results");
 
 // 선택된 체크박스 리스트에 추가, 해제되면 삭제
 findRecipeBtn.addEventListener("click", getFoodRecipe);
-
-const dataList = [
-  "양파",
-  "토마토",
-  "상추",
-  "소고기",
-  "닭고기",
-  "돼지고기",
-  "양고기",
-  "고추",
-  "감자",
-  "고구마",
-  "당근",
-  "오이",
-  "가지",
-  "파프리카",
-  "버섯",
-  "무",
-  "호박",
-  "애호박",
-  "깻잎",
-  "도라지",
-  "쪽파",
-];
 
 checkboxes.forEach(function (checkbox) {
   checkbox.addEventListener("change", function () {
@@ -126,9 +104,10 @@ recipeResults.addEventListener("click", function (event) {
     // 요리 레시피의 ID를 가져오기
     // const recipeId = recipeDiv.dataset.recipeId  ;
     // 여기에 클릭했을 때 실행할 코드 추가
-    // const url = `/recipe/${recipeId}`;
+    const url = `http://localhost:8080/Wimr/recipe?foodID=%22123%22`;
+    // const url = `recipe.html`;
     // 새 창으로 이동
-    // window.open(url, "_blank");
+    window.open(url, "_blank");
   }
 });
 
@@ -149,7 +128,7 @@ $search.onkeyup = (event) => {
 
   // 자동완성 필터링
   const matchDataList = value
-    ? dataList.filter((label) => label.includes(value))
+    ? foodList.filter((label) => label.includes(value))
     : [];
 
   switch (event.keyCode) {
@@ -206,6 +185,10 @@ const selectItem = (index) => {
 
 const addToAddedList = (item) => {
   if (!selectedItems.includes(item)) {
+    if (!foodList.includes(item)) {
+      alert(`${item}은 목록에 없습니다`);
+      return;
+    }
     // 중복 추가 방지
     selectedItems.push(item); // 선택한 항목을 배열에 추가
     checkboxes.forEach((checkbox) => {
