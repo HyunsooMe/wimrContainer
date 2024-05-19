@@ -19,8 +19,8 @@
     <div class="emptyBox"></div>
     
     <div class="container myPage-container pico"> 
-        <div id="userImg" class="item justify-content-center-m"><img th:src="${imagePath != null ? imagePath : '/img/userDefaultImg.png'}"/></div>      <!--이미지를 못 받았을 때 default 이미지 경로(현재 /img/pen.jpg)-->
-        <div id="userName" class="item justify-content-center-m" ><strong><u><span th:text="userName"></span></u></strong></div>
+        <div id="userImg" class="item justify-content-center display-flex"><img th:src="${imagePath != null ? imagePath : '/img/userDefaultImg.png'}"/></div>      <!--이미지를 못 받았을 때 default 이미지 경로(현재 /img/pen.jpg)-->
+        <div id="userName" class="item justify-content-center display-flex" ><strong><u><span th:text="userName"></span></u></strong></div>
         <div class="infoTitle item">Self-introduce:<article id="introduce"><sapn th:text="${introduce}"></article></div>
         <div id="userItem">
             <div class="infoTitle item">Email:<article id="email"><span th:text="${eamil}"></span></article></div>
@@ -28,4 +28,5 @@
     </div>
 
     <script src="/js/index.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
 </body>
