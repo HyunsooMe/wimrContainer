@@ -43,15 +43,15 @@ public class WhatsInMyRefController {
     }
 
     @GetMapping("/register")
-    public String register(Model model) {
+    public String save(Model model) {
         model.addAttribute("userDTO", new UserDTO());
         return "register";
     }
 
     @PostMapping("/register")
-    public String register(@ModelAttribute UserDTO userDTO){
+    public String save(@ModelAttribute UserDTO userDTO){
         userService.save(userDTO);
-        return "index";
+        return "redirect:/Wimr";
     }
     
     
