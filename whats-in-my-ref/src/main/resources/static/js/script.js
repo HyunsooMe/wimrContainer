@@ -6,7 +6,36 @@ const $searchBtn = document.querySelector("#searchBtn");
 const $addedList = document.querySelector(".addedlist");
 let selectedItems = []; // 선택한 항목을 저장할 배열
 
+// 요리 레시피를 표시하는 div에 대한 참조 가져오기
+const recipeResults = document.getElementById("recipe-results");
+
 // 선택된 체크박스 리스트에 추가, 해제되면 삭제
+findRecipeBtn.addEventListener("click", getFoodRecipe);
+
+const dataList = [
+  "양파",
+  "토마토",
+  "상추",
+  "소고기",
+  "닭고기",
+  "돼지고기",
+  "양고기",
+  "고추",
+  "감자",
+  "고구마",
+  "당근",
+  "오이",
+  "가지",
+  "파프리카",
+  "버섯",
+  "무",
+  "호박",
+  "애호박",
+  "깻잎",
+  "도라지",
+  "쪽파",
+];
+
 checkboxes.forEach(function (checkbox) {
   checkbox.addEventListener("change", function () {
     if (this.checked) {
@@ -22,7 +51,11 @@ checkboxes.forEach(function (checkbox) {
 });
 
 function getFoodRecipe() {
-  console.log("click");
+  if (selectedItems.length === 0) {
+    alert("재료를 입력하세요");
+    return;
+  }
+
   let apiUrl = `http://openapi.foodsafetykorea.go.kr/api/f415b345bda946528b8e/COOKRCP01/json/0/1000/`;
 
   fetch(apiUrl)
@@ -33,10 +66,8 @@ function getFoodRecipe() {
       return response.json();
     })
     .then((data) => {
-      // console.log(data);
       if (data && data.COOKRCP01 && data.COOKRCP01.row) {
         const recipes = data.COOKRCP01.row;
-        // console.log(recipes);
         const filteredRecipes = recipes.filter((recipe) =>
           selectedItems.every((item) => recipe.RCP_PARTS_DTLS.includes(item))
         );
@@ -61,43 +92,45 @@ function displayRecipes(recipes) {
     recipesDiv.textContent = "해당 재료를 포함한 레시피가 없습니다.";
     return;
   }
-  recipes.forEach((recipe) => {
+
+  recipes.forEach((recipe, index) => {
     const recipeDiv = document.createElement("div");
     recipeDiv.className = "recipe";
-    const title = document.createElement("h2");
+    // 요리 이름 생성
+    const title = document.createElement("h3");
     title.textContent = recipe.RCP_NM;
+    // 요리 사진 생성
     const img = document.createElement("img");
     img.src = recipe.ATT_FILE_NO_MAIN || recipe.ATT_FILE_NO_MK;
-    const parts = document.createElement("p");
-    parts.textContent = "재료: " + recipe.RCP_PARTS_DTLS;
-    const instructions = document.createElement("p");
-    instructions.innerHTML =
-      recipe.MANUAL01 + "<br>" + recipe.MANUAL02 + "<br>" + recipe.MANUAL03;
-    // 필요한 경우 추가 매뉴얼 필드를 여기에 추가
-    recipeDiv.appendChild(title);
+    // const parts = document.createElement("p");
+    // parts.textContent = "재료: " + recipe.RCP_PARTS_DTLS;
+    // const instructions = document.createElement("p");
+    // instructions.innerHTML =
+    //   recipe.MANUAL01 + "<br>" + recipe.MANUAL02 + "<br>" + recipe.MANUAL03;
+    // 요리 이름과 사진을 각 recipeDiv에 추가
     recipeDiv.appendChild(img);
-    recipeDiv.appendChild(parts);
-    recipeDiv.appendChild(instructions);
+    recipeDiv.appendChild(title);
     recipesDiv.appendChild(recipeDiv);
+    // recipeDiv를 recipesDiv에 추가
+    // recipesDiv.appendChild(containerDiv);
+    // recipeDiv.appendChild(parts);
+    // recipeDiv.appendChild(instructions);
   });
 }
 
-findRecipeBtn.addEventListener("click", getFoodRecipe);
-
-const dataList = [
-  "양파",
-  "토마토",
-  "상추",
-  "소고기",
-  "닭고기",
-  "돼지고기",
-  "양고기",
-  "고추",
-  "감자",
-  "고구마",
-  "당근",
-  "오이",
-];
+// 상위 요소에 클릭 이벤트 리스너 추가 (이벤트 위임)
+recipeResults.addEventListener("click", function (event) {
+  const clickedElement = event.target;
+  if (clickedElement.tagName === "IMG" || clickedElement.tagName === "H3") {
+    console.log("클릭됨");
+    // 요리 레시피의 ID를 가져오기
+    // const recipeId = recipeDiv.dataset.recipeId  ;
+    // 여기에 클릭했을 때 실행할 코드 추가
+    // const url = `/recipe/${recipeId}`;
+    // 새 창으로 이동
+    // window.open(url, "_blank");
+  }
+});
 
 $searchBtn.addEventListener("click", () => {
   const value = $search.value.trim();
@@ -175,12 +208,22 @@ const addToAddedList = (item) => {
   if (!selectedItems.includes(item)) {
     // 중복 추가 방지
     selectedItems.push(item); // 선택한 항목을 배열에 추가
+    checkboxes.forEach((checkbox) => {
+      if (checkbox.value == item) {
+        checkbox.checked = true;
+      }
+    });
     renderAddedList(); // addedlist 업데이트
   }
 };
 
 const removeFromAddedList = (item) => {
   selectedItems = selectedItems.filter((selectedItem) => selectedItem !== item);
+  checkboxes.forEach((checkbox) => {
+    if (checkbox.value == item) {
+      checkbox.checked = false;
+    }
+  });
   renderAddedList(); // addedlist 업데이트
 };
 
@@ -189,6 +232,10 @@ const renderAddedList = () => {
   selectedItems.forEach((item) => {
     const listItem = document.createElement("div");
     listItem.textContent = item;
+    listItem.classList.add("selectedFoods"); // 클래스 추가
+    listItem.addEventListener("click", () => {
+      removeFromAddedList(item); // 항목 클릭 시 삭제
+    });
     $addedList.appendChild(listItem);
   });
 };
