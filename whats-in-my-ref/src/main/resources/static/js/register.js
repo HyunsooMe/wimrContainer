@@ -26,7 +26,7 @@ function form_check() {
         pwdError.style.display="block";
         pwdError.style.visibility="visible";
         error=true;
-    }else{pwdError.style.display="none"; pwdError.style.visibility="hidden";pwdError2.style.display="none"; pwdError2.style.visibility="hidden";}
+    }else{pwdError.style.display="none"; pwdError.style.visibility="hidden";}
    
     if(form.password.value!=form.repassword.value){ //재확인 비밀번호가 다를 때
         repwdError.style.display="block";
@@ -49,8 +49,11 @@ function form_check() {
     if(error==true){    //에러 존재시 submit x
         return false;
     }
+
+    console.log(full_email);
     document.getElementById("email").value=full_email;
     form.submit();
+    return true;
 }
 
 
