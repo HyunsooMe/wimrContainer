@@ -39,3 +39,16 @@ if(error_code!=""){
         }
     }
 }
+
+/*---------------------------------------------------------------
+아이디/비밀번호 창 띄우기
+----------------------------------------------------------------*/
+function openInNewWindow(event, url) {
+    event.preventDefault();
+    var width = 800;
+    var height = 600;
+    var left = (screen.width - width) / 2;
+    var top = (screen.height - height) / 2;
+
+    window.open(url, 'newwindow', 'width=' + width + ', height=' + height + ', left=' + left + ', top=' + top );
+}

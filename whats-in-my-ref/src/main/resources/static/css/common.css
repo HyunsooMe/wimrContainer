@@ -26,7 +26,11 @@ a:hover {
     visibility: hidden;
     height: 100px;
     width: 1px;
-  }
+}
+
+.flexible-font-size{
+  font-size: 20px;
+}
   
   
   
@@ -43,12 +47,12 @@ a:hover {
       width: 50px;
     }
     .navbar{
-      font-size: 15px;
       margin-top:4px;
     }
-     /*index.html*/
-    .site-cover{
+    .flexible-font-size{
+      font-size: 15px;
     }
+     /*index.html*/
     .input-width{
       max-width: 1000px !important;
     }
@@ -72,8 +76,10 @@ a:hover {
       width: 35px;
     }
     .navbar{
-      font-size: 11px;
       margin-top:0px;
+    }
+    .flexible-font-size{
+      font-size: 11px;
     }
      /*index.html*/
     .site-cover{
@@ -84,6 +90,9 @@ a:hover {
     .box{
       width:200px;
       margin:0 38px 30px;
+    }
+    .emptyBox{
+      height:70px;
     }
   
     /*recipe.html*/
@@ -142,19 +151,22 @@ a:hover {
       width: calc(96vw);
       box-shadow: none;
     }
+
+    .recipe_container .comment .card .card-body form #comment-submit-btn{
+      width:70px;
+    }
   
     .myPage-container .item{
       width: calc(90vw);
     }
-    .justify-content-center-m{
-        display: flex;
-        justify-content: center;
-    }
+
 
     /*login.html*/
     .centerBox{
       max-width: 400px !important;
     }
+    
+
 }
 
 .text-center {
@@ -176,4 +188,8 @@ a:hover {
   flex-wrap: wrap;
   margin-right: -15px;
   margin-left: -15px;
+}
+
+.display-flex{
+  display: flex;
 }

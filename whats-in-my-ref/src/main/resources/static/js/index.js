@@ -32,7 +32,7 @@ function redirectToPage(str){
 }
 
 /*---------------------------------------
-mobile menu bar 
+side menu bar 
 ----------------------------------------*/
 var menu_bar = document.getElementById("mobile-nav-toggle");
 

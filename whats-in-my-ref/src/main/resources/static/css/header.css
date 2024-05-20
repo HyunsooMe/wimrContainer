@@ -50,7 +50,7 @@
   position: relative;
   margin-left: auto;
   margin-right: 15px;
-  font-size: 20px;
+  
   margin-top:5px;
 }
 
@@ -161,11 +161,7 @@
 footer
 -----------------------------------------------------*/
   
-#footer{
-  width:100%;
-  height: 50px;
-  background-color: #838383;
-}
+
 
 
 /*--------------------------------------------------
@@ -195,7 +191,7 @@ menu bar
 #sidebar{
   visibility: hidden;
   height:100%;
-  width: 500px;
+  width: 300px;
   background-color: rgba(37, 37, 37, 0.952);
   position:fixed;
   top:36px;

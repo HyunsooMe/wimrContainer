@@ -3,49 +3,104 @@
 } */
 
 
-  .container {
-    text-align: center;
-  }
-  
-  .recipe_container {
-    position: relative;
-    margin: 0 auto;
-    background-color: #ffffff;
+.container {
+  text-align: center;
+}
+
+.recipe_container {
+  position: relative;
+  margin: 0 auto;
+  background-color: #ffffff;
+  width: 100%;
+  max-width: 1500px;
+  border-radius: 20px;
+  box-shadow: 2px 2px 13px -1px rgb(12, 12, 12);
+}
+
+#foodImg {
+  width: 100%;
+  height: 650px;
+  /*background-image: url("[[${foodImg}]]");*/
+  background-size: cover;
+  background-attachment: scroll;
+  background-position: center;
+  border-radius: 20px 20px 20px 20px;
+
+  #blur {
     width: 100%;
-    max-width: 1500px;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.363);
+    position: relative;
+    z-index: 0;
     border-radius: 20px;
-    box-shadow: 2px 2px 13px -1px rgb(12, 12, 12);
   }
-  
-  #foodImg {
-    width: 100%;
-    height: 650px;
-    /*background-image: url("[[${foodImg}]]");*/
-    background-size: cover;
-    background-attachment: scroll;
-    background-position: center;
-    border-radius: 20px 20px 20px 20px;
-  
-    #blur {
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.363);
-      position: relative;
-      z-index: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 20px;
-    }
-  }
-  
-  #foodName {
-    position: relative;
-    z-index: 1;
-    font: 600 90px "YEONGJUSeonbiTTF";
-    color: aliceblue;
-  }
-  
-  .recipe_container ul li {
-    text-align: left;
-  }
+}
+
+.recipe_container #foodImg #blur #recommend{
+  justify-content: right;
+  margin-right: 20px;
+}
+
+.recipe_container #foodImg #blur #recommend svg{
+  cursor: pointer;
+}
+
+#foodName {
+  height: 100%;
+  position: relative;
+  z-index: 1;
+  font: 600 90px "YEONGJUSeonbiTTF";
+  color: aliceblue;
+}
+
+.recipe_container ul li {
+  text-align: left;
+}
+
+section.comment{
+  width:100%;
+}
+
+div.card{
+  width: 85%;
+}
+
+.comment .card .card-body #user-info{
+  margin-bottom: 5px;
+}
+
+.comment .card .card-body form #comment-content-input{
+  margin-bottom: 4px;
+}
+
+.comment .card .card-body form .comment-btn-wrap{
+  display: flex;
+  justify-content: space-between;
+}
+
+.comment .card .card-body form #comment-submit-btn{
+  width:12%;
+  font-size: small;
+  text-align: center;
+}
+
+.comment .card .card-body form #char-count{
+  margin-left: 5px;
+  color:grey;
+}
+
+.comment .card .card-body .comment-box .commenter{
+  justify-content: space-between;
+}
+
+
+.comment .card .card-body .comment-box .commenter div .name{
+  margin-top: 12px; 
+  margin-left: 7px; 
+}
+
+.comment .card .card-body .comment-box .commenter .date{
+  font-size:13px;
+  margin-top: 25px; 
+}
+
