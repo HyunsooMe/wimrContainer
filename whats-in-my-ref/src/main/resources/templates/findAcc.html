@@ -1,0 +1,41 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.conditional.min.css"
+  />
+    <link href="/css/findAcc.css" rel="stylesheet"/>
+    <link href="/css/common.css" rel="stylesheet"/>
+    <!--menu icon
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
+      </svg>-->
+      
+    <title>아이디/ 비밀번호 찾기</title>
+</head>
+<body class="display-flex justify-content-center pico" > 
+    <div style="display:block;width: 800px; height: 500px;margin-top: 10px;">
+      <div class="tabs text-center">
+        <div class="tab active" onclick="showTab('find-id')">아이디 찾기</div>
+        <div class="tab" onclick="showTab('find-password')">비밀번호 찾기</div>
+      </div>
+      <div id="find-id" class="tab-content active">
+        <div style="margin-left:10px; font-size: larger;">이메일:</div>
+        <form th:action="@{/Wimr/findAcc/find-id}" method="post">
+          <div class="display-flex">
+            <input type="text" id="email" th:value="${email}" >
+            <button type="submit">입력</button>
+          </div>
+        </form>
+      </div>
+      <div id="find-password" class="tab-content">
+        비밀번호 찾기
+      </div>
+    </div>
+
+    <script src="/js/findAcc.js"></script>
+</body>
+</html>

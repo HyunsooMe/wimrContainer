@@ -12,7 +12,7 @@
         </h1>
       </div>
       <!-- ========= Nav =========-->
-      <nav id="navbar" class="navbar">
+      <nav id="navbar" class="navbar flexible-font-size">
         <ul>
           <li><a href="/Wimr/search">레시피 검색</a></li>
           <li><a href="/boardList">게시판</a></li>
@@ -21,15 +21,15 @@
             <ul>
               <li class="pico text-center">
                 <div>
-                  <div class="before-login">
+                  <div class="before-login" th:if="${user==null}">
                     <button class="login-btn" onclick="redirectToPage('/Wimr/login')">로그인 하기</button>
                     <a id="toRegister" href="/Wimr/register"><span>회원가입</span></a>
                   </div>
-                  <div class="my-info after-login">
+                  <div class="my-info after-login" th:if="${user!=null}">
                     <div class="text-center">
                       <p>안녕하세요,</p>
-                      <p th:text="|${userName}님|"></p>
-                      <form th:action="@{/logout}" method="post">
+                      <p th:text="|${user.name}님|"></p>
+                      <form th:action="@{/Wimr/logout}" method="post">
                         <button class="logout-btn" type="submit">로그아웃</button>
                       </form>
                     </div>
@@ -42,9 +42,13 @@
             </ul>
           </li>
         </ul>
-        <i class="bi bi-list mobile-nav-toggle"></i>
       </nav>
       <!-- .navbar -->
+      <div id="mobile-nav-toggle" class="menu">
+        <div class="bar x-top"></div>
+        <div class="bar x-middle"></div>
+        <div class="bar x-bottom"></div>  
+      </div>
     </header>
     <!-- End Header -->
   </body>

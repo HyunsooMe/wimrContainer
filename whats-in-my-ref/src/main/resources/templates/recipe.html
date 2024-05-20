@@ -18,30 +18,81 @@
     </style>
 </head>
 
-<body id="recipeBody">
+<body>
     <header th:replace="~{fragments/header::header}"/>
+    <div class="sidebar-wrap"><div th:replace="~{fragments/sideNav::sidebar}"/></div>
     
-    <div class="emptyBox">hidden</div>
-    <div class="recipe_container pico">
-        <div id="foodImg" class="item"><div id="blur"><span id="foodName" th:text="${foodName}">food name</span></div></div>
-        <hr />
-        <ul>
+    <div class="emptyBox"></div>
+    <div class="recipe_container"> <!--</div> th:object="${recipe}">-->
+        <div id="foodImg" class="item">
+            <div id="blur">
+                <!--<div id="recommend" class="display-flex">
+                    <form><button type="button"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white" class="bi bi-bookmark-fill" viewBox="0 0 16 16">
+                        <path d="M2 2v13.5a.5.5 0 0 0 .74.439L8 13.069l5.26 2.87A.5.5 0 0 0 14 15.5V2a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2"/>
+                        </svg></form>
+                    
+                </div>-->
+                <div id="foodName" class="display-flex justify-content-center align-items-center text-center">
+                    <span th:text="*{title}"></span>
+                </div>
+            </div>
+        </div>
+        <hr/>
+        <ul class="pico">
             <li id="ingredients"><h2><strong>Ingredients</strong></h2> <br/> 
-                <ul th:each="ingredient : ${ingredients}">
+                <ul th:each="ingredient : *{ingredients}">
                     <li  th:text="${ingredient}"></li>
                 </ul>
             </li>
             <hr/>
             <li id="recipeDetail"><h2><strong>Recipe</strong></h2> <br/> 
-                <ol th:each="num : ${recipe}">
+                <ol th:each="num : *{recipe}">
                     <li th:text="${num}"></li>
                 </ol>
             </li>
             <hr />
-            <li id="others"><h2><strong>Others</strong></h2></li>
+            <li id="others"><h2><strong>Others</strong></h2>
+                <ul th:each="other : *{others}">
+                    <li th:text="${other}"></li>
+                </ul>
+            </li>    
+            <hr/>
         </ul>
+        <section class="comment justify-content-center display-flex pico">
+            <div class="card">
+                <div class="card-body">
+                    <div id="user-info">유저 사진이랑 닉네임</div>
+                    <!-- 컨트롤러까지 갖춰졌을 때의 Comment form
+                    <form th:action="@{/Wimr/recipe/{recipeno}/submitComment(id=${recipe.recipeno})}" th:object="${comment}" method="post" class="comment-form">
+                        <textarea th:field="*{content}" id="comment-content" rows="3" placeholder="댓글을 입력해주세요" maxlength="300" style="resize: none;"></textarea> 
+                        <div id="char-count">0/300</div>
+                        <button type="button" id="comment-submit-btn" onclick="comment_check()"><span class="flexible-font-size">등록</span></button>
+                    </form>-->
+                    <!-- Comment form-->
+                    <form class="comment-form">
+                        <textarea id="comment-content-input" rows="3" placeholder="댓글을 입력해주세요" maxlength="300" style="resize: none;"></textarea> 
+                        <div class="comment-btn-wrap flexible-font-size">
+                            <div id="char-count">0/300</div>
+                            <button type="button" id="comment-submit-btn" onclick="comment_check()"><span class="flexible-font-size">등록</span></button>
+                        </div>
+                    </form>
+                    <hr/>
+                    <!-- Comment with nested comments-->
+                    <div class="comment-box">  <!--th:each="comment: ${comments}" th:object="${comment}">-->
+                        <div class="commenter display-flex">
+                            <div class="display-flex"><img src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /><!--th:src="*{commenter.img}"--><div class="name"><!--th:text="*{commenter.name}">-->Commenter Name</div></div>
+                            <div class="date"><!--th:text="*{date}"-->2024-05-19 15:42</div>
+                        </div>
+                        <div class="comment-main-area">
+                            <div class="comment-content"><!--th:text="*{content}"-->If you're going to lead a space frontier, it has to be government; it'll never be private enterprise. Because the space frontier is dangerous, and it's expensive, and it has unquantified risks.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </div>
 
+    <script src="/js/recipe.js"></script>
     <script src="/js/index.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
 </body>

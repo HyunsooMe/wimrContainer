@@ -30,3 +30,40 @@ document.addEventListener("DOMContentLoaded", (event) => {
 function redirectToPage(str){
     window.location.href=str;
 }
+
+/*---------------------------------------
+side menu bar 
+----------------------------------------*/
+var menu_bar = document.getElementById("mobile-nav-toggle");
+
+document.addEventListener("DOMContentLoaded", (event) => {
+
+    let x_top = menu_bar.querySelector(".x-top"),
+        x_middle = menu_bar.querySelector(".x-middle"),
+        x_bottom = menu_bar.querySelector(".x-bottom"),
+        sidebar = document.getElementById("sidebar"),
+        width=window.innerWidth;
+
+    gsap.set(sidebar, { x:width });
+        
+    tl = gsap.timeline({ paused: true });
+    tl2 = gsap.timeline({ paused: true });
+
+    tl.to(x_top, { y: 8.1, rotateZ: 45, ease: "none" });
+    tl.to(x_middle, { width:0, ease: "none" },0);
+    tl.to(x_bottom, { y: -8.1, rotateZ: -45, ease: "none" },0);
+    tl2.to(sidebar,{x:"-="+width,ease:"none"},0);
+
+    let isMenuOpen = false;
+
+    menu_bar.addEventListener("click", () => {
+        if (!isMenuOpen) {
+            tl.timeScale(10).play();
+            tl2.timeScale(3).play();
+        } else {
+            tl.timeScale(10).reverse();
+            tl2.timeScale(3).reverse();
+        }
+        isMenuOpen = !isMenuOpen;
+    });
+});
