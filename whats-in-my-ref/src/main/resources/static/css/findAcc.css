@@ -1,0 +1,40 @@
+.tab-content {
+    display: none;
+
+    background-color: aliceblue;
+    height: 100%;
+}
+.tab-content.active {
+    display: block;
+}
+
+.tabs{
+    width: 100%;
+    display: flex;
+}
+
+.tab {
+    width: 50%;
+    cursor: pointer;
+    padding: 0;
+    margin: 0;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+}
+.tab.active {
+    background-color: #ccc;
+}
+
+#find-id{
+    margin-top: 10px;
+}
+
+#find-id form input{
+    margin-left: 10px;
+}
+
+#find-id form button{
+    margin-left: 10px;
+    margin-right: 10px;
+    width: 80px;
+}

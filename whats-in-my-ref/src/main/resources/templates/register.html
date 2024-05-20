@@ -43,8 +43,8 @@
                 </div>
                 <div class="input-wrap">
                 이메일: 
-                    <div style="display: flex;">
-                        <input type="text" id="email_id" th:field="*{email}" class="form_input" ><span style="font-size: x-large; margin-top: 5px; margin-left: 20px;margin-right: 20px;">@</span>
+                    <div class="display-flex">
+                        <input type="text" id="email_id" class="form_input" ><span style="font-size: x-large; margin-top: 5px; margin-left: 20px;margin-right: 20px;">@</span>
                         <input type="text" id="email_add" style="width: 58%;">
                         <select id="email_sel" style="width: 12%; margin-left: 5px;" onchange="change_email()">
                             <option value="">직접입력</option>
@@ -55,6 +55,7 @@
                         <div id="emailError" class="Error" ><li>이메일 형식에 맞지 않습니다.</li></div> 
                 </div>
 
+                <input type="hidden" id="email" th:field="*{email}"> <!--email_id와 add를 합쳐서 보내기 위한 hidden input-->
                 <button type="button" onclick="form_check()">가입하기</button>
                 
             </form>

@@ -2,13 +2,12 @@
 function form_check() {
     var form=document.getElementById("register-form");
 
-    let idError1=document.getElementById("idError1"),
-        idError2=document.getElementById("idError2"),
-        pwdError1=document.getElementById("pwdError1"),
-        pwdError2=document.getElementById("pwdError2"),
+    let idError=document.getElementById("idError"),
+        pwdError=document.getElementById("pwdError"),
         repwdError=document.getElementById("repwdError"),
         nameError=document.getElementById("nameError"),
         emailError=document.getElementById("emailError"),
+        full_email=form.email_id.value+'@'+form.email_add.value,
 
         idCheck=/^[A-Za-z][A-Za-z0-9]{2,14}$/,
         pwdCheck=/^(?=.*[a-zA-Z])(?=.*[!@#$%^&*+=-])(?=.*[0-9]).{8,20}$/,
@@ -41,7 +40,7 @@ function form_check() {
         error=true;
     }else{nameError.style.display="none"; nameError.style.visibility="hidden";}
     
-    if(!emailCheck.test(form.email_id.value+'@'+form.email_add.value)){   //이메일 형식이 다를 때
+    if(!emailCheck.test(full_email)){   //이메일 형식이 다를 때
         emailError.style.display="block";
         emailError.style.visibility="visible";
         error=true;
@@ -50,6 +49,7 @@ function form_check() {
     if(error==true){    //에러 존재시 submit x
         return false;
     }
+    document.getElementById("email").value=full_email;
     form.submit();
 }
 

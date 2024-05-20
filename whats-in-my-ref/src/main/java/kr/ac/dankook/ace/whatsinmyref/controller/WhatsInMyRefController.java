@@ -63,6 +63,10 @@ public class WhatsInMyRefController {
         return "foodSelect";
     }
 
+    @GetMapping("/findACC")
+    public String findAccount() {
+        return "findAcc";
+    }
     
 }
 
