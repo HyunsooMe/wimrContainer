@@ -51,11 +51,13 @@ DROP TABLE IF EXISTS `member`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `member` (
+  `member_no` int NOT NULL AUTO_INCREMENT,
   `member_id` varchar(15) NOT NULL,
   `member_pw` varchar(20) NOT NULL,
   `member_email` varchar(320) NOT NULL,
-  `member_nick` varchar(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `member_nick` varchar(10) NOT NULL,
+  PRIMARY KEY (`member_no`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -64,6 +66,7 @@ CREATE TABLE `member` (
 
 LOCK TABLES `member` WRITE;
 /*!40000 ALTER TABLE `member` DISABLE KEYS */;
+INSERT INTO `member` VALUES (1,'test1','1q2w3e4r!','abcde@gmail.com','apple'),(2,'test2','qwe123','ccc@naver.com','banana'),(3,'test3','asdf','aaa@dankook.ac.kr','cake'),(4,'kmhyunsoo','kmhyunsoo','adsf@naver.com','abcdedf');
 /*!40000 ALTER TABLE `member` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -158,4 +161,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-05-09 11:26:17
+-- Dump completed on 2024-05-20 16:15:26
