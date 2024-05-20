@@ -57,7 +57,7 @@ public class WhatsInMyRefController {
     
     
     @GetMapping("/login")
-    public String login(@ModelAttribute("User") User user,Model model) {
+    public String login(@ModelAttribute("User") UserDTO userDTO,Model model) {
         return "login";
     }
     
