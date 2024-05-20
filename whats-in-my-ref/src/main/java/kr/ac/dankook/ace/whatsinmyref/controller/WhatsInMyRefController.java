@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import kr.ac.dankook.ace.whatsinmyref.entity.User;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -57,13 +57,25 @@ public class WhatsInMyRefController {
     
     
     @GetMapping("/login")
-    public String login(@ModelAttribute("User") UserDTO userDTO,Model model) {
+    public String login(Model model) {
+        model.addAttribute("userDTO", new UserDTO());
         return "login";
     }
     
     @PostMapping("/login")
-    public String loginUser(@ModelAttribute("User") User user,Model model) {
-        return "redirect:/Wimr";
+    public String loginUser(@ModelAttribute UserDTO userDTO, HttpSession session) {
+        UserDTO loginResult = userService.login(userDTO);
+        if(loginResult != null){
+            session.setAttribute("userNick", loginResult.getMemberNick());
+            return "redirect:/Wimr/";
+        } else {
+            return "login";
+        }
+    }
+
+    @GetMapping("/logout")
+    public String logoutUser(){
+        return "";
     }
     
     @GetMapping("/myPage")

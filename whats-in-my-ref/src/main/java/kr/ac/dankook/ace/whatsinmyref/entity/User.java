@@ -12,29 +12,29 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int member_no;
+    private int memberNo;
 
     @Column(nullable = false)
-    private String member_id;
+    private String memberId;
 
     @Column(nullable = false)
-    private String member_pw;
+    private String memberPw;
 
     @Column(nullable = false)
-    private String member_email;
+    private String memberEmail;
 
     @Column(nullable = false)
-    private String member_nick;
+    private String memberNick;
 
 
     public static User toUser(UserDTO userDTO){
         User user = new User();
 
-        user.setMember_no(userDTO.getMember_no());
-        user.setMember_id(userDTO.getMember_id());
-        user.setMember_pw(userDTO.getMember_id());
-        user.setMember_nick(userDTO.getMember_nick());
-        user.setMember_email(userDTO.getMember_email());
+        user.setMemberNo(userDTO.getMemberNo());
+        user.setMemberId(userDTO.getMemberId());
+        user.setMemberPw(userDTO.getMemberId());
+        user.setMemberNick(userDTO.getMemberNick());
+        user.setMemberEmail(userDTO.getMemberEmail());
 
         return user;
     }
