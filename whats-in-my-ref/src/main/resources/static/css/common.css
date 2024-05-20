@@ -47,8 +47,8 @@ a:hover {
       height: 50px;
       font-size: 20px;
     }
-    #header .logo img{
-      width: 50px;
+    #header .logo{
+      margin-top: 3px;
     }
     .navbar{
       margin-top:4px;
@@ -67,6 +67,7 @@ a:hover {
     .box{
       width:250px;
       margin:0 60px 30px;
+      font-size: 50px;
     }
     /*recipe.html*/
     .recipe_container{
@@ -80,8 +81,8 @@ a:hover {
       height: 36px;
       font-size: 14px;
     }
-    #header .logo img{
-      width: 35px;
+    #header .logo{
+      margin-top: 4px;
     }
     .navbar{
       margin-top:0px;
@@ -100,6 +101,7 @@ a:hover {
     .box{
       width:200px;
       margin:0 38px 30px;
+      font-size: 38px;
     }
     .emptyBox{
       height:70px;
@@ -116,6 +118,10 @@ a:hover {
     /*header.html*/
     .navbar{
       content-visibility:hidden;
+    }
+
+    #header .logo{
+      margin-top: 4px;
     }
 
     #mobile-nav-toggle{
@@ -148,6 +154,7 @@ a:hover {
     }
     .box{
       width: 360px;
+      font-size: 70px;
     }
 
   
