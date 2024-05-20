@@ -35,7 +35,6 @@ function getFoodRecipe() {
   }
 
   let apiUrl = `http://openapi.foodsafetykorea.go.kr/api/f415b345bda946528b8e/COOKRCP01/json/0/1000/`;
-
   fetch(apiUrl)
     .then((response) => {
       if (!response.ok) {
