@@ -75,15 +75,20 @@ div.card{
   margin-bottom: 4px;
 }
 
-.comment .card .card-body form .comment-btn-wrap{
+.comment .card .card-body form .comment-sub-wrap{
   display: flex;
   justify-content: space-between;
 }
 
+.comment .card .card-body form .comment-sub-wrap #comment-btn-wrap{
+  width:11%;
+  align-items: center;
+}
+
 .comment .card .card-body form #comment-submit-btn{
-  width:12%;
+  width:100%;
   font-size: small;
-  text-align: center;
+  --pico-form-element-spacing-vertical: 0.4rem;
 }
 
 .comment .card .card-body form #char-count{

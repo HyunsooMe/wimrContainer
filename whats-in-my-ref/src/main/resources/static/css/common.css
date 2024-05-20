@@ -28,8 +28,12 @@ a:hover {
     width: 1px;
 }
 
-.flexible-font-size{
+.Header-font-size{
   font-size: 20px;
+}
+
+.flexible-font-size{
+  font-size:23px;
 }
   
   
@@ -49,9 +53,13 @@ a:hover {
     .navbar{
       margin-top:4px;
     }
-    .flexible-font-size{
+    .Header-font-size{
       font-size: 15px;
     }
+    .flexible-font-size{
+      font-size:17px;
+    }
+      
      /*index.html*/
     .input-width{
       max-width: 1000px !important;
@@ -78,12 +86,14 @@ a:hover {
     .navbar{
       margin-top:0px;
     }
-    .flexible-font-size{
+    .Header-font-size{
       font-size: 11px;
     }
-     /*index.html*/
-    .site-cover{
+    .flexible-font-size{
+      font-size:14px;
     }
+      
+     /*index.html*/
     .input-width{
       max-width: 700px !important;
     }
@@ -152,8 +162,8 @@ a:hover {
       box-shadow: none;
     }
 
-    .recipe_container .comment .card .card-body form #comment-submit-btn{
-      width:70px;
+    .recipe_container .comment .card .card-body form #comment-btn-wrap{
+      width:55px;
     }
   
     .myPage-container .item{
@@ -192,4 +202,8 @@ a:hover {
 
 .display-flex{
   display: flex;
+}
+
+.underline{
+  text-decoration: underline;
 }

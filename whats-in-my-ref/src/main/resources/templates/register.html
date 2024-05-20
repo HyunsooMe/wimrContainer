@@ -26,12 +26,12 @@
             <form id="register-form" th:action="@{/Wimr/register}" method="post" th:object="${userDTO}">
                 <div class="input-wrap">
                 아이디:
-                        <input type="text" id="loginId" name="member_id" class="form_input" th:field="*{member_id}">
+                        <input type="text" id="loginId" name="member_id" class="form_input" th:field="*{memberId}">
                         <div id="idError" class="Error" ><li>아이디는 영문자로 시작하는 영문자와 숫자 조합의 3~15자리를 사용해야 합니다.</li></div> 
                 </div>
                 <div class="input-wrap">
                 비밀번호:
-                        <input type="password" id="password" name="member_pw" class="form_input" th:field="*{member_pw}">
+                        <input type="password" id="password" name="member_pw" class="form_input" th:field="*{memberPw}">
                         <div id="pwdError" class="Error"><li>비밀번호는 영문자+숫자+특수문자 조합의 8~20자리를 사용해야 합니다.</li></div>  
                 </div>        
                 <div class="input-wrap">       
@@ -41,7 +41,7 @@
                 </div>
                 <div class="input-wrap">
                 닉네임: 
-                        <input type="text" id="name" name="member_nick" class="form_input" th:field="*{member_nick}">
+                        <input type="text" id="name" name="member_nick" class="form_input" th:field="*{memberNick}">
                         <div id="nameError" class="Error"><li>닉네임은 영문자 or 한글 or 숫자 조합의 3~10자리를 사용해야합니다.</li></div>
                         
                 </div>
@@ -59,7 +59,7 @@
                         <div id="emailError" class="Error" ><li>이메일 형식에 맞지 않습니다.</li></div> 
                 </div>
 
-                <input type="hidden" id="email" th:field="*{member_email}"> <!--email_id와 add를 합쳐서 보내기 위한 hidden input-->
+                <input type="hidden" id="email" th:field="*{memberEmail}"> <!--email_id와 add를 합쳐서 보내기 위한 hidden input-->
                 <button type="button" onclick="form_check()">가입하기</button>
                 
             </form>
