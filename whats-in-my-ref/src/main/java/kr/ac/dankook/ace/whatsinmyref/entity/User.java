@@ -1,22 +1,41 @@
 package kr.ac.dankook.ace.whatsinmyref.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import jakarta.persistence.*;
+import kr.ac.dankook.ace.whatsinmyref.dto.UserDTO;
+import lombok.*;
 
 @Entity
-@Data
+@Getter @Setter
 @NoArgsConstructor
-@AllArgsConstructor
+@Table(name ="member")
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String loginId;
-    private String email;
-    private String name;
-    private String password;
+    private int member_no;
+
+    @Column(nullable = false)
+    private String member_id;
+
+    @Column(nullable = false)
+    private String member_pw;
+
+    @Column(nullable = false)
+    private String member_email;
+
+    @Column(nullable = false)
+    private String member_nick;
+
+
+    public static User toUser(UserDTO userDTO){
+        User user = new User();
+
+        user.setMember_no(userDTO.getMember_no());
+        user.setMember_id(userDTO.getMember_id());
+        user.setMember_pw(userDTO.getMember_id());
+        user.setMember_nick(userDTO.getMember_nick());
+        user.setMember_email(userDTO.getMember_email());
+
+        return user;
+    }
 }
