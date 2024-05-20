@@ -12,20 +12,20 @@ import lombok.ToString;
 @ToString
 public class UserDTO {
 
-    private int member_no;
-    private String member_id;
-    private String member_pw;
-    private String member_email;
-    private String member_nick;
+    private int memberNo;
+    private String memberId;
+    private String memberPw;
+    private String memberEmail;
+    private String memberNick;
 
     public static UserDTO toUserDTO(User user){
         UserDTO userDTO = new UserDTO();
 
-        userDTO.setMember_no(user.getMember_no());
-        userDTO.setMember_id(user.getMember_id());
-        userDTO.setMember_pw(user.getMember_pw());
-        userDTO.setMember_email(user.getMember_email());
-        userDTO.setMember_nick(user.getMember_nick());
+        userDTO.setMemberNo(user.getMemberNo());
+        userDTO.setMemberId(user.getMemberId());
+        userDTO.setMemberPw(user.getMemberPw());
+        userDTO.setMemberEmail(user.getMemberEmail());
+        userDTO.setMemberNick(user.getMemberNick());
 
         return userDTO;
     }

@@ -1,10 +1,13 @@
 <html xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="UTF-8" />
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap"
+      rel="stylesheet"
+    />
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.conditional.min.css"
@@ -13,16 +16,26 @@
     <link href="/css/header.css" rel="stylesheet" />
     <link href="/css/common.css" rel="stylesheet" />
 
-    
     <title>login</title>
   </head>
   <body class="noscroll">
     <header th:replace="~{fragments/header::header}"></header>
-    <div class="sidebar-wrap"><div th:replace="~{fragments/sideNav::sidebar}"/></div>
+    <div class="sidebar-wrap">
+      <div th:replace="~{fragments/sideNav::sidebar}" />
+    </div>
 
-    <div id="loginBox" class="centerBox pico justify-content-center align-items-center">
+    <div
+      id="loginBox"
+      class="centerBox pico justify-content-center align-items-center"
+    >
       <div class="form-wrap">
-        <form name="login-form" id="login-form" th:action="@{/Wimr/login}" method="post" th:object="${User}">
+        <form
+          name="login-form"
+          id="login-form"
+          th:action="@{/Wimr/login}"
+          method="post"
+          th:object="${userDTO}"
+        >
           Login ID:
           <input
             type="text"
@@ -39,18 +52,18 @@
             name="password"
             th:value="*{memberPw}"
             class="form_input"
-            style="margin-bottom: 0;"
+            style="margin-bottom: 0"
           />
           <div class="link-div">
-            <a href="/Wimr/findACC" onclick="openInNewWindow(event,this.href)">아이디/비밀번호 찾기</a>
+            <a href="/Wimr/findACC" onclick="openInNewWindow(event,this.href)"
+              >아이디/비밀번호 찾기</a
+            >
             <a href="/Wimr/register">회원가입</a>
           </div>
           <button type="button" onclick="loginChk()">Login</button>
         </form>
       </div>
     </div>
-    
-    
 
     <script src="/js/login.js"></script>
     <script src="/js/index.js"></script>

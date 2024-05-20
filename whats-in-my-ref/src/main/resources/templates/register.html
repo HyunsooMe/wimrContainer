@@ -1,25 +1,29 @@
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
-    
+  <head>
+    <meta charset="UTF-8" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap"
+      rel="stylesheet"
+    />
+
     <title>Register</title>
     <link
-    rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.conditional.min.css"
-  />
-    <link href="/css/register.css" rel="stylesheet"/>
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.conditional.min.css"
+    />
+    <link href="/css/register.css" rel="stylesheet" />
     <link href="/css/header.css" rel="stylesheet" />
     <link href="/css/common.css" rel="stylesheet" />
+  </head>
+  <body>
+    <header th:replace="~{fragments/header::header}" />
+    <div class="sidebar-wrap">
+      <div th:replace="~{fragments/sideNav::sidebar}" />
+    </div>
 
-</head>
-<body>
-    <header th:replace="~{fragments/header::header}"/>
-    <div class="sidebar-wrap"><div th:replace="~{fragments/sideNav::sidebar}"/></div>
-    
     <div class="emptyBox"></div>
     <div id="registerBox" class="centerBox pico">
         <div class="form-wrap">
@@ -69,5 +73,5 @@
     <script src="/js/register.js"></script>
     <script src="/js/index.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
-</body>
+  </body>
 </html>
