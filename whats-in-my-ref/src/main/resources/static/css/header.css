@@ -24,7 +24,7 @@
 }
 
 #header .logo h1 {
-  font-family: "YEONGJUSeonbiTTF";
+  font-family: "Do Hyeon";
   margin: 0;
   padding: 6px 0px 6px; /*위 좌-우 아래*/
   line-height: 1;
@@ -73,7 +73,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 10px 10px 10px 30px;
-  font-family: "Open Sans", sans-serif;
+  font-family: "Do Hyeon", sans-serif;
   color: #fff;
   white-space: nowrap;
   transition: 0.3s;

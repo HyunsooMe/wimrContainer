@@ -10,6 +10,8 @@
 .recipe_container {
   position: relative;
   margin: 0 auto;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
   background-color: #ffffff;
   width: 100%;
   max-width: 1500px;
