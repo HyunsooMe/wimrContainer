@@ -26,17 +26,25 @@
         <div class="tab active" onclick="showTab('find-id')">아이디 찾기</div>
         <div class="tab" onclick="showTab('find-password')">비밀번호 찾기</div>
       </div>
-      <div id="find-id" class="tab-content active">
-        <div style="margin-left:10px; font-size: larger;">이메일:</div>
-        <form th:action="@{/Wimr/findAcc/find-id}" method="post">
-          <div class="display-flex">
-            <input type="text" id="email" th:value="${email}" >
-            <button type="submit">입력</button>
+      <div class="tab-content-wrap">
+        <div id="find-id" class="tab-content active">
+          <div style="margin-left:10px; font-size: larger;">이메일:</div>
+          <form th:action="@{/Wimr/findAcc/find-id}" method="post">
+            <div class="display-flex">
+              <input type="text" id="email" th:value="${email}" >
+              <button type="submit">입력</button>
+            </div>
+          </form>
+
+          <div id="result" class="display-flex align-items-center justify-content-center">
+            아이디는&nbsp;
+            <div class="underline" th:text="${masked_member_id}"></div>
+            &nbsp;입니다.
           </div>
-        </form>
-      </div>
-      <div id="find-password" class="tab-content">
-        비밀번호 찾기
+        </div>
+        <div id="find-password" class="tab-content">
+          비밀번호 찾기
+        </div>
       </div>
     </div>
 

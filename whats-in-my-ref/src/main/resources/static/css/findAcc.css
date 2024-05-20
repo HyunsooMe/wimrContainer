@@ -1,8 +1,5 @@
 .tab-content {
     display: none;
-
-    background-color: aliceblue;
-    height: 100%;
 }
 .tab-content.active {
     display: block;
@@ -25,9 +22,12 @@
     background-color: #ccc;
 }
 
-#find-id{
-    margin-top: 10px;
+.tab-content-wrap{
+    background-color: aliceblue;
+    height: 100%;
+    padding: 15px;
 }
+
 
 #find-id form input{
     margin-left: 10px;
@@ -37,4 +37,8 @@
     margin-left: 10px;
     margin-right: 10px;
     width: 80px;
+}
+
+#find-id #result{
+    height: 100px;
 }
