@@ -143,6 +143,7 @@
 .navbar .login-btn{
   position: relative;
   width:145px; 
+  margin-top: 7px;
 }
 
 .navbar .after-login{
@@ -152,7 +153,8 @@
   margin: 0;
   margin-right: 7px;
   padding-top: 0;
-  font-size: 13px;
+  padding-bottom: 0;
+  font-size: 15px;
   display: flex;
   justify-content: right;
 }
