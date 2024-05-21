@@ -17,19 +17,16 @@ public class Recipe {
     private String title;
     //재료
     private String ingredient;
-    //영양 정보
-    private String nutrition;
 
-    private String category;
-
+    //열량
     private Double calories;
-
+    //탄수화물
     private Double carbohydrates;
-
+    //단백질
     private Double protein;
-
+    //지방
     private Double fat;
-
+    //나트륨
     private Double sodium;
 
     @Lob
