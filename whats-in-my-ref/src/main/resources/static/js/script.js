@@ -142,10 +142,10 @@ checkboxes.forEach(function (checkbox) {
 function submitSelectedItems() {
   console.log("서버에 전송");
   $.ajax({
-    url: "http://localhost:8080/Wimr/foodSelect", // 서버의 API 주소
+    url: "http://localhost:8080/Wimr/foodSelect",
     type: "POST",
     contentType: "application/json",
-    data: JSON.stringify({ items: selectedItems }),
+    data: JSON.stringify({ items: selectedItems }), // selectedItems 배열을 JSON으로 변환하여 전송
     success: function (response) {
       console.log("Success:", response);
     },
