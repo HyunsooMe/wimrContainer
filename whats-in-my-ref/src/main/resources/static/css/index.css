@@ -2,6 +2,8 @@
 
 .overlay::before{
     position: absolute;
+    height: calc(100vh);
+    min-height: 600px;
     content: "";
     left: 0;
     bottom: 0;
@@ -58,7 +60,6 @@
     width: 100%;
     position: relative;
     padding-top: 50px;
-    font-family: "YEONGJUSeonbiTTF";
   }
   
   .Contents .box_div{
@@ -69,7 +70,6 @@
   }
   
   .Contents .box_div .big-box{
-    font-family: "YEONGJUSeonbiTTF";
   }
   
   .box {
@@ -79,7 +79,7 @@
     margin:0 80px;
     margin-bottom: 30px;
     border-radius: 10%;
-    font: 600 60px "YEONGJUSeonbiTTF";
+    font: 600 60px "Do Hyeon";
     cursor:pointer;
     color:#fff;
   }
@@ -97,13 +97,4 @@
   
   .box div {
     transition: 0.15s;
-  }
-  
-  .Contents #Search_recipe {
-  }
-  
-  .Contents #Make_recipe {
-  }
-  
-  .Contents #bBorad{
   }

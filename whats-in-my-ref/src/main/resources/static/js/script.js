@@ -17,6 +17,8 @@ $searchBtn.addEventListener("click", () => {
   }
 });
 
+//---------------------------------------------------------------
+// 재료 검색 자동완성
 let nowIndex = 0;
 
 $search.onkeyup = (event) => {
@@ -73,6 +75,9 @@ const showList = (data, value, nowIndex) => {
     .join("");
 };
 
+//---------------------------------------------------------------
+
+// 리스트에 선택한 재료 추가
 const addToAddedList = (item) => {
   if (!selectedItems.includes(item)) {
     if (!foodList.includes(item)) {
@@ -91,6 +96,7 @@ const addToAddedList = (item) => {
   }
 };
 
+// 리스트에서 선택한 재료 삭제
 const removeFromAddedList = (item) => {
   selectedItems = selectedItems.filter((selectedItem) => selectedItem !== item);
   checkboxes.forEach((checkbox) => {
@@ -102,6 +108,7 @@ const removeFromAddedList = (item) => {
   renderAddedList(); // addedlist 업데이트
 };
 
+// 재료 추가,삭제 표시
 const renderAddedList = () => {
   $addedList.innerHTML = ""; // 기존 리스트 초기화
   selectedItems.forEach((item) => {

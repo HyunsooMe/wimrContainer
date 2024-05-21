@@ -1,27 +1,49 @@
 package kr.ac.dankook.ace.whatsinmyref.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import jakarta.persistence.*;
+import lombok.*;
+
+import java.util.List;
 
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name ="recipe")
+
 public class Recipe {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int recipeno;
+
     private String title;
     //재료
     private String ingredient;
-    //영양 정보
-    private String nutrition;
-    private String content;
+    //열량
+    private Double calories;
+    //탄수화물
+    private Double carbohydrates;
+    //단백질
+    private Double protein;
+    //지방
+    private Double fat;
+    //나트륨
+    private Double sodium;
+
+    @Lob
+    private String ingredients;
+
+    @ElementCollection
+    private List<Manual> manuals;
+
+    @Embeddable
+    @Getter @Setter
+    public static class Manual{
+        private String step;
+        private String image;
+    }
+
     private String nickname;
-    private int like;
+
+    private int likecount;
 }
