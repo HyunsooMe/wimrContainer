@@ -24,7 +24,9 @@
 }
 
 #header .logo h1 {
-  font-family: "YEONGJUSeonbiTTF";
+  font-family: "Do Hyeon", sans-serif;
+  font-weight: 500;
+  font-style: normal;
   margin: 0;
   padding: 6px 0px 6px; /*위 좌-우 아래*/
   line-height: 1;
@@ -50,8 +52,8 @@
   position: relative;
   margin-left: auto;
   margin-right: 15px;
-  
-  margin-top:5px;
+
+  margin-top: 5px;
 }
 
 .navbar ul {
@@ -60,7 +62,6 @@
   display: flex;
   list-style: none;
   align-items: center;
-  
 }
 
 .navbar li {
@@ -73,7 +74,9 @@
   align-items: center;
   justify-content: space-between;
   padding: 10px 10px 10px 30px;
-  font-family: "Open Sans", sans-serif;
+  font-family: "Do Hyeon", sans-serif;
+  font-weight: 500;
+  font-style: normal;
   color: #fff;
   white-space: nowrap;
   transition: 0.3s;
@@ -140,11 +143,11 @@
   visibility: visible;
 }
 
-.navbar .login-btn{
-  position: relative; 
+.navbar .login-btn {
+  position: relative;
 }
 
-.navbar .after-login{
+.navbar .after-login {
 }
 
 .navbar #toRegister {
@@ -155,22 +158,17 @@
   justify-content: right;
 }
 
-
-
 /*---------------------------------------------------
 footer
 -----------------------------------------------------*/
-  
-
-
 
 /*--------------------------------------------------
 menu bar
 ----------------------------------------------------*/
-#mobile-nav-toggle{
+#mobile-nav-toggle {
   display: none;
   content-visibility: hidden;
-  margin-right:10px;
+  margin-right: 10px;
   cursor: pointer;
 }
 
@@ -180,31 +178,31 @@ menu bar
   width: 20px;
   background: #ffffff;
   margin: 5px auto;
-  -webkit-transition: all .2s ease;
-  transition: all .2s ease;
+  -webkit-transition: all 0.2s ease;
+  transition: all 0.2s ease;
 }
-.sidebar-wrap{
+.sidebar-wrap {
   display: flex;
   justify-content: right;
 }
 
-#sidebar{
+#sidebar {
   visibility: hidden;
-  height:100%;
+  height: 100%;
   width: 300px;
   background-color: rgba(37, 37, 37, 0.952);
-  position:fixed;
-  top:36px;
+  position: fixed;
+  top: 36px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.904), 0 6px 6px rgba(0, 0, 0, 0.23);
   z-index: 3;
 }
 
-#sidebar ul li{
+#sidebar ul li {
   text-align: left;
   color: rgb(255, 255, 255);
   margin-bottom: 50px;
 }
 
-#sidebar ul li a{
-  color:white;
+#sidebar ul li a {
+  color: white;
 }
