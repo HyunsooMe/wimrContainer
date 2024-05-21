@@ -10,11 +10,13 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name ="recipe")
-
 public class Recipe {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int recipeno;
+
+    //대표 사진
+    private String picture;
 
     private String title;
     //재료

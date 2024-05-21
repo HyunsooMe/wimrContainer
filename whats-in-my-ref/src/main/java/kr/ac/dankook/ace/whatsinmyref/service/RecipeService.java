@@ -4,9 +4,6 @@ import kr.ac.dankook.ace.whatsinmyref.dto.ApiResponseDTO;
 import kr.ac.dankook.ace.whatsinmyref.dto.RecipeDTO;
 import kr.ac.dankook.ace.whatsinmyref.entity.Recipe;
 import kr.ac.dankook.ace.whatsinmyref.repository.RecipeRepository;
-import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -48,6 +45,7 @@ public class RecipeService {
         recipe.setFat(dto.getINFO_FAT());
         recipe.setSodium(dto.getINFO_NA());
         recipe.setIngredients(dto.getRCP_PARTS_DTLS());
+        recipe.setPicture(dto.getATT_FILE_NO_MAIN());
 
         List<Recipe.Manual> manuals = new ArrayList<>();
         for (int i = 1; i <= 20; i++) {
