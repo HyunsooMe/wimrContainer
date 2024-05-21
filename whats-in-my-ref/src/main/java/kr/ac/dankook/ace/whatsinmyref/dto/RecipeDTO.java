@@ -10,8 +10,6 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 public class RecipeDTO {
-    //레시피 번호
-    private int RCP_SEQ;
     //메뉴 명
     private String RCP_NM;
     //열량

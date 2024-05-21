@@ -9,6 +9,8 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name ="recipe")
+
 public class Recipe {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,7 +19,6 @@ public class Recipe {
     private String title;
     //재료
     private String ingredient;
-
     //열량
     private Double calories;
     //탄수화물
@@ -35,8 +36,6 @@ public class Recipe {
     @ElementCollection
     private List<Manual> manuals;
 
-    private String reductionTip;
-
     @Embeddable
     @Getter @Setter
     public static class Manual{
@@ -46,5 +45,5 @@ public class Recipe {
 
     private String nickname;
 
-    private int like;
+    private int likecount;
 }

@@ -1,8 +1,12 @@
 package kr.ac.dankook.ace.whatsinmyref.service;
 
+import kr.ac.dankook.ace.whatsinmyref.dto.ApiResponseDTO;
 import kr.ac.dankook.ace.whatsinmyref.dto.RecipeDTO;
 import kr.ac.dankook.ace.whatsinmyref.entity.Recipe;
 import kr.ac.dankook.ace.whatsinmyref.repository.RecipeRepository;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -21,19 +25,22 @@ public class RecipeService {
     }
 
     public void getRecipes(String url) {
-        RecipeDTO[] recipes = restTemplate.getForObject(url, RecipeDTO[].class);
 
-        if (recipes != null) {
-            for (RecipeDTO recipeDto : recipes) {
-                Recipe recipe = mapToEntity(recipeDto);
-                recipeRepository.save(recipe);
+        ApiResponseDTO response = restTemplate.getForObject(url, ApiResponseDTO.class);
+
+        if (response != null && "success".equals(response.getStatus())) {
+            List<RecipeDTO> recipes = response.getData().getRecipes();
+            if (recipes != null) {
+                for (RecipeDTO recipeDto : recipes) {
+                    Recipe recipe = mapToEntity(recipeDto);
+                    recipeRepository.save(recipe);
+                }
             }
         }
     }
 
     private Recipe mapToEntity(RecipeDTO dto) {
         Recipe recipe = new Recipe();
-        recipe.setRecipeno(dto.getRCP_SEQ());
         recipe.setTitle(dto.getRCP_NM());
         recipe.setCalories(dto.getINFO_ENG());
         recipe.setCarbohydrates(dto.getINFO_CAR());
