@@ -36,6 +36,11 @@ public class BoardService {
         return boardRepository.findById(bno).get();
     }
 
+    // 조회수 순서 게시글 리스트 처리
+    public Page<Board> boardListByViewCount(Pageable pageable) {
+        return boardRepository.findAllByOrderByViewcountDesc(pageable);
+    }
+
     // 특정 게시글 삭제
     public void boardDelete(Integer bno){
 

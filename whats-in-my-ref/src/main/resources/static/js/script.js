@@ -140,6 +140,11 @@ checkboxes.forEach(function (checkbox) {
 // 서버로 selectedItems 배열을 보내는 함수
 
 function submitSelectedItems() {
+  if (selectedItems.length === 0) {
+    alert("재료를 입력해주세요.");
+    return; // 배열이 비어있으면 함수 종료
+  }
+
   console.log("서버에 전송");
   $.ajax({
     url: "http://localhost:8080/Wimr/foodSelect",
