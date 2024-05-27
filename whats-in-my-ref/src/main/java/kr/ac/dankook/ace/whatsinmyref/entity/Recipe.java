@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.List;
+import java.util.Map;
 
 @Entity
 @Data
@@ -14,38 +15,32 @@ public class Recipe {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int recipeno;
-
-    //대표 사진
+//    대표 사진
     private String picture;
 
     private String title;
     //재료
     private String ingredient;
     //열량
-    private Double calories;
+    private String calories;
     //탄수화물
-    private Double carbohydrates;
+    private String carbohydrates;
     //단백질
-    private Double protein;
+    private String protein;
     //지방
-    private Double fat;
+    private String fat;
     //나트륨
-    private Double sodium;
+    private String sodium;
 
-    @Lob
-    private String ingredients;
 
     @ElementCollection
-    private List<Manual> manuals;
+    private Map<String, String> manual;
 
-    @Embeddable
-    @Getter @Setter
-    public static class Manual{
-        private String step;
-        private String image;
-    }
+    @ElementCollection
+    private Map<String, String> manualImg;
 
-    private String nickname;
+
+//    private String nickname;
 
     private int likecount;
 }
