@@ -69,6 +69,7 @@ public class WhatsInMyRefController {
             session.setAttribute("userNick", loginResult.getMemberNick());
             return "redirect:/Wimr/";
         } else {
+            System.out.println();
             return "login";
         }
     }
