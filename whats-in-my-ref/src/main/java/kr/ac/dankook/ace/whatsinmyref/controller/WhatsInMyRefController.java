@@ -31,15 +31,19 @@ public class WhatsInMyRefController {
         return "index";
     }
 
-    @GetMapping("/recipe") //localhost:8080/Wimr/recipe?foodID=""
-    public String recipe(@RequestParam String foodID,Model model) {
-        String foodImg = "/img/ingredients.jpg";  //이미지가 없는 경우 default
-        /*
-        model.addAttribute("foodName",foodName)         //요리 이름
-        model.addAttribute("ingredients", ingredients); //재료 리스트
-        model.addAttribute("recipe", recipe);           //레시피 리스트
-        */
-        model.addAttribute("foodImg", foodImg);         //음식 사진 path
+//    @GetMapping("/recipe") //localhost:8080/Wimr/recipe?foodID=""
+//    public String recipe(@RequestParam String foodID,Model model) {
+//        String foodImg = "/img/ingredients.jpg";  //이미지가 없는 경우 default
+//        /*
+//        model.addAttribute("foodName",foodName)         //요리 이름
+//        model.addAttribute("ingredients", ingredients); //재료 리스트
+//        model.addAttribute("recipe", recipe);           //레시피 리스트
+//        */
+//        model.addAttribute("foodImg", foodImg);         //음식 사진 path
+//        return "recipe";
+//    }
+    @GetMapping("/recipe")
+    public String recipe(){
         return "recipe";
     }
 

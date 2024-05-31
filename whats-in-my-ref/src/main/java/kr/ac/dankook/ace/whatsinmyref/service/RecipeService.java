@@ -51,6 +51,7 @@ public class RecipeService {
                             manualImg.put(manualImgKey, node.path(manualImgKey).asText());
                         }
                     }
+
                     recipe.setManual(manual);
                     recipe.setManualImg(manualImg);
 
