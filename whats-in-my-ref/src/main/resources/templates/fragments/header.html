@@ -34,7 +34,7 @@
                       <p>안녕하세요,</p>
                       <p th:text="|${session.user.memberNick}님|"></p>
                       <form th:action="@{/Wimr/logout}" method="post">
-                        <button class="logout-btn" type="submit" onclick="confirmLogout()">로그아웃</button>
+                        <button class="logout-btn" type="submit">로그아웃</button>
                       </form>
                     </div>
                   </div>
