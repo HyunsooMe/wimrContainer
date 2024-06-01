@@ -71,15 +71,19 @@ public class WhatsInMyRefController {
         UserDTO loginResult = userService.login(userDTO);
         if(loginResult != null){
             session.setAttribute("userNick", loginResult.getMemberNick());
+            session.setMaxInactiveInterval(1800);
+            System.out.println("success");
             return "redirect:/Wimr/";
         } else {
+            System.out.println("failed");
             return "login";
         }
     }
 
     @GetMapping("/logout")
-    public String logoutUser(){
-        return "";
+    public String logoutUser(HttpSession session){
+        session.invalidate();
+        return "redirect:/Wimr/";
     }
     
     @GetMapping("/myPage")
