@@ -43,7 +43,7 @@
       </div>
       <div class="btn">
         <a th:href="@{/boardDelete(bno=${board.bno})}" id="delete">글 삭제</a>
-        <a th:href="@{/boardModify(bno=${board.bno})}">글 수정</a>
+        <a th:href="@{/board/edit/{bno}(bno=${board.bno})}">글 수정</a>
         <a th:href="@{/boardList}">목록 보기</a>
       </div>
     </div>

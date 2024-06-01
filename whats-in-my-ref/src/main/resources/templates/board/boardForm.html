@@ -26,7 +26,12 @@
     </div>
     <h2><a href="boardList">게시판</a></h2>
     <div class="form-wrap">
-      <form id="writeForm" method="post" action="/board/writePro">
+      <form
+        id="writeForm"
+        method="post"
+        action="/board/writePro"
+        onsubmit="return validateForm()"
+      >
         <table>
           <tr>
             <td>제목</td>
@@ -62,5 +67,18 @@
         </div>
       </form>
     </div>
+    <script>
+      function validateForm() {
+        const title = document.getElementById("title").value.trim();
+        const nickname = document.getElementById("nickname").value.trim();
+        const content = document.getElementById("content").value.trim();
+
+        if (!title || !nickname || !content) {
+          alert("모든 필드를 입력해 주세요.");
+          return false;
+        }
+        return true;
+      }
+    </script>
   </body>
 </html>

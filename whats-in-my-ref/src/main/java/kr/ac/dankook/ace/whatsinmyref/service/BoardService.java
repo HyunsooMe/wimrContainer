@@ -57,4 +57,16 @@ public class BoardService {
 
         }
     }
+
+    // 게시글 수정 처리
+    @Transactional
+    public void updateBoard(Integer bno, Board newBoard) {
+        Board existingBoard = boardRepository.findById(bno).orElse(null);
+        if(existingBoard != null) {
+            existingBoard.setTitle(newBoard.getTitle());
+            existingBoard.setContent(newBoard.getContent());
+            // 필요한 경우 다른 필드도 추가
+            boardRepository.save(existingBoard);
+        }
+    }
 }

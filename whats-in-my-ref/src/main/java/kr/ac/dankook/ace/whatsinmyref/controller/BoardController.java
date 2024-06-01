@@ -9,6 +9,8 @@ import org.springframework.stereotype.Controller;
 // import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -85,4 +87,18 @@ public class BoardController {
         return "/foodSelect";
     }
 
+     // 게시글 수정 페이지 이동
+    @GetMapping("/board/edit/{bno}")
+    public String editBoard(@PathVariable("bno") Integer bno, Model model) {
+        Board board = boardService.boardView(bno);
+        model.addAttribute("board", board);
+        return "/board/boardEdit"; // boardEdit.html로 이동
+    }
+
+    // 게시글 수정 처리
+    @PostMapping("/board/update/{bno}")
+    public String updateBoard(@PathVariable("bno") Integer bno, @ModelAttribute Board board) {
+        boardService.updateBoard(bno, board);
+        return "redirect:/boardList"; // 수정 후 해당 게시글 페이지로 리다이렉트
+    }
 }

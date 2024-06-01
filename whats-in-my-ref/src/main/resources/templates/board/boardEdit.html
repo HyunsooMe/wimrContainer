@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>게시글 수정</title>
+    <link rel="stylesheet" th:href="@{/css/boardViewStyle.css}" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.conditional.min.css"
+    />
+    <link rel="stylesheet" th:href="@{/css/header.css}" />
+    <link rel="stylesheet" th:href="@{/css/common.css}" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header th:replace="~{fragments/header::header}"></header>
+    <form
+      th:action="@{/board/update/{bno}(bno=${board.bno})}"
+      th:object="${board}"
+      method="post"
+    >
+      <label for="title">제목:</label>
+      <input type="text" id="title" th:field="*{title}" />
+
+      <label for="content">내용:</label>
+      <textarea id="content" th:field="*{content}"></textarea>
+
+      <button type="submit">수정</button>
+    </form>
+  </body>
+</html>

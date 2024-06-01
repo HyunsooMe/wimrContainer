@@ -136,6 +136,70 @@ checkboxes.forEach(function (checkbox) {
   });
 });
 
+const findRecipeBtn = document.getElementById("findRecipeBtn");
+// 요리 레시피를 표시하는 div에 대한 참조 가져오기
+
+// 선택된 체크박스 리스트에 추가, 해제되면 삭제
+findRecipeBtn.addEventListener("click", getFoodRecipe);
+const recipeResults = document.getElementById("recipe-results");
+
+function getFoodRecipe() {
+  if (selectedItems.length === 0) {
+    alert("재료를 입력하세요");
+    return;
+  }
+
+  let apiUrl = `http://openapi.foodsafetykorea.go.kr/api/f415b345bda946528b8e/COOKRCP01/json/0/1000/`;
+  fetch(apiUrl)
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Network response was not ok " + response.statusText);
+      }
+      return response.json();
+    })
+    .then((data) => {
+      if (data && data.COOKRCP01 && data.COOKRCP01.row) {
+        const recipes = data.COOKRCP01.row;
+        const filteredRecipes = recipes.filter((recipe) =>
+          selectedItems.every((item) => recipe.RCP_PARTS_DTLS.includes(item))
+        );
+        console.log(filteredRecipes);
+        displayRecipes(filteredRecipes);
+      } else {
+        console.error("Unexpected data structure", data);
+      }
+    })
+    .catch((error) => {
+      console.error(
+        "There has been a problem with your fetch operation:",
+        error
+      );
+    });
+}
+
+function displayRecipes(recipes) {
+  const recipesDiv = document.getElementById("recipe-results");
+  recipesDiv.innerHTML = "";
+  if (recipes.length === 0) {
+    recipesDiv.textContent = "해당 재료를 포함한 레시피가 없습니다.";
+    return;
+  }
+
+  recipes.forEach((recipe, index) => {
+    const recipeDiv = document.createElement("div");
+    recipeDiv.className = "recipe";
+    // 요리 이름 생성
+    const title = document.createElement("h3");
+    title.textContent = recipe.RCP_NM;
+    // 요리 사진 생성
+    const img = document.createElement("img");
+    img.src = recipe.ATT_FILE_NO_MAIN || recipe.ATT_FILE_NO_MK;
+    recipeDiv.appendChild(img);
+    recipeDiv.appendChild(title);
+    recipesDiv.appendChild(recipeDiv);
+  });
+}
+
 // -------------------------------------------------------
 // 서버로 selectedItems 배열을 보내는 함수
 
@@ -161,4 +225,4 @@ function submitSelectedItems() {
 }
 
 // 전송 버튼 클릭 시 selectedItems 배열을 서버로 전송
-findRecipeBtn.addEventListener("click", submitSelectedItems);
+// findRecipeBtn.addEventListener("click", submitSelectedItems);
