@@ -39,8 +39,8 @@ public class Recipe {
     @ElementCollection
     private Map<String, String> manualImg;
 
-    // @Column(columnDefinition = "default 'asdf'")
-    // private String nickname;
+//    @Column(columnDefinition = "default 'asdf'")
+//    private String nickname;
 
     private int likecount;
 }
