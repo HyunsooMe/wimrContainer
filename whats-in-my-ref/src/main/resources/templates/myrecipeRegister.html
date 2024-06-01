@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" th:href="@{/css/myRecipeStyle.css}" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.conditional.min.css"
+    />
+    <link rel="stylesheet" th:href="@{/css/header.css}" />
+    <link rel="stylesheet" th:href="@{/css/common.css}" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header th:replace="~{fragments/header::header}"></header>
+    <div class="sidebar-wrap">
+      <div th:replace="~{fragments/sideNav::sidebar}" />
+    </div>
+    <h2>나만의 레시피</h2>
+    <form id="myRecipe" method="post" action="/myRecipe/registerRCP">
+      <table>
+        <tr>
+          <td id="mainImg">대표 사진</td>
+        </tr>
+        <tr>
+          <td><input type="file" name="mainImg" /></td>
+        </tr>
+        <tr>
+          <td id="RCP_NM">레시피 제목</td>
+        </tr>
+        <tr>
+          <td>
+            <input
+              type="text"
+              id="title"
+              name="title"
+              placeholder="예) 순두부찌개"
+              required
+            />
+          </td>
+        </tr>
+        <tr>
+          <td id="RCP_IG">재료</td>
+        </tr>
+        <tr>
+          <td>
+            <input
+              type="text"
+              id="ingredient"
+              name="ingredient"
+              placeholder="예) 순두부 1개, 대파 1스푼, 고춧가루 1.5스푼"
+              required
+            />
+          </td>
+        </tr>
+        <tr>
+          <td id="RCP_STEP">요리순서</td>
+        </tr>
+        <tbody id="steps">
+          <tr class="step">
+            <td>
+              <input
+                type="text"
+                name="stepDescription[]"
+                placeholder="예) 채소를 먹기 좋게 다져주세요."
+                required
+              />
+              <input type="file" name="stepImage[]" accept="image/*" required />
+            </td>
+          </tr>
+          <tr class="step">
+            <td>
+              <input
+                type="text"
+                name="stepDescription[]"
+                placeholder="예) 채소를 먹기 좋게 다져주세요."
+                required
+              />
+              <input type="file" name="stepImage[]" accept="image/*" required />
+            </td>
+          </tr>
+          <tr class="step">
+            <td>
+              <input
+                type="text"
+                name="stepDescription[]"
+                placeholder="예) 채소를 먹기 좋게 다져주세요."
+                required
+              />
+              <input type="file" name="stepImage[]" accept="image/*" required />
+            </td>
+          </tr>
+          <tr>
+            <div id="moreRCP"></div>
+          </tr>
+        </tbody>
+      </table>
+      <div>
+        <button type="button" onclick="addStep()">➕ 요리순서 추가</button>
+        <button type="button" onclick="deleteStep()">➖ 요리순서 삭제</button>
+      </div>
+      <div>
+        <button type="submit" class="send">등록</button>
+      </div>
+    </form>
+    <script>
+      function addStep() {
+        const stepDiv = document.createElement("tr");
+        stepDiv.className = "step";
+        stepDiv.innerHTML = `
+              <td>
+                  <input
+                      type="text"
+                      name="stepDescription[]"
+                      placeholder="예) 채소를 먹기 좋게 다져주세요."
+                      required
+                  />
+                  <input type="file" name="stepImage[]" accept="image/*" required />
+              </td>
+          `;
+        document.getElementById("steps").appendChild(stepDiv);
+      }
+
+      function deleteStep() {
+        const steps = document.getElementById("steps");
+        const stepElements = steps.getElementsByClassName("step");
+
+        if (stepElements.length > 3) {
+          steps.removeChild(stepElements[stepElements.length - 1]);
+        }
+      }
+    </script>
+  </body>
+</html>

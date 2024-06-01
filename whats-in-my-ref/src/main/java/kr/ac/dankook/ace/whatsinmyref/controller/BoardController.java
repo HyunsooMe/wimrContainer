@@ -101,4 +101,9 @@ public class BoardController {
         boardService.updateBoard(bno, board);
         return "redirect:/boardList"; // 수정 후 해당 게시글 페이지로 리다이렉트
     }
+
+    @GetMapping("/myrecipeRegister")
+    public String myRecipe(){
+        return "/myrecipeRegister";
+    }
 }
