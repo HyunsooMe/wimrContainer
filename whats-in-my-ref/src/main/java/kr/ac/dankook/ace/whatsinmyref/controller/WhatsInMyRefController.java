@@ -70,20 +70,20 @@ public class WhatsInMyRefController {
     public String loginUser(@ModelAttribute UserDTO userDTO, HttpSession session) {
         UserDTO loginResult = userService.login(userDTO);
         if(loginResult != null){
-            session.setAttribute("userNick", loginResult.getMemberNick());
+            session.setAttribute("user", loginResult);
             session.setMaxInactiveInterval(1800);
             System.out.println("success");
-            return "redirect:/Wimr/";
+            return "redirect:/Wimr"; //로그인 성공 확인용
         } else {
             System.out.println("failed");
             return "login";
         }
     }
 
-    @GetMapping("/logout")
+    @PostMapping("/logout")
     public String logoutUser(HttpSession session){
         session.invalidate();
-        return "redirect:/Wimr/";
+        return "redirect:/Wimr";
     }
     
     @GetMapping("/myPage")

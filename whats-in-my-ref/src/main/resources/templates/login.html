@@ -40,8 +40,8 @@
           <input
             type="text"
             id="loginId"
-            name="loginId"
-            th:value="*{memberId}"
+            name="member_id"
+            th:field="*{memberId}"
             class="form_input"
           />
           <br />
@@ -49,8 +49,8 @@
           <input
             type="password"
             id="password"
-            name="password"
-            th:value="*{memberPw}"
+            name="member_pw"
+            th:field="*{memberPw}"
             class="form_input"
             style="margin-bottom: 0"
           />
@@ -60,7 +60,7 @@
             >
             <a href="/Wimr/register">회원가입</a>
           </div>
-          <button type="button" onclick="loginChk()">Login</button>
+          <button type="button" onclick="loginChk()">로그인</button>
         </form>
       </div>
     </div>
