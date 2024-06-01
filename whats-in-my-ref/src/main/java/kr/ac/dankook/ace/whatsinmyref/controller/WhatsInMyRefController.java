@@ -31,15 +31,19 @@ public class WhatsInMyRefController {
         return "index";
     }
 
-    @GetMapping("/recipe") //localhost:8080/Wimr/recipe?foodID=""
-    public String recipe(@RequestParam String foodID,Model model) {
-        String foodImg = "/img/ingredients.jpg";  //이미지가 없는 경우 default
-        /*
-        model.addAttribute("foodName",foodName)         //요리 이름
-        model.addAttribute("ingredients", ingredients); //재료 리스트
-        model.addAttribute("recipe", recipe);           //레시피 리스트
-        */
-        model.addAttribute("foodImg", foodImg);         //음식 사진 path
+//    @GetMapping("/recipe") //localhost:8080/Wimr/recipe?foodID=""
+//    public String recipe(@RequestParam String foodID,Model model) {
+//        String foodImg = "/img/ingredients.jpg";  //이미지가 없는 경우 default
+//        /*
+//        model.addAttribute("foodName",foodName)         //요리 이름
+//        model.addAttribute("ingredients", ingredients); //재료 리스트
+//        model.addAttribute("recipe", recipe);           //레시피 리스트
+//        */
+//        model.addAttribute("foodImg", foodImg);         //음식 사진 path
+//        return "recipe";
+//    }
+    @GetMapping("/recipe")
+    public String recipe(){
         return "recipe";
     }
 
@@ -66,16 +70,20 @@ public class WhatsInMyRefController {
     public String loginUser(@ModelAttribute UserDTO userDTO, HttpSession session) {
         UserDTO loginResult = userService.login(userDTO);
         if(loginResult != null){
-            session.setAttribute("userNick", loginResult.getMemberNick());
-            return "redirect:/Wimr/";
+            session.setAttribute("user", loginResult);
+            session.setMaxInactiveInterval(1800);
+            System.out.println("success");
+            return "redirect:/Wimr"; //로그인 성공 확인용
         } else {
+            System.out.println("failed");
             return "login";
         }
     }
 
-    @GetMapping("/logout")
-    public String logoutUser(){
-        return "";
+    @PostMapping("/logout")
+    public String logoutUser(HttpSession session){
+        session.invalidate();
+        return "redirect:/Wimr";
     }
     
     @GetMapping("/myPage")
