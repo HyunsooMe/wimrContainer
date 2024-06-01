@@ -14,7 +14,7 @@
       <!-- ========= Nav =========-->
       <nav id="navbar" class="navbar Header-font-size">
         <ul>
-          <li><a href="/Wimr/search">레시피 검색</a></li>
+          <li><a href="/Wimr/foodSelect">레시피 검색</a></li>
           <li><a href="/boardList">게시판</a></li>
           <li class="dropdown">
             <a><span>My</span></a>
@@ -28,7 +28,7 @@
                   <div class="my-info after-login" th:if="${user!=null}">
                     <div class="text-center">
                       <p>안녕하세요,</p>
-                      <p th:text="|${user.name}님|"></p>
+                      <p th:text="|${user.memberNick}님|" class="underline"></p>
                       <form th:action="@{/Wimr/logout}" method="post">
                         <button class="logout-btn" type="submit">로그아웃</button>
                       </form>

@@ -1,6 +1,9 @@
+
+
 /*recipe css*/
 /* #recipeBody {
 } */
+
 
 
 .container {
@@ -96,18 +99,29 @@ div.card{
   color:grey;
 }
 
-.comment .card .card-body .comment-box .commenter{
+.comment .card .card-body .comment-box{
+  margin-bottom: 25px;
+}
+
+.comment .card .card-body .comments-box .commenter{
   justify-content: space-between;
 }
 
 
-.comment .card .card-body .comment-box .commenter div .name{
-  margin-top: 12px; 
+.comment .card .card-body .comments-box .commenter .name{
   margin-left: 7px; 
+  
+  color:rgba(51, 51, 51, 0.842);
+  font-size: 17px;
+  font-weight: 400;
 }
 
-.comment .card .card-body .comment-box .commenter .date{
+.comment .card .card-body .comments-box .commenter .date{
   font-size:13px;
-  margin-top: 25px; 
+  padding-top: 10px; 
+}
+
+.comment .card .card-body .comments-box .comment-main-area .comment-content{
+  font-size:23px;
 }
 

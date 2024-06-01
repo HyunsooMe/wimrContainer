@@ -7,6 +7,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
 
+    
     <link
     rel="stylesheet"
     href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.conditional.min.css"
@@ -18,7 +19,7 @@
     <title>Recipe</title>
 
     <style>
-        #foodImg{ background-image: url("[[${foodImg}]]") ;}
+        #foodImg{ background-image: url("[[${picture}]]") ;}
     </style>
 </head>
 
@@ -27,7 +28,7 @@
     <div class="sidebar-wrap"><div th:replace="~{fragments/sideNav::sidebar}"/></div>
     
     <div class="emptyBox"></div>
-    <div class="recipe_container"> <!--</div> th:object="${recipe}">-->
+    <div class="recipe_container" th:object="${recipe}">
         <div id="foodImg" class="item">
             <div id="blur">
                 <!--<div id="recommend" class="display-flex">
@@ -43,21 +44,21 @@
         </div>
         <hr/>
         <ul class="pico">
-            <li id="ingredients"><h2><strong>Ingredients</strong></h2> <br/> 
-                <ul th:each="ingredient : *{ingredients}">
-                    <li  th:text="${ingredient}"></li>
+            <li id="ingredients"><h2><strong>Ingredients</strong></h2>
+                <ul>
+                    <li  th:text="${ingredient}" th:each="ingredient : ${ingredients}"></li>        <!--ingredients는 따로 컨트롤러에서 List로 만들어서 보내야됨-->
                 </ul>
             </li>
             <hr/>
-            <li id="recipeDetail"><h2><strong>Recipe</strong></h2> <br/> 
-                <ol th:each="num : *{recipe}">
-                    <li th:text="${num}"></li>
+            <li id="recipeDetail"><h2><strong>Recipe</strong></h2>
+                <ol>
+                    <li th:text="${num}" th:each="num : *{manuals}"></li>
                 </ol>
             </li>
             <hr />
             <li id="others"><h2><strong>Others</strong></h2>
-                <ul th:each="other : *{others}">
-                    <li th:text="${other}"></li>
+                <ul>
+                    <li th:text="${other}" th:each="other : ${others}"></li>
                 </ul>
             </li>    
             <hr/>
@@ -65,12 +66,12 @@
         <section class="comment justify-content-center display-flex pico">
             <div class="card">
                 <div class="card-body">
-                    <div id="user-info">유저 사진이랑 닉네임</div>
+                    <div id="user-info"><div class="name" th:text="${session.user != null ? session.user.memberNick : 'Unknown'}"></div></div>
                     <!-- 컨트롤러까지 갖춰졌을 때의 Comment form
-                    <form th:action="@{/Wimr/recipe/{recipeno}/submitComment(id=${recipe.recipeno})}" th:object="${comment}" method="post" class="comment-form">
-                        <textarea th:field="*{content}" id="comment-content" rows="3" placeholder="댓글을 입력해주세요" maxlength="300" style="resize: none;"></textarea> 
+                    <form class="comment-form" th:action="@{/Wimr/recipe/{recipeno}/submitComment(id=${recipe.recipeno})}" th:object="${comment}" method="post">
+                        <textarea th:field="*{content}" id="comment-content-input" rows="3" placeholder="댓글을 입력해주세요" maxlength="300" style="resize: none;"></textarea> 
                         <div id="char-count">0/300</div>
-                        <button type="button" id="comment-submit-btn" onclick="comment_check()"><span class="flexible-font-size">등록</span></button>
+                        <div id="comment-btn-wrap" class="display-flex justify-content-center"><button type="button" id="comment-submit-btn" onclick="comment_check()"><span class="flexible-font-size">등록</span></button></div>
                     </form>-->
                     <!-- Comment form-->
                     <form class="comment-form">
@@ -82,13 +83,24 @@
                     </form>
                     <hr/>
                     <!-- Comment with nested comments-->
-                    <div class="comment-box">  <!--th:each="comment: ${comments}" th:object="${comment}">-->
-                        <div class="commenter display-flex">
-                            <div class="display-flex"><img src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /><!--th:src="*{commenter.img}"--><div class="name"><!--th:text="*{commenter.name}">-->Commenter Name</div></div>
-                            <div class="date"><!--th:text="*{date}"-->2024-05-19 15:42</div>
+                    <div class="comments-box">  <!--th:each="comment: ${comments}" th:object="${comment}">-->
+                        <div class="comment-box">
+                            <div class="commenter display-flex">
+                                <div class="display-flex"><img style="height: 23px; border-radius: 50%;" src="/img/userDefaultImg.png"/><div class="name"><!--th:text="*{commenter.name}">-->작성자 이름</div></div>
+                                <div class="date"><!--th:text="*{date}"-->2024-05-19 15:42</div>
+                            </div>
+                            <div class="comment-main-area">
+                                <div class="comment-content"><!--th:text="*{content}">-->이거 정말 맛있어요!</div>
+                            </div>
                         </div>
-                        <div class="comment-main-area">
-                            <div class="comment-content"><!--th:text="*{content}"-->If you're going to lead a space frontier, it has to be government; it'll never be private enterprise. Because the space frontier is dangerous, and it's expensive, and it has unquantified risks.</div>
+                        <div class="comment-box">
+                            <div class="commenter display-flex">
+                                <div class="display-flex"><img style="height: 23px; border-radius: 50%;" src="/img/userDefaultImg.png"/><!--th:src="*{commenter.img}"--><div class="name"><!--th:text="*{commenter.name}">-->Commenter Name</div></div>
+                                <div class="date"><!--th:text="*{date}">-->2024-05-19 15:42</div>
+                            </div>
+                            <div class="comment-main-area">
+                                <div class="comment-content "><!--th:text="*{content}">-->If you're going to lead a space frontier, it has to be government; it'll never be private enterprise. Because the space frontier is dangerous, and it's expensive, and it has unquantified risks.</div>
+                            </div>
                         </div>
                     </div>
                 </div>

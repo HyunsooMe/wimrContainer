@@ -1,8 +1,13 @@
 package kr.ac.dankook.ace.whatsinmyref.controller;
 
 import kr.ac.dankook.ace.whatsinmyref.dto.UserDTO;
+import kr.ac.dankook.ace.whatsinmyref.entity.Recipe;
 import kr.ac.dankook.ace.whatsinmyref.service.UserService;
 import lombok.RequiredArgsConstructor;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -79,7 +84,23 @@ public class WhatsInMyRefController {
     }
     
     @GetMapping("/myPage")
-    public String myPage() {
+    public String myPage(Model model) {
+        //test
+        List<Recipe> myRecipes=new ArrayList<Recipe>();
+        Recipe recipe1=new Recipe();
+        Recipe recipe2=new Recipe();
+        Recipe recipe3=new Recipe();
+        Recipe recipe4=new Recipe();
+        recipe2.setRecipeno(1);
+        recipe3.setRecipeno(2);
+        recipe3.setRecipeno(3);
+        myRecipes.add(recipe1);
+        myRecipes.add(recipe2);
+        myRecipes.add(recipe3);
+        myRecipes.add(recipe4);
+
+        model.addAttribute("myRecipeList", myRecipes);
+        //test end
         return "myPage";
     }
 

@@ -155,12 +155,13 @@
   font-size: 10px;
   display: flex;
   justify-content: right;
+  text-decoration-line: none;
 }
 
 
 
 /*---------------------------------------------------
-footer
+footer9
 -----------------------------------------------------*/
   
 
@@ -193,12 +194,35 @@ menu bar
 #sidebar{
   visibility: hidden;
   height:100%;
-  width: 300px;
+  width: 270px;
   background-color: rgba(37, 37, 37, 0.952);
   position:fixed;
   top:36px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.904), 0 6px 6px rgba(0, 0, 0, 0.23);
   z-index: 3;
+}
+
+#sidebar .user-info{
+  margin: 0;
+  margin-top: 15px;
+  margin-left: 10px;
+  margin-right: 45px;
+  margin-bottom: 10px;
+  justify-content: center;
+  
+  --pico-form-element-spacing-vertical: 0.5rem;
+}
+
+#sidebar .user-info .a-Register{
+  font-size: 15px;
+  margin: 0;
+  margin-top: 28px;
+  margin-left: 7px;
+}
+
+#sidebar .user-info .a-Register a{
+  color:white;
+  text-decoration-line:none ;
 }
 
 #sidebar ul li{
@@ -209,4 +233,5 @@ menu bar
 
 #sidebar ul li a{
   color:white;
+  text-decoration:none ;
 }
