@@ -32,7 +32,7 @@ public class User {
 
         user.setMemberNo(userDTO.getMemberNo());
         user.setMemberId(userDTO.getMemberId());
-        user.setMemberPw(userDTO.getMemberId());
+        user.setMemberPw(userDTO.getMemberPw());
         user.setMemberNick(userDTO.getMemberNick());
         user.setMemberEmail(userDTO.getMemberEmail());
 

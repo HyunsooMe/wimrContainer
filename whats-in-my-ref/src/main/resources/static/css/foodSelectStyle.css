@@ -3,7 +3,7 @@ body {
 }
 
 h2 {
-  padding-bottom: 20px;
+  /* padding-bottom: 20px; */
 }
 .selectTitle {
   margin: 0;
@@ -45,7 +45,9 @@ li {
 }
 
 .food_list {
-  /* border: 1px solid blue; */
+  /* border: 2px solid green; */
+  /* border-radius: 15px; */
+  padding-top: 20px;
 }
 
 .autocomplete {
@@ -82,6 +84,7 @@ input[type="text"] {
   height: 35px;
   border-radius: 20px;
   border: 2px solid green;
+  padding-left: 10px;
 }
 
 .selectedFood {

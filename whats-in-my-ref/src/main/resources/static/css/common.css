@@ -16,144 +16,129 @@ a:hover {
 }
 
 .emptyBox {
-    visibility: hidden;
-    height: 100px;
-    width: 1px;
+  visibility: hidden;
+  height: 100px;
+  width: 1px;
 }
 
-.Header-font-size{
+.flexible-font-size {
   font-size: 20px;
 }
 
-.flexible-font-size{
-  font-size:23px;
-}
-  
-  
-  
 /*------------------------------------------------------------
 반응형 변경 사항들
 --------------------------------------------------------------*/
-@media (max-width:1536px){
-    /*header.html*/
-    #header{
-      height: 50px;
-      font-size: 20px;
-    }
-    #header .logo img{
-      width: 50px;
-    }
-    .navbar{
-      margin-top:4px;
-    }
-    .Header-font-size{
-      font-size: 15px;
-    }
-    .flexible-font-size{
-      font-size:17px;
-    }
-      
-     /*index.html*/
-    .input-width{
-      max-width: 1000px !important;
-    }
-    .box{
-      width:250px;
-      margin:0 60px 30px;
-    }
-    /*recipe.html*/
-    .recipe_container{
-      max-width: 1000px;
-    }
+@media (max-width: 1536px) {
+  /*header.html*/
+  #header {
+    height: 50px;
+    font-size: 20px;
+  }
+  #header .logo img {
+    width: 50px;
+  }
+  .navbar {
+    margin-top: 4px;
+  }
+  .flexible-font-size {
+    font-size: 15px;
+  }
+  /*index.html*/
+  .input-width {
+    max-width: 1000px !important;
+  }
+  .box {
+    width: 250px;
+    margin: 0 60px 30px;
+  }
+  /*recipe.html*/
+  .recipe_container {
+    max-width: 1000px;
+  }
 }
-  
-  @media (max-width:1150px){
-    /*header.html*/
-    #header{
-      height: 36px;
-      font-size: 14px;
-    }
-    #header .logo img{
-      width: 35px;
-    }
-    .navbar{
-      margin-top:0px;
-    }
-    .Header-font-size{
-      font-size: 11px;
-    }
-    .flexible-font-size{
-      font-size:14px;
-    }
-      
-     /*index.html*/
-    .input-width{
-      max-width: 700px !important;
-    }
-    .box{
-      width:200px;
-      margin:0 38px 30px;
-    }
-    .emptyBox{
-      height:70px;
-    }
-  
-    /*recipe.html*/
-    .recipe_container{
-      max-width: 700px;
-    }
+
+@media (max-width: 1150px) {
+  /*header.html*/
+  #header {
+    height: 36px;
+    font-size: 14px;
+  }
+  #header .logo img {
+    width: 35px;
+  }
+  .navbar {
+    margin-top: 0px;
+  }
+  .flexible-font-size {
+    font-size: 11px;
+  }
+  /*index.html*/
+  .site-cover {
+  }
+  .input-width {
+    max-width: 700px !important;
+  }
+  .box {
+    width: 200px;
+    margin: 0 38px 30px;
+  }
+  .emptyBox {
+    height: 70px;
+  }
+
+  /*recipe.html*/
+  .recipe_container {
+    max-width: 700px;
+  }
 }
-  
-  /*모바일*/
-  @media (max-width:853px){
-    /*header.html*/
-    .navbar{
-      content-visibility:hidden;
-    }
 
-    #mobile-nav-toggle{
-      display:block;
-      content-visibility: visible;
-    }
+/*모바일*/
+@media (max-width: 853px) {
+  /*header.html*/
+  .navbar {
+    content-visibility: hidden;
+  }
 
-    #sidebar{
-      visibility: visible;
-    }
-  
-    /*index.html*/
-    .input-width{
-      max-width: 400px !important;
-    }
-  
-    .search-form-wrap form div{
-      flex-direction: column;
-      
-    }
-    .search-form-wrap form div input{
-      --pico-spacing: 1rem ;
-    }
-    
-    .Contents .box_div{
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-    }
-    .box{
-      width: 360px;
-    }
+  #mobile-nav-toggle {
+    display: block;
+    content-visibility: visible;
+  }
 
-  
-  
-    /*recipe.html*/
-    .emptyBox{
-      height:40px;
-    }
-  
-    .recipe_container{
-      width: calc(96vw);
-      box-shadow: none;
-    }
+  #sidebar {
+    visibility: visible;
+  }
+
+  /*index.html*/
+  .input-width {
+    max-width: 400px !important;
+  }
+
+  .search-form-wrap form div {
+    flex-direction: column;
+  }
+  .search-form-wrap form div input {
+    --pico-spacing: 1rem;
+  }
+
+  .Contents .box_div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .box {
+    width: 360px;
+  }
+
+  /*recipe.html*/
+  .emptyBox {
+    height: 40px;
+  }
+
+  .recipe_container {
+    width: calc(96vw);
+    box-shadow: none;
+  }
 
     .recipe_container .comment .card .card-body form #comment-btn-wrap{
       width:55px;
@@ -196,10 +181,6 @@ a:hover {
   margin-left: -15px;
 }
 
-.display-flex{
+.display-flex {
   display: flex;
-}
-
-.underline{
-  text-decoration: underline;
 }

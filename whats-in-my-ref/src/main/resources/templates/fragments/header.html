@@ -2,6 +2,10 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
+
   </head>
   <body>
     <!-- ======= Header ======= -->
@@ -21,11 +25,11 @@
             <ul>
               <li class="pico text-center">
                 <div>
-                  <div class="before-login" th:if="${user==null}">
+                  <div class="before-login" th:if="${session.user==null}">
                     <button class="login-btn" onclick="redirectToPage('/Wimr/login')">로그인 하기</button>
                     <a id="toRegister" href="/Wimr/register"><span>회원가입</span></a>
                   </div>
-                  <div class="my-info after-login" th:if="${user!=null}">
+                  <div class="my-info after-login" th:if="${session.user!=null}">
                     <div class="text-center">
                       <p>안녕하세요,</p>
                       <p th:text="|${user.memberNick}님|" class="underline"></p>
@@ -49,7 +53,7 @@
       </div>
     </header>
     <!-- End Header -->
-  </body>
+  <body>
       </nav>
       <!-- .navbar -->
     </header>

@@ -4,50 +4,43 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.List;
+import java.util.Map;
 
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name ="recipe")
 public class Recipe {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int recipeno;
+//    대표 사진
+    private String picture;
 
     private String title;
     //재료
     private String ingredient;
-    //영양 정보
-    private String nutrition;
+    //열량
+    private String calories;
+    //탄수화물
+    private String carbohydrates;
+    //단백질
+    private String protein;
+    //지방
+    private String fat;
+    //나트륨
+    private String sodium;
 
-    private String category;
-
-    private Double calories;
-
-    private Double carbohydrates;
-
-    private Double protein;
-
-    private Double fat;
-
-    private Double sodium;
-
-    @Lob
-    private String ingredients;
 
     @ElementCollection
-    private List<Manual> manuals;
+    private Map<String, String> manual;
 
-    private String reductionTip;
+    @ElementCollection
+    private Map<String, String> manualImg;
 
-    @Embeddable
-    @Getter @Setter
-    public static class Manual{
-        private String step;
-        private String image;
-    }
+//    @Column(columnDefinition = "default 'asdf'")
+//    private String nickname;
 
-    private String nickname;
-
-    private int like;
+    private int likecount;
 }

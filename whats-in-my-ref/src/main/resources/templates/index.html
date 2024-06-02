@@ -1,29 +1,30 @@
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
 
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
     
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link
-    rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.conditional.min.css"
-  />
-    <link href="/css/index.css" rel="stylesheet"/>
-    <link href="/css/header.css" rel="stylesheet"/>
-    <link href="/css/common.css" rel="stylesheet"/>
-    <link href="/css/footer.css" rel="stylesheet"/>
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.conditional.min.css"
+    />
+    <link href="/css/index.css" rel="stylesheet" />
+    <link href="/css/header.css" rel="stylesheet" />
+    <link href="/css/common.css" rel="stylesheet" />
+    <link href="/css/footer.css" rel="stylesheet" />
     <!--menu icon
     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
         <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
       </svg>-->
-      
+
     <title>Session Home</title>
-</head>
-<body> 
-    <div class="site-cover overlay" style="background-image: url(/img/index_img.jpg); background-position: 50% -25px;">
+    </head>
+    <body> 
+    <div class="site-cover overlay" style="background-image: url(/img/index_img.jpg); background-position: 50% ;">
         <!--header와 밑에 div 모든 html에 추가되야함.-->
         <header th:replace="~{fragments/header::header}"/>
         <div class="sidebar-wrap"><div th:replace="~{fragments/sideNav::sidebar}"/></div>
@@ -44,38 +45,68 @@
                 </div>
             </div>
         </div>
+      </div>
     </div>
 
     <div class="Contents pico">
-        <h1>바로가기 box</h1>
-        <div class="box_div" >
-            <div class="big-box pico text-center" data-aos="fade-up">
-                <div id="Search_recipe" class="box" style="background-image: url(/img/ingredients.jpg); background-position: center; background-size: 200%;" onclick="redirectToPage(''/*검색 페이지*/)">
-                    <div class="back">재료 검색<br/></div>
-                </div>
-                <p>레시피 검색</p>
-            </div>
-
-            <div class="big-box text-center pico" data-aos="fade-up">
-                <div id="Make_recipe" class="box" style="background-image: url(/img/regist.jpg); background-position: center; background-size: 200%;" onclick="redirectToPage('#'/*레시피 등록 페이지*/)">
-                    <div class="back">레시피 등록<br/></div>
-                </div>
-                <p>레시피 등록</p>
-            </div>
-                <div class="big-box text-center pico" data-aos="fade-up">
-                    <div id="bBoard" class="box" style="background-image: url(/img/pen.jpg); background-position: center; background-size: 200%;" onclick="redirectToPage(''/*게시판*/)">
-                    <div class="back pico">게시판<br/></div> 
-                </div>
-                <p>게시판</p>
-            </div>
+      <h1>바로가기 box</h1>
+      <div class="box_div">
+        <div class="big-box pico text-center" data-aos="fade-up">
+          <div
+            id="Search_recipe"
+            class="box"
+            style="
+              background-image: url(/img/ingredients.jpg);
+              background-position: center;
+              background-size: 200%;
+            "
+            onclick="redirectToPage(''/*검색 페이지*/)"
+          >
+            <div class="back">재료 검색<br /></div>
+          </div>
+          <p>레시피 검색</p>
         </div>
+
+        <div class="big-box text-center pico" data-aos="fade-up">
+          <div
+            id="Make_recipe"
+            class="box"
+            style="
+              background-image: url(/img/regist.jpg);
+              background-position: center;
+              background-size: 200%;
+            "
+            onclick="redirectToPage('#'/*레시피 등록 페이지*/)"
+          >
+            <div class="back">레시피 등록<br /></div>
+          </div>
+          <p>레시피 등록</p>
+        </div>
+        <div class="big-box text-center pico" data-aos="fade-up">
+          <div
+            id="bBoard"
+            class="box"
+            style="
+              background-image: url(/img/pen.jpg);
+              background-position: center;
+              background-size: 200%;
+            "
+            onclick="redirectToPage(''/*게시판*/)"
+          >
+            <div class="back pico">게시판<br /></div>
+          </div>
+          <p>게시판</p>
+        </div>
+      </div>
     </div>
-    <footer th:replace="~{fragments/footer::footer}"/>
+    <footer th:replace="~{fragments/footer::footer}" />
 
     <script src="/js/index.js"></script>
+    <!-- <script type="module" src="js/script.js"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        AOS.init();
+      AOS.init();
     </script>
-</body>
+  </body>
+</html>

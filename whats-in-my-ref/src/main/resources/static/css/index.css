@@ -2,6 +2,8 @@
 
 .overlay::before{
     position: absolute;
+    height: calc(100vh);
+    min-height: 600px;
     content: "";
     left: 0;
     bottom: 0;
