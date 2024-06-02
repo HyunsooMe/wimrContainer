@@ -30,7 +30,7 @@
             <div class="infoTitle item">Email:<article id="email"><span th:text="${session.user != null ? session.user.memberEmail : ''}"></span></article></div>
             
             <div class="my-board-part item" >작성한 게시글:      
-                <table class="board-grid">
+                <table class="board-grid" id="myBoardGrid">
                     <colgroup>
                         <col style="width: 7%;">
                         <col style="width: 60%;">
@@ -38,14 +38,16 @@
                         <col style="width: 10%;">
                         <col style="width: 10%;">
                     </colgroup>
-                    <th>ID</th> <th>제목</th> <th>작성자</th> <th>조회</th> <th>날짜</th>
-                    <tr th:onclick="|redirectToPage('/Wimr)|" th:each="my_board, iterStat : ${myBoardList}" th:class="'board-shape shape' + ${iterStat.index >= 3 ? ' hidden' : ''}" >  <!--타임리프 값:"myBoardList" (Board 객체의 배열 or List)-->
-                        <td class="board-id" th:text="${my_board.id}"></td>
-                        <td class="board-title"><a th:href="@{/Wimr}" th:text="${my_board.title}"></a></td>
-                        <td class="board-nickname" th:text="${my_board.nickname}"></td>
-                        <td class="board-viewCount" th:text="${my_board.viewcount}"></td>
-                        <td class="board-createdDate" th:text="${my_board.createdDate}"></td>
-                    </tr>
+                    <thead ><th>ID</th> <th>제목</th> <th>작성자</th> <th>조회</th> <th>날짜</th></thead>
+                    <tbody>
+                        <tr th:each="my_board, iterStat : ${myBoardList}" th:class="'board-shape shape' + ${iterStat.index >= 3 ? ' hidden' : ''}" >  <!--타임리프 값:"myBoardList" (Board 객체의 배열 or List)-->
+                            <td class="board-id" th:text="${my_board.id}" style="text-align: center;"></td>
+                            <td class="board-title"><a th:href="@{/Wimr/'게시물 주소'}" th:text="${my_board.title}"></a></td>
+                            <td class="board-nickname" th:text="${my_board.nickname}" style="text-align: center;"></td>
+                            <td class="board-viewCount" th:text="${my_board.viewcount}" style="text-align: center;"></td>
+                            <td class="board-createdDate" th:text="${my_board.createdDate}" style="text-align: center;"></td>
+                        </tr>
+                    </tbody>
                 </table>
                 <div class="display-flex justify-content-center"><button id="toggleButton0" data-target="myBoardGrid">더 보기</button></div>
             </div>
@@ -53,8 +55,8 @@
             <div class="my-recipe-part item" >등록한 레시피:      
                 <div class="recipe-grid" id="myRecipeGrid">  
                     <div th:onclick="|redirectToPage('/Wimr/recipe?recipeNo='+${my_recipe.recipeno})|" th:each="my_recipe, iterStat : ${myRecipeList}" th:class="'recipe-shape shape' + ${iterStat.index >= 3 ? ' hidden' : ''}" >  <!--타임리프 값:"myRecipeList" (Recipe 객체의 배열 or List)-->
-                        <div class="food-img"><img th:src="${my_recipe.picture != '' ? my_recipe.picture : '/img/ingredients.jpg'}"/></div>
-                        <div class="food-name display-flex justify-content-center align-items-center" th:text="${my_recipe.title}"></div>
+                        <div class="food-img"><img th:src="${my_recipe.picture != null ? my_recipe.picture : '/img/ingredients.jpg'}"/></div>
+                        <div class="food-name display-flex justify-content-center align-items-center" th:text="${my_recipe.title != null ? my_recipe.title : 'Unknown'}"></div>
                     </div>
                 </div>
                 <div class="display-flex justify-content-center"><button id="toggleButton1" data-target="myRecipeGrid">더 보기</button></div>
@@ -64,7 +66,7 @@
                 <div class="recipe-grid"  id="favoriteRecipeGrid">
                     <div  th:onclick="|redirectToPage('/Wimr/recipe?recipeNo='+${favorite_recipe.recipeno})|" th:each="favorite_recipe, iterStat : ${favoriteRecipeList}" th:class="'recipe-shape shape' + ${iterStat.index >= 3 ? ' hidden' : ''}">  <!--타임리프 값:"favoriteRecipeList" (Recipe 객체의 배열 or List)-->
                         <div class="food-img"><img th:src="${favorite_recipe.picture != null ? favorite_recipe.picture : '/img/ingredients.jpg'}"/></div>
-                        <div class="food-name display-flex justify-content-center align-items-center" th:text="${favorite_recipe.title}"></div>
+                        <div class="food-name display-flex justify-content-center align-items-center" th:text="${favorite_recipe.title != null ? favorite_recipe.title : 'Unknown'}"></div>
                     </div>
                 </div>
                 <div class="display-flex justify-content-center"><button id="toggleButton2" data-target="favoriteRecipeGrid">더 보기</button></div>
