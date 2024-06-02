@@ -1,10 +1,3 @@
-/*@font-face {
-  font-family: "YEONGJUSeonbiTTF";
-  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/2403@1.0/YEONGJUSeonbiTTF.woff2")
-    format("woff2");
-  font-weight: normal;
-  font-style: normal;
-}*/
 
 body {
   font-family: "Do Hyeon", sans-serif;
@@ -147,18 +140,24 @@ a:hover {
     box-shadow: none;
   }
 
-  .recipe_container .comment .card .card-body form #comment-submit-btn {
-    width: 70px;
-  }
+    .recipe_container .comment .card .card-body form #comment-btn-wrap{
+      width:55px;
+    }
+  
+    .myPage-container {
+      width: calc(90vw);
+    }
 
-  .myPage-container .item {
-    width: calc(90vw);
-  }
 
-  /*login.html*/
-  .centerBox {
-    max-width: 400px !important;
-  }
+    /*login.html*/
+    .centerBox{
+      max-width: 400px !important;
+    }
+    
+    .recipe-grid{
+      width:100%;
+    }
+
 }
 
 .text-center {
