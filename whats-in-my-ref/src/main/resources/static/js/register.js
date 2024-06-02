@@ -50,7 +50,6 @@ function form_check() {
         return false;
     }
 
-    console.log(full_email);
     document.getElementById("email").value=full_email;
     form.submit();
     return true;

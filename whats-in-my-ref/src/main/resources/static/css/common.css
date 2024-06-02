@@ -159,7 +159,7 @@ a:hover {
       width:55px;
     }
   
-    .myPage-container .item{
+    .myPage-container {
       width: calc(90vw);
     }
 
@@ -169,12 +169,8 @@ a:hover {
       max-width: 400px !important;
     }
     
-    .my-recipe-grid{
+    .recipe-grid{
       width:100%;
-    }
-
-    .my-recipe-grid .my-recipe{
-      width: calc(29.5vw);
     }
 
 }

@@ -1,6 +1,7 @@
 package kr.ac.dankook.ace.whatsinmyref.controller;
 
 import kr.ac.dankook.ace.whatsinmyref.dto.UserDTO;
+import kr.ac.dankook.ace.whatsinmyref.dto.boardDTO;
 import kr.ac.dankook.ace.whatsinmyref.entity.Recipe;
 import kr.ac.dankook.ace.whatsinmyref.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 
 
@@ -36,8 +39,8 @@ public class WhatsInMyRefController {
         return "index";
     }
 
-    @GetMapping("/recipe") //localhost:8080/Wimr/recipe?foodID=""
-    public String recipe(@RequestParam String foodID,Model model) {
+    @GetMapping("/recipe") //localhost:8080/Wimr/recipe?recipeNo=
+    public String recipe(@RequestParam int recipeNo,Model model) {
         String foodImg = "/img/ingredients.jpg";  //이미지가 없는 경우 default
         /*
         model.addAttribute("foodName",foodName)         //요리 이름
@@ -86,6 +89,19 @@ public class WhatsInMyRefController {
     @GetMapping("/myPage")
     public String myPage(Model model) {
         //test
+        List<boardDTO> boards=new ArrayList<boardDTO>();
+        boardDTO board1=new boardDTO();
+        boardDTO board2=new boardDTO();
+        boardDTO board3=new boardDTO();
+        boardDTO board4=new boardDTO();
+        board1.setTitle("캐나다 수도는 뭐야?");
+        board2.setTitle("캐나다 수도는 뭐야?2");
+        board3.setTitle("캐나다 수도는 뭐야?3");
+        board4.setTitle("캐나다 수도는 뭐야?4");
+        boards.add(board1);
+        boards.add(board2);
+        boards.add(board3);
+        boards.add(board4);
         List<Recipe> myRecipes=new ArrayList<Recipe>();
         Recipe recipe1=new Recipe();
         Recipe recipe2=new Recipe();
@@ -99,7 +115,9 @@ public class WhatsInMyRefController {
         myRecipes.add(recipe3);
         myRecipes.add(recipe4);
 
+        model.addAttribute("myBoardList", boards);
         model.addAttribute("myRecipeList", myRecipes);
+        model.addAttribute("favoriteRecipeList", myRecipes);
         //test end
         return "myPage";
     }
@@ -112,6 +130,18 @@ public class WhatsInMyRefController {
     @GetMapping("/findACC")
     public String findAccount() {
         return "findAcc";
+    }
+    
+    @PostMapping("/editProfile")
+    public String editProfile(@ModelAttribute String memberEmail) {
+        
+        
+        return "redirect:/Wimr/myPage";
+    }
+    
+    @GetMapping("/editMyPage")
+    public String editMyPage() {
+        return "editMyPage";
     }
     
 }
