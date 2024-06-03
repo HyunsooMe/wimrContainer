@@ -96,6 +96,41 @@ const addToAddedList = (item) => {
   }
 };
 
+const addedListDiv = document.querySelector(".addedlist");
+
+// Local Storage에서 재료 목록을 가져옴
+const ingredients = localStorage.getItem("ingredients");
+if (ingredients) {
+  selectedItems = ingredients.split(" ");
+  updateAddedList();
+  checkSelectedCheckboxes();
+}
+
+// 추가 버튼 클릭 시
+document.getElementById("searchBtn").addEventListener("click", function () {
+  const searchInput = document.getElementById("search");
+  const ingredient = searchInput.value.trim();
+  if (ingredient && !selectedItems.includes(ingredient)) {
+    selectedItems.push(ingredient);
+    updateAddedList();
+    searchInput.value = "";
+  }
+});
+
+// addedListDiv 업데이트
+function updateAddedList() {
+  addedListDiv.innerHTML = "";
+  selectedItems.forEach((item) => {
+    const itemDiv = document.createElement("div");
+    itemDiv.textContent = item;
+    itemDiv.className = "selectedFoods";
+    itemDiv.addEventListener("click", function () {
+      removeFromAddedList(item);
+    });
+    addedListDiv.appendChild(itemDiv);
+  });
+}
+
 // 리스트에서 선택한 재료 삭제
 const removeFromAddedList = (item) => {
   selectedItems = selectedItems.filter((selectedItem) => selectedItem !== item);
@@ -122,6 +157,15 @@ const renderAddedList = () => {
   });
 };
 
+// 체크박스 상태 초기화
+function checkSelectedCheckboxes() {
+  checkboxes.forEach(function (checkbox) {
+    if (selectedItems.includes(checkbox.value)) {
+      checkbox.checked = true;
+    }
+  });
+}
+
 checkboxes.forEach(function (checkbox) {
   checkbox.addEventListener("change", function () {
     if (this.checked) {
@@ -141,7 +185,7 @@ const findRecipeBtn = document.getElementById("findRecipeBtn");
 
 // 선택된 체크박스 리스트에 추가, 해제되면 삭제
 findRecipeBtn.addEventListener("click", getFoodRecipe);
-const recipeResults = document.getElementById("recipe-results");
+// const recipeResults = document.getElementById("recipe-results");
 
 function getFoodRecipe() {
   if (selectedItems.length === 0) {
