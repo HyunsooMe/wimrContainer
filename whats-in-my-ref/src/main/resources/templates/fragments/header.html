@@ -16,31 +16,30 @@
         </h1>
       </div>
       <!-- ========= Nav =========-->
-      <nav id="navbar" class="navbar Header-font-size">
+      <nav id="navbar" class="navbar">
         <ul>
           <li><a href="/Wimr/foodSelect">레시피 검색</a></li>
           <li><a href="/boardList">게시판</a></li>
           <li class="dropdown">
             <a><span>My</span></a>
-            <ul>
-              <li class="pico text-center">
-                <div>
+            <ul class="pico">
+                <div class="dropdown-box">
                   <div class="before-login" th:if="${session.user==null}">
-                    <button class="login-btn" onclick="redirectToPage('/Wimr/login')">로그인 하기</button>
+                    <div class="display-flex justify-content-center"><button class="login-btn" onclick="redirectToPage('/Wimr/login')">로그인 하기</button></div>
                     <a id="toRegister" href="/Wimr/register"><span>회원가입</span></a>
                   </div>
                   <div class="my-info after-login" th:if="${session.user!=null}">
                     <div class="text-center">
-                      <p>안녕하세요,</p>
-                      <p th:text="|${session.user.memberNick}님|"></p>
-                      <form th:action="@{/Wimr/logout}" method="post">
-                        <button class="logout-btn" type="submit">로그아웃</button>
-                      </form>
+                      안녕하세요, <br/>
+                      <span th:text="${session.user.memberNick}" class="underline"></span><span>님!</span>
+                      <div class="a-myPage display-flex justify-content-center">
+                        <div><a href="/Wimr/myPage">마이페이지</a></div>
+                      </div>
+                      <div style="width: 0%;"><a class="logout-btn" onclick="form_submit('logout')">로그아웃</a></div>
+                      <form id="logout" style="display: none;" th:action="@{/Wimr/logout}" method="post"></form>
                     </div>
                   </div>
                 </div>
-              </li>
-              <li th:if="${user!=null}"><a href="/Wimr/myPage">마이페이지</a></li>
             </ul>
           </li>
         </ul>
