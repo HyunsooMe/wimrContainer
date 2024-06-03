@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- <link rel="stylesheet" th:href="@{/css/.css}" /> -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.conditional.min.css"
+    />
+    <link rel="stylesheet" th:href="@{/css/header.css}" />
+    <link rel="stylesheet" th:href="@{/css/common.css}" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header th:replace="~{fragments/header::header}"></header>
+    <div class="board-wrap">
+      <h2>특별한 레시피</h2>
+      <div class="sidebar-wrap">
+        <div th:replace="~{fragments/sideNav::sidebar}" />
+      </div>
+      <div class="table_wrap">
+        <div class="sort-buttons">
+          <a href="/userRecipeList">최신순</a>
+          <a>조회순</a>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>번호</th>
+              <th>글제목</th>
+              <th>작성자</th>
+              <th>작성일</th>
+              <th>조회수</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="userboard : ${userboardList}">
+              <!-- 유저 레시피 게시판 번호 -->
+              <td th:text="${userboardStat.index+1}"></td>
+              <!-- 레시피 제목 (눌렀을 때 상세페이지)-->
+              <td>
+                <a th:text="${userboard.title}" th:href="@{/}"> </a>
+              </td>
+              <!-- 사용자 닉네임(게시판과 마찬가지로 세션에서 불러와야함) -->
+              <td th:text="${userboard.nickname}"></td>
+              <!-- 게시글 작성 날짜 -->
+              <td
+                th:text="${#temporals.format(userboard.created_date, 'yyyy-MM-dd')}"
+              ></td>
+              <!-- 조회수 -->
+              <td th:text="${userboard.viewcount}"></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="pages">
+          <th:block th:each="page : ${#numbers.sequence(startPage, endPage)}">
+            <!-- 페이지가 현재 페이지와 다를 때 -->
+            <a
+              th:if="${page != nowPage}"
+              th:href="@{/userRecipeList(page = ${page-1})}"
+              th:text="${page}"
+            ></a>
+            <!-- 페이지가 현재 페이지와 같을 때 -->
+            <strong
+              th:if="${page == nowPage}"
+              th:text="${page}"
+              style="color: red"
+            ></strong>
+          </th:block>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

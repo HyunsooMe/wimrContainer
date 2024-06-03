@@ -106,4 +106,9 @@ public class BoardController {
     public String myRecipe(){
         return "/myrecipeRegister";
     }
+
+    @GetMapping("/userRecipe")
+    public String UserRCP(){
+        return "/userRecipeList";
+    }
 }

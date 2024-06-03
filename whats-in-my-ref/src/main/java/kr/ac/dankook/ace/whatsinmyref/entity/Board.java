@@ -1,8 +1,5 @@
 package kr.ac.dankook.ace.whatsinmyref.entity;
-
-
 import java.time.LocalDateTime;
-import java.util.Date;
 
 import jakarta.persistence.*;
 // import kr.ac.dankook.ace.whatsinmyref.dto.boardDTO;
