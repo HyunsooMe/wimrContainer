@@ -28,11 +28,12 @@
     <div class="sidebar-wrap"><div th:replace="~{fragments/sideNav::sidebar}"/></div>
     
     <div class="emptyBox"></div>
-    <div class="recipe_container" th:object="${recipe}">
-        <form id="scrap-form" th:action="@{'/Wimr/scrap?recipeNo='+*{recipeno}}" method="post"></form>      <!--즐겨찾기 추가 Wimr/scrap?recipeNo=???-->
-        <form id="unscrap-form" th:action="@{'/Wimr/unscrap?recipeNo='+*{recipeno}}" method="post"></form>  <!--즐겨찾기 제거 Wimr/unscrap?recipeNo=???-->
-        <form id="recommend-form" th:action="@{'/Wimr/like?recipeNo='+*{recipeno}}" method="post"></form>  <!--즐겨찾기 제거 Wimr/unscrap?recipeNo=???-->
-        <form id="unrecommend-form" th:action="@{'/Wimr/unlike?recipeNo='+*{recipeno}}" method="post"></form>  <!--즐겨찾기 제거 Wimr/unscrap?recipeNo=???-->
+
+<!--    <div class="recipe_container" th:object="${recipe}">-->
+<!--        <form id="scrap-form" th:action="@{'/Wimr/scrap?recipeNo='+*{recipeno}}" method="post"></form>      &lt;!&ndash;즐겨찾기 추가 Wimr/scrap?recipeNo=???&ndash;&gt;-->
+<!--        <form id="unscrap-form" th:action="@{'/Wimr/unscrap?recipeNo='+*{recipeno}}" method="post"></form>  &lt;!&ndash;즐겨찾기 제거 Wimr/unscrap?recipeNo=???&ndash;&gt;-->
+<!--        <form id="recommend-form" th:action="@{'/Wimr/like?recipeNo='+*{recipeno}}" method="post"></form>  &lt;!&ndash;즐겨찾기 제거 Wimr/unscrap?recipeNo=???&ndash;&gt;-->
+<!--        <form id="unrecommend-form" th:action="@{'/Wimr/unlike?recipeNo='+*{recipeno}}" method="post"></form>  &lt;!&ndash;즐겨찾기 제거 Wimr/unscrap?recipeNo=???&ndash;&gt;-->
         <div id="foodImg" class="item">
             <div id="blur">
                 <div id="recommend-and-scrap" class="display-flex">
@@ -49,7 +50,7 @@
                                 <path d="M6.956 1.745C7.021.81 7.908.087 8.864.325l.261.066c.463.116.874.456 1.012.965.22.816.533 2.511.062 4.51a10 10 0 0 1 .443-.051c.713-.065 1.669-.072 2.516.21.518.173.994.681 1.2 1.273.184.532.16 1.162-.234 1.733q.086.18.138.363c.077.27.113.567.113.856s-.036.586-.113.856c-.039.135-.09.273-.16.404.169.387.107.819-.003 1.148a3.2 3.2 0 0 1-.488.901c.054.152.076.312.076.465 0 .305-.089.625-.253.912C13.1 15.522 12.437 16 11.5 16H8c-.605 0-1.07-.081-1.466-.218a4.8 4.8 0 0 1-.97-.484l-.048-.03c-.504-.307-.999-.609-2.068-.722C2.682 14.464 2 13.846 2 13V9c0-.85.685-1.432 1.357-1.615.849-.232 1.574-.787 2.132-1.41.56-.627.914-1.28 1.039-1.639.199-.575.356-1.539.428-2.59z"/>
                             </svg>
                         </div>
-                        <div class="recommend-count" th:text="*{likecount}"></div>
+<!--                        <div class="recommend-count" th:text="*{likecount}"></div>-->
                     </div>
                     <div id="scrap">
                         <!--즐겨찾기 안 한 상태-->
@@ -68,7 +69,7 @@
                     </div>
                 </div>
                 <div id="foodName" class="display-flex justify-content-center align-items-center text-center">
-                    <span th:text="*{title}"></span>
+<!--                    <span th:text="*{title}"></span>-->
                 </div>
             </div>
         </div>
@@ -76,14 +77,21 @@
         <ul class="pico">
             <li id="ingredients"><h2><strong>Ingredients</strong></h2>
                 <ul>
-                    <li  th:text="${ingredient}" th:each="ingredient : ${ingredients}"></li>        <!--ingredients는 따로 컨트롤러에서 List로 만들어서 보내야됨-->
+                    <li th:text="${ingredient}" th:each="ingredient : ${ingredients}"></li>        <!--ingredients는 따로 컨트롤러에서 List로 만들어서 보내야됨-->
                 </ul>
             </li>
             <hr/>
             <li id="recipeDetail"><h2><strong>Recipe</strong></h2>
-                <ol>
-                    <li th:text="${num}" th:each="num : *{manual}"></li>
-                </ol>
+                <!--!!!!!!!!!!!!!!!!!!!!!!해줘!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
+
+                <!--                <ol>-->
+<!--                <th:block th:each="index : ${#numbers.sequence(0,#lists.size(manualList)-1)}">-->
+<!--                    <li th:if="${index % 2 == 0}" th:text="*{num}" th:each="num : ${manualList}">-->
+<!--                    <span th:unless="${index % 2 == 0}">-->
+<!--                        <img th:src="*{pic}" th:each="pic : ${manualImgList}"/></span>-->
+<!--                    </li>-->
+<!--                </th:block>-->
+<!--                </ol>-->
             </li>
             <hr />
             <li id="others"><h2><strong>Others</strong></h2>
