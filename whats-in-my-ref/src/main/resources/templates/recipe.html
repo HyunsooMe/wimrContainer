@@ -28,15 +28,17 @@
     <div class="sidebar-wrap"><div th:replace="~{fragments/sideNav::sidebar}"/></div>
     
     <div class="emptyBox"></div>
-
-<!--    <div class="recipe_container" th:object="${recipe}">-->
-<!--        <form id="scrap-form" th:action="@{'/Wimr/scrap?recipeNo='+*{recipeno}}" method="post"></form>      &lt;!&ndash;즐겨찾기 추가 Wimr/scrap?recipeNo=???&ndash;&gt;-->
-<!--        <form id="unscrap-form" th:action="@{'/Wimr/unscrap?recipeNo='+*{recipeno}}" method="post"></form>  &lt;!&ndash;즐겨찾기 제거 Wimr/unscrap?recipeNo=???&ndash;&gt;-->
-<!--        <form id="recommend-form" th:action="@{'/Wimr/like?recipeNo='+*{recipeno}}" method="post"></form>  &lt;!&ndash;즐겨찾기 제거 Wimr/unscrap?recipeNo=???&ndash;&gt;-->
-<!--        <form id="unrecommend-form" th:action="@{'/Wimr/unlike?recipeNo='+*{recipeno}}" method="post"></form>  &lt;!&ndash;즐겨찾기 제거 Wimr/unscrap?recipeNo=???&ndash;&gt;-->
+    
+    <div class="recipe_container">
+        <form id="scrap-form" th:action="@{'/Wimr/scrap?recipeNo='+${recipeNo}}" method="post"></form>          <!--즐겨찾기 추가 Wimr/scrap?recipeNo=???-->
+        <form id="unscrap-form" th:action="@{'/Wimr/unscrap?recipeNo='+${recipeNo}}" method="post"></form>      <!--즐겨찾기 제거 Wimr/unscrap?recipeNo=???-->
+        <form id="recommend-form" th:action="@{'/Wimr/like?recipeNo='+${recipeNo}}" method="post"></form>       <!--즐겨찾기 제거 Wimr/like?recipeNo=???-->
+        <form id="unrecommend-form" th:action="@{'/Wimr/unlike?recipeNo='+${recipeNo}}" method="post"></form>   <!--즐겨찾기 제거 Wimr/unlike?recipeNo=???-->
+        <div class="display-flex" style="justify-content:left; padding-left: 10px;padding-right: 10px;"><span th:text="|등록자 : ${nickname != null ? nickname : 'Unknown'}|"></span></div>
         <div id="foodImg" class="item">
             <div id="blur">
                 <div id="recommend-and-scrap" class="display-flex">
+                    <div class="display-flex btns-wrap">
                     <div id="recommend" class="display-flex">
                         <!--좋아요 안한 상태-->
                         <div type="button" onclick="form_submit('recommend-form')" th:if="${session.user == null} or (${session.user != null and !#lists.contains(likeList, recipe.recipeno)})">
@@ -50,48 +52,44 @@
                                 <path d="M6.956 1.745C7.021.81 7.908.087 8.864.325l.261.066c.463.116.874.456 1.012.965.22.816.533 2.511.062 4.51a10 10 0 0 1 .443-.051c.713-.065 1.669-.072 2.516.21.518.173.994.681 1.2 1.273.184.532.16 1.162-.234 1.733q.086.18.138.363c.077.27.113.567.113.856s-.036.586-.113.856c-.039.135-.09.273-.16.404.169.387.107.819-.003 1.148a3.2 3.2 0 0 1-.488.901c.054.152.076.312.076.465 0 .305-.089.625-.253.912C13.1 15.522 12.437 16 11.5 16H8c-.605 0-1.07-.081-1.466-.218a4.8 4.8 0 0 1-.97-.484l-.048-.03c-.504-.307-.999-.609-2.068-.722C2.682 14.464 2 13.846 2 13V9c0-.85.685-1.432 1.357-1.615.849-.232 1.574-.787 2.132-1.41.56-.627.914-1.28 1.039-1.639.199-.575.356-1.539.428-2.59z"/>
                             </svg>
                         </div>
-<!--                        <div class="recommend-count" th:text="*{likecount}"></div>-->
+                        <div class="recommend-count" th:text="${likecount}"></div>
                     </div>
                     <div id="scrap">
                         <!--즐겨찾기 안 한 상태-->
                         <div type="button" onclick="form_submit('scrap-form')" th:if="${session.user == null} or (${session.user != null and !#lists.contains(scrapList, recipe.recipeno)})"> <!--scrapList => session.user.scrapList-->
-                            <svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" fill="RGBA(255,255,255,0.5)" class="bi bi-bookmark-fill" viewBox="0 0 16 16">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="RGBA(100,100,100,1)" class="bi bi-bookmark-fill" viewBox="0 0 16 16">
                                 <path d="M2 2v13.5a.5.5 0 0 0 .74.439L8 13.069l5.26 2.87A.5.5 0 0 0 14 15.5V2a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2"/>
                             </svg>
                         </div>
                         <!--즐겨찾기 한 상태-->
                         <div type="button" onclick="form_submit('unscrap-form')" th:if="${session.user != null and #lists.contains(scrapList,recipe.recipeno)}"> <!--scrapList => session.user.scrapList-->
-                            <svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" fill="rgb(255, 213, 0)" class="bi bi-bookmark-fill bi-bookmark-star" viewBox="0 0 16 16">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="rgb(255, 213, 0)" class="bi bi-bookmark-fill bi-bookmark-star" viewBox="0 0 16 16">
                                 <path fill-rule="evenodd" d="M2 15.5V2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.74.439L8 13.069l-5.26 2.87A.5.5 0 0 1 2 15.5M8.16 4.1a.178.178 0 0 0-.32 0l-.634 1.285a.18.18 0 0 1-.134.098l-1.42.206a.178.178 0 0 0-.098.303L6.58 6.993c.042.041.061.1.051.158L6.39 8.565a.178.178 0 0 0 .258.187l1.27-.668a.18.18 0 0 1 .165 0l1.27.668a.178.178 0 0 0 .257-.187L9.368 7.15a.18.18 0 0 1 .05-.158l1.028-1.001a.178.178 0 0 0-.098-.303l-1.42-.206a.18.18 0 0 1-.134-.098z"/>
                                 <path d="M7.84 4.1a.178.178 0 0 1 .32 0l.634 1.285a.18.18 0 0 0 .134.098l1.42.206c.145.021.204.2.098.303L9.42 6.993a.18.18 0 0 0-.051.158l.242 1.414a.178.178 0 0 1-.258.187l-1.27-.668a.18.18 0 0 0-.165 0l-1.27.668a.178.178 0 0 1-.257-.187l.242-1.414a.18.18 0 0 0-.05-.158l-1.03-1.001a.178.178 0 0 1 .098-.303l1.42-.206a.18.18 0 0 0 .134-.098z" fill="black"/>    
                             </svg>
                         </div>
                     </div>
+                    </div>
                 </div>
-                <div id="foodName" class="display-flex justify-content-center align-items-center text-center">
-<!--                    <span th:text="*{title}"></span>-->
-                </div>
+                <div class="display-flex justify-content-center align-items-center" style="width: 100%; height: 90%;"><div id="foodName" class="display-flex justify-content-center align-items-center text-center">
+                    <span th:text="${title}"></span>
+                </div></div>
             </div>
         </div>
         <hr/>
         <ul class="pico">
             <li id="ingredients"><h2><strong>Ingredients</strong></h2>
                 <ul>
-                    <li th:text="${ingredient}" th:each="ingredient : ${ingredients}"></li>        <!--ingredients는 따로 컨트롤러에서 List로 만들어서 보내야됨-->
+                    <li th:text="${ingredient}" th:each="ingredient : ${ingredients}"></li> 
                 </ul>
             </li>
             <hr/>
             <li id="recipeDetail"><h2><strong>Recipe</strong></h2>
-                <!--!!!!!!!!!!!!!!!!!!!!!!해줘!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
-
-                <!--                <ol>-->
-<!--                <th:block th:each="index : ${#numbers.sequence(0,#lists.size(manualList)-1)}">-->
-<!--                    <li th:if="${index % 2 == 0}" th:text="*{num}" th:each="num : ${manualList}">-->
-<!--                    <span th:unless="${index % 2 == 0}">-->
-<!--                        <img th:src="*{pic}" th:each="pic : ${manualImgList}"/></span>-->
-<!--                    </li>-->
-<!--                </th:block>-->
-<!--                </ol>-->
+                <ol>
+                <div th:each="manual, index : ${manualList}">
+                    <li th:text="${manual}"></li>
+                    <div class="manualImg-wrap"><img th:src="${manualImgList[index.index]}"/></div>
+                </ol>
             </li>
             <hr />
             <li id="others"><h2><strong>Others</strong></h2>

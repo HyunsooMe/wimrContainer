@@ -8,6 +8,7 @@ import kr.ac.dankook.ace.whatsinmyref.service.UserService;
 import lombok.RequiredArgsConstructor;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -53,14 +54,15 @@ public class WhatsInMyRefController {
         //others : 영양 성분
         List<String> manualList = new ArrayList<>();
         List<String> manualImgList = new ArrayList<>();
-
+        model.addAttribute("recipeNo",id);
         recipeService.getRecipeById(id).ifPresent(recipe -> {
-            List<String> others = List.of("열량 :" + recipe.getCalories() + ", 탄수화물 : " + recipe.getCarbohydrates() + ", 단백질 :" + recipe.getProtein()
-                    + ", 지방 : " + recipe.getFat() + ", 나트륨 : " + recipe.getSodium());
-            String ingredient = recipe.getIngredient();
+            List<String> others = List.of("열량 : " + recipe.getCalories(), "탄수화물 : " + recipe.getCarbohydrates() ,"단백질 :" + recipe.getProtein(), "지방 : " + recipe.getFat(), "나트륨 : " + recipe.getSodium());
+            List<String> ingredient = Arrays.asList(recipe.getIngredient().split(","));
             String picture = recipe.getPicture();
+            String title = recipe.getTitle();
             String k1 = "MANUAL0";
             String k2 = "MANUAL_IMG0";
+            int likecount=recipe.getLikecount();
             int i = 1;
             while(true) {
                 String kee = k1.concat(Integer.toString(i));
@@ -73,6 +75,10 @@ public class WhatsInMyRefController {
                     break;
                 }
             }
+            List<String> realManuaList=new ArrayList<>();
+            for(String s:manualList){
+                realManuaList.add(s.substring(2));
+            }
             while(true){
                 String kee = k2.concat(Integer.toString(i));
                 if(!recipe.getManualImg().get(kee).isEmpty()){
@@ -84,10 +90,13 @@ public class WhatsInMyRefController {
                 }
             }
             System.out.println(manualImgList.size());
+            model.addAttribute("recipeNo",id);
+            model.addAttribute("title",title);
+            model.addAttribute("likecount",likecount);
             model.addAttribute("picture", picture);
             model.addAttribute("ingredients", ingredient);
             model.addAttribute("others", others);
-            model.addAttribute("manualList", manualList);
+            model.addAttribute("manualList", realManuaList);
             model.addAttribute("manualImgList", manualImgList);
         });
         return "recipe";
@@ -193,25 +202,25 @@ public class WhatsInMyRefController {
     @PostMapping("/scrap")
     public String doScrap(@RequestParam int recipeNo) {
         //로그인된 유저의 scrap 배열에 recipeNo 추가
-        return "redirect:/Wimr/recipe?recipeNo="+recipeNo;
+        return "redirect:/Wimr/recipe/"+recipeNo;
     }
     
     @PostMapping("/unscrap")
     public String doUnscrap(@RequestParam int recipeNo) {
         //로그인된 유저의 scrap 배열에 recipeNo 제거
-        return "redirect:/Wimr/recipe?recipeNo="+recipeNo;
+        return "redirect:/Wimr/recipe/"+recipeNo;
     }
     
     @PostMapping("/like")
     public String doLike(@RequestParam int recipeNo) {
         //로그인된 유저의 recommend 배열에 recipeNo 추가
-        return "redirect:/Wimr/recipe?recipeNo="+recipeNo;
+        return "redirect:/Wimr/recipe/"+recipeNo;
     }
 
     @PostMapping("/unlike")
     public String doUnlike(@RequestParam int recipeNo) {
         //로그인된 유저의 recommend 배열에 recipeNo 제거
-        return "redirect:/Wimr/recipe?recipeNo="+recipeNo;
+        return "redirect:/Wimr/recipe/"+recipeNo;
     }
 
     @PostMapping("/findAcc/find-id")
