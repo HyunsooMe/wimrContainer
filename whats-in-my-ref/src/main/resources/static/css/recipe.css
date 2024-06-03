@@ -34,16 +34,20 @@
   #blur {
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.363);
+    background-color: rgba(0, 0, 0, 0.151);
     position: relative;
     z-index: 0;
     border-radius: 20px;
   }
 }
 
+
 #recommend-and-scrap #recommend{
-  margin-top: 4px;
-  margin-right: 7px;
+  padding-top: 4px;
+  padding-left: 7px;
+  padding-right: 7px;
+  border-radius:0 0 10px 10px ;
+  background-color: rgba(255, 255, 255, 0.712);
 }
 
 #recommend-and-scrap #recommend .recommend-count{
@@ -56,19 +60,39 @@
 }
 
 .recipe_container #foodImg #blur #recommend-and-scrap svg{
+  
   cursor: pointer;
 }
 
+#scrap div{
+  position: relative;
+  bottom:2px;
+}
+
 #foodName {
+  width: 70%;
+  border-radius: 30%;
   height: 100%;
   position: relative;
   z-index: 1;
-  font: 600 90px "YEONGJUSeonbiTTF";
+  font-size: 90px;
   color: aliceblue;
+  word-break: keep-all;
+
 }
 
 .recipe_container ul li {
   text-align: left;
+}
+
+#recipeDetail .manualImg-wrap{
+  width:40%;
+  object-fit: contain;
+  object-position: center;
+}
+
+#recipeDetail .manualImg-wrap img{
+  width: 100%;
 }
 
 section.comment{
