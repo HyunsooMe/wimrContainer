@@ -39,21 +39,32 @@ public class WhatsInMyRefController {
         return "index";
     }
 
-//    @GetMapping("/recipe") //localhost:8080/Wimr/recipe?recipeNo=
-//    public String recipe(@RequestParam int recipeNo,Model model) {
-//        String foodImg = "/img/ingredients.jpg";  //이미지가 없는 경우 default
-//        /*
-//        model.addAttribute("foodName",foodName)         //요리 이름
-//        model.addAttribute("ingredients", ingredients); //재료 리스트
-//        model.addAttribute("recipe", recipe);           //레시피 리스트
-//        */
-//        model.addAttribute("foodImg", foodImg);         //음식 사진 path
-//        return "recipe";
-//    }
-    @GetMapping("/recipe")
-    public String recipe(){
+    @GetMapping("/recipe") //localhost:8080/Wimr/recipe?recipeNo=
+    public String recipe(@RequestParam int recipeNo,Model model) {
+        //test code
+        String foodImg = "/img/ingredients.jpg";  //이미지가 없는 경우 default
+        /*
+        model.addAttribute("foodName",foodName)         //요리 이름
+        model.addAttribute("ingredients", ingredients); //재료 리스트
+        model.addAttribute("recipe", recipe);           //레시피 리스트
+        */
+        model.addAttribute("foodImg", foodImg);         //음식 사진 path
+        Recipe recipe=new Recipe();
+        recipe.setRecipeno(recipeNo);
+        model.addAttribute("recipe", recipe );
+        List<Integer> scrapList=new ArrayList<>();
+        scrapList.add(recipeNo);
+        model.addAttribute("scrapList", scrapList);
+        List<Integer> likeList=new ArrayList<>();
+        likeList.add(recipeNo);
+        model.addAttribute("likeList", likeList);
+        //test code end
         return "recipe";
     }
+//    @GetMapping("/recipe")
+//    public String recipe(){
+//        return "recipe";
+//    }
 
     @GetMapping("/register")
     public String save(Model model) {
@@ -151,7 +162,30 @@ public class WhatsInMyRefController {
     public String editMyPage() {
         return "editMyPage";
     }
+
+    @PostMapping("/scrap")
+    public String doScrap(@RequestParam int recipeNo) {
+        //로그인된 유저의 scrap 배열에 recipeNo 추가
+        return "redirect:/Wimr/recipe?recipeNo="+recipeNo;
+    }
     
+    @PostMapping("/unscrap")
+    public String doUnscrap(@RequestParam int recipeNo) {
+        //로그인된 유저의 scrap 배열에 recipeNo 제거
+        return "redirect:/Wimr/recipe?recipeNo="+recipeNo;
+    }
+    
+    @PostMapping("/like")
+    public String doLike(@RequestParam int recipeNo) {
+        //로그인된 유저의 recommend 배열에 recipeNo 추가
+        return "redirect:/Wimr/recipe?recipeNo="+recipeNo;
+    }
+
+    @PostMapping("/unlike")
+    public String doUnlike(@RequestParam int recipeNo) {
+        //로그인된 유저의 recommend 배열에 recipeNo 제거
+        return "redirect:/Wimr/recipe?recipeNo="+recipeNo;
+    }
 }
 
 

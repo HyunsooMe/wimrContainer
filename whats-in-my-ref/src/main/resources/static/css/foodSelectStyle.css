@@ -38,7 +38,7 @@ h2 {
   border-radius: 25px;
 }
 
-li {
+.food_list li {
   list-style: none;
   padding: 10px 0;
   font-size: medium;
@@ -62,7 +62,7 @@ li {
   gap: 1rem;
 }
 
-ul {
+.food_list ul {
   padding: 0;
 }
 
