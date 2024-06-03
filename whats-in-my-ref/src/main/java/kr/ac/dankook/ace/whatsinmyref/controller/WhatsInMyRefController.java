@@ -35,7 +35,6 @@ public class WhatsInMyRefController {
         return "index";
     }
 
-<<<<<<< HEAD
 //    @GetMapping("/recipe") //localhost:8080/Wimr/recipe?recipeNo=
 //    public String recipe(@RequestParam int recipeNo,Model model) {
 //        String foodImg = "/img/ingredients.jpg";  //이미지가 없는 경우 default
@@ -52,26 +51,33 @@ public class WhatsInMyRefController {
         //Ingredients 재료
         //Recipe : 사진, 정보
         //others : 영양 성분
+        List<String> manualList = new ArrayList<>();
+
         recipeService.getRecipeById(id).ifPresent(recipe -> {
             List<String> others = List.of("열량 :" + recipe.getCalories() + ", 탄수화물 : " + recipe.getCarbohydrates() + ", 단백질 :" + recipe.getProtein()
                     + ", 지방 : " + recipe.getFat() + ", 나트륨 : " + recipe.getSodium());
             String ingredient = recipe.getIngredient();
-
-            List<String> manualList = recipe.getManual().entrySet().stream().map(
-                    entry ->entry.getValue()+"\n")
-                    .collect(Collectors.toList());
-
-
+            String img = recipe.getPicture();
+            String k1 = "MANUAL0";
+            int i = 1;
+            while(true) {
+                String kee = k1.concat(Integer.toString(i));
+                if (!recipe.getManual().get(kee).isEmpty()) {
+                    manualList.add(recipe.getManual().get(kee));
+                    System.out.println(recipe.getManual().get(kee));
+                    i++;
+                } else {
+                    break;
+                }
+            }
+            System.out.println(manualList.size());
+            model.addAttribute("img", img);
             model.addAttribute("ingredients", ingredient);
             model.addAttribute("others", others);
             model.addAttribute("manualList", manualList);
         });
         return "recipe";
     }
-//    @GetMapping("/recipe")
-//    public String recipe(){
-//        return "recipe";
-//    }
 
     @GetMapping("/register")
     public String save(Model model) {
