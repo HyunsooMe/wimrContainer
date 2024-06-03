@@ -41,12 +41,21 @@
   }
 }
 
-.recipe_container #foodImg #blur #recommend{
+#recommend-and-scrap #recommend{
+  margin-top: 4px;
+  margin-right: 7px;
+}
+
+#recommend-and-scrap #recommend .recommend-count{
+  font-size: 28px;
+}
+
+.recipe_container #foodImg #blur #recommend-and-scrap{
   justify-content: right;
   margin-right: 20px;
 }
 
-.recipe_container #foodImg #blur #recommend svg{
+.recipe_container #foodImg #blur #recommend-and-scrap svg{
   cursor: pointer;
 }
 
