@@ -41,6 +41,7 @@ public class WhatsInMyRefController {
 
     @GetMapping("/recipe") //localhost:8080/Wimr/recipe?recipeNo=
     public String recipe(@RequestParam int recipeNo,Model model) {
+        //test code
         String foodImg = "/img/ingredients.jpg";  //이미지가 없는 경우 default
         /*
         model.addAttribute("foodName",foodName)         //요리 이름
@@ -54,6 +55,10 @@ public class WhatsInMyRefController {
         List<Integer> scrapList=new ArrayList<>();
         scrapList.add(recipeNo);
         model.addAttribute("scrapList", scrapList);
+        List<Integer> likeList=new ArrayList<>();
+        likeList.add(recipeNo);
+        model.addAttribute("likeList", likeList);
+        //test code end
         return "recipe";
     }
 //    @GetMapping("/recipe")
@@ -170,6 +175,17 @@ public class WhatsInMyRefController {
         return "redirect:/Wimr/recipe?recipeNo="+recipeNo;
     }
     
+    @PostMapping("/like")
+    public String doLike(@RequestParam int recipeNo) {
+        //로그인된 유저의 recommend 배열에 recipeNo 추가
+        return "redirect:/Wimr/recipe?recipeNo="+recipeNo;
+    }
+
+    @PostMapping("/unlike")
+    public String doUnlike(@RequestParam int recipeNo) {
+        //로그인된 유저의 recommend 배열에 recipeNo 제거
+        return "redirect:/Wimr/recipe?recipeNo="+recipeNo;
+    }
 }
 
 
