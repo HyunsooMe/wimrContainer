@@ -9,7 +9,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 
 @Service
@@ -17,6 +19,14 @@ public class RecipeService {
 
     @Autowired
     private RecipeRepository recipeRepository;
+
+    public List<Recipe> getAllRecipes(){
+        return recipeRepository.findAll();
+    }
+
+    public Optional<Recipe> getRecipeById(int id){
+        return recipeRepository.findById(id);
+    }
 
     public void getRecipes() {
         String url = "http://openapi.foodsafetykorea.go.kr/api/f415b345bda946528b8e/COOKRCP01/json/0/30";

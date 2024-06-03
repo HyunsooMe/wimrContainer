@@ -19,7 +19,7 @@
     <title>Recipe</title>
 
     <style>
-        #foodImg{ background-image: url("[[${picture}]]") ;}
+        /*#foodImg{ background-image: url("[[${picture}]]") ;}*/
     </style>
 </head>
 
@@ -28,7 +28,7 @@
     <div class="sidebar-wrap"><div th:replace="~{fragments/sideNav::sidebar}"/></div>
     
     <div class="emptyBox"></div>
-    <div class="recipe_container" th:object="${recipe}">
+<!--    <div class="recipe_container" th:object="${recipe}">-->
         <div id="foodImg" class="item">
             <div id="blur">
                 <!--<div id="recommend" class="display-flex">
@@ -38,7 +38,7 @@
                     
                 </div>-->
                 <div id="foodName" class="display-flex justify-content-center align-items-center text-center">
-                    <span th:text="*{title}"></span>
+<!--                    <span th:text="*{title}"></span>-->
                 </div>
             </div>
         </div>
@@ -52,7 +52,7 @@
             <hr/>
             <li id="recipeDetail"><h2><strong>Recipe</strong></h2>
                 <ol>
-                    <li th:text="${num}" th:each="num : *{manuals}"></li>
+                    <li th:text="${manualList}" th:each="num : *{manualList}"></li>
                 </ol>
             </li>
             <hr />

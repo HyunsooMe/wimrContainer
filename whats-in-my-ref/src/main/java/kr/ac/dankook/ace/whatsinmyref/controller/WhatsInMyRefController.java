@@ -3,27 +3,20 @@ package kr.ac.dankook.ace.whatsinmyref.controller;
 import kr.ac.dankook.ace.whatsinmyref.dto.UserDTO;
 import kr.ac.dankook.ace.whatsinmyref.dto.boardDTO;
 import kr.ac.dankook.ace.whatsinmyref.entity.Recipe;
+import kr.ac.dankook.ace.whatsinmyref.service.RecipeService;
 import kr.ac.dankook.ace.whatsinmyref.service.UserService;
 import lombok.RequiredArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import jakarta.servlet.http.HttpSession;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-
-
-
-
 
 
 @Controller
@@ -33,6 +26,9 @@ public class WhatsInMyRefController {
 
     @Autowired
     private final UserService userService;
+
+    @Autowired
+    private RecipeService recipeService;
 
     @GetMapping("")
     public String mainPage() {
@@ -50,8 +46,25 @@ public class WhatsInMyRefController {
 //        model.addAttribute("foodImg", foodImg);         //음식 사진 path
 //        return "recipe";
 //    }
-    @GetMapping("/recipe")
-    public String recipe(){
+    @GetMapping("/recipe/{id}")
+    public String listRecipe(@PathVariable int id, Model model) {
+        //Ingredients 재료
+        //Recipe : 사진, 정보
+        //others : 영양 성분
+        recipeService.getRecipeById(id).ifPresent(recipe -> {
+            List<String> others = List.of("열량 :" + recipe.getCalories() + ", 탄수화물 : " + recipe.getCarbohydrates() + ", 단백질 :" + recipe.getProtein()
+                    + ", 지방 : " + recipe.getFat() + ", 나트륨 : " + recipe.getSodium());
+            String ingredient = recipe.getIngredient();
+
+            List<String> manualList = recipe.getManual().entrySet().stream().map(
+                    entry ->entry.getValue()+"\n")
+                    .collect(Collectors.toList());
+
+
+            model.addAttribute("ingredients", ingredient);
+            model.addAttribute("others", others);
+            model.addAttribute("manualList", manualList);
+        });
         return "recipe";
     }
 
