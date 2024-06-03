@@ -100,7 +100,19 @@ public class WhatsInMyRefController {
     }
 
     @PostMapping("/register")
-    public String save(@ModelAttribute UserDTO userDTO){
+    public String save(@ModelAttribute UserDTO userDTO, Model model){
+        if(userService.existsByMemberId(userDTO.getMemberId())){
+            model.addAttribute("errorMessage", "이미 사용중인 아이디입니다.");
+            return "register";
+        }
+        else if(userService.existsByMemberNick(userDTO.getMemberNick())){
+            model.addAttribute("errorMessage", "이미 사용중인 닉네임입니다.");
+            return "register";
+        }
+        else if(userService.existsByMemberEmail(userDTO.getMemberEmail())){
+            model.addAttribute("errorMessage", "이미 사용중인 이메일입니다.");
+            return "register";
+        }
         userService.save(userDTO);
         return "redirect:/Wimr";
     }
