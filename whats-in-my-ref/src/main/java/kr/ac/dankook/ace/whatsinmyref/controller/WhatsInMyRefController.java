@@ -3,6 +3,7 @@ package kr.ac.dankook.ace.whatsinmyref.controller;
 import kr.ac.dankook.ace.whatsinmyref.dto.UserDTO;
 import kr.ac.dankook.ace.whatsinmyref.dto.boardDTO;
 import kr.ac.dankook.ace.whatsinmyref.entity.Recipe;
+import kr.ac.dankook.ace.whatsinmyref.entity.User;
 import kr.ac.dankook.ace.whatsinmyref.service.UserService;
 import lombok.RequiredArgsConstructor;
 
@@ -48,7 +49,7 @@ public class WhatsInMyRefController {
         model.addAttribute("ingredients", ingredients); //재료 리스트
         model.addAttribute("recipe", recipe);           //레시피 리스트
         */
-        model.addAttribute("foodImg", foodImg);         //음식 사진 path
+        model.addAttribute("picture", foodImg);         //음식 사진 path
         Recipe recipe=new Recipe();
         recipe.setRecipeno(recipeNo);
         model.addAttribute("recipe", recipe );
@@ -147,7 +148,7 @@ public class WhatsInMyRefController {
     }
 
     @GetMapping("/findAcc")
-    public String findAccount() {
+    public String findAccount(@ModelAttribute UserDTO userDTO) {
         return "findAcc";
     }
     
@@ -186,6 +187,37 @@ public class WhatsInMyRefController {
         //로그인된 유저의 recommend 배열에 recipeNo 제거
         return "redirect:/Wimr/recipe?recipeNo="+recipeNo;
     }
+
+    @PostMapping("/findAcc/find-id")
+    public String findId(@ModelAttribute UserDTO userDTO) {
+        //TODO: process POST request
+        //userDTO의 이메일에 맞는 아이디 찾아서 검열 후 masked_member_id에 보내야됨 
+        return "redirect:/Wimr/findAcc";
+    }
+    
+
+    @PostMapping("/findAcc/find-pwd")
+    public String findPwd(@ModelAttribute UserDTO userDTO) {
+        
+        //userDTO의 Id랑 Email에 일치하는게 DB에 있는지 검증
+        return "redirect:/Wimr/findAcc/rewritepw";
+    }
+    
+
+    @GetMapping("/findAcc/rewritepw")
+    public String reWritePw() {
+        //여기서 이전에 이메일 쳐서 들어왔는지 확인해서 아니면 페이지 들어가지 못하게 해야됨
+        return "reWritePw";
+    }
+
+    @PostMapping("/doRewritepw")
+    public String doReWritePw(@ModelAttribute String memberPw) {
+        //TODO: process POST request
+        //비밀번호 변경
+        return "redirect:/Wimr/login";
+    }
+    
+    
 }
 
 
