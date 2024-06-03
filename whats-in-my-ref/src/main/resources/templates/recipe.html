@@ -19,7 +19,7 @@
     <title>Recipe</title>
 
     <style>
-        /*#foodImg{ background-image: url("[[${picture}]]") ;}*/
+        #foodImg{ background-image: url("[[${picture}]]") ;}
     </style>
 </head>
 
@@ -80,9 +80,16 @@
             </li>
             <hr/>
             <li id="recipeDetail"><h2><strong>Recipe</strong></h2>
-                <ol>
-                    <li th:text="*{num}" th:each="num : ${manualList}"></li>
-                </ol>
+                <!--!!!!!!!!!!!!!!!!!!!!!!해줘!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
+
+                <!--                <ol>-->
+<!--                <th:block th:each="index : ${#numbers.sequence(0,#lists.size(manualList)-1)}">-->
+<!--                    <li th:if="${index % 2 == 0}" th:text="*{num}" th:each="num : ${manualList}">-->
+<!--                    <span th:unless="${index % 2 == 0}">-->
+<!--                        <img th:src="*{pic}" th:each="pic : ${manualImgList}"/></span>-->
+<!--                    </li>-->
+<!--                </th:block>-->
+<!--                </ol>-->
             </li>
             <hr />
             <li id="others"><h2><strong>Others</strong></h2>
