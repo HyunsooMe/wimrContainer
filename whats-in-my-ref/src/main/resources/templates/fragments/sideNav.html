@@ -2,15 +2,36 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
+    
   </head>
   <body>
-    <sidebar id="sidebar">
+    <sidebar id="sidebar" class="pico">
         <div>
-            <ul>
-                <li><a href="/Wimr/search">레시피 검색</a></li>
-                <li><a href="/boardList">게시판</a></li>
-                <li>c</li>
-            </ul>
+          <div class="user-info display-flex">
+            <div class="before-login display-flex" th:if="${session.user==null}">
+              <button class="login-btn" onclick="redirectToPage('/Wimr/login')">로그인 하기</button>
+              <div class="a-Register"><a href="/Wimr/register"><span>회원가입</span></a></div>
+            </div>
+            <div class="after-login" th:if="${session.user!=null}">
+              <div><p>안녕하세요,&nbsp;<span th:text="${session.user.memberNick}" class="underline"></span>님</p></div>
+
+            </div>
+          </div>
+          <ul>
+            
+            
+            <li><a href="/Wimr/foodSelect">레시피 검색</a></li>
+            <li><a href="/boardList">게시판</a></li>
+            <li>c</li>
+          </ul>
+          <div class="logout" th:if="${session.user!=null}">
+            <form id="logout" th:action="@{/Wimr/logout}" method="post"></form>
+              <a onclick="form_submit('logout')">로그아웃</a>
+          </div>
         </div>
     </sidebar>
   </body>

@@ -1,10 +1,8 @@
 /*로그인*/
-body.noscroll {
-    height: 500px;
-}
 .centerBox {
-  display: flex;
   height: 100vh;
+  min-height: 600px;
+  width: 100%;
   max-width: 600px;
   margin: 0 auto;
 }
@@ -12,6 +10,7 @@ body.noscroll {
 .form-wrap{
   width: 100%;
 }
+
 
 #loginBox button {
   background-color: rgb(241, 56, 56);
