@@ -20,9 +20,7 @@
   </head>
   <body class="noscroll">
     <header th:replace="~{fragments/header::header}"></header>
-    <div class="sidebar-wrap">
-      <div th:replace="~{fragments/sideNav::sidebar}" />
-    </div>
+    <div class="sidebar-wrap"><div th:replace="~{fragments/sideNav::sidebar}" /></div>
 
     
     <div
@@ -61,7 +59,7 @@
             >
             <a href="/Wimr/register">회원가입</a>
           </div>
-          <button type="button" onclick="loginChk()">로그인</button>
+          <button id="login-btn" type="button" onclick="loginChk()">로그인</button>
         </form>
       </div>
     </div>

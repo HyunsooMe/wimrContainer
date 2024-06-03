@@ -35,6 +35,7 @@ public class WhatsInMyRefController {
         return "index";
     }
 
+<<<<<<< HEAD
 //    @GetMapping("/recipe") //localhost:8080/Wimr/recipe?recipeNo=
 //    public String recipe(@RequestParam int recipeNo,Model model) {
 //        String foodImg = "/img/ingredients.jpg";  //이미지가 없는 경우 default
@@ -67,6 +68,10 @@ public class WhatsInMyRefController {
         });
         return "recipe";
     }
+//    @GetMapping("/recipe")
+//    public String recipe(){
+//        return "recipe";
+//    }
 
     @GetMapping("/register")
     public String save(Model model) {
@@ -164,7 +169,30 @@ public class WhatsInMyRefController {
     public String editMyPage() {
         return "editMyPage";
     }
+
+    @PostMapping("/scrap")
+    public String doScrap(@RequestParam int recipeNo) {
+        //로그인된 유저의 scrap 배열에 recipeNo 추가
+        return "redirect:/Wimr/recipe?recipeNo="+recipeNo;
+    }
     
+    @PostMapping("/unscrap")
+    public String doUnscrap(@RequestParam int recipeNo) {
+        //로그인된 유저의 scrap 배열에 recipeNo 제거
+        return "redirect:/Wimr/recipe?recipeNo="+recipeNo;
+    }
+    
+    @PostMapping("/like")
+    public String doLike(@RequestParam int recipeNo) {
+        //로그인된 유저의 recommend 배열에 recipeNo 추가
+        return "redirect:/Wimr/recipe?recipeNo="+recipeNo;
+    }
+
+    @PostMapping("/unlike")
+    public String doUnlike(@RequestParam int recipeNo) {
+        //로그인된 유저의 recommend 배열에 recipeNo 제거
+        return "redirect:/Wimr/recipe?recipeNo="+recipeNo;
+    }
 }
 
 

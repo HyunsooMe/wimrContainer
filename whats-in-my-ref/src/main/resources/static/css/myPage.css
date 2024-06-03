@@ -131,11 +131,6 @@
   height: 17%;
 }
 
-.hidden{
-  display: none;
-}
-
-
 .Error{
   visibility: hidden; 
   display: none;

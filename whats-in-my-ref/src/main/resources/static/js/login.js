@@ -41,7 +41,7 @@ if (error_code != "") {
 }
 
 /*---------------------------------------------------------------
-아이디/비밀번호 창 띄우기
+아이디/비밀번호 찾기 창 띄우기
 ----------------------------------------------------------------*/
 function openInNewWindow(event, url) {
   event.preventDefault();
@@ -56,3 +56,14 @@ function openInNewWindow(event, url) {
     "width=" + width + ", height=" + height + ", left=" + left + ", top=" + top
   );
 }
+
+/*---------------------------------------------------------------
+엔터 키로 로그인
+----------------------------------------------------------------*/
+function enterPushButton(event){
+  if(event.keyCode===13){
+    document.getElementById("login-btn").click();
+  }
+}
+
+document.getElementById("login-form").addEventListener("keypress",enterPushButton);

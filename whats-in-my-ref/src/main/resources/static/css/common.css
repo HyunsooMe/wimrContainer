@@ -1,11 +1,10 @@
-
 body {
   font-family: "Do Hyeon", sans-serif;
   margin: 0;
   padding: 0;
 }
 
-a {
+a {color: rgb(255, 213, 0);
   color: #4fa6d5;
   text-decoration: none;
 }
@@ -40,6 +39,16 @@ a:hover {
   .navbar {
     margin-top: 4px;
   }
+  .navbar .dropdown ul{
+    left:-95px;
+  }
+  .navbar .dropdown-box{
+    width: 180px;
+    font-size: 20px;
+  }
+  .navbar .my-info .a-myPage a{
+    font-size: 35px;
+  }
   .flexible-font-size {
     font-size: 15px;
   }
@@ -63,18 +72,24 @@ a:hover {
     height: 36px;
     font-size: 14px;
   }
-  #header .logo img {
-    width: 35px;
-  }
   .navbar {
-    margin-top: 0px;
+    margin-top: 2px;
+    font-size: 15px;
+  }
+  .navbar .dropdown ul{
+    left:-70px;
+  }
+  .navbar .dropdown-box{
+    width: 150px;
+    font-size: 20px;
+  }
+  .navbar .my-info .a-myPage a{
+    font-size: 30px;
   }
   .flexible-font-size {
     font-size: 11px;
   }
   /*index.html*/
-  .site-cover {
-  }
   .input-width {
     max-width: 700px !important;
   }
@@ -96,6 +111,7 @@ a:hover {
 @media (max-width: 853px) {
   /*header.html*/
   .navbar {
+    display: none;
     content-visibility: hidden;
   }
 
@@ -140,24 +156,23 @@ a:hover {
     box-shadow: none;
   }
 
-    .recipe_container .comment .card .card-body form #comment-btn-wrap{
-      width:55px;
-    }
+  .recipe_container .comment .card .card-body form #comment-btn-wrap{
+    width:55px;
+  }
+
+  .myPage-container {
+    width: calc(90vw);
+  }
+
+
+  /*login.html*/
+  .centerBox{
+    max-width: 400px !important;
+  }
   
-    .myPage-container {
-      width: calc(90vw);
-    }
-
-
-    /*login.html*/
-    .centerBox{
-      max-width: 400px !important;
-    }
-    
-    .recipe-grid{
-      width:100%;
-    }
-
+  .recipe-grid{
+    width:100%;
+  }
 }
 
 .text-center {
@@ -183,4 +198,12 @@ a:hover {
 
 .display-flex {
   display: flex;
+}
+
+.underline{
+  text-decoration: underline;
+}
+
+.hidden{
+  display: none;
 }
