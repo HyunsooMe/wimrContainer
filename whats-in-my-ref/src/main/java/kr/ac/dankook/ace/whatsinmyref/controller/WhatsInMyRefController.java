@@ -125,17 +125,22 @@ public class WhatsInMyRefController {
     }
     
     @PostMapping("/login")
-    public String loginUser(@ModelAttribute UserDTO userDTO, HttpSession session) {
+    public String loginUser(@ModelAttribute UserDTO userDTO, HttpSession session, Model model) {
         UserDTO loginResult = userService.login(userDTO);
         if(loginResult != null){
             session.setAttribute("user", loginResult);
             session.setMaxInactiveInterval(1800);
-            System.out.println("success");
             return "redirect:/Wimr"; //로그인 성공 확인용
-        } else {
-            System.out.println("failed");
-            return "login";
+        } else{
+            if(!userService.existsByMemberId(userDTO.getMemberId())){
+            model.addAttribute("errorMessage", "존재하지 않는 회원 아이디입니다.");
+            return "redirect:/Wimr/login";
+        } else{
+                model.addAttribute("errorMessage", "비밀번호가 일치하지 않습니다.");
+                return "redirect:/Wimr/login";
+            }
         }
+
     }
 
     @PostMapping("/logout")
