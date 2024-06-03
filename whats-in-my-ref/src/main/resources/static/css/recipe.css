@@ -84,14 +84,17 @@ div.card{
 }
 
 .comment .card .card-body form .comment-sub-wrap #comment-btn-wrap{
-  width:11%;
+  width:9%;
   align-items: center;
+  --pico-form-element-spacing-vertical: 0.4rem;
+  --pico-form-element-spacing-horizontal: 0.6rem;
+  
 }
 
 .comment .card .card-body form #comment-submit-btn{
   width:100%;
   font-size: small;
-  --pico-form-element-spacing-vertical: 0.4rem;
+  
 }
 
 .comment .card .card-body form #char-count{
@@ -124,4 +127,3 @@ div.card{
 .comment .card .card-body .comments-box .comment-main-area .comment-content{
   font-size:23px;
 }
-

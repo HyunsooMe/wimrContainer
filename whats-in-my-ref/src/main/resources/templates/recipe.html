@@ -29,14 +29,23 @@
     
     <div class="emptyBox"></div>
     <div class="recipe_container" th:object="${recipe}">
+        <form id="scrap-form" th:action="@{'/Wimr/scrap?recipeNo='+*{recipeno}}" method="post"></form>      <!--즐겨찾기 추가 Wimr/scrap?recipeNo=???-->
+        <form id="unscrap-form" th:action="@{'/Wimr/unscrap?recipeNo='+*{recipeno}}" method="post"></form>  <!--즐겨찾기 제거 Wimr/unscrap?recipeNo=???-->
         <div id="foodImg" class="item">
             <div id="blur">
-                <!--<div id="recommend" class="display-flex">
-                    <form><button type="button"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white" class="bi bi-bookmark-fill" viewBox="0 0 16 16">
-                        <path d="M2 2v13.5a.5.5 0 0 0 .74.439L8 13.069l5.26 2.87A.5.5 0 0 0 14 15.5V2a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2"/>
-                        </svg></form>
-                    
-                </div>-->
+                <div id="recommend" class="display-flex">
+                    <div type="button" onclick="form_submit('scrap-form')" th:if="${session.user == null} or (${session.user != null and !#lists.contains(scrapList, recipe.recipeno)})"> <!--scrapList => session.user.scrapList-->
+                        <svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" fill="RGBA(255,255,255,0.5)" class="bi bi-bookmark-fill" viewBox="0 0 16 16">
+                            <path d="M2 2v13.5a.5.5 0 0 0 .74.439L8 13.069l5.26 2.87A.5.5 0 0 0 14 15.5V2a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2"/>
+                        </svg>
+                    </div>
+                    <div type="button" onclick="form_submit('unscrap-form')" th:if="${session.user != null and #lists.contains(scrapList,recipe.recipeno)}"> <!--scrapList => session.user.scrapList-->
+                        <svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" fill="rgb(255, 213, 0)" class="bi bi-bookmark-fill bi-bookmark-star" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M2 15.5V2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.74.439L8 13.069l-5.26 2.87A.5.5 0 0 1 2 15.5M8.16 4.1a.178.178 0 0 0-.32 0l-.634 1.285a.18.18 0 0 1-.134.098l-1.42.206a.178.178 0 0 0-.098.303L6.58 6.993c.042.041.061.1.051.158L6.39 8.565a.178.178 0 0 0 .258.187l1.27-.668a.18.18 0 0 1 .165 0l1.27.668a.178.178 0 0 0 .257-.187L9.368 7.15a.18.18 0 0 1 .05-.158l1.028-1.001a.178.178 0 0 0-.098-.303l-1.42-.206a.18.18 0 0 1-.134-.098z"/>
+                            <path d="M7.84 4.1a.178.178 0 0 1 .32 0l.634 1.285a.18.18 0 0 0 .134.098l1.42.206c.145.021.204.2.098.303L9.42 6.993a.18.18 0 0 0-.051.158l.242 1.414a.178.178 0 0 1-.258.187l-1.27-.668a.18.18 0 0 0-.165 0l-1.27.668a.178.178 0 0 1-.257-.187l.242-1.414a.18.18 0 0 0-.05-.158l-1.03-1.001a.178.178 0 0 1 .098-.303l1.42-.206a.18.18 0 0 0 .134-.098z" fill="black"/>    
+                        </svg>
+                    </div>
+                </div>
                 <div id="foodName" class="display-flex justify-content-center align-items-center text-center">
                     <span th:text="*{title}"></span>
                 </div>
@@ -52,7 +61,7 @@
             <hr/>
             <li id="recipeDetail"><h2><strong>Recipe</strong></h2>
                 <ol>
-                    <li th:text="${num}" th:each="num : *{manuals}"></li>
+                    <li th:text="${num}" th:each="num : *{manual}"></li>
                 </ol>
             </li>
             <hr />
@@ -87,19 +96,10 @@
                         <div class="comment-box">
                             <div class="commenter display-flex">
                                 <div class="display-flex"><img style="height: 23px; border-radius: 50%;" src="/img/userDefaultImg.png"/><div class="name"><!--th:text="*{commenter.name}">-->작성자 이름</div></div>
-                                <div class="date"><!--th:text="*{date}"-->2024-05-19 15:42</div>
+                                <div class="date"><!--th:text="${comment.date}"-->2024-05-19 15:42</div>
                             </div>
                             <div class="comment-main-area">
-                                <div class="comment-content"><!--th:text="*{content}">-->이거 정말 맛있어요!</div>
-                            </div>
-                        </div>
-                        <div class="comment-box">
-                            <div class="commenter display-flex">
-                                <div class="display-flex"><img style="height: 23px; border-radius: 50%;" src="/img/userDefaultImg.png"/><!--th:src="*{commenter.img}"--><div class="name"><!--th:text="*{commenter.name}">-->Commenter Name</div></div>
-                                <div class="date"><!--th:text="*{date}">-->2024-05-19 15:42</div>
-                            </div>
-                            <div class="comment-main-area">
-                                <div class="comment-content "><!--th:text="*{content}">-->If you're going to lead a space frontier, it has to be government; it'll never be private enterprise. Because the space frontier is dangerous, and it's expensive, and it has unquantified risks.</div>
+                                <div class="comment-content"><!--th:text="${comment.content}">-->이거 정말 맛있어요!</div>
                             </div>
                         </div>
                     </div>

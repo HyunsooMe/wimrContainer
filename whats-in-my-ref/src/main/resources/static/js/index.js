@@ -67,3 +67,9 @@ document.addEventListener("DOMContentLoaded", (event) => {
     isMenuOpen = !isMenuOpen;
   });
 });
+
+//폼 제출 function
+function form_submit(formId){
+  form=document.getElementById(formId);
+  form.submit();
+}

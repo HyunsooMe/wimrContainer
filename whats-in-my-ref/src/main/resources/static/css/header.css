@@ -96,10 +96,14 @@
   color: #a2cce3;
 }
 
+.navbar .dropdown{
+  cursor:default;
+}
+
 .navbar .dropdown ul {
   display: block;
   position: absolute;
-  left: -130px;
+  left: -112px;
   top: calc(100% + 30px);
   margin: 0;
   padding: 10px 0;
@@ -139,14 +143,16 @@
   visibility: visible;
 }
 
+.navbar .dropdown-box{
+  width:200px;
+}
+
 .navbar .login-btn {
   position: relative;
   width: 145px;
   margin-top: 7px;
 }
 
-.navbar .after-login {
-}
 
 .navbar #toRegister {
   margin: 0;
@@ -159,8 +165,18 @@
   text-decoration-line: none;
 }
 
+
+.navbar .my-info .a-myPage a{
+  font-size: 40px;
+}
+
+.navbar .logout-btn{
+  cursor: pointer;
+}
+
+
 /*---------------------------------------------------
-footer9
+footer
 -----------------------------------------------------*/
 
 /*--------------------------------------------------
@@ -204,7 +220,8 @@ menu bar
   margin-left: 10px;
   margin-right: 45px;
   margin-bottom: 10px;
-  justify-content: center;
+  width: 85%;
+  justify-content: left;
   
   --pico-form-element-spacing-vertical: 0.5rem;
 }
@@ -221,6 +238,16 @@ menu bar
   text-decoration-line:none ;
 }
 
+#sidebar .user-info .after-login{
+  width: 100%;
+  text-align: center;
+}
+
+#sidebar .user-info .after-login p{
+  color:rgb(255, 255, 255);
+  font-size: 30px;
+}
+
 #sidebar ul li{
   text-align: left;
   color: rgb(255, 255, 255);
@@ -230,4 +257,9 @@ menu bar
 #sidebar ul li a{
   color:white;
   text-decoration:none ;
+}
+
+#sidebar .logout a{
+  cursor: pointer;
+  margin-left: 20px;
 }
