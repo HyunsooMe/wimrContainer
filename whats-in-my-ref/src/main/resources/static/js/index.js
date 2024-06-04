@@ -73,3 +73,12 @@ function form_submit(formId){
   form=document.getElementById(formId);
   form.submit();
 }
+
+//엔터키로 버튼 클릭
+function enterPushButton(event){
+  if(event.keyCode===13){
+    document.getElementById("search-btn").click();
+  }
+}
+
+document.getElementById("search-form").addEventListener("keypress",enterPushButton);

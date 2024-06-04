@@ -9,6 +9,8 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import jakarta.transaction.Transactional;
+
 @Service
 @RequiredArgsConstructor
 public class UserService {
@@ -32,5 +34,17 @@ public class UserService {
         } else {
             return null;
         }
+    }
+    @Transactional
+    public boolean existsByMemberId(String memberId){
+        return userRepository.existsByMemberId(memberId);
+    }
+    @Transactional
+    public boolean existsByMemberNick(String memberNick){
+        return userRepository.existsByMemberNick(memberNick);
+    }
+    @Transactional
+    public boolean existsByMemberEmail(String memberEmail){
+        return userRepository.existsByMemberEmail(memberEmail);
     }
 }

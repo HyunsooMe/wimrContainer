@@ -29,7 +29,7 @@
       <div class="tab-content-wrap">
         <div id="find-id" class="tab-content active">
           <div style="margin-left:10px; font-size: larger;">이메일:</div>
-          <form id="find-id-form" th:action="@{/Wimr/findAcc/find-id}" method="post"> <!--th:object="${userDTO}">-->
+          <form id="find-id-form" th:action="@{/Wimr/findAcc/find-id}" method="post" th:object="${userDTO}">
             <input type="text" id="memberEmail" th:value="*{memberEmail}" >
             <div id="emailError" class="Error" ><li>이메일을 입력해주세요.</li></div> 
             <div class="btn-wrap display-flex justify-content-center">
@@ -46,7 +46,7 @@
 
 
         <div id="find-password" class="tab-content">
-          <form id="find-pwd-form" th:action="@{/Wimr/findAcc/find-pwd}" method="post"> <!-- th:object="${userDTO}">-->
+          <form id="find-pwd-form" th:action="@{/Wimr/findAcc/find-pwd}" method="post" th:object="${userDTO}">
             <div style="margin-left:10px; font-size: larger;">아이디:</div>
             <input type="text" id="memberId" th:value="*{memberId}" >
             <div id="idError" class="Error" ><li>아이디를 입력해주세요.</li></div> 
