@@ -67,6 +67,7 @@
         <div th:if="${errorMessage}">
           <script th:inline="javascript">
             alert(/*[[${errorMessage}]]*/);
+            location.replace(/*[[${searchUrl}]]*/);
           </script>
         </div>
       </div>

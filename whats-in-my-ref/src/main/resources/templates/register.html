@@ -126,6 +126,13 @@
               alert(/*[[${errorMessage}]]*/);
           </script>
         </div>
+        <div th:if="${successMessage}">
+          <script th:inline="javascript">
+              alert(/*[[${successMessage}]]*/);
+              location.replace(/*[[${searchUrl}]]*/)
+          </script>
+        </div>
+        
       </div>
     </div>
 
