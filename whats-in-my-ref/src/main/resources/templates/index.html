@@ -39,7 +39,7 @@
                     <form id="search-form" th:action="@{/Wimr/foodSelect}" method="get">
                         <div class="pico" style="display:flex;width:100%;">
                             <input type="text" id="ingredients" placeholder="재료를 입력해주세요" style="flex:0 0 70%;margin-right:20px ;"/>
-                            <button id="search-btn" type="button" style="background-color: #3091ff;">검색하기</button>
+                            <button id="search-btn" type="button" onclick="searchIngredients()" style="background-color: #3091ff;width: 100%;">검색하기</button>
                         </div>
                     </form>
                 </div>
@@ -106,7 +106,7 @@
           const ingredients = document.getElementById('ingredients').value.trim();
           if (ingredients) {
               localStorage.setItem('ingredients', ingredients);
-              // window.location.href = 'foodSelect.html';
+              form_submit('search-form');
             document.getElementById("search-form").submit();
           } else {
               alert('재료를 입력하세요.');
