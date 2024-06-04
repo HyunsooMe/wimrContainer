@@ -1,8 +1,7 @@
 //댓글의 입력 유무 체크
 function comment_check(){
     var form=document.getElementById("comment-form");
-
-    if(!form.comment-content.value){
+    if(!form.comment-content-input.value){
         return false;
     }
     form.submit();

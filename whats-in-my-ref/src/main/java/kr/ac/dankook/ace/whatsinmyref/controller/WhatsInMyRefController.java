@@ -3,11 +3,14 @@ package kr.ac.dankook.ace.whatsinmyref.controller;
 import kr.ac.dankook.ace.whatsinmyref.dto.UserDTO;
 import kr.ac.dankook.ace.whatsinmyref.dto.boardDTO;
 import kr.ac.dankook.ace.whatsinmyref.entity.Recipe;
+import kr.ac.dankook.ace.whatsinmyref.entity.RecipeCmt;
+import kr.ac.dankook.ace.whatsinmyref.service.RecipeCmtService;
 import kr.ac.dankook.ace.whatsinmyref.service.RecipeService;
 import kr.ac.dankook.ace.whatsinmyref.service.UserService;
 import lombok.RequiredArgsConstructor;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -29,6 +32,9 @@ public class WhatsInMyRefController {
 
     @Autowired
     private RecipeService recipeService;
+
+    @Autowired
+    private RecipeCmtService recipeCmtService;
 
     @GetMapping("")
     public String mainPage() {
@@ -59,6 +65,7 @@ public class WhatsInMyRefController {
                     + ", 지방 : " + recipe.getFat() + ", 나트륨 : " + recipe.getSodium());
             String ingredient = recipe.getIngredient();
             String picture = recipe.getPicture();
+            int recipeNo = recipe.getRecipeno();
             String k1 = "MANUAL0";
             String k2 = "MANUAL_IMG0";
             int i = 1;
@@ -66,7 +73,6 @@ public class WhatsInMyRefController {
                 String kee = k1.concat(Integer.toString(i));
                 if (!recipe.getManual().get(kee).isEmpty()) {
                     manualList.add(recipe.getManual().get(kee));
-                    System.out.println(recipe.getManual().get(kee));
                     i++;
                 } else {
                     i = 1;
@@ -83,14 +89,27 @@ public class WhatsInMyRefController {
                     break;
                 }
             }
-            System.out.println(manualImgList.size());
             model.addAttribute("picture", picture);
             model.addAttribute("ingredients", ingredient);
             model.addAttribute("others", others);
             model.addAttribute("manualList", manualList);
             model.addAttribute("manualImgList", manualImgList);
+            model.addAttribute("recipeNo", recipeNo);
+
+            model.addAttribute("comments", recipeCmtService.getAllCmts());
+            model.addAttribute("newComment", new RecipeCmt());
         });
         return "recipe";
+    }
+
+    @PostMapping("/recipe/{id}")
+    public String addRecipeCmt(@PathVariable int id, RecipeCmt recipeCmt) {
+        recipeService.getRecipeById(id).ifPresent(recipe -> {
+            recipeCmt.setTime(new Date());
+            recipeCmt.setRno(id);
+            recipeCmtService.saveRecipeCmt(recipeCmt);
+        });
+        return "redirect:/Wimr/recipe/"+id;
     }
 
     @GetMapping("/register")

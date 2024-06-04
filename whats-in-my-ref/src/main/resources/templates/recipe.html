@@ -103,30 +103,30 @@
             <div class="card">
                 <div class="card-body">
                     <div id="user-info"><div class="name" th:text="${session.user != null ? session.user.memberNick : 'Unknown'}"></div></div>
-                    <!-- 컨트롤러까지 갖춰졌을 때의 Comment form
-                    <form class="comment-form" th:action="@{/Wimr/recipe/{recipeno}/submitComment(id=${recipe.recipeno})}" th:object="${comment}" method="post">
-                        <textarea th:field="*{content}" id="comment-content-input" rows="3" placeholder="댓글을 입력해주세요" maxlength="300" style="resize: none;"></textarea> 
+<!--                    컨트롤러까지 갖춰졌을 때의 Comment form-->
+                    <form class="comment-form" th:action="@{/Wimr/recipe/{id}(id=${recipeNo})}" th:object="${newComment}" method="post">
+                        <textarea th:field="*{comment}" id="comment-content-input" rows="3" placeholder="댓글을 입력해주세요" maxlength="300" style="resize: none;"></textarea>
                         <div id="char-count">0/300</div>
                         <div id="comment-btn-wrap" class="display-flex justify-content-center"><button type="button" id="comment-submit-btn" onclick="comment_check()"><span class="flexible-font-size">등록</span></button></div>
-                    </form>-->
-                    <!-- Comment form-->
-                    <form class="comment-form">
-                        <textarea id="comment-content-input" rows="3" placeholder="댓글을 입력해주세요" maxlength="300" style="resize: none;"></textarea> 
-                        <div class="comment-sub-wrap flexible-font-size">
-                            <div id="char-count">0/300</div>
-                            <div id="comment-btn-wrap" class="display-flex justify-content-center"><button type="button" id="comment-submit-btn" onclick="comment_check()"><span class="flexible-font-size">등록</span></button></div>
-                        </div>
                     </form>
+                    <!-- Comment form-->
+<!--                    <form class="comment-form">-->
+<!--                        <textarea id="comment-content-input" rows="3" placeholder="댓글을 입력해주세요" maxlength="300" style="resize: none;"></textarea> -->
+<!--                        <div class="comment-sub-wrap flexible-font-size">-->
+<!--                            <div id="char-count">0/300</div>-->
+<!--                            <div id="comment-btn-wrap" class="display-flex justify-content-center"><button type="submit" id="comment-submit-btn" onclick="comment_check()"><span class="flexible-font-size">등록</span></button></div>-->
+<!--                        </div>-->
+<!--                    </form>-->
                     <hr/>
                     <!-- Comment with nested comments-->
-                    <div class="comments-box">  <!--th:each="comment: ${comments}" th:object="${comment}">-->
-                        <div class="comment-box">
+                    <div class="comments-box" th:each="comment: ${comments}" th:object="${comments}">
+                    <div class="comment-box">
                             <div class="commenter display-flex">
                                 <div class="display-flex"><img style="height: 23px; border-radius: 50%;" src="/img/userDefaultImg.png"/><div class="name"><!--th:text="*{commenter.name}">-->작성자 이름</div></div>
-                                <div class="date"><!--th:text="${comment.date}"-->2024-05-19 15:42</div>
+<!--                                <div class="date" th:text="${comment.date}">2024-05-19 15:42</div>-->
                             </div>
                             <div class="comment-main-area">
-                                <div class="comment-content"><!--th:text="${comment.content}">-->이거 정말 맛있어요!</div>
+                                <div class="comment-content" th:text="${comment.comment}"></div>
                             </div>
                         </div>
                     </div>

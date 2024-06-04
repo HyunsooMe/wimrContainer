@@ -10,7 +10,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter @Setter
-public class RecipeComment {
+public class RecipeCmt {
     //댓글 번호
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
