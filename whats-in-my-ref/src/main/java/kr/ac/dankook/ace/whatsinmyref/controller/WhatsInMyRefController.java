@@ -8,6 +8,7 @@ import kr.ac.dankook.ace.whatsinmyref.service.UserService;
 import lombok.RequiredArgsConstructor;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,14 +52,15 @@ public class WhatsInMyRefController {
         //others : 영양 성분
         List<String> manualList = new ArrayList<>();
         List<String> manualImgList = new ArrayList<>();
-
+        model.addAttribute("recipeNo",id);
         recipeService.getRecipeById(id).ifPresent(recipe -> {
-            List<String> others = List.of("열량 :" + recipe.getCalories() + ", 탄수화물 : " + recipe.getCarbohydrates() + ", 단백질 :" + recipe.getProtein()
-                    + ", 지방 : " + recipe.getFat() + ", 나트륨 : " + recipe.getSodium());
-            String ingredient = recipe.getIngredient();
+            List<String> others = List.of("열량 : " + recipe.getCalories(), "탄수화물 : " + recipe.getCarbohydrates() ,"단백질 :" + recipe.getProtein(), "지방 : " + recipe.getFat(), "나트륨 : " + recipe.getSodium());
+            List<String> ingredient = Arrays.asList(recipe.getIngredient().split(","));
             String picture = recipe.getPicture();
+            String title = recipe.getTitle();
             String k1 = "MANUAL0";
             String k2 = "MANUAL_IMG0";
+            int likecount=recipe.getLikecount();
             int i = 1;
             while(true) {
                 String kee = k1.concat(Integer.toString(i));
@@ -71,6 +73,10 @@ public class WhatsInMyRefController {
                     break;
                 }
             }
+            List<String> realManuaList=new ArrayList<>();
+            for(String s:manualList){
+                realManuaList.add(s.substring(2));
+            }
             while(true){
                 String kee = k2.concat(Integer.toString(i));
                 if(!recipe.getManualImg().get(kee).isEmpty()){
@@ -82,10 +88,13 @@ public class WhatsInMyRefController {
                 }
             }
             System.out.println(manualImgList.size());
+            model.addAttribute("recipeNo",id);
+            model.addAttribute("title",title);
+            model.addAttribute("likecount",likecount);
             model.addAttribute("picture", picture);
             model.addAttribute("ingredients", ingredient);
             model.addAttribute("others", others);
-            model.addAttribute("manualList", manualList);
+            model.addAttribute("manualList", realManuaList);
             model.addAttribute("manualImgList", manualImgList);
         });
         return "recipe";
@@ -98,7 +107,19 @@ public class WhatsInMyRefController {
     }
 
     @PostMapping("/register")
-    public String save(@ModelAttribute UserDTO userDTO){
+    public String save(@ModelAttribute UserDTO userDTO, Model model){
+        if(userService.existsByMemberId(userDTO.getMemberId())){
+            model.addAttribute("errorMessage", "이미 사용중인 아이디입니다.");
+            return "register";
+        }
+        else if(userService.existsByMemberNick(userDTO.getMemberNick())){
+            model.addAttribute("errorMessage", "이미 사용중인 닉네임입니다.");
+            return "register";
+        }
+        else if(userService.existsByMemberEmail(userDTO.getMemberEmail())){
+            model.addAttribute("errorMessage", "이미 사용중인 이메일입니다.");
+            return "register";
+        }
         userService.save(userDTO);
         return "redirect:/Wimr";
     }
@@ -111,17 +132,22 @@ public class WhatsInMyRefController {
     }
     
     @PostMapping("/login")
-    public String loginUser(@ModelAttribute UserDTO userDTO, HttpSession session) {
+    public String loginUser(@ModelAttribute UserDTO userDTO, HttpSession session, Model model) {
         UserDTO loginResult = userService.login(userDTO);
         if(loginResult != null){
             session.setAttribute("user", loginResult);
             session.setMaxInactiveInterval(1800);
-            System.out.println("success");
             return "redirect:/Wimr"; //로그인 성공 확인용
-        } else {
-            System.out.println("failed");
-            return "login";
+        } else{
+            if(!userService.existsByMemberId(userDTO.getMemberId())){
+            model.addAttribute("errorMessage", "존재하지 않는 회원 아이디입니다.");
+            return "redirect:/Wimr/login";
+        } else{
+                model.addAttribute("errorMessage", "비밀번호가 일치하지 않습니다.");
+                return "redirect:/Wimr/login";
+            }
         }
+
     }
 
     @PostMapping("/logout")
@@ -172,7 +198,7 @@ public class WhatsInMyRefController {
     }
 
     @GetMapping("/findAcc")
-    public String findAccount() {
+    public String findAccount(@ModelAttribute UserDTO userDTO) {
         return "findAcc";
     }
     
@@ -191,26 +217,57 @@ public class WhatsInMyRefController {
     @PostMapping("/scrap")
     public String doScrap(@RequestParam int recipeNo) {
         //로그인된 유저의 scrap 배열에 recipeNo 추가
-        return "redirect:/Wimr/recipe?recipeNo="+recipeNo;
+        return "redirect:/Wimr/recipe/"+recipeNo;
     }
     
     @PostMapping("/unscrap")
     public String doUnscrap(@RequestParam int recipeNo) {
         //로그인된 유저의 scrap 배열에 recipeNo 제거
-        return "redirect:/Wimr/recipe?recipeNo="+recipeNo;
+        return "redirect:/Wimr/recipe/"+recipeNo;
     }
     
     @PostMapping("/like")
     public String doLike(@RequestParam int recipeNo) {
         //로그인된 유저의 recommend 배열에 recipeNo 추가
-        return "redirect:/Wimr/recipe?recipeNo="+recipeNo;
+        return "redirect:/Wimr/recipe/"+recipeNo;
     }
 
     @PostMapping("/unlike")
     public String doUnlike(@RequestParam int recipeNo) {
         //로그인된 유저의 recommend 배열에 recipeNo 제거
-        return "redirect:/Wimr/recipe?recipeNo="+recipeNo;
+        return "redirect:/Wimr/recipe/"+recipeNo;
     }
+
+    @PostMapping("/findAcc/find-id")
+    public String findId(@ModelAttribute UserDTO userDTO) {
+        //TODO: process POST request
+        //userDTO의 이메일에 맞는 아이디 찾아서 검열 후 masked_member_id에 보내야됨 
+        return "redirect:/Wimr/findAcc";
+    }
+    
+
+    @PostMapping("/findAcc/find-pwd")
+    public String findPwd(@ModelAttribute UserDTO userDTO) {
+        
+        //userDTO의 Id랑 Email에 일치하는게 DB에 있는지 검증
+        return "redirect:/Wimr/findAcc/rewritepw";
+    }
+    
+
+    @GetMapping("/findAcc/rewritepw")
+    public String reWritePw() {
+        //여기서 이전에 이메일 쳐서 들어왔는지 확인해서 아니면 페이지 들어가지 못하게 해야됨
+        return "reWritePw";
+    }
+
+    @PostMapping("/doRewritepw")
+    public String doReWritePw(@ModelAttribute String memberPw) {
+        //TODO: process POST request
+        //비밀번호 변경
+        return "redirect:/Wimr/login";
+    }
+    
+    
 }
 
 
