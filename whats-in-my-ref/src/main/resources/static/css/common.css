@@ -136,6 +136,18 @@ a:hover {
     --pico-spacing: 1rem;
   }
 
+  .Contents .ranking-div #first-recipe{
+    order:1;
+  }
+  
+  .Contents .ranking-div #second-recipe{
+    order: 2;
+  }
+
+  .Contents .ranking-div #third-recipe{
+    order: 3;
+  }
+
   .Contents .box_div {
     display: flex;
     flex-direction: column;

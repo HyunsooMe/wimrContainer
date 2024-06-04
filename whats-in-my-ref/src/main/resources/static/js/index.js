@@ -82,3 +82,15 @@ function enterPushButton(event){
 }
 
 document.getElementById("search-form").addEventListener("keypress",enterPushButton);
+
+//검색 재료 넘기기
+function searchIngredients() {
+  const ingredients = document.getElementById('ingredients').value.trim();
+  if (ingredients) {
+      localStorage.setItem('ingredients', ingredients);
+      form_submit('search-form');
+    document.getElementById("search-form").submit();
+  } else {
+      alert('재료를 입력하세요.');
+  }
+}

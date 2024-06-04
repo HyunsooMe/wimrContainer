@@ -38,7 +38,7 @@
                 <div class="search-form-wrap">
                     <form id="search-form" th:action="@{/Wimr/foodSelect}" method="get">
                         <div class="pico" style="display:flex;width:100%;">
-                            <input type="text" id="ingredients" placeholder="재료를 입력해주세요" style="flex:0 0 70%;margin-right:20px ;"/>
+                            <input type="text" id="ingredients" placeholder="쉼표( , )로 구분하여 재료들을 입력해주세요." style="flex:0 0 70%;margin-right:20px ;"/>
                             <button id="search-btn" type="button" onclick="searchIngredients()" style="background-color: #3091ff;width: 100%;">검색하기</button>
                         </div>
                     </form>
@@ -47,6 +47,53 @@
         </div>
       </div>
     </div>
+
+    <div class="Contents pico">
+      <h1>이 주의 레시피</h1>
+      <div class="box_div ranking-div">
+        <div id="second-recipe" class="big-box pico text-center" data-aos="fade-up" th:object="${second_rank_recipe}">
+          <div
+            class="box"
+            style="
+              background-image: url('#2등 레시피 사진');
+              background-position: center;
+              background-size: 200%;
+            "
+            onclick="redirectToPage(''/*2등 레시피 페이지*/)"
+          >
+          </div>
+          <p>2등</p>
+        </div>
+
+        <div id="first-recipe" class="big-box text-center pico" data-aos="fade-up" th:object="${first_rank_recipe}">
+          <div
+            class="box"
+            style="
+              background-image: url('1등 레시피 사진');
+              background-position: center;
+              background-size: 200%;
+            "
+            onclick="redirectToPage('#'/*1등 레시피 페이지*/)"
+          >
+          </div>
+          <p>1등</p>
+        </div>
+        <div id="third-recipe" class="big-box text-center pico" data-aos="fade-up" th:object="${third_rank_recipe}">
+          <div
+            class="box"
+            style="
+              background-image: url('3등 레시피 사진');
+              background-position: center;
+              background-size: 200%;
+            "
+            onclick="redirectToPage(''/*3등 레시피 페이지*/)"
+          >
+          </div>
+          <p>3등</p>
+        </div>
+      </div>
+    </div>
+    
 
     <div class="Contents pico">
       <h1>바로가기 box</h1>
@@ -101,18 +148,6 @@
     </div>
     <footer th:replace="~{fragments/footer::footer}" />
 
-    <script>
-      function searchIngredients() {
-          const ingredients = document.getElementById('ingredients').value.trim();
-          if (ingredients) {
-              localStorage.setItem('ingredients', ingredients);
-              form_submit('search-form');
-            document.getElementById("search-form").submit();
-          } else {
-              alert('재료를 입력하세요.');
-          }
-      }
-  </script>
     <script src="/js/index.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>

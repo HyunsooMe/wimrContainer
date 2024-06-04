@@ -101,7 +101,7 @@ const addedListDiv = document.querySelector(".addedlist");
 // Local Storage에서 재료 목록을 가져옴
 const ingredients = localStorage.getItem("ingredients");
 if (ingredients) {
-  selectedItems = ingredients.split(" ");
+  selectedItems = ingredients.split(/[ ,]+/);
   updateAddedList();
   checkSelectedCheckboxes();
   localStorage.removeItem('ingredients');
