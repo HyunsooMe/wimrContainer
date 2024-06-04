@@ -74,11 +74,11 @@
 }
 
 .Contents .ranking-div #first-recipe{
-  order:2;
+  order:1;
 }
 
 .Contents .ranking-div #second-recipe{
-  order:1;
+  order:2;
 }
 
 .Contents .ranking-div #third-recipe{

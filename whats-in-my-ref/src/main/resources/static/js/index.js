@@ -80,7 +80,6 @@ function enterPushButton(event){
     document.getElementById("search-btn").click();
   }
 }
-
 document.getElementById("search-form").addEventListener("keypress",enterPushButton);
 
 //검색 재료 넘기기

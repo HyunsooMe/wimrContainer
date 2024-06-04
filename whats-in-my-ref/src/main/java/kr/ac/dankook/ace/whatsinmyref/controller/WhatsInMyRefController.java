@@ -30,7 +30,13 @@ public class WhatsInMyRefController {
     private RecipeService recipeService;
 
     @GetMapping("")
-    public String mainPage() {
+    public String mainPage(Model model) {
+        //test 임시값
+        Recipe recipe=recipeService.getRecipeById(11).get();
+        model.addAttribute("first_rank_recipe",recipe);
+        model.addAttribute("second_rank_recipe",recipe);
+        model.addAttribute("third_rank_recipe",recipe);
+        //test 임시값 여기까지
         return "index";
     }
 
@@ -52,7 +58,7 @@ public class WhatsInMyRefController {
         //others : 영양 성분
         List<String> manualList = new ArrayList<>();
         List<String> manualImgList = new ArrayList<>();
-        model.addAttribute("recipeNo",id);
+
         recipeService.getRecipeById(id).ifPresent(recipe -> {
             List<String> others = List.of("열량 : " + recipe.getCalories(), "탄수화물 : " + recipe.getCarbohydrates() ,"단백질 :" + recipe.getProtein(), "지방 : " + recipe.getFat(), "나트륨 : " + recipe.getSodium());
             List<String> ingredient = Arrays.asList(recipe.getIngredient().split(","));
@@ -73,6 +79,7 @@ public class WhatsInMyRefController {
                     break;
                 }
             }
+            //순서 번호 제거
             List<String> realManuaList=new ArrayList<>();
             for(String s:manualList){
                 realManuaList.add(s.substring(2));

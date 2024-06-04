@@ -48,45 +48,48 @@
       </div>
     </div>
 
-    <div class="Contents pico">
+    <div class="Contents pico" data-aos="fade-up">
       <h1>이 주의 레시피</h1>
       <div class="box_div ranking-div">
         <div id="second-recipe" class="big-box pico text-center" data-aos="fade-up" th:object="${second_rank_recipe}">
+          <p style="font-size: 40px;"><strong>2등</strong></p>
           <div
             class="box"
-            style="
-              background-image: url('#2등 레시피 사진');
+            th:style="
+              'background-image: url('+*{picture}+');
               background-position: center;
-              background-size: 200%;
+              background-size: cover;'
             "
-            onclick="redirectToPage(''/*2등 레시피 페이지*/)"
+            th:onclick="'redirectToPage(\'/Wimr/recipe/'+*{recipeno}+'\')'"
           >
           </div>
           <p>2등</p>
         </div>
 
         <div id="first-recipe" class="big-box text-center pico" data-aos="fade-up" th:object="${first_rank_recipe}">
+          <p style="font-size: 40px;"><strong>1등</strong></p>
           <div
             class="box"
-            style="
-              background-image: url('1등 레시피 사진');
+            th:style="
+              'background-image: url('+*{picture}+');
               background-position: center;
-              background-size: 200%;
+              background-size: cover;'
             "
-            onclick="redirectToPage('#'/*1등 레시피 페이지*/)"
+            th:onclick="'redirectToPage(\'/Wimr/recipe/'+*{recipeno}+'\')'"
           >
           </div>
           <p>1등</p>
         </div>
         <div id="third-recipe" class="big-box text-center pico" data-aos="fade-up" th:object="${third_rank_recipe}">
+          <p style="font-size: 40px;"><strong>3등</strong></p>
           <div
             class="box"
-            style="
-              background-image: url('3등 레시피 사진');
+            th:style="
+              'background-image: url('+*{picture}+');
               background-position: center;
-              background-size: 200%;
+              background-size: cover;'
             "
-            onclick="redirectToPage(''/*3등 레시피 페이지*/)"
+            th:onclick="'redirectToPage(\'/Wimr/recipe/'+*{recipeno}+'\')'"
           >
           </div>
           <p>3등</p>
