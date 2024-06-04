@@ -148,7 +148,9 @@ public class WhatsInMyRefController {
             return "register";
         }
         userService.save(userDTO);
-        return "redirect:/Wimr";
+        model.addAttribute("successMessage", "정상적으로 회원가입되었습니다!");
+        model.addAttribute("searchUrl","/Wimr");
+        return "register";
     }
     
     
@@ -168,10 +170,12 @@ public class WhatsInMyRefController {
         } else{
             if(!userService.existsByMemberId(userDTO.getMemberId())){
             model.addAttribute("errorMessage", "존재하지 않는 회원 아이디입니다.");
-            return "redirect:/Wimr/login";
+            model.addAttribute("searchUrl","/Wimr/login");
+            return "login";
         } else{
                 model.addAttribute("errorMessage", "비밀번호가 일치하지 않습니다.");
-                return "redirect:/Wimr/login";
+                model.addAttribute("searchUrl","/Wimr/login");
+                return "login";
             }
         }
 
@@ -228,7 +232,18 @@ public class WhatsInMyRefController {
     public String findAccount(@ModelAttribute UserDTO userDTO) {
         return "findAcc";
     }
-    
+
+    /*
+    @PostMapping("/findAcc/find-id")
+    public String findId(@ModelAttribute UserDTO userDTO){
+        return "findAcc";
+    }
+
+    @PostMapping("/findAcc/find-pwd")
+    public String findPwd(@ModelAttribute UserDTO userDTO){
+        return "findAcc";
+    }
+    */
     @PostMapping("/editProfile")
     public String editProfile(@ModelAttribute String memberEmail) {
         
