@@ -56,3 +56,9 @@ th {
   justify-content: center;
   gap: 1rem;
 }
+
+.sort-buttons {
+  display: flex;
+  justify-content: end;
+  gap: 0.5rem;
+}

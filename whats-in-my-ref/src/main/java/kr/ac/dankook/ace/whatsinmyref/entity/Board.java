@@ -1,8 +1,5 @@
 package kr.ac.dankook.ace.whatsinmyref.entity;
-
-
 import java.time.LocalDateTime;
-import java.util.Date;
 
 import jakarta.persistence.*;
 // import kr.ac.dankook.ace.whatsinmyref.dto.boardDTO;
@@ -22,7 +19,7 @@ public class Board {
     private String content;
     private String nickname;
     private int viewcount;
-    private Date time;
+    private LocalDateTime created_date;
     private int likes;
 
     public int getBno() {
@@ -65,14 +62,6 @@ public class Board {
         this.viewcount = viewcount;
     }
 
-    public Date getTime() {
-        return this.time;
-    }
-
-    public void setTime(Date time) {
-        this.time = time;
-    }
-
     public int getLikes() {
         return this.likes;
     }
@@ -89,7 +78,7 @@ public class Board {
         this.created_date = created_date;
     }
 
-    private LocalDateTime created_date;
+    
 
     // 엔티티가 저장되기 전에 초기화
     @PrePersist
