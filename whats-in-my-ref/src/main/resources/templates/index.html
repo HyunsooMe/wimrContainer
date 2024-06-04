@@ -36,10 +36,10 @@
                     <p>냉장고에 있는 재료를 입력하세요</p>
                 </div>
                 <div class="search-form-wrap">
-                    <form th:action="@{/search/typing}" method="post" >
+                    <form id="search-form" th:action="@{/Wimr/foodSelect}" method="post" >
                         <div class="pico" style="display:flex;width:100%;">
                             <input type="text" th:value="${ingredients}" placeholder="재료를 입력해주세요" style="flex:0 0 70%;margin-right:20px ;"/>
-                            <button type="submit" style="background-color: #3091ff;">검색하기</button>
+                            <button id="search-btn" type="submit" style="background-color: #3091ff;">검색하기</button>
                         </div>
                     </form>
                 </div>

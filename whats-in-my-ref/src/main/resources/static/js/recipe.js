@@ -2,7 +2,7 @@
 function comment_check(){
     var form=document.getElementById("comment-form");
 
-    if(!form.comment-content.value){
+    if(!form.comment-content-input.value){
         return false;
     }
     form.submit();
@@ -10,7 +10,7 @@ function comment_check(){
 
 //글자 수 출력
 document.addEventListener('DOMContentLoaded', function () {
-    let textarea = document.getElementById('comment-content'),
+    let textarea = document.getElementById('comment-content-input'),
         charCount = document.getElementById('char-count');
 
     textarea.addEventListener('input', function () {
