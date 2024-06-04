@@ -104,6 +104,7 @@ if (ingredients) {
   selectedItems = ingredients.split(" ");
   updateAddedList();
   checkSelectedCheckboxes();
+  localStorage.removeItem('ingredients');
 }
 
 // 추가 버튼 클릭 시
