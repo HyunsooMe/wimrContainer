@@ -64,11 +64,15 @@ public class WhatsInMyRefController {
             List<String> others = List.of("열량 : " + recipe.getCalories(), "탄수화물 : " + recipe.getCarbohydrates() ,"단백질 :" + recipe.getProtein(), "지방 : " + recipe.getFat(), "나트륨 : " + recipe.getSodium());
             List<String> ingredient = Arrays.asList(recipe.getIngredient().split(","));
             String picture = recipe.getPicture();
+
             int recipeNo = recipe.getRecipeno();
             String title = recipe.getTitle();
+
             String k1 = "MANUAL0";
             String k2 = "MANUAL_IMG0";
-            int likecount=recipe.getLikecount();
+
+            int likecount =recipe.getLikecount();
+
             int i = 1;
             while(true) {
                 String kee = k1.concat(Integer.toString(i));
@@ -79,10 +83,6 @@ public class WhatsInMyRefController {
                     i = 1;
                     break;
                 }
-            }
-            List<String> realManuaList=new ArrayList<>();
-            for(String s:manualList){
-                realManuaList.add(s.substring(2));
             }
             while(true){
                 String kee = k2.concat(Integer.toString(i));
@@ -101,7 +101,7 @@ public class WhatsInMyRefController {
             model.addAttribute("picture", picture);
             model.addAttribute("ingredients", ingredient);
             model.addAttribute("others", others);
-            model.addAttribute("manualList", realManuaList);
+            model.addAttribute("manualList", manualList);
             model.addAttribute("manualImgList", manualImgList);
             model.addAttribute("recipeNo", recipeNo);
 

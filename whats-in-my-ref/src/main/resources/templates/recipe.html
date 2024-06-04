@@ -85,11 +85,11 @@
             </li>
             <hr/>
             <li id="recipeDetail"><h2><strong>Recipe</strong></h2>
-                <ol>
+                <ul>
                 <div th:each="manual, index : ${manualList}">
                     <li th:text="${manual}"></li>
                     <div class="manualImg-wrap"><img th:src="${manualImgList[index.index]}"/></div>
-                </ol>
+                </ul>
             </li>
             <hr />
             <li id="others"><h2><strong>Others</strong></h2>
