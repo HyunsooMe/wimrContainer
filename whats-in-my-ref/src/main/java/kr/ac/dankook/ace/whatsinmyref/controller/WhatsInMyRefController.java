@@ -194,6 +194,16 @@ public class WhatsInMyRefController {
     public String findAccount() {
         return "findAcc";
     }
+
+    @PostMapping("/findAcc/find-id")
+    public String findId(){
+        return "findAcc";
+    }
+
+    @PostMapping("/findAcc/find-pwd")
+    public String findPwd(){
+        return "findAcc";
+    }
     
     @PostMapping("/editProfile")
     public String editProfile(@ModelAttribute String memberEmail) {
