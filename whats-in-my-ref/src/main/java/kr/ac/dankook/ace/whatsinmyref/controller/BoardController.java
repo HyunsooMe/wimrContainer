@@ -92,7 +92,7 @@ public class BoardController {
     public String editBoard(@PathVariable("bno") Integer bno, Model model) {
         Board board = boardService.boardView(bno);
         model.addAttribute("board", board);
-        return "/board/boardEdit"; // boardEdit.html로 이동
+        return "board/boardEdit"; // boardEdit.html로 이동
     }
 
     // 게시글 수정 처리

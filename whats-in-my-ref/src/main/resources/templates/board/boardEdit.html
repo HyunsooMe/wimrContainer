@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>게시글 수정</title>
-    <link rel="stylesheet" th:href="@{/css/boardViewStyle.css}" />
+    <link rel="stylesheet" th:href="@{/css/boardEdit.css}" />
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.conditional.min.css"
@@ -20,7 +20,35 @@
   </head>
   <body>
     <header th:replace="~{fragments/header::header}"></header>
-    <form
+    <div class="board_wrap">
+      <h2>게시글 수정</h2>
+      <form
+        class="table_wrap"
+        th:action="@{/board/update/{bno}(bno=${board.bno})}"
+        th:object="${board}"
+        method="post"
+      >
+        <table>
+          <tr>
+            <th>조회수</th>
+            <td th:text="${board.viewcount}"></td>
+            <th>제목</th>
+            <td><input type="text" th:field="*{title}" /></td>
+          </tr>
+          <tr>
+            <th>작성자</th>
+            <td th:text="${board.nickname}"></td>
+            <th>날짜</th>
+            <td
+              th:text="${#temporals.format(board.created_date, 'yyyy-MM-dd')}"
+            ></td>
+          </tr>
+        </table>
+        <textarea id="content" th:field="*{content}"></textarea>
+        <button class="btn" type="submit">수정</button>
+      </form>
+    </div>
+    <!-- <form
       th:action="@{/board/update/{bno}(bno=${board.bno})}"
       th:object="${board}"
       method="post"
@@ -32,6 +60,6 @@
       <textarea id="content" th:field="*{content}"></textarea>
 
       <button type="submit">수정</button>
-    </form>
+    </form> -->
   </body>
 </html>
