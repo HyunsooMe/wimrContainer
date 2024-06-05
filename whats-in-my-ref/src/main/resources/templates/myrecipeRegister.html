@@ -124,6 +124,12 @@
         <button type="submit" class="send">등록</button>
       </div>
     </form>
+    <div th:if="${errorMessage}">
+      <script th:inline="javascript">
+        alert(/*[[${errorMessage}]]*/);
+        location.replace(/*[[${searchUrl}]]*/);
+      </script>
+    </div>
     <script>
       function addStep() {
         const stepDiv = document.createElement("tr");

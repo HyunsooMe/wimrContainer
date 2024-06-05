@@ -85,9 +85,9 @@
             </li>
             <hr/>
             <li id="recipeDetail"><h2><strong>Recipe</strong></h2>
-                <ul>
+                <ul >
                 <div th:each="manual, index : ${manualList}">
-                    <li th:text="${manual}"></li>
+                    <li style="list-style: none; padding-left: 0;" th:text="${manual}"></li>
                     <div class="manualImg-wrap"><img th:src="${manualImgList[index.index]}"/></div>
                 </ul>
             </li>
@@ -111,14 +111,6 @@
                             <div id="comment-btn-wrap" class="display-flex justify-content-center"><button type="button" id="comment-submit-btn" onclick="comment_check()"><span class="flexible-font-size">등록</span></button></div>
                         </div>
                     </form>
-                    <!-- Comment form-->
-<!--                    <form class="comment-form">-->
-<!--                        <textarea id="comment-content-input" rows="3" placeholder="댓글을 입력해주세요" maxlength="300" style="resize: none;"></textarea> -->
-<!--                        <div class="comment-sub-wrap flexible-font-size">-->
-<!--                            <div id="char-count">0/300</div>-->
-<!--                            <div id="comment-btn-wrap" class="display-flex justify-content-center"><button type="submit" id="comment-submit-btn" onclick="comment_check()"><span class="flexible-font-size">등록</span></button></div>-->
-<!--                        </div>-->
-<!--                    </form>-->
                     <hr/>
                     <!-- Comment with nested comments-->
                     <div class="comments-box" th:each="comment: ${comments}" th:object="${comments}">

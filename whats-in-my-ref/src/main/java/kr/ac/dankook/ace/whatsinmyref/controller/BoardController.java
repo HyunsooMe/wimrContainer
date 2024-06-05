@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import jakarta.servlet.http.HttpSession;
+import kr.ac.dankook.ace.whatsinmyref.dto.UserDTO;
 import kr.ac.dankook.ace.whatsinmyref.entity.Board;
 import kr.ac.dankook.ace.whatsinmyref.service.BoardService;
 
@@ -26,7 +28,7 @@ public class BoardController {
 
      // 게시글 목록
      @GetMapping("/boardList")
-     public String BoardList(Model model, 
+     public String BoardList(@ModelAttribute UserDTO userDTO, Model model, 
                              @RequestParam(required = false, defaultValue = "bno") String sort,
                              @PageableDefault(page = 0, size = 10, sort = "bno", direction = Sort.Direction.DESC) Pageable pageable) {
  
@@ -49,20 +51,27 @@ public class BoardController {
          model.addAttribute("startPage", startPage);
          model.addAttribute("endPage", endPage);
          model.addAttribute("sort", sort);
- 
+         
          return "/board/boardList";
      }
  
     // 게시글 작성폼
     @GetMapping("/boardForm")
-    public String BoardForm(){
+    public String BoardForm(HttpSession session, Model model){
+        if (session.getAttribute("user")== null){
+           
+            model.addAttribute("errorMessage", "로그인이 필요한 서비스입니다.");
+            model.addAttribute("searchUrl","/Wimr/login");
+            return "/board/boardForm";
+        }
         return "/board/boardForm";
+        
     }
     // 작성폼 전송 처리
     @PostMapping("/board/writePro")
     public String boardwritePro(Board board){
-
         boardService.write(board);
+        
         return "redirect:/boardList";
     }
     // 게시글 상세보기
@@ -103,7 +112,13 @@ public class BoardController {
     }
 
     @GetMapping("/myrecipeRegister")
-    public String myRecipe(){
+    public String myRecipe(HttpSession session, Model model){
+        if (session.getAttribute("user")== null){
+           
+            model.addAttribute("errorMessage", "로그인이 필요한 서비스입니다.");
+            model.addAttribute("searchUrl","/Wimr/login");
+            return "/myrecipeRegister";
+        }
         return "/myrecipeRegister";
     }
 
