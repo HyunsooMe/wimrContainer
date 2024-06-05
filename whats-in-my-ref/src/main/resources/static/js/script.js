@@ -238,7 +238,7 @@ function displayRecipes(recipes) {
   const recipesDiv = document.getElementById("recipe-results");
   recipesDiv.innerHTML = "";
   if (recipes.length === 0) {
-    recipesDiv.textContent = "해당 재료를 포함한 레시피가 없습니다.";
+    alert("해당 재료를 포함한 레시피가 없습니다.");
     return;
   }
 
