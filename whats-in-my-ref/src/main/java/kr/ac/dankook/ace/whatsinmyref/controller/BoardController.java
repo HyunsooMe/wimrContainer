@@ -112,7 +112,13 @@ public class BoardController {
     }
 
     @GetMapping("/myrecipeRegister")
-    public String myRecipe(){
+    public String myRecipe(HttpSession session, Model model){
+        if (session.getAttribute("user")== null){
+           
+            model.addAttribute("errorMessage", "로그인이 필요한 서비스입니다.");
+            model.addAttribute("searchUrl","/Wimr/login");
+            return "/myrecipeRegister";
+        }
         return "/myrecipeRegister";
     }
 
