@@ -8,14 +8,26 @@ const $autoComplete = document.querySelector(".autocomplete");
 const $searchBtn = document.querySelector("#searchBtn");
 const $addedList = document.querySelector(".addedlist");
 let selectedItems = []; // 선택한 항목을 저장할 배열
+// 검색 버튼 클릭 시
 $searchBtn.addEventListener("click", () => {
+  handleSearch();
+});
+
+// 엔터키 눌렀을 때
+$search.addEventListener("keydown", (event) => {
+  if (event.key === "Enter") {
+    handleSearch();
+  }
+});
+
+function handleSearch() {
   const value = $search.value.trim();
   if (value) {
     addToAddedList(value); // 선택한 항목을 추가
     $search.value = ""; // 검색어 입력란 초기화
     $autoComplete.innerHTML = ""; // 자동완성 리스트 초기화
   }
-});
+}
 
 //---------------------------------------------------------------
 // 재료 검색 자동완성
@@ -104,7 +116,7 @@ if (ingredients) {
   selectedItems = ingredients.split(/[ ,]+/);
   updateAddedList();
   checkSelectedCheckboxes();
-  localStorage.removeItem('ingredients');
+  localStorage.removeItem("ingredients");
 }
 
 // 추가 버튼 클릭 시
@@ -235,7 +247,9 @@ function displayRecipes(recipes) {
     recipeDiv.className = "recipe";
     // 요리 이름 생성
     const title = document.createElement("h3");
+    title.className = "food-name";
     title.textContent = recipe.RCP_NM;
+    title.setAttribute("data-name", recipe.RCP_NM);
     // 요리 사진 생성
     const img = document.createElement("img");
     img.src = recipe.ATT_FILE_NO_MAIN || recipe.ATT_FILE_NO_MK;
@@ -243,31 +257,55 @@ function displayRecipes(recipes) {
     recipeDiv.appendChild(title);
     recipesDiv.appendChild(recipeDiv);
   });
+
+  document.querySelectorAll(".recipe").forEach((recipeDiv) => {
+    // h3 요소에 이벤트 리스너 추가
+    const title = recipeDiv.querySelector("h3");
+    if (title) {
+      title.addEventListener("click", function () {
+        console.log("클릭됨");
+        const recipeName = this.getAttribute("data-name");
+        window.location.href = `/recipe/${encodeURIComponent(recipeName)}`;
+      });
+    }
+
+    // img 요소에 이벤트 리스너 추가
+    const img = recipeDiv.querySelector("img");
+    if (img) {
+      img.addEventListener("click", function () {
+        console.log("클릭됨");
+        const recipeName = recipeDiv
+          .querySelector("h3")
+          .getAttribute("data-name");
+        window.location.href = `/recipe/${encodeURIComponent(recipeName)}`;
+      });
+    }
+  });
 }
 
 // -------------------------------------------------------
 // 서버로 selectedItems 배열을 보내는 함수
 
-function submitSelectedItems() {
-  if (selectedItems.length === 0) {
-    alert("재료를 입력해주세요.");
-    return; // 배열이 비어있으면 함수 종료
-  }
+// function submitSelectedItems() {
+//   if (selectedItems.length === 0) {
+//     alert("재료를 입력해주세요.");
+//     return; // 배열이 비어있으면 함수 종료
+//   }
 
-  console.log("서버에 전송");
-  $.ajax({
-    url: "http://localhost:8080/Wimr/foodSelect",
-    type: "POST",
-    contentType: "application/json",
-    data: JSON.stringify({ items: selectedItems }), // selectedItems 배열을 JSON으로 변환하여 전송
-    success: function (response) {
-      console.log("Success:", response);
-    },
-    error: function (xhr, status, error) {
-      console.error("Error:", error);
-    },
-  });
-}
+//   console.log("서버에 전송");
+//   $.ajax({
+//     url: "http://localhost:8080/Wimr/foodSelect",
+//     type: "POST",
+//     contentType: "application/json",
+//     data: JSON.stringify({ items: selectedItems }), // selectedItems 배열을 JSON으로 변환하여 전송
+//     success: function (response) {
+//       console.log("Success:", response);
+//     },
+//     error: function (xhr, status, error) {
+//       console.error("Error:", error);
+//     },
+//   });
+// }
 
 // 전송 버튼 클릭 시 selectedItems 배열을 서버로 전송
 // findRecipeBtn.addEventListener("click", submitSelectedItems);

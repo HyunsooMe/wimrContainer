@@ -150,3 +150,16 @@ label {
 .active {
   background-color: #ccc;
 }
+
+.food_search button {
+  margin: 0 3px;
+  background-color: skyblue;
+  border: none;
+  border-radius: 5px;
+  color: white;
+}
+
+.food_search button:hover {
+  background-color: rgb(70, 70, 196);
+  transition: 0.2s ease;
+}

@@ -109,6 +109,6 @@ public class BoardController {
 
     @GetMapping("/userRecipe")
     public String UserRCP(){
-        return "/userRecipeList";
+        return "userRecipeList";
     }
 }

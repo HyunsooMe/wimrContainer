@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <!-- <link rel="stylesheet" th:href="@{/css/.css}" /> -->
+    <link rel="stylesheet" th:href="@{/css/userRecipeList.css}" />
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.conditional.min.css"
@@ -40,41 +40,8 @@
               <th>조회수</th>
             </tr>
           </thead>
-          <tbody>
-            <tr th:each="userboard : ${userboardList}">
-              <!-- 유저 레시피 게시판 번호 -->
-              <td th:text="${userboardStat.index+1}"></td>
-              <!-- 레시피 제목 (눌렀을 때 상세페이지)-->
-              <td>
-                <a th:text="${userboard.title}" th:href="@{/}"> </a>
-              </td>
-              <!-- 사용자 닉네임(게시판과 마찬가지로 세션에서 불러와야함) -->
-              <td th:text="${userboard.nickname}"></td>
-              <!-- 게시글 작성 날짜 -->
-              <td
-                th:text="${#temporals.format(userboard.created_date, 'yyyy-MM-dd')}"
-              ></td>
-              <!-- 조회수 -->
-              <td th:text="${userboard.viewcount}"></td>
-            </tr>
-          </tbody>
+          <tbody></tbody>
         </table>
-        <div class="pages">
-          <th:block th:each="page : ${#numbers.sequence(startPage, endPage)}">
-            <!-- 페이지가 현재 페이지와 다를 때 -->
-            <a
-              th:if="${page != nowPage}"
-              th:href="@{/userRecipeList(page = ${page-1})}"
-              th:text="${page}"
-            ></a>
-            <!-- 페이지가 현재 페이지와 같을 때 -->
-            <strong
-              th:if="${page == nowPage}"
-              th:text="${page}"
-              style="color: red"
-            ></strong>
-          </th:block>
-        </div>
       </div>
     </div>
   </body>
