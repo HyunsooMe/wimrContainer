@@ -51,7 +51,7 @@
           </tr>
           <tr>
             <td>작성자</td>
-            <td>
+            <td th:if="${session.user} != null">
               <input
                 type="text"
                 id="nickname"
@@ -77,6 +77,12 @@
           <a href="boardList" id="cancel">취소</a>
         </div>
       </form>
+    </div>
+    <div th:if="${errorMessage}">
+      <script th:inline="javascript">
+        alert(/*[[${errorMessage}]]*/);
+        location.replace(/*[[${searchUrl}]]*/);
+      </script>
     </div>
     <script>
       function validateForm() {
