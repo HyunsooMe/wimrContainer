@@ -54,7 +54,7 @@
 
             <div class="my-recipe-part item" >등록한 레시피:      
                 <div class="recipe-grid" id="myRecipeGrid">  
-                    <div th:onclick="|redirectToPage('/Wimr/recipe?recipeNo='+${my_recipe.recipeno})|" th:each="my_recipe, iterStat : ${myRecipeList}" th:class="'recipe-shape shape' + ${iterStat.index >= 3 ? ' hidden' : ''}" >  <!--타임리프 값:"myRecipeList" (Recipe 객체의 배열 or List)-->
+                    <div th:onclick="|redirectToPage('/Wimr/recipe/'+${my_recipe.recipeno})|" th:each="my_recipe, iterStat : ${myRecipeList}" th:class="'recipe-shape shape' + ${iterStat.index >= 3 ? ' hidden' : ''}" >  <!--타임리프 값:"myRecipeList" (Recipe 객체의 배열 or List)-->
                         <div class="food-img"><img th:src="${my_recipe.picture != null ? my_recipe.picture : '/img/ingredients.jpg'}"/></div>
                         <div class="food-name display-flex justify-content-center align-items-center" th:text="${my_recipe.title != null ? my_recipe.title : 'Unknown'}"></div>
                     </div>
