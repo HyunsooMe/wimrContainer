@@ -4,8 +4,11 @@ import kr.ac.dankook.ace.whatsinmyref.dto.UserDTO;
 import kr.ac.dankook.ace.whatsinmyref.dto.boardDTO;
 import kr.ac.dankook.ace.whatsinmyref.entity.Recipe;
 import kr.ac.dankook.ace.whatsinmyref.entity.RecipeCmt;
+import kr.ac.dankook.ace.whatsinmyref.entity.Scrap;
+import kr.ac.dankook.ace.whatsinmyref.entity.User;
 import kr.ac.dankook.ace.whatsinmyref.service.RecipeCmtService;
 import kr.ac.dankook.ace.whatsinmyref.service.RecipeService;
+import kr.ac.dankook.ace.whatsinmyref.service.ScrapService;
 import kr.ac.dankook.ace.whatsinmyref.service.UserService;
 import lombok.RequiredArgsConstructor;
 
@@ -39,6 +42,9 @@ public class WhatsInMyRefController {
     @Autowired
     private RecipeCmtService recipeCmtService;
 
+    @Autowired
+    private ScrapService scrapService;
+
     @GetMapping("")
     public String mainPage(Model model) {
         //test 임시값
@@ -62,7 +68,7 @@ public class WhatsInMyRefController {
 //        return "recipe";
 //    }
     @GetMapping("/recipe/{id}")
-    public String listRecipe(@PathVariable int id, Model model) {
+    public String listRecipe(@PathVariable int id,HttpSession session, Model model) {
         //Ingredients 재료
         //Recipe : 사진, 정보
         //others : 영양 성분
@@ -72,9 +78,11 @@ public class WhatsInMyRefController {
         recipeService.getRecipeById(id).ifPresent(recipe -> {
             List<String> others = List.of("열량 : " + recipe.getCalories(), "탄수화물 : " + recipe.getCarbohydrates() ,"단백질 :" + recipe.getProtein(), "지방 : " + recipe.getFat(), "나트륨 : " + recipe.getSodium());
             List<String> ingredient = Arrays.asList(recipe.getIngredient().split(","));
+            List<Recipe> scrapRecipeList=new ArrayList<>();
+            if(session.getAttribute("user")!=null)
+            {scrapRecipeList=scrapService.getAllRecipesBymemberNo(((UserDTO)session.getAttribute("user")).getMemberNo());}
             String picture = recipe.getPicture();
 
-            int recipeNo = recipe.getRecipeno();
             String title = recipe.getTitle();
 
             String k1 = "MANUAL0";
@@ -103,7 +111,11 @@ public class WhatsInMyRefController {
                     break;
                 }
             }
+
+            
+            
             System.out.println(manualImgList.size());
+            model.addAttribute("recipe", recipe);
             model.addAttribute("recipeNo",id);
             model.addAttribute("title",title);
             model.addAttribute("likecount",likecount);
@@ -112,10 +124,10 @@ public class WhatsInMyRefController {
             model.addAttribute("others", others);
             model.addAttribute("manualList", manualList);
             model.addAttribute("manualImgList", manualImgList);
-            model.addAttribute("recipeNo", recipeNo);
-
             model.addAttribute("comments", recipeCmtService.getAllCmts());
             model.addAttribute("newComment", new RecipeCmt());
+            model.addAttribute("likeList", scrapRecipeList);
+            model.addAttribute("scrapList", scrapRecipeList);
         });
         return "recipe";
     }
@@ -219,10 +231,14 @@ public class WhatsInMyRefController {
         myRecipes.add(recipe2);
         myRecipes.add(recipe3);
         myRecipes.add(recipe4);
-
+        //스크랩한 레시피 불러오기
+        List<Recipe> scrapRecipes=new ArrayList<>();
+        for(Scrap s:scrapService.getAllBymemberNo(memberNo)){
+            scrapRecipes.add(s.getRecipe());
+        }
         model.addAttribute("myBoardList", boards);
         model.addAttribute("myRecipeList", myRecipes);
-        model.addAttribute("favoriteRecipeList", myRecipes);
+        model.addAttribute("favoriteRecipeList", scrapRecipes);
         //test end
         return "myPage";
     }
@@ -263,26 +279,49 @@ public class WhatsInMyRefController {
     }
 
     @PostMapping("/scrap")
-    public String doScrap(@RequestParam int recipeNo) {
+    public String doScrap(@RequestParam int recipeNo,HttpSession session, Model model) {
         //로그인된 유저의 scrap 배열에 recipeNo 추가
+        if(session.getAttribute("user") == null){
+            model.addAttribute("userDTO", new UserDTO());
+            model.addAttribute("errorMessage","로그인을 해주세요.");
+            model.addAttribute("searchUrl","/Wimr/login");
+            return "login";
+        }
+        User loginUser=User.toUser((UserDTO)session.getAttribute("user"));
+        Recipe recipe=recipeService.getRecipeById(recipeNo).get();
+        scrapService.addToScrapList(loginUser, recipe);
         return "redirect:/Wimr/recipe/"+recipeNo;
     }
     
     @PostMapping("/unscrap")
-    public String doUnscrap(@RequestParam int recipeNo) {
+    public String doUnscrap(@RequestParam int recipeNo,HttpSession session, Model model) {
         //로그인된 유저의 scrap 배열에 recipeNo 제거
+        if(session.getAttribute("user") == null){
+            model.addAttribute("userDTO", new UserDTO());
+            model.addAttribute("errorMessage","로그인을 해주세요.");
+            model.addAttribute("searchUrl","/Wimr/login");
+            return "login";
+        }
+        User loginUser=User.toUser((UserDTO)session.getAttribute("user"));
+        Recipe recipe=recipeService.getRecipeById(recipeNo).get();
+        scrapService.deleteScrap(loginUser, recipe);
         return "redirect:/Wimr/recipe/"+recipeNo;
     }
     
     @PostMapping("/like")
     public String doLike(@RequestParam int recipeNo) {
-        //로그인된 유저의 recommend 배열에 recipeNo 추가
+        Recipe recipe=recipeService.getRecipeById(recipeNo).get();
+        recipe.setLikecount(recipe.getLikecount()+1);
+        recipeService.saveRecipe(recipe);
         return "redirect:/Wimr/recipe/"+recipeNo;
     }
 
     @PostMapping("/unlike")
     public String doUnlike(@RequestParam int recipeNo) {
         //로그인된 유저의 recommend 배열에 recipeNo 제거
+        Recipe recipe=recipeService.getRecipeById(recipeNo).get();
+        recipe.setLikecount(recipe.getLikecount()-1);
+        recipeService.saveRecipe(recipe);
         return "redirect:/Wimr/recipe/"+recipeNo;
     }
 
