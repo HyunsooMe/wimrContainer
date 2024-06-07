@@ -81,14 +81,9 @@ public class WhatsInMyRefController {
             List<Recipe> scrapRecipeList=new ArrayList<>();
             if(session.getAttribute("user")!=null)
             {scrapRecipeList=scrapService.getAllRecipesBymemberNo(((UserDTO)session.getAttribute("user")).getMemberNo());}
-            String picture = recipe.getPicture();
-
-            String title = recipe.getTitle();
 
             String k1 = "MANUAL0";
             String k2 = "MANUAL_IMG0";
-
-            int likecount =recipe.getLikecount();
 
             int i = 1;
             while(true) {
@@ -116,10 +111,6 @@ public class WhatsInMyRefController {
             
             System.out.println(manualImgList.size());
             model.addAttribute("recipe", recipe);
-            model.addAttribute("recipeNo",id);
-            model.addAttribute("title",title);
-            model.addAttribute("likecount",likecount);
-            model.addAttribute("picture", picture);
             model.addAttribute("ingredients", ingredient);
             model.addAttribute("others", others);
             model.addAttribute("manualList", manualList);
