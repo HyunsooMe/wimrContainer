@@ -241,11 +241,11 @@ public class WhatsInMyRefController {
         if(memberNick!=null){
             loginUser.setMemberNick(memberNick);
         }
-        loginUser.setMemberEmail(memberEmail);
-
+        if(memberEmail!=null){
+            loginUser.setMemberEmail(memberEmail);
+        }
 
         userService.updateUser(loginUser);
-
         return "redirect:/Wimr/myPage?memberNo="+loginUser.getMemberNo();
     }
     
