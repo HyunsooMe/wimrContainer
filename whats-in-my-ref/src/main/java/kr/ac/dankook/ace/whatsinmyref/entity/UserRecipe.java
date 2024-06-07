@@ -1,0 +1,92 @@
+package kr.ac.dankook.ace.whatsinmyref.entity;
+
+import java.time.LocalDateTime;
+
+
+import jakarta.persistence.Embeddable;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.PrePersist;
+import lombok.Data;
+
+@Entity
+@Data
+@Embeddable
+public class UserRecipe {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+    private String recipe_title;
+    private String ingredient;
+    private String nickname;
+    private String tip;
+    private String filename;
+    private String filepath;
+    private int viewcount;
+
+    public Integer getId() {
+        return this.id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getRecipe_title() {
+        return this.recipe_title;
+    }
+
+    public void setRecipe_title(String recipe_title) {
+        this.recipe_title = recipe_title;
+    }
+
+    public String getIngredient() {
+        return this.ingredient;
+    }
+
+    public void setIngredient(String ingredient) {
+        this.ingredient = ingredient;
+    }
+
+    public String getNickname() {
+        return this.nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+    public String getTip() {
+        return this.tip;
+    }
+
+    public void setTip(String tip) {
+        this.tip = tip;
+    }
+
+    public int getViewcount() {
+        return this.viewcount;
+    }
+
+    public void setViewcount(int viewcount) {
+        this.viewcount = viewcount;
+    }
+
+
+    public LocalDateTime getCreated_date() {
+        return this.created_date;
+    }
+
+    public void setCreated_date(LocalDateTime created_date) {
+        this.created_date = created_date;
+    }
+    private LocalDateTime created_date;
+
+    // 엔티티가 저장되기 전에 초기화
+    @PrePersist
+    public void prePersist() {
+        this.created_date = LocalDateTime.now(); // 현재 날짜 및 시간으로 초기화
+    }
+}

@@ -27,23 +27,65 @@
       </div>
       <div class="table_wrap">
         <div class="sort-buttons">
-          <a href="/userRecipeList">최신순</a>
-          <a>조회순</a>
+          <a href="/userRecipe">최신순</a>
+          <a th:href="@{/userRecipe(sort='viewcount')}"
+          class="button"
+          th:classappend="${sort == 'viewcount'} ? 'active' : ''">조회순</a>
         </div>
         <table>
           <thead>
             <tr>
               <th>번호</th>
               <th>요리</th>
-              <!--요리 사진-->
               <th>글제목</th>
               <th>작성자</th>
               <th>작성일</th>
               <th>조회수</th>
             </tr>
           </thead>
-          <tbody></tbody>
+          <tbody>
+            <tr th:each="userrecipe : ${list}">
+              <td th:text="${userrecipeStat.index+1}"></td>
+              <td>
+                <img th:src="@{${userrecipe.filepath}}"></img>
+              </td>
+
+              <td>
+                <a
+                  th:text="${userrecipe.recipe_title}"
+                  th:href="@{/userRecipeView(id=${userrecipe.id})}"
+                ></a>
+              </td>
+              <td
+                th:if="${session.user} != null"
+                th:text="${session.user.memberNick}"
+              ></td>
+              <td
+                th:text="${#temporals.format(userrecipe.created_date, 'yyyy-MM-dd')}"
+              ></td>
+              <td th:text="${userrecipe.viewcount}">조회수</td>
+            </tr>
+          </tbody>
         </table>
+        <div class="registerBtn">
+          <a th:href="@{/myrecipeRegister}">레시피 등록</a>
+        </div>
+        <div class="pages">
+          <th:block th:each="page : ${#numbers.sequence(startPage, endPage)}">
+            <!-- 페이지가 현재 페이지와 다를 때 -->
+            <a
+              th:if="${page != nowPage}"
+              th:href="@{/userRecipe(page = ${page-1})}"
+              th:text="${page}"
+            ></a>
+            <!-- 페이지가 현재 페이지와 같을 때 -->
+            <strong
+              th:if="${page == nowPage}"
+              th:text="${page}"
+              style="color: red"
+            ></strong>
+          </th:block>
+        </div>
       </div>
     </div>
   </body>

@@ -24,13 +24,18 @@
       <div th:replace="~{fragments/sideNav::sidebar}" />
     </div>
     <h2>나만의 레시피</h2>
-    <form id="myRecipe" method="post" action="/myRecipe/registerRCP">
+    <form
+      id="myRecipe"
+      method="post"
+      action="/userrecipe/register"
+      enctype="multipart/form-data"
+    >
       <table>
         <tr>
           <td id="mainImg">대표 사진</td>
         </tr>
         <tr>
-          <td><input type="file" name="mainImg" /></td>
+          <td><input type="file" name="file" /></td>
         </tr>
         <tr>
           <td id="RCP_NM">레시피 제목</td>
@@ -40,7 +45,7 @@
             <input
               type="text"
               id="title"
-              name="title"
+              name="recipe_title"
               placeholder="예) 순두부찌개"
               required
             />
