@@ -33,7 +33,7 @@
                       안녕하세요, <br/>
                       <span th:text="${session.user.memberNick}" class="underline"></span><span>님!</span>
                       <div class="a-myPage display-flex justify-content-center">
-                        <div><a href="/Wimr/myPage">마이페이지</a></div>
+                        <div><a th:href="'/Wimr/myPage?memberNo='+${session.user.memberNo}">마이페이지</a></div>
                       </div>
                       <div style="width: 0%;"><a class="logout-btn" onclick="form_submit('logout')">로그아웃</a></div>
                       <form id="logout" style="display: none;" th:action="@{/Wimr/logout}" method="post"></form>

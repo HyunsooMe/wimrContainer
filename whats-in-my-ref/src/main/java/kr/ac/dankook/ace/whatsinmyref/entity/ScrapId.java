@@ -5,12 +5,12 @@ import java.io.Serializable;
 public class ScrapId implements Serializable {
 
     private int user;
-    private int board;
+    private int recipe;
 
     public ScrapId(){}
-    public ScrapId(int user, int board){
+    public ScrapId(int user, int recipe){
         super();
         this.user = user;
-        this.board = board;
+        this.recipe = recipe;
     }
 }

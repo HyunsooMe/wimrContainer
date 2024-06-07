@@ -28,12 +28,12 @@
             <div id="userImg" class="item justify-content-center display-flex"><img th:src="${imagePath != null ? imagePath : '/img/userDefaultImg.png'}"/></div>      <!--이미지를 못 받았을 때 default 이미지 경로(현재 /img/pen.jpg)-->
             <div id="userName" class="item  justify-content-center"><div style="font-size: 20px;">Nickname:</div>
                 <div id="nameError" class="Error"><li>닉네임은 영문자 or 한글 or 숫자 조합의 3~10자리를 사용해야합니다.</li></div>
-                <strong><u><input id="name" th:placeholder="${session.user != null ? session.user.memberNick : 'Enter nickname'}" th:value="${memberNick}"></u></strong>
+                <strong><u><input id="name" name="memberNick" th:placeholder="${session.user != null ? session.user.memberNick : 'Enter nickname'}" th:value="${memberNick}"></u></strong>
             </div>
             
             <div id="userItem">
                 <div class="infoTitle item">Email:<div id="emailError" class="Error" ><li>이메일 형식에 맞지 않습니다.</li></div> 
-                <input id="email" type="text" th:placeholder="${session.user != null ? session.user.memberEmail : 'Enter email'}" th:value="${memberEmail}"></div>
+                <input id="email" type="text" name="memberEmail" th:placeholder="${session.user != null ? session.user.memberEmail : 'Enter email'}" th:value="${memberEmail}"></div>
                 
             </div>
         </form>
