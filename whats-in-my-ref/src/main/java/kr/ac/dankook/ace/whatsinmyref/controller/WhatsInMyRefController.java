@@ -19,6 +19,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import jakarta.servlet.http.HttpSession;
 import jakarta.websocket.server.PathParam;
 
@@ -250,7 +252,13 @@ public class WhatsInMyRefController {
     }
     
     @GetMapping("/editMyPage")
-    public String editMyPage() {
+    public String editMyPage(HttpSession session,Model model) {
+        if(session.getAttribute("user") == null){
+            model.addAttribute("userDTO", new UserDTO());
+            model.addAttribute("errorMessage","로그인을 해주세요.");
+            model.addAttribute("searchUrl","/Wimr/login");
+            return "login";
+        }
         return "editMyPage";
     }
 
