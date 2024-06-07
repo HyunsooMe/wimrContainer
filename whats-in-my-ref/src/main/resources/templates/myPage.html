@@ -23,11 +23,11 @@
     <div class="emptyBox"></div>
     
     <div class="container myPage-container pico" id="read-mode"> 
-        <div class="edit-btn-wrap display-flex"><button onclick="redirectToPage('/Wimr/editMyPage')">편집</button></div>
+        <div class="edit-btn-wrap display-flex" th:if="${session.user != null and session.user.memberNo == pageUser.memberNo}"><button onclick="redirectToPage('/Wimr/editMyPage')">편집</button></div>
         <div id="userImg" class="item justify-content-center display-flex"><img th:src="${imagePath != null ? imagePath : '/img/userDefaultImg.png'}"/></div>      <!--이미지를 못 받았을 때 default 이미지 경로(현재 /img/pen.jpg)-->
-        <div id="userName" class="item justify-content-center display-flex" ><strong><u><span th:text="${session.user != null ? session.user.memberNick : 'Unknown'}"></span></u></strong></div>
+        <div id="userName" class="item justify-content-center display-flex" ><strong><u><span th:text="${pageUser != null ? pageUser.memberNick : 'Unknown'}"></span></u></strong></div>
         <div id="userItem">
-            <div class="infoTitle item">Email:<article id="email"><span th:text="${session.user != null ? session.user.memberEmail : ''}"></span></article></div>
+            <div class="infoTitle item">Email:<article id="email"><span th:text="${pageUser != null ? pageUser.memberEmail : ''}"></span></article></div>
             
             <div class="my-board-part item" >작성한 게시글:      
                 <table class="board-grid" id="myBoardGrid">

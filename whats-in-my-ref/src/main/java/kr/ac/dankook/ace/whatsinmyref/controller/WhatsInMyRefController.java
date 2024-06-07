@@ -19,7 +19,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import jakarta.servlet.http.HttpSession;
+import jakarta.websocket.server.PathParam;
 
 
 @Controller
@@ -188,8 +191,9 @@ public class WhatsInMyRefController {
     }
     
     @GetMapping("/myPage")
-    public String myPage(Model model) {
+    public String myPage(@RequestParam int memberNo, Model model) {
         //test
+        model.addAttribute("pageUser", userService.findByMemberNo(memberNo));
         List<boardDTO> boards=new ArrayList<boardDTO>();
         boardDTO board1=new boardDTO();
         boardDTO board2=new boardDTO();
@@ -234,14 +238,27 @@ public class WhatsInMyRefController {
     }
 
     @PostMapping("/editProfile")
-    public String editProfile(@ModelAttribute String memberEmail) {
-        
-        
-        return "redirect:/Wimr/myPage";
+    public String editProfile(@RequestParam String memberNick, @RequestParam String memberEmail, HttpSession session) {
+        UserDTO loginUser=(UserDTO)session.getAttribute("user");
+        if(memberNick!=null){
+            loginUser.setMemberNick(memberNick);
+        }
+        if(memberEmail!=null){
+            loginUser.setMemberEmail(memberEmail);
+        }
+
+        userService.updateUser(loginUser);
+        return "redirect:/Wimr/myPage?memberNo="+loginUser.getMemberNo();
     }
     
     @GetMapping("/editMyPage")
-    public String editMyPage() {
+    public String editMyPage(HttpSession session,Model model) {
+        if(session.getAttribute("user") == null){
+            model.addAttribute("userDTO", new UserDTO());
+            model.addAttribute("errorMessage","로그인을 해주세요.");
+            model.addAttribute("searchUrl","/Wimr/login");
+            return "login";
+        }
         return "editMyPage";
     }
 

@@ -47,4 +47,15 @@ public class UserService {
     public boolean existsByMemberEmail(String memberEmail){
         return userRepository.existsByMemberEmail(memberEmail);
     }
+
+    public UserDTO findByMemberNo(int memberNo){
+        return UserDTO.toUserDTO(userRepository.findByMemberNo(memberNo));
+    }
+
+    public User updateUser(UserDTO updateUser){
+
+        User user=User.toUser(updateUser);
+
+        return userRepository.save(user);
+    }
 }
