@@ -7,7 +7,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.io.Serial;
 import java.io.Serializable;
 
 @Entity
@@ -15,8 +14,9 @@ import java.io.Serializable;
 @Getter @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@IdClass(ScrapId.class)
+@IdClass(ScrapNo.class)
 public class Scrap implements Serializable {
+
     @Id
     @ManyToOne
     @JsonBackReference
@@ -26,7 +26,7 @@ public class Scrap implements Serializable {
     @Id
     @ManyToOne
     @JsonBackReference
-    @JoinColumn(name="recipeno")
+    @JoinColumn(name="recipeNo")
     private Recipe recipe;
 
 }
