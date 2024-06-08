@@ -271,7 +271,9 @@ public class WhatsInMyRefController {
 
     @PostMapping("/findAcc/find-id")
     public String findId(@ModelAttribute UserDTO userDTO) {
-        //userDTO의 이메일에 맞는 아이디 찾아서 검열 후 masked_member_id에 보내야됨 
+        if(userService.existsByMemberEmail(userDTO.getMemberEmail())){
+            
+        }
         return "redirect:/Wimr/findAcc";
     }
     
