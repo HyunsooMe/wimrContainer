@@ -48,6 +48,11 @@ public class UserService {
         return userRepository.existsByMemberEmail(memberEmail);
     }
 
+    public String findMemberIdByMemberEmail(String memberEmail){
+        User user = userRepository.findByMemberEmail(memberEmail);
+        return user != null ? user.getMemberId() : null;
+    }
+
     public UserDTO findByMemberNo(int memberNo){
         return UserDTO.toUserDTO(userRepository.findByMemberNo(memberNo));
     }
@@ -57,5 +62,9 @@ public class UserService {
         User user=User.toUser(updateUser);
 
         return userRepository.save(user);
+    }
+
+    public UserDTO getByMemberNick(String memberNick) {
+        return UserDTO.toUserDTO(userRepository.findByMemberNick(memberNick));
     }
 }
