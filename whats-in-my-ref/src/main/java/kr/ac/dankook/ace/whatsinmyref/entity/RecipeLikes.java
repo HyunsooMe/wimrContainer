@@ -10,12 +10,13 @@ import lombok.Setter;
 import java.io.Serializable;
 
 @Entity
-@Table(name="scrap")
-@Getter @Setter
+@Table(name="RecipeLikes")
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@IdClass(ScrapNo.class)
-public class Scrap implements Serializable {
+@IdClass(RecipeLikesNo.class)
+public class RecipeLikes implements Serializable {
 
     @Id
     @ManyToOne
@@ -28,5 +29,5 @@ public class Scrap implements Serializable {
     @JsonBackReference
     @JoinColumn(name="recipeNo")
     private Recipe recipe;
-
 }
+
