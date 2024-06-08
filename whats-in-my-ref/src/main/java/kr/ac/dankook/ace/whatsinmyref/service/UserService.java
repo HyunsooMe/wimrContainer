@@ -48,6 +48,11 @@ public class UserService {
         return userRepository.existsByMemberEmail(memberEmail);
     }
 
+    public String findMemberIdByMemberEmail(String memberEmail){
+        User user = userRepository.findByMemberEmail(memberEmail);
+        return user != null ? user.getMemberId() : null;
+    }
+
     public UserDTO findByMemberNo(int memberNo){
         return UserDTO.toUserDTO(userRepository.findByMemberNo(memberNo));
     }

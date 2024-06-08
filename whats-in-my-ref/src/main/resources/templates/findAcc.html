@@ -59,6 +59,13 @@
             <div class="underline" th:text="${masked_member_id}"></div>
             &nbsp;입니다.
           </div>
+          <div
+            id="result"
+            class="display-flex align-items-center justify-content-center"
+            th:if="${masked_member_id == null}"
+          >
+            이메일이 존재하지 않습니다.
+          </div>
         </div>
         <!-- -------------------------------------------------------------------------------------------------------------------- -->
 
