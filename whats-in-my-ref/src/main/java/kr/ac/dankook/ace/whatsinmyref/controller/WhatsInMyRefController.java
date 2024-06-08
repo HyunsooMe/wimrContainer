@@ -14,6 +14,8 @@ import kr.ac.dankook.ace.whatsinmyref.service.ScrapService;
 import kr.ac.dankook.ace.whatsinmyref.service.UserService;
 import lombok.RequiredArgsConstructor;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Arrays;
@@ -121,7 +123,7 @@ public class WhatsInMyRefController {
             model.addAttribute("others", others);
             model.addAttribute("manualList", manualList);
             model.addAttribute("manualImgList", manualImgList);
-            model.addAttribute("comments", recipeCmtService.getAllCmts());
+            model.addAttribute("comments", recipeCmtService.findRecipeCmtsById(recipe.getRecipeno()));
             model.addAttribute("newComment", new RecipeCmt());
             model.addAttribute("likeList", likeRecipeList);
             model.addAttribute("scrapList", scrapRecipeList);
@@ -130,13 +132,16 @@ public class WhatsInMyRefController {
     }
 
     @PostMapping("/recipe/{title}")
-    public String addRecipeCmt(@PathVariable String title, RecipeCmt recipeCmt) {
+    public String addRecipeCmt(@PathVariable String title, RecipeCmt recipeCmt) throws UnsupportedEncodingException {
         recipeService.getRecipeByTitle(title).ifPresent(recipe -> {
             recipeCmt.setTime(new Date());
             recipeCmt.setRno(recipe.getRecipeno());
             recipeCmtService.saveRecipeCmt(recipeCmt);
         });
-        return "redirect:/Wimr/recipe/"+title;
+
+        String encodedTitle = URLEncoder.encode(title, "UTF-8");
+        encodedTitle = encodedTitle.replaceAll("\\+", "%20");
+        return "redirect:/Wimr/recipe/"+encodedTitle;
     }
 
     @GetMapping("/register")
