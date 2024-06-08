@@ -82,7 +82,22 @@
         <tr>
           <td id="RCP_STEP">요리순서</td>
         </tr>
-        <tbody id="steps">
+        <tr>
+          <td>
+            <textarea
+              name="step"
+              placeholder="enter키로 순서를 구분하여 입력해주세요. 
+
+예) 1. 물을 끓인다.
+    2. 스프를 넣는다
+    3. 라면을 넣는다.
+    4. 맛있게 먹는다."
+              required
+            ></textarea>
+          </td>
+        </tr>
+      </table>
+      <!-- <tbody id="steps">
           <tr class="step">
             <td>
               <input
@@ -124,7 +139,7 @@
       <div>
         <button type="button" onclick="addStep()">➕ 요리순서 추가</button>
         <button type="button" onclick="deleteStep()">➖ 요리순서 삭제</button>
-      </div>
+      </div>-->
       <div>
         <button type="submit" class="send">등록</button>
       </div>

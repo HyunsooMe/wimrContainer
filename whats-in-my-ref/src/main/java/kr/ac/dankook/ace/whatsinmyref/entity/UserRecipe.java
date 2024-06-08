@@ -1,7 +1,8 @@
 package kr.ac.dankook.ace.whatsinmyref.entity;
 
 import java.time.LocalDateTime;
-
+import java.util.Arrays;
+import java.util.List;
 
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.Entity;
@@ -25,6 +26,7 @@ public class UserRecipe {
     private String filename;
     private String filepath;
     private int viewcount;
+    private String step;
 
     public Integer getId() {
         return this.id;
@@ -74,6 +76,22 @@ public class UserRecipe {
         this.viewcount = viewcount;
     }
 
+    public String getStep(){
+        return this.step;
+    }
+
+    public void setStep(String step) {
+        this.step = step;
+    }
+
+    // 줄 단위로 step 필드를 분리하여 리스트로 반환하는 메서드
+    public List<String> getStepAsList() {
+        if (step != null && !step.isEmpty()) {
+            return Arrays.asList(step.split("\\r?\\n"));
+        } else {
+            return Arrays.asList();
+        }
+    }
 
     public LocalDateTime getCreated_date() {
         return this.created_date;

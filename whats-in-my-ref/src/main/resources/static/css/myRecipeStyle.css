@@ -45,3 +45,9 @@ form input {
 table {
   width: 100%;
 }
+
+textarea {
+  width: 100%;
+  height: 400px;
+  resize: none;
+}

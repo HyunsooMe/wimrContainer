@@ -3,9 +3,58 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>미슐랭장고</title>
+    <link rel="stylesheet" th:href="@{/css/userRecipeView.css}" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.conditional.min.css"
+    />
+    <link rel="stylesheet" th:href="@{/css/header.css}" />
+    <link rel="stylesheet" th:href="@{/css/common.css}" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
+    <header th:replace="~{fragments/header::header}"></header>
     <h2>사용자 레시피 상세</h2>
+    <div class="content-wrap">
+      <img th:src="@{*{userrecipe.filepath}}" alt="Recipe Image" />
+
+      <div class="container">
+        <table class="recipe-table">
+          <tr>
+            <th colspan="2" class="title-content">
+              <h1 th:text="${userrecipe.recipe_title}"></h1>
+            </th>
+          </tr>
+          <tr>
+            <td class="ingredient-label" style="font-weight: bold">재료</td>
+            <td class="ingredient-content">
+              <div th:text="${userrecipe.ingredient}"></div>
+            </td>
+          </tr>
+          <tr>
+            <td class="tip-label" style="font-weight: bold">
+              꿀팁이나 주의사항
+            </td>
+            <td class="tip-content">
+              <div th:text="${userrecipe.tip}"></div>
+            </td>
+          </tr>
+          <tr>
+            <td class="step-label" style="font-weight: bold">요리 순서</td>
+            <td class="step-content">
+              <ul class="step">
+                <li th:each="step : ${steps}" th:text="${step}"></li>
+              </ul>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
   </body>
 </html>

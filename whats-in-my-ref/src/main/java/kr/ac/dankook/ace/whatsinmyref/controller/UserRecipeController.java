@@ -1,5 +1,7 @@
 package kr.ac.dankook.ace.whatsinmyref.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -66,8 +68,15 @@ public class UserRecipeController {
     @GetMapping("/userRecipeView")
     public String userRecipeView(Model model, Integer id){
 
-        model.addAttribute("userrcipe", userRecipeService.userRecipeView(id));
+        // 게시글의 상세 정보를 불러와서 모델에 추가
+        UserRecipe userRecipe = userRecipeService.userRecipeView(id);
+        model.addAttribute("userrecipe", userRecipe);
+
+        // 요리 순서를 줄 단위로 분리하여 모델에 추가
+        List<String> steps = userRecipe.getStepAsList();
+        model.addAttribute("steps", steps);
+        model.addAttribute("userrecipe", userRecipeService.userRecipeView(id));
         userRecipeService.increaseViewCount(id);
-        return "userRecipeView";
+        return "/userRecipeView";
     }
 }
