@@ -28,62 +28,6 @@ public class UserRecipe {
     private int viewcount;
     private String step;
 
-    public Integer getId() {
-        return this.id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getRecipe_title() {
-        return this.recipe_title;
-    }
-
-    public void setRecipe_title(String recipe_title) {
-        this.recipe_title = recipe_title;
-    }
-
-    public String getIngredient() {
-        return this.ingredient;
-    }
-
-    public void setIngredient(String ingredient) {
-        this.ingredient = ingredient;
-    }
-
-    public String getNickname() {
-        return this.nickname;
-    }
-
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
-    }
-
-    public String getTip() {
-        return this.tip;
-    }
-
-    public void setTip(String tip) {
-        this.tip = tip;
-    }
-
-    public int getViewcount() {
-        return this.viewcount;
-    }
-
-    public void setViewcount(int viewcount) {
-        this.viewcount = viewcount;
-    }
-
-    public String getStep(){
-        return this.step;
-    }
-
-    public void setStep(String step) {
-        this.step = step;
-    }
-
     // 줄 단위로 step 필드를 분리하여 리스트로 반환하는 메서드
     public List<String> getStepAsList() {
         if (step != null && !step.isEmpty()) {

@@ -49,46 +49,52 @@
     </div>
 
     <div class="Contents pico" data-aos="fade-up">
-      <h1>이 주의 레시피</h1>
+      <h1>인기 레시피</h1>
       <div class="box_div ranking-div">
         <div id="second-recipe" class="big-box pico text-center" data-aos="fade-up" th:object="${second_rank_recipe}">
-          <p style="font-size: 40px;"><strong>2등</strong></p>
-          <a th:href="@{'/Wimr/recipe/'+*{title}}"><div
+          <div class="img-wrap display-flex justify-content-center"><img src="/img/silver.png"/></div>
+          <div
             class="box"
             th:style="
               'background-image: url('+*{picture}+');
               background-position: center;
               background-size: cover;'
             "
+            th:attr="data-title=*{title}"
+            th:onclick="redirectToRecipePage(this)"
           >
-          </div></a>
+          </div>
           <p th:text="*{title}"></p>
         </div>
 
         <div id="first-recipe" class="big-box text-center pico" data-aos="fade-up" th:object="${first_rank_recipe}">
-          <p style="font-size: 40px;"><strong>1등</strong></p>
-          <a th:href="'/Wimr/recipe/'+*{title}"><div
+          <div class="img-wrap display-flex justify-content-center"><img src="/img/gold.png"/></div>
+          <div
             class="box"
             th:style="
               'background-image: url('+*{picture}+');
               background-position: center;
               background-size: cover;'
             "
+            th:attr="data-title=*{title}"
+            th:onclick="redirectToRecipePage(this)"
           >
-          </div></a>
+          </div>
           <p th:text="*{title}"></p>
         </div>
         <div id="third-recipe" class="big-box text-center pico" data-aos="fade-up" th:object="${third_rank_recipe}">
-          <p style="font-size: 40px;"><strong>3등</strong></p>
-          <a th:href="'/Wimr/recipe/'+*{title}"><div
+          <div class="img-wrap display-flex justify-content-center"><img src="/img/copper.png"/></div>
+          <div
             class="box"
             th:style="
               'background-image: url('+*{picture}+');
               background-position: center;
               background-size: cover;'
             "
+            th:attr="data-title=*{title}"
+            th:onclick="redirectToRecipePage(this)"
           >
-          </div></a>
+          </div>
           <p th:text="*{title}"></p>
         </div>
       </div>
@@ -96,7 +102,7 @@
     
 
     <div class="Contents pico">
-      <h1>바로가기 box</h1>
+      <h1>주요기능</h1>
       <div class="box_div">
         <div class="big-box pico text-center" data-aos="fade-up">
           <div
