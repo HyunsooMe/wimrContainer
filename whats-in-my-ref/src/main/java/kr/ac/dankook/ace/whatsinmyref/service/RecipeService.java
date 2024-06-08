@@ -28,6 +28,8 @@ public class RecipeService {
         return recipeRepository.findById(id);
     }
 
+    public Optional<Recipe> getRecipeByTitle(String title){ return recipeRepository.findByTitle(title);}
+
     public void saveRecipe(Recipe recipe){
         recipeRepository.save(recipe);
     }

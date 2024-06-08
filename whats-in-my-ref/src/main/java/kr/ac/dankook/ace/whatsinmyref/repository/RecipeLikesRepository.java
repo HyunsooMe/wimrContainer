@@ -8,5 +8,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface RecipeLikesRepository extends JpaRepository<RecipeLikes, RecipeLikesNo> {
-    List<Scrap> findAllByUser_memberNo(int memberno);
+    List<RecipeLikes> findAllByUser_memberNo(int memberno);
 }
