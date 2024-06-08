@@ -317,14 +317,16 @@ public class WhatsInMyRefController {
     @PostMapping("/findAcc/find-id")
     public String findId(@ModelAttribute UserDTO userDTO, Model model) {
         String memberEmail = userDTO.getMemberEmail();
+        System.out.println(memberEmail);
+        String maskedMemberId = null;
         if(userService.existsByMemberEmail(memberEmail)){
             String memberId = userService.findMemberIdByMemberEmail(memberEmail);
-            String maskedMemberId = "**" + memberId.substring(2);
-            model.addAttribute("masked_member_id", maskedMemberId);
-        } else {
-            model.addAttribute("masked_member_id", null);
+            maskedMemberId = "**" + memberId.substring(2);
+            System.out.println("sucess");  
         }
-        return "redirect:/Wimr/findAcc";
+        model.addAttribute("masked_member_id", maskedMemberId);
+        model.addAttribute("idSearchPerformed", true);
+        return "findAcc";
     }
     
 

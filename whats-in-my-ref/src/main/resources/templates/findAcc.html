@@ -41,7 +41,7 @@
             method="post"
             th:object="${userDTO}"
           >
-            <input type="text" id="memberEmail" th:value="*{memberEmail}" />
+            <input type="text" id="memberEmail" th:field="*{memberEmail}" />
             <div id="emailError" class="Error">
               <li>이메일을 입력해주세요.</li>
             </div>
@@ -53,18 +53,16 @@
           <div
             id="result"
             class="display-flex align-items-center justify-content-center"
-            th:if="${masked_member_id!=null}"
+            th:if="${idSearchPerformed}"
           >
-            아이디는&nbsp;
-            <div class="underline" th:text="${masked_member_id}"></div>
-            &nbsp;입니다.
-          </div>
-          <div
-            id="result"
-            class="display-flex align-items-center justify-content-center"
-            th:if="${masked_member_id == null}"
-          >
-            이메일이 존재하지 않습니다.
+            <div th:if="${masked_member_id!=null}">
+              아이디는&nbsp;
+              <div class="underline" th:text="${masked_member_id}"></div>
+              &nbsp;입니다.
+            </div>
+            <div th:if="${masked_member_id == null}">
+              이메일이 존재하지 않습니다.
+            </div>
           </div>
         </div>
         <!-- -------------------------------------------------------------------------------------------------------------------- -->
