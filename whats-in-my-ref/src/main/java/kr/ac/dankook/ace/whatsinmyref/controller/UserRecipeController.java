@@ -41,7 +41,7 @@ public class UserRecipeController {
 
 
     // 게시글 목록
-    @GetMapping("/userRecipe")
+    @GetMapping("/userRecipes")
     public String userRecipeList(@ModelAttribute UserDTO userDTO, Model model, 
                              @RequestParam(required = false, defaultValue = "id") String sort,
                              @PageableDefault(page = 0, size = 10, sort = "id", direction = Sort.Direction.DESC) Pageable pageable){

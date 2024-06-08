@@ -28,13 +28,16 @@ public class RecipeLikesService {
     }
 
     //유저-레시피로 좋아요한 레시피 추가
-    public RecipeLikes addTolikeList(User user,Recipe recipe){
+    public boolean addTolikeList(User user,Recipe recipe){
         RecipeLikes likeRecipe=new RecipeLikes(user,recipe);
-        return recipeLikesRepository.save(likeRecipe);
+        if(recipeLikesRepository.save(likeRecipe)!=null)    return true;
+        return false;
     }
 
-    public void deleteLike(User user,Recipe recipe){
+    public boolean deleteLike(User user,Recipe recipe){
         RecipeLikes likeRecipe=new RecipeLikes(user,recipe);
         recipeLikesRepository.delete(likeRecipe);
+        if(recipeLikesRepository.findByUserAndRecipe(user,recipe)==null) {return true;}
+        return false;
     }
 }

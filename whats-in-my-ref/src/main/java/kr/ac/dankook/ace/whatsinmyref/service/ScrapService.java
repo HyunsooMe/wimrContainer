@@ -31,13 +31,16 @@ public class ScrapService {
         return scrapRecipes;
     }
 
-    public Scrap addToScrapList(User user,Recipe recipe){
+    public boolean addToScrapList(User user,Recipe recipe){
         Scrap scrap=new Scrap(user,recipe);
-        return scrapRepository.save(scrap);
+        if(scrapRepository.save(scrap)!=null)   return true;
+        return false;
     }
 
-    public void deleteScrap(User user,Recipe recipe){
+    public boolean deleteScrap(User user,Recipe recipe){
         Scrap scrap=new Scrap(user,recipe);
         scrapRepository.delete(scrap);
+        if(scrapRepository.findByUserAndRecipe(user,recipe)==null) {return true;}
+        return false;
     }
 }

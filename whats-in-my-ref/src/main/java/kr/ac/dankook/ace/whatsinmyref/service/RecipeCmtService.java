@@ -19,7 +19,8 @@ public class RecipeCmtService {
         return recipeCmtRepository.findRecipeCmtByRno(id);
     }
 
-    public void saveRecipeCmt(RecipeCmt recipeCmt){
-        recipeCmtRepository.save(recipeCmt);
+    public boolean saveRecipeCmt(RecipeCmt recipeCmt){
+        if(recipeCmtRepository.save(recipeCmt)!=null) return true;
+        return false;
     }
 }
