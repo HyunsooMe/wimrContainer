@@ -48,10 +48,10 @@ public class WhatsInMyRefController {
     @GetMapping("")
     public String mainPage(Model model) {
         //test 임시값
-        Recipe recipe=recipeService.getRecipeById(11).get();
-        model.addAttribute("first_rank_recipe",recipe);
-        model.addAttribute("second_rank_recipe",recipe);
-        model.addAttribute("third_rank_recipe",recipe);
+        List<Recipe> recipe=recipeService.getTop3ByLikecount();
+        model.addAttribute("first_rank_recipe",recipe.get(0));
+        model.addAttribute("second_rank_recipe",recipe.get(1));
+        model.addAttribute("third_rank_recipe",recipe.get(2));
         //test 임시값 여기까지
         return "index";
     }
@@ -110,6 +110,7 @@ public class WhatsInMyRefController {
             
             
             System.out.println(manualImgList.size());
+            model.addAttribute("nickname","정동재");
             model.addAttribute("recipe", recipe);
             model.addAttribute("ingredients", ingredient);
             model.addAttribute("others", others);
@@ -193,10 +194,20 @@ public class WhatsInMyRefController {
         return "redirect:/Wimr";
     }
     
-    @GetMapping("/myPage")
-    public String myPage(@RequestParam int memberNo, Model model) {
+    @GetMapping("/myPage/{memberNick}")
+    public String myPage(@PathVariable String memberNick, Model model) {
+        UserDTO pageUser=userService.getByMemberNick(memberNick);
+        model.addAttribute("pageUser", pageUser);
+
+
+         //스크랩한 레시피 불러오기
+         List<Recipe> scrapRecipes=new ArrayList<>();
+         for(Scrap s:scrapService.getAllBymemberNo(pageUser.getMemberNo())){
+             scrapRecipes.add(s.getRecipe());
+         }
+         model.addAttribute("favoriteRecipeList", scrapRecipes);
         //test
-        model.addAttribute("pageUser", userService.findByMemberNo(memberNo));
+        
         List<boardDTO> boards=new ArrayList<boardDTO>();
         boardDTO board1=new boardDTO();
         boardDTO board2=new boardDTO();
@@ -222,14 +233,10 @@ public class WhatsInMyRefController {
         myRecipes.add(recipe2);
         myRecipes.add(recipe3);
         myRecipes.add(recipe4);
-        //스크랩한 레시피 불러오기
-        List<Recipe> scrapRecipes=new ArrayList<>();
-        for(Scrap s:scrapService.getAllBymemberNo(memberNo)){
-            scrapRecipes.add(s.getRecipe());
-        }
+       
         model.addAttribute("myBoardList", boards);
         model.addAttribute("myRecipeList", myRecipes);
-        model.addAttribute("favoriteRecipeList", scrapRecipes);
+        
         //test end
         return "myPage";
     }

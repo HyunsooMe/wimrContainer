@@ -32,6 +32,10 @@ public class RecipeService {
         recipeRepository.save(recipe);
     }
 
+    public List<Recipe> getTop3ByLikecount(){
+        return recipeRepository.findTop3ByLikecountDesc();
+    }
+
     public void getRecipes() {
         String url = "http://openapi.foodsafetykorea.go.kr/api/f415b345bda946528b8e/COOKRCP01/json/0/30";
         RestTemplate restTemplate = new RestTemplate();
