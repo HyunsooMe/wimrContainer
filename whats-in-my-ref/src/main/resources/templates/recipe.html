@@ -92,7 +92,7 @@
                 <ul >
                 <div th:each="manual, index : ${manualList}">
                     <li style="list-style: none; padding-left: 0;" th:text="${manual}"></li>
-                    <div class="manualImg-wrap"><img th:src="${manualImgList[index.index]}"/></div>
+                    <div class="manualImg-wrap" th:if="${manualImgList != null}"><img th:src="${manualImgList[index.index]}"/></div>
                 </ul>
             </li>
             <hr />
