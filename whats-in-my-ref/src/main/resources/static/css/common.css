@@ -77,11 +77,14 @@ a:hover {
     font-size: 15px;
   }
   .navbar .dropdown ul{
-    left:-70px;
+    left:-50px;
   }
   .navbar .dropdown-box{
     width: 150px;
     font-size: 20px;
+  }
+  .navbar .dropdown-box .before-login .btn-wrap{
+    --pico-form-element-spacing-horizontal: 0.2rem;
   }
   .navbar .my-info .a-myPage a{
     font-size: 30px;
@@ -110,6 +113,10 @@ a:hover {
 /*모바일*/
 @media (max-width: 853px) {
   /*header.html*/
+  #header .logo{
+    padding-left: 20px;
+  }
+
   .navbar {
     display: none;
     content-visibility: hidden;

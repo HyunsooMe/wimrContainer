@@ -260,8 +260,10 @@ public class WhatsInMyRefController {
     }
 
     @PostMapping("/editProfile")
-    public String editProfile(@RequestParam String memberNick, @RequestParam String memberEmail, HttpSession session) {
+    public String editProfile(@RequestParam String memberNick, @RequestParam String memberEmail, HttpSession session) throws UnsupportedEncodingException {
         UserDTO loginUser=(UserDTO)session.getAttribute("user");
+        System.out.println("Before update: " + loginUser);
+
         if(memberNick!=null){
             loginUser.setMemberNick(memberNick);
         }
@@ -269,8 +271,12 @@ public class WhatsInMyRefController {
             loginUser.setMemberEmail(memberEmail);
         }
 
+        session.setAttribute("user", loginUser);
+        System.out.println("After update: " + loginUser);
+
         userService.updateUser(loginUser);
-        return "redirect:/Wimr/myPage?memberNo="+loginUser.getMemberNo();
+        System.out.println("User updated");
+        return "redirect:/Wimr/myPage/"+URLEncoder.encode(memberNick, "UTF-8");
     }
     
     @GetMapping("/editMyPage")
