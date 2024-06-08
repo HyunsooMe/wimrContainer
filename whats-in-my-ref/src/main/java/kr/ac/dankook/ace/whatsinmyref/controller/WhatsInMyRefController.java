@@ -67,15 +67,14 @@ public class WhatsInMyRefController {
 //        model.addAttribute("foodImg", foodImg);         //음식 사진 path
 //        return "recipe";
 //    }
-    @GetMapping("/recipe/{id}")
-    public String listRecipe(@PathVariable int id,HttpSession session, Model model) {
+    @GetMapping("/recipe/{title}")
+    public String listRecipe(@PathVariable String title,HttpSession session, Model model) {
         //Ingredients 재료
         //Recipe : 사진, 정보
         //others : 영양 성분
         List<String> manualList = new ArrayList<>();
         List<String> manualImgList = new ArrayList<>();
-
-        recipeService.getRecipeById(id).ifPresent(recipe -> {
+        recipeService.getRecipeByTitle(title).ifPresent(recipe -> {
             List<String> others = List.of("열량 : " + recipe.getCalories(), "탄수화물 : " + recipe.getCarbohydrates() ,"단백질 :" + recipe.getProtein(), "지방 : " + recipe.getFat(), "나트륨 : " + recipe.getSodium());
             List<String> ingredient = Arrays.asList(recipe.getIngredient().split(","));
             List<Recipe> scrapRecipeList=new ArrayList<>();
@@ -108,8 +107,6 @@ public class WhatsInMyRefController {
             }
 
             
-            
-            System.out.println(manualImgList.size());
             model.addAttribute("recipe", recipe);
             model.addAttribute("ingredients", ingredient);
             model.addAttribute("others", others);
