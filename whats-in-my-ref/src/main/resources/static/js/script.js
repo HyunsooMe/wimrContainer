@@ -241,7 +241,6 @@ function displayRecipes(recipes) {
     alert("해당 재료를 포함한 레시피가 없습니다.");
     return;
   }
-
   recipes.forEach((recipe, index) => {
     const recipeDiv = document.createElement("div");
     recipeDiv.className = "recipe";
@@ -263,9 +262,9 @@ function displayRecipes(recipes) {
     const title = recipeDiv.querySelector("h3");
     if (title) {
       title.addEventListener("click", function () {
-        console.log("클릭됨");
+        console.log("제목 클릭됨");
         const recipeName = this.getAttribute("data-name");
-        window.location.href = `/recipe/${encodeURIComponent(recipeName)}`;
+        window.location.href = `Wimr/recipe/${encodeURIComponent(recipeName)}`;
       });
     }
 
@@ -273,11 +272,11 @@ function displayRecipes(recipes) {
     const img = recipeDiv.querySelector("img");
     if (img) {
       img.addEventListener("click", function () {
-        console.log("클릭됨");
+        console.log("이미지 클릭됨");
         const recipeName = recipeDiv
           .querySelector("h3")
           .getAttribute("data-name");
-        window.location.href = `/recipe/${encodeURIComponent(recipeName)}`;
+        window.location.href = `/Wimr/recipe/${encodeURIComponent(recipeName)}`;
       });
     }
   });
