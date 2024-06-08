@@ -106,7 +106,6 @@ public class WhatsInMyRefController {
                 }
             }
 
-            
             model.addAttribute("recipe", recipe);
             model.addAttribute("ingredients", ingredient);
             model.addAttribute("others", others);
@@ -120,14 +119,14 @@ public class WhatsInMyRefController {
         return "recipe";
     }
 
-    @PostMapping("/recipe/{id}")
-    public String addRecipeCmt(@PathVariable int id, RecipeCmt recipeCmt) {
-        recipeService.getRecipeById(id).ifPresent(recipe -> {
+    @PostMapping("/recipe/{title}")
+    public String addRecipeCmt(@PathVariable String title, RecipeCmt recipeCmt) {
+        recipeService.getRecipeByTitle(title).ifPresent(recipe -> {
             recipeCmt.setTime(new Date());
-            recipeCmt.setRno(id);
+            recipeCmt.setRno(recipe.getRecipeno());
             recipeCmtService.saveRecipeCmt(recipeCmt);
         });
-        return "redirect:/Wimr/recipe/"+id;
+        return "redirect:/Wimr/recipe/"+title;
     }
 
     @GetMapping("/register")
