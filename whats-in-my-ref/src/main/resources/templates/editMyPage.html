@@ -24,7 +24,7 @@
 
     <div class="container myPage-container pico" id="write-mode">
         <form id="edit-profile-form" th:action="@{/Wimr/editProfile}" method="post">
-            <div class="edit-btn-wrap display-flex"><button type="button" onclick="form_check()">저장</button> <button type="button" onclick="redirectToPage('/Wimr/myPage')">취소</button></div>
+            <div class="edit-btn-wrap display-flex"><button type="button" onclick="form_check()">저장</button> <a th:href="'/Wimr/myPage/'+${session.user.memberNick}"><button type="button" >취소</button></a></div>
             <div id="userImg" class="item justify-content-center display-flex"><img th:src="${imagePath != null ? imagePath : '/img/userDefaultImg.png'}"/></div>      <!--이미지를 못 받았을 때 default 이미지 경로(현재 /img/pen.jpg)-->
             <div id="userName" class="item  justify-content-center"><div style="font-size: 20px;">Nickname:</div>
                 <div id="nameError" class="Error"><li>닉네임은 영문자 or 한글 or 숫자 조합의 3~10자리를 사용해야합니다.</li></div>
