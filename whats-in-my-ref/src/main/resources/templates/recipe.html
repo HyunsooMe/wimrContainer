@@ -34,7 +34,11 @@
         <form id="unscrap-form" th:action="@{'/Wimr/unscrap?recipeNo='+${recipe.recipeno}}" method="post"></form>      <!--즐겨찾기 제거 Wimr/unscrap?recipeNo=???-->
         <form id="recommend-form" th:action="@{'/Wimr/like?recipeNo='+${recipe.recipeno}}" method="post"></form>       <!--즐겨찾기 제거 Wimr/like?recipeNo=???-->
         <form id="unrecommend-form" th:action="@{'/Wimr/unlike?recipeNo='+${recipe.recipeno}}" method="post"></form>   <!--즐겨찾기 제거 Wimr/unlike?recipeNo=???-->
-        <div class="display-flex" style="justify-content:left; padding-left: 10px;padding-right: 10px;"><span th:text="|등록자 : ${nickname != null ? nickname : 'Unknown'}|"></span></div>
+        <div class="display-flex" style="justify-content:left; padding-left: 10px;padding-right: 10px;">
+            등록자 :&nbsp;
+            <span th:if="${nickname == null}">Unknown</span>
+            <a th:if="${nickname != null}" th:text="${nickname}" th:href="${'/Wimr/myPage/'+nickname}"></a>
+        </div>
         <div id="foodImg" class="item">
             <div id="blur">
                 <div id="recommend-and-scrap" class="display-flex">
@@ -104,7 +108,7 @@
                 <div class="card-body">
                     <div id="user-info"><div class="name" th:text="${session.user != null ? session.user.memberNick : 'Unknown'}"></div></div>
 <!--                    컨트롤러까지 갖춰졌을 때의 Comment form-->
-                    <form id="comment-form" class="comment-form" th:action="@{/Wimr/recipe/{id}(id=${recipeNo})}" th:object="${newComment}" method="post">
+                    <form id="comment-form" class="comment-form" th:action="@{/Wimr/recipe/{title}(title=${recipe.getTitle()})}" th:object="${newComment}" method="post">
                         <textarea th:field="*{comment}" id="commentContentInput" rows="3" placeholder="댓글을 입력해주세요" maxlength="300" style="resize: none;"></textarea>
                         <div class="comment-sub-wrap flexible-font-size">
                             <div id="char-count">0/300</div>

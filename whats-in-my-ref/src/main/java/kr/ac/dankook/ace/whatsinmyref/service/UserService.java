@@ -58,4 +58,8 @@ public class UserService {
 
         return userRepository.save(user);
     }
+
+    public UserDTO getByMemberNick(String memberNick) {
+        return UserDTO.toUserDTO(userRepository.findByMemberNick(memberNick));
+    }
 }
