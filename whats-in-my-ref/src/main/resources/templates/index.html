@@ -53,46 +53,43 @@
       <div class="box_div ranking-div">
         <div id="second-recipe" class="big-box pico text-center" data-aos="fade-up" th:object="${second_rank_recipe}">
           <p style="font-size: 40px;"><strong>2등</strong></p>
-          <div
+          <a th:href="@{'/Wimr/recipe/'+*{title}}"><div
             class="box"
             th:style="
               'background-image: url('+*{picture}+');
               background-position: center;
               background-size: cover;'
             "
-            th:onclick="'redirectToPage(\'/Wimr/recipe/'+*{recipeno}+'\')'"
           >
-          </div>
-          <p>2등</p>
+          </div></a>
+          <p th:text="*{title}"></p>
         </div>
 
         <div id="first-recipe" class="big-box text-center pico" data-aos="fade-up" th:object="${first_rank_recipe}">
           <p style="font-size: 40px;"><strong>1등</strong></p>
-          <div
+          <a th:href="'/Wimr/recipe/'+*{title}"><div
             class="box"
             th:style="
               'background-image: url('+*{picture}+');
               background-position: center;
               background-size: cover;'
             "
-            th:onclick="'redirectToPage(\'/Wimr/recipe/'+*{recipeno}+'\')'"
           >
-          </div>
-          <p>1등</p>
+          </div></a>
+          <p th:text="*{title}"></p>
         </div>
         <div id="third-recipe" class="big-box text-center pico" data-aos="fade-up" th:object="${third_rank_recipe}">
           <p style="font-size: 40px;"><strong>3등</strong></p>
-          <div
+          <a th:href="'/Wimr/recipe/'+*{title}"><div
             class="box"
             th:style="
               'background-image: url('+*{picture}+');
               background-position: center;
               background-size: cover;'
             "
-            th:onclick="'redirectToPage(\'/Wimr/recipe/'+*{recipeno}+'\')'"
           >
-          </div>
-          <p>3등</p>
+          </div></a>
+          <p th:text="*{title}"></p>
         </div>
       </div>
     </div>

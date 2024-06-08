@@ -61,17 +61,6 @@ public class WhatsInMyRefController {
         return "index";
     }
 
-//    @GetMapping("/recipe") //localhost:8080/Wimr/recipe?recipeNo=
-//    public String recipe(@RequestParam int recipeNo,Model model) {
-//        String foodImg = "/img/ingredients.jpg";  //이미지가 없는 경우 default
-//        /*
-//        model.addAttribute("foodName",foodName)         //요리 이름
-//        model.addAttribute("ingredients", ingredients); //재료 리스트
-//        model.addAttribute("recipe", recipe);           //레시피 리스트
-//        */
-//        model.addAttribute("foodImg", foodImg);         //음식 사진 path
-//        return "recipe";
-//    }
     @GetMapping("/recipe/{title}")
     public String listRecipe(@PathVariable String title,HttpSession session, Model model) {
         //Ingredients 재료
@@ -167,8 +156,10 @@ public class WhatsInMyRefController {
     
     
     @GetMapping("/login")
-    public String login(Model model) {
+    public String login(@RequestHeader(value = "Referer", required = false) String referer, Model model,HttpSession session) {
         model.addAttribute("userDTO", new UserDTO());
+        if(session.getAttribute("prevURL")==null){
+            session.setAttribute("prevURL",referer );}
         return "login";
     }
     
@@ -178,6 +169,12 @@ public class WhatsInMyRefController {
         if(loginResult != null){
             session.setAttribute("user", loginResult);
             session.setMaxInactiveInterval(1800);
+            //이전 페이지로 돌아가는 로직
+            if(session.getAttribute("prevURL")!=null){
+                String prevURL=(String)session.getAttribute("prevURL");
+                session.removeAttribute("prevURL");
+                return "redirect:"+prevURL;
+            }
             return "redirect:/Wimr"; //로그인 성공 확인용
         } else{
             if(!userService.existsByMemberId(userDTO.getMemberId())){
@@ -272,11 +269,13 @@ public class WhatsInMyRefController {
     }
     
     @GetMapping("/editMyPage")
-    public String editMyPage(HttpSession session,Model model) {
+    public String editMyPage(HttpSession session,@RequestHeader(value = "Referer", required = false) String referer,Model model) {
         if(session.getAttribute("user") == null){
             model.addAttribute("userDTO", new UserDTO());
             model.addAttribute("errorMessage","로그인을 해주세요.");
             model.addAttribute("searchUrl","/Wimr/login");
+            //돌아오기위한 페이지 저장
+            session.setAttribute("prevURL",referer );
             return "login";
         }
         return "editMyPage";
@@ -287,45 +286,56 @@ public class WhatsInMyRefController {
     스크랩
     ==============================================================*/
     @PostMapping("/scrap")
-    public String doScrap(@RequestParam int recipeNo,HttpSession session, Model model) {
+    public String doScrap(@RequestParam int recipeNo,HttpSession session,@RequestHeader(value = "Referer", required = false) String referer, Model model) {
         //로그인된 유저의 scrap 배열에 recipeNo 추가
         if(session.getAttribute("user") == null){
             model.addAttribute("userDTO", new UserDTO());
             model.addAttribute("errorMessage","로그인을 해주세요.");
             model.addAttribute("searchUrl","/Wimr/login");
+            //돌아오기위한 페이지 저장
+            session.setAttribute("prevURL",referer );
             return "login";
         }
         User loginUser=User.toUser((UserDTO)session.getAttribute("user"));
         Recipe recipe=recipeService.getRecipeById(recipeNo).get();
         scrapService.addToScrapList(loginUser, recipe);
-        return "redirect:/Wimr/recipe/"+recipeNo;
+
+        if(referer!=null)
+        {return "redirect:"+referer;}
+        return "redirect:/Wimr";
     }
     
     @PostMapping("/unscrap")
-    public String doUnscrap(@RequestParam int recipeNo,HttpSession session, Model model) {
+    public String doUnscrap(@RequestParam int recipeNo,HttpSession session,@RequestHeader(value = "Referer", required = false) String referer, Model model) {
         //로그인된 유저의 scrap 배열에 recipeNo 제거
         if(session.getAttribute("user") == null){
             model.addAttribute("userDTO", new UserDTO());
             model.addAttribute("errorMessage","로그인을 해주세요.");
             model.addAttribute("searchUrl","/Wimr/login");
+            //돌아오기위한 페이지 저장
+            session.setAttribute("prevURL",referer );
             return "login";
         }
         User loginUser=User.toUser((UserDTO)session.getAttribute("user"));
         Recipe recipe=recipeService.getRecipeById(recipeNo).get();
         scrapService.deleteScrap(loginUser, recipe);
-        return "redirect:/Wimr/recipe/"+recipeNo;
+        if(referer!=null)
+        {return "redirect:"+referer;}
+        return "redirect:/Wimr";
     }
     
     /*============================================================
     좋아요
     ==============================================================*/
     @PostMapping("/like")
-    public String doLike(@RequestParam int recipeNo,HttpSession session, Model model) {
+    public String doLike(@RequestParam int recipeNo,HttpSession session,@RequestHeader(value = "Referer", required = false) String referer, Model model) {
         //로그인 체크
         if(session.getAttribute("user") == null){
             model.addAttribute("userDTO", new UserDTO());
             model.addAttribute("errorMessage","로그인을 해주세요.");
             model.addAttribute("searchUrl","/Wimr/login");
+            //돌아오기위한 페이지 저장
+            session.setAttribute("prevURL",referer );
             return "login";
         }
         User loginUser=User.toUser((UserDTO)session.getAttribute("user"));
@@ -335,16 +345,20 @@ public class WhatsInMyRefController {
         //레시피의 likecount 1 증가
         recipe.setLikecount(recipe.getLikecount()+1);
         recipeService.saveRecipe(recipe);
-        return "redirect:/Wimr/recipe/"+recipeNo;
+        if(referer!=null)
+        {return "redirect:"+referer;}
+        return "redirect:/Wimr";
     }
 
     @PostMapping("/unlike")
-    public String doUnlike(@RequestParam int recipeNo,HttpSession session, Model model) {
+    public String doUnlike(@RequestParam int recipeNo,HttpSession session,@RequestHeader(value = "Referer", required = false) String referer, Model model) {
         //로그인 체크
         if(session.getAttribute("user") == null){
             model.addAttribute("userDTO", new UserDTO());
             model.addAttribute("errorMessage","로그인을 해주세요.");
             model.addAttribute("searchUrl","/Wimr/login");
+            //돌아오기위한 페이지 저장
+            session.setAttribute("prevURL",referer );
             return "login";
         }
         User loginUser=User.toUser((UserDTO)session.getAttribute("user"));
@@ -354,7 +368,9 @@ public class WhatsInMyRefController {
         //레시피의 likecount 1 감소
         recipe.setLikecount(recipe.getLikecount()-1);
         recipeService.saveRecipe(recipe);
-        return "redirect:/Wimr/recipe/"+recipeNo;
+        if(referer!=null)
+        {return "redirect:"+referer;}
+        return "redirect:/Wimr";
     }
 
     /*============================================================
