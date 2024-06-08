@@ -12,13 +12,22 @@
     <header id="header" class="align-items-center">
       <div class="logo">
         <h1 class="brandName">
-          <a href="/Wimr"><span>미슐랭장고</span></a>
+          <a href="/Wimr"><span>미슐<span style="color: aqua;">랭장고</span></span></a>
         </h1>
       </div>
       <!-- ========= Nav =========-->
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a href="/Wimr/foodSelect">레시피 검색</a></li>
+          <li class="dropdown"><a>레시피</a>
+            <ul>
+              <div class="dropdown-box">
+                <div>
+                  재료겁색
+                </div>
+              </div>
+            </ul>
+          </li>
+          
           <li><a href="/boardList">게시판</a></li>
           <li class="dropdown">
             <a><span>My</span></a>
@@ -33,7 +42,7 @@
                       안녕하세요, <br/>
                       <span th:text="${session.user.memberNick}" class="underline"></span><span>님!</span>
                       <div class="a-myPage display-flex justify-content-center">
-                        <div><a href="/Wimr/myPage">마이페이지</a></div>
+                        <div><a th:href="'/Wimr/myPage?memberNo='+${session.user.memberNo}">마이페이지</a></div>
                       </div>
                       <div style="width: 0%;"><a class="logout-btn" onclick="form_submit('logout')">로그아웃</a></div>
                       <form id="logout" style="display: none;" th:action="@{/Wimr/logout}" method="post"></form>

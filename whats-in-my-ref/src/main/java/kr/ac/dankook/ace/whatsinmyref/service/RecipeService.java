@@ -28,8 +28,12 @@ public class RecipeService {
         return recipeRepository.findById(id);
     }
 
+    public void saveRecipe(Recipe recipe){
+        recipeRepository.save(recipe);
+    }
+
     public void getRecipes() {
-        String url = "http://openapi.foodsafetykorea.go.kr/api/f415b345bda946528b8e/COOKRCP01/json/0/30";
+        String url = "http://openapi.foodsafetykorea.go.kr/api/f415b345bda946528b8e/COOKRCP01/json/0/1000";
         RestTemplate restTemplate = new RestTemplate();
         String response = restTemplate.getForObject(url, String.class);
 
