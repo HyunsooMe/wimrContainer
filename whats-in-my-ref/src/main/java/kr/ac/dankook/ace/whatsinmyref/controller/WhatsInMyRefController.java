@@ -506,7 +506,11 @@ public class WhatsInMyRefController {
         if(userService.existsByMemberEmail(memberEmail)){
             String memberId = userService.findMemberIdByMemberEmail(memberEmail);
             maskedMemberId = "**" + memberId.substring(2);
-            System.out.println("sucess");  
+            System.out.println("success");  
+        } else{
+            model.addAttribute("errorMessage", "등록되지 않은 이메일입니다.");
+            model.addAttribute("searchUrl","/Wimr/findAcc");
+            return "findAcc";
         }
         model.addAttribute("masked_member_id", maskedMemberId);
         model.addAttribute("idSearchPerformed", true);
@@ -515,26 +519,52 @@ public class WhatsInMyRefController {
     
 
     @PostMapping("/findAcc/find-pwd")
-    public String findPwd(@ModelAttribute UserDTO userDTO) {
-        
-        //userDTO의 Id랑 Email에 일치하는게 DB에 있는지 검증
-        return "redirect:/Wimr/findAcc/rewritepw";
+    public String findPwd(@ModelAttribute UserDTO userDTO, HttpSession session, Model model) {
+        String memberId = userDTO.getMemberId();
+        String memberEmail = userDTO.getMemberEmail();
+        if (userService.existsByMemberIdAndMemberEmail(memberId, memberEmail)) {
+            UserDTO foundUser = userService.findByMemberIdAndMemberEmail(memberId, memberEmail);
+            session.setAttribute("authenticatedUser",foundUser);
+            session.setMaxInactiveInterval(1800);
+            return "redirect:/Wimr/findAcc/rewritepw";
+        } else {
+            model.addAttribute("errorMessage", "회원님의 아이디와 이메일이 일치하지 않습니다.");
+            model.addAttribute("searchUrl","/Wimr/findAcc");
+            return "findAcc";
+        }
     }
     
     /*============================================================
     비밀번호 변경
     ==============================================================*/
     @GetMapping("/findAcc/rewritepw")
-    public String reWritePw() {
-        //여기서 이전에 이메일 쳐서 들어왔는지 확인해서 아니면 페이지 들어가지 못하게 해야됨
+    public String reWritePw(HttpSession session, Model model) {
+        UserDTO authenticatedUser = (UserDTO) session.getAttribute("authenticatedUser");
+        if (authenticatedUser == null) {
+            model.addAttribute("errorMessage", "비정상적인 접근입니다.");
+            model.addAttribute("searchUrl","/Wimr/login");
+            return "reWritePw";
+        }
+        model.addAttribute("authenticatedUser", authenticatedUser);
         return "reWritePw";
     }
 
     @PostMapping("/doRewritepw")
-    public String doReWritePw(@ModelAttribute String memberPw) {
-        //TODO: process POST request
-        //비밀번호 변경
-        return "redirect:/Wimr/login";
+    public String doReWritePw(@RequestParam("memberPw") String memberPw, HttpSession session, Model model) {
+        UserDTO authenticatedUser = (UserDTO) session.getAttribute("authenticatedUser");
+        System.out.println(authenticatedUser);
+        if (authenticatedUser == null) {
+            model.addAttribute("errorMessage", "비정상적인 접근입니다.");
+            model.addAttribute("searchUrl","/Wimr/login");
+            return "reWritePw";
+        }
+        authenticatedUser.setMemberPw(memberPw);
+        System.out.println(authenticatedUser);
+        userService.updateUser(authenticatedUser);
+        session.invalidate();
+        model.addAttribute("successMessage", "비밀번호 변경이 완료되었습니다.");
+        model.addAttribute("searchUrl","/Wimr/login");
+        return "reWritePw";
     }
     
     

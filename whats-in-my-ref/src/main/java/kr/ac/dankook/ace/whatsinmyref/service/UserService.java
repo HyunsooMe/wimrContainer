@@ -47,10 +47,18 @@ public class UserService {
     public boolean existsByMemberEmail(String memberEmail){
         return userRepository.existsByMemberEmail(memberEmail);
     }
+    @Transactional
+    public boolean existsByMemberIdAndMemberEmail(String memberId, String memberEmail){
+        return userRepository.existsByMemberIdAndMemberEmail(memberId, memberEmail);
+    }
 
     public String findMemberIdByMemberEmail(String memberEmail){
         User user = userRepository.findByMemberEmail(memberEmail);
         return user != null ? user.getMemberId() : null;
+    }
+
+    public UserDTO findByMemberIdAndMemberEmail(String memberId, String memberEmail) {
+        return UserDTO.toUserDTO(userRepository.findByMemberIdAndMemberEmail(memberId, memberEmail));
     }
 
     public UserDTO findByMemberNo(int memberNo){
@@ -67,4 +75,5 @@ public class UserService {
     public UserDTO getByMemberNick(String memberNick) {
         return UserDTO.toUserDTO(userRepository.findByMemberNick(memberNick));
     }
+    
 }
