@@ -122,8 +122,4 @@ public class BoardController {
         return "/myrecipeRegister";
     }
 
-    @GetMapping("/userRecipe")
-    public String UserRCP(){
-        return "userRecipeList";
-    }
 }

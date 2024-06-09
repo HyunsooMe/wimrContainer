@@ -193,6 +193,16 @@ checkboxes.forEach(function (checkbox) {
   });
 });
 
+// Function to show the loader
+function showLoader() {
+  document.getElementById("loader").style.display = "block";
+}
+
+// Function to hide the loader
+function hideLoader() {
+  document.getElementById("loader").style.display = "none";
+}
+
 const findRecipeBtn = document.getElementById("findRecipeBtn");
 // 요리 레시피를 표시하는 div에 대한 참조 가져오기
 
@@ -207,6 +217,7 @@ function getFoodRecipe() {
   }
 
   let apiUrl = `http://openapi.foodsafetykorea.go.kr/api/f415b345bda946528b8e/COOKRCP01/json/0/1000/`;
+  showLoader();
   fetch(apiUrl)
     .then((response) => {
       if (!response.ok) {
@@ -231,6 +242,9 @@ function getFoodRecipe() {
         "There has been a problem with your fetch operation:",
         error
       );
+    })
+    .finally(() => {
+      hideLoader(); // Hide loader after fetching data
     });
 }
 

@@ -1,6 +1,6 @@
--- MySQL dump 10.13  Distrib 8.0.36, for macos14 (arm64)
+-- MySQL dump 10.13  Distrib 8.0.36, for Win64 (x86_64)
 --
--- Host: localhost    Database: wimr
+-- Host: 127.0.0.1    Database: wimr
 -- ------------------------------------------------------
 -- Server version	8.3.0
 
@@ -109,7 +109,7 @@ CREATE TABLE `member` (
   `member_nick` varchar(255) NOT NULL,
   `member_pw` varchar(255) NOT NULL,
   PRIMARY KEY (`member_no`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -118,17 +118,18 @@ CREATE TABLE `member` (
 
 LOCK TABLES `member` WRITE;
 /*!40000 ALTER TABLE `member` DISABLE KEYS */;
+INSERT INTO `member` VALUES (1,'vwjdehdwov@naver.com','vwjdehdwov','정동재','d@ngjae3203');
 /*!40000 ALTER TABLE `member` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `memberCmt`
+-- Table structure for table `membercmt`
 --
 
-DROP TABLE IF EXISTS `memberCmt`;
+DROP TABLE IF EXISTS `membercmt`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `memberCmt` (
+CREATE TABLE `membercmt` (
   `cmtno` int NOT NULL AUTO_INCREMENT,
   `bno` int DEFAULT NULL,
   `comment` text,
@@ -140,12 +141,12 @@ CREATE TABLE `memberCmt` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `memberCmt`
+-- Dumping data for table `membercmt`
 --
 
-LOCK TABLES `memberCmt` WRITE;
-/*!40000 ALTER TABLE `memberCmt` DISABLE KEYS */;
-/*!40000 ALTER TABLE `memberCmt` ENABLE KEYS */;
+LOCK TABLES `membercmt` WRITE;
+/*!40000 ALTER TABLE `membercmt` DISABLE KEYS */;
+/*!40000 ALTER TABLE `membercmt` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -239,6 +240,32 @@ LOCK TABLES `recipe_comment` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `recipe_likes`
+--
+
+DROP TABLE IF EXISTS `recipe_likes`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `recipe_likes` (
+  `member_no` int NOT NULL,
+  `recipe_no` int NOT NULL,
+  PRIMARY KEY (`member_no`,`recipe_no`),
+  KEY `FKa206c6wr3yl435e3j9nhdvr5k` (`recipe_no`),
+  CONSTRAINT `FK2kip5eqoppeugd5fo5o9hnqgy` FOREIGN KEY (`member_no`) REFERENCES `member` (`member_no`),
+  CONSTRAINT `FKa206c6wr3yl435e3j9nhdvr5k` FOREIGN KEY (`recipe_no`) REFERENCES `recipe` (`recipeno`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `recipe_likes`
+--
+
+LOCK TABLES `recipe_likes` WRITE;
+/*!40000 ALTER TABLE `recipe_likes` DISABLE KEYS */;
+/*!40000 ALTER TABLE `recipe_likes` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `recipe_manual`
 --
 
@@ -291,13 +318,13 @@ INSERT INTO `recipe_manual_img` VALUES (1,'http://www.foodsafetykorea.go.kr/uplo
 UNLOCK TABLES;
 
 --
--- Table structure for table `recipeCmt`
+-- Table structure for table `recipecmt`
 --
 
-DROP TABLE IF EXISTS `recipeCmt`;
+DROP TABLE IF EXISTS `recipecmt`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `recipeCmt` (
+CREATE TABLE `recipecmt` (
   `cmtno` int NOT NULL AUTO_INCREMENT,
   `rno` int DEFAULT NULL,
   `comment` text,
@@ -309,12 +336,38 @@ CREATE TABLE `recipeCmt` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `recipeCmt`
+-- Dumping data for table `recipecmt`
 --
 
-LOCK TABLES `recipeCmt` WRITE;
-/*!40000 ALTER TABLE `recipeCmt` DISABLE KEYS */;
-/*!40000 ALTER TABLE `recipeCmt` ENABLE KEYS */;
+LOCK TABLES `recipecmt` WRITE;
+/*!40000 ALTER TABLE `recipecmt` DISABLE KEYS */;
+/*!40000 ALTER TABLE `recipecmt` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `scrap`
+--
+
+DROP TABLE IF EXISTS `scrap`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `scrap` (
+  `member_no` int NOT NULL,
+  `recipe_no` int NOT NULL,
+  PRIMARY KEY (`member_no`,`recipe_no`),
+  KEY `FKdb9g9snhrusjaxgs6dghq3g5n` (`recipe_no`),
+  CONSTRAINT `FKdb9g9snhrusjaxgs6dghq3g5n` FOREIGN KEY (`recipe_no`) REFERENCES `recipe` (`recipeno`),
+  CONSTRAINT `FKgfdw8e7ivc76c6musfpd9e3ut` FOREIGN KEY (`member_no`) REFERENCES `member` (`member_no`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `scrap`
+--
+
+LOCK TABLES `scrap` WRITE;
+/*!40000 ALTER TABLE `scrap` DISABLE KEYS */;
+/*!40000 ALTER TABLE `scrap` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -326,4 +379,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-06-08 11:09:33
+-- Dump completed on 2024-06-08 17:42:21

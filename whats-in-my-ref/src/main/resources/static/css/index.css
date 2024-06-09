@@ -112,3 +112,16 @@
 .box div {
   transition: 0.15s;
 }
+
+.big-box .img-wrap{
+  width:100%;
+}
+
+.big-box .img-wrap img{
+  width: 30%;
+  object-fit: contain;
+}
+
+.big-box a{
+  
+}

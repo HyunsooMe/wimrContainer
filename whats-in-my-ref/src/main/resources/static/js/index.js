@@ -93,3 +93,10 @@ function searchIngredients() {
       alert('재료를 입력하세요.');
   }
 }
+
+
+//레시피 화면 전환
+function redirectToRecipePage(element) {
+  var title = element.getAttribute('data-title');
+  window.location.href = '/Wimr/recipe/' + encodeURIComponent(title);
+}
