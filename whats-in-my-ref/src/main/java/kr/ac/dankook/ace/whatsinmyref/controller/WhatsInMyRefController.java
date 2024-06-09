@@ -116,7 +116,7 @@ public class WhatsInMyRefController {
             model.addAttribute("manualList", manualList);
             model.addAttribute("manualImgList", manualImgList);
             model.addAttribute("comments", recipeCmtService.findRecipeCmtsById(recipe.getRecipeno()));
-            model.addAttribute("newComment", new RecipeCmt());
+            
             model.addAttribute("likeList", likeRecipeList);
             model.addAttribute("scrapList", scrapRecipeList);
         });
@@ -143,6 +143,7 @@ public class WhatsInMyRefController {
             Recipe recipe = optionalRecipe.get();
             recipeCmt.setTime(new Date());
             recipeCmt.setRno(recipe.getRecipeno());
+            recipeCmt.setNickname(((UserDTO)session.getAttribute("user")).getMemberNick());
             success = recipeCmtService.saveRecipeCmt(recipeCmt);
         } else {
             success = false;

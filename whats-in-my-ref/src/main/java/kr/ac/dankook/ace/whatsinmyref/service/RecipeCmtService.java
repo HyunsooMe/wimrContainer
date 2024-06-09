@@ -20,7 +20,7 @@ public class RecipeCmtService {
     }
 
     public boolean saveRecipeCmt(RecipeCmt recipeCmt){
-        if(recipeCmtRepository.save(recipeCmt)!=null) return true;
+        if(recipeCmtRepository.save(recipeCmt)!=null) {return true;}
         return false;
     }
 }
