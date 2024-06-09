@@ -116,7 +116,6 @@ public class WhatsInMyRefController {
             model.addAttribute("manualList", manualList);
             model.addAttribute("manualImgList", manualImgList);
             model.addAttribute("comments", recipeCmtService.findRecipeCmtsById(recipe.getRecipeno()));
-            
             model.addAttribute("likeList", likeRecipeList);
             model.addAttribute("scrapList", scrapRecipeList);
         });

@@ -117,7 +117,7 @@
                     <div class="comment-box">
                             <div class="commenter display-flex">
                                 <div class="display-flex"><img style="height: 23px; border-radius: 50%;" src="/img/userDefaultImg.png"/><div class="name" th:text="${comment.nickname}"></div></div>
-<!--                                <div class="date" th:text="${comment.date}">2024-05-19 15:42</div>-->
+                               <div class="date" th:text="${#dates.format(comment.time, 'yy-MM-dd-HH-mm')}"></div>
                             </div>
                             <div class="comment-main-area">
                                 <div class="comment-content" th:text="${comment.comment}"></div>
