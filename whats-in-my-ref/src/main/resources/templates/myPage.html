@@ -33,19 +33,19 @@
                 <table class="board-grid" id="myBoardGrid">
                     <colgroup>
                         <col style="width: 7%;">
-                        <col style="width: 60%;">
+                        <col style="width: 54%;">
                         <col style="width: 13%;">
                         <col style="width: 10%;">
-                        <col style="width: 10%;">
+                        <col style="width: 16%;">
                     </colgroup>
                     <thead ><th>ID</th> <th>제목</th> <th>작성자</th> <th>조회</th> <th>날짜</th></thead>
                     <tbody>
                         <tr th:each="my_board, iterStat : ${myBoardList}" th:class="'board-shape shape' + ${iterStat.index >= 3 ? ' hidden' : ''}" >  <!--타임리프 값:"myBoardList" (Board 객체의 배열 or List)-->
-                            <td class="board-id" th:text="${my_board.id}" style="text-align: center;"></td>
-                            <td class="board-title"><a th:href="@{/Wimr/'게시물 주소'}" th:text="${my_board.title}"></a></td>
+                            <td class="board-id" th:text="${my_board.bno}" style="text-align: center;"></td>
+                            <td class="board-title" style="overflow: hidden;"><a th:href="@{'/boardView?bno='+${my_board.bno}}" th:text="${my_board.title}"></a></td>
                             <td class="board-nickname" th:text="${my_board.nickname}" style="text-align: center;"></td>
                             <td class="board-viewCount" th:text="${my_board.viewcount}" style="text-align: center;"></td>
-                            <td class="board-createdDate " th:text="${my_board.createdDate}" style="text-align: center;"></td>
+                            <td class="board-createdDate " th:text="${#temporals.format(my_board.created_date, 'yy-MM-dd')}" style="text-align: center;"></td>
                         </tr>
                     </tbody>
                 </table>
@@ -57,7 +57,7 @@
 
             <div class="my-recipe-part item" >등록한 레시피:      
                 <div class="recipe-grid" id="myRecipeGrid">  
-                    <div th:onclick="|redirectToPage('/Wimr/recipe/'+${my_recipe.recipeno})|" th:each="my_recipe, iterStat : ${myRecipeList}" th:class="'recipe-shape shape' + ${iterStat.index >= 3 ? ' hidden' : ''}" >  <!--타임리프 값:"myRecipeList" (Recipe 객체의 배열 or List)-->
+                    <div th:onclick="|redirectToPage('/Wimr/recipe/which/'+${my_recipe.recipeno})|" th:each="my_recipe, iterStat : ${myRecipeList}" th:class="'recipe-shape shape' + ${iterStat.index >= 3 ? ' hidden' : ''}" >  <!--타임리프 값:"myRecipeList" (Recipe 객체의 배열 or List)-->
                         <div class="food-img"><img th:src="${my_recipe.picture != null ? my_recipe.picture : '/img/ingredients.jpg'}"/></div>
                         <div class="food-name display-flex justify-content-center align-items-center" th:text="${my_recipe.title != null ? my_recipe.title : 'Unknown'}"></div>
                     </div>

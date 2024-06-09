@@ -15,9 +15,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import jakarta.servlet.http.HttpSession;
+import jakarta.transaction.Transactional;
 import kr.ac.dankook.ace.whatsinmyref.dto.UserDTO;
 import kr.ac.dankook.ace.whatsinmyref.entity.Board;
+import kr.ac.dankook.ace.whatsinmyref.entity.User;
 import kr.ac.dankook.ace.whatsinmyref.service.BoardService;
+import kr.ac.dankook.ace.whatsinmyref.service.MyBoardService;
 
 
 @Controller
@@ -25,7 +28,9 @@ public class BoardController {
 
     @Autowired
     private BoardService boardService;
-
+    @Autowired
+    private MyBoardService myBoardService;
+    
      // 게시글 목록
      @GetMapping("/boardList")
      public String BoardList(@ModelAttribute UserDTO userDTO, Model model, 
@@ -69,8 +74,10 @@ public class BoardController {
     }
     // 작성폼 전송 처리
     @PostMapping("/board/writePro")
-    public String boardwritePro(Board board){
+    public String boardwritePro(Board board,HttpSession session){
         boardService.write(board);
+
+        myBoardService.save(User.toUser((UserDTO)session.getAttribute("user")),board);
         
         return "redirect:/boardList";
     }
@@ -82,11 +89,14 @@ public class BoardController {
         boardService.increaseViewCount(bno);
         return "/board/boardView";
     }
+    
     // 게시글 삭제
+    @Transactional
     @GetMapping("/boardDelete")
-    public String boardDelete(Integer bno){
+    public String boardDelete(@RequestParam Integer bno){
 
-        boardService.boardDelete(bno);
+        //myBoard 삭제
+        myBoardService.deleteByBoard_bno(bno);
 
         return "redirect:/boardList";
     }

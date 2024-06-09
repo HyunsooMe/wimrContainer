@@ -24,12 +24,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import jakarta.servlet.http.HttpSession;
-import kr.ac.dankook.ace.whatsinmyref.dto.FileStorageProperties;
+
 import kr.ac.dankook.ace.whatsinmyref.dto.UserDTO;
+
 import kr.ac.dankook.ace.whatsinmyref.entity.PersonalRecipe;
 import kr.ac.dankook.ace.whatsinmyref.entity.Recipe;
-import kr.ac.dankook.ace.whatsinmyref.entity.UserRecipe;
+import kr.ac.dankook.ace.whatsinmyref.entity.User;
 import kr.ac.dankook.ace.whatsinmyref.service.FileService;
+import kr.ac.dankook.ace.whatsinmyref.service.MyRecipeService;
 import kr.ac.dankook.ace.whatsinmyref.service.PersonalRecipeService;
 import kr.ac.dankook.ace.whatsinmyref.service.RecipeService;
 import kr.ac.dankook.ace.whatsinmyref.service.UserRecipeService;
@@ -48,6 +50,8 @@ public class UserRecipeController {
     private RecipeService recipeService;
     @Autowired
     private PersonalRecipeService personalRecipeService;
+    @Autowired
+    private MyRecipeService myRecipeService;
 
     // 레시피 등록폼 처리
     @PostMapping("/userrecipe/register")
@@ -66,6 +70,7 @@ public class UserRecipeController {
         String mainImagePath;
         Map<String, String> manual = new HashMap<>();
         Map<String, String> manualImg = new HashMap<>();
+        UserDTO loginUser=(UserDTO)session.getAttribute("user");
 
         userRecipe.setTitle(title);
         userRecipe.setIngredient(ingredient);
@@ -91,8 +96,10 @@ public class UserRecipeController {
         userRecipe.setManualImg(manualImg);
         recipeService.saveRecipe(userRecipe);
 
-        personalRecipe=new PersonalRecipe(recipeNo,tip,((UserDTO)session.getAttribute("user")).getMemberNick(),new Date(),0);
+        personalRecipe=new PersonalRecipe(recipeNo,tip,loginUser.getMemberNick(),new Date(),0);
         personalRecipeService.save(personalRecipe);
+
+        myRecipeService.save(User.toUser(loginUser),userRecipe);
 
         return "redirect:/Wimr/recipe/usermade/"+userRecipe.getRecipeno();
     }

@@ -2,12 +2,15 @@ package kr.ac.dankook.ace.whatsinmyref.controller;
 
 import kr.ac.dankook.ace.whatsinmyref.dto.UserDTO;
 import kr.ac.dankook.ace.whatsinmyref.dto.boardDTO;
+import kr.ac.dankook.ace.whatsinmyref.entity.Board;
 import kr.ac.dankook.ace.whatsinmyref.entity.PersonalRecipe;
 import kr.ac.dankook.ace.whatsinmyref.entity.Recipe;
 import kr.ac.dankook.ace.whatsinmyref.entity.RecipeCmt;
 import kr.ac.dankook.ace.whatsinmyref.entity.RecipeLikes;
 import kr.ac.dankook.ace.whatsinmyref.entity.Scrap;
 import kr.ac.dankook.ace.whatsinmyref.entity.User;
+import kr.ac.dankook.ace.whatsinmyref.service.MyBoardService;
+import kr.ac.dankook.ace.whatsinmyref.service.MyRecipeService;
 import kr.ac.dankook.ace.whatsinmyref.service.PersonalRecipeService;
 import kr.ac.dankook.ace.whatsinmyref.service.RecipeCmtService;
 import kr.ac.dankook.ace.whatsinmyref.service.RecipeLikesService;
@@ -50,20 +53,20 @@ public class WhatsInMyRefController {
 
     @Autowired
     private final UserService userService;
-
     @Autowired
     private RecipeService recipeService;
-
     @Autowired
     private RecipeCmtService recipeCmtService;
-
     @Autowired
     private ScrapService scrapService;
-
     @Autowired
     private RecipeLikesService recipeLikesService;
     @Autowired
     private PersonalRecipeService personalRecipeService;
+    @Autowired
+    private MyRecipeService myRecipeService;
+    @Autowired
+    private MyBoardService myBoardService;
 
     @GetMapping("")
     public String mainPage(Model model) {
@@ -311,14 +314,26 @@ public class WhatsInMyRefController {
     public String myPage(@PathVariable String memberNick, Model model) {
         UserDTO pageUser=userService.getByMemberNick(memberNick);
         List<Recipe> scrapRecipes=null;
+        List<Recipe> myRecipes=null;
+        List<Board> myBoards=null;
 
+        //내가 작성한 글 불러오기
+        if((myBoards=myBoardService.getAllBoardsBymemberNo(pageUser.getMemberNo()))==null){
+            myBoards=new ArrayList<Board>();
+        }
 
+        //내가 등록한 레시피 불러오기
+        if((myRecipes=myRecipeService.getAllRecipesBymemberNo(pageUser.getMemberNo()))==null){
+            myRecipes=new ArrayList<Recipe>();
+        }
 
          //스크랩한 레시피 불러오기
          if((scrapRecipes=scrapService.getAllRecipesBymemberNo(pageUser.getMemberNo()))==null){
             scrapRecipes=new ArrayList<Recipe>();
          }
          model.addAttribute("pageUser", pageUser);
+         model.addAttribute("myBoardList", myBoards);
+         model.addAttribute("myRecipeList", myRecipes);
          model.addAttribute("favoriteRecipeList", scrapRecipes);
         //test
         
@@ -335,22 +350,6 @@ public class WhatsInMyRefController {
         boards.add(board2);
         boards.add(board3);
         boards.add(board4);
-        List<Recipe> myRecipes=new ArrayList<Recipe>();
-        Recipe recipe1=new Recipe();
-        Recipe recipe2=new Recipe();
-        Recipe recipe3=new Recipe();
-        Recipe recipe4=new Recipe();
-        recipe2.setRecipeno(1);
-        recipe3.setRecipeno(2);
-        recipe3.setRecipeno(3);
-        myRecipes.add(recipe1);
-        myRecipes.add(recipe2);
-        myRecipes.add(recipe3);
-        myRecipes.add(recipe4);
-       
-        model.addAttribute("myBoardList", boards);
-        model.addAttribute("myRecipeList", myRecipes);
-        
         //test end
         return "myPage";
     }

@@ -25,5 +25,5 @@ public class MyRecipe {
     @ManyToOne
     @JsonBackReference
     @JoinColumn(name="recipeno")
-    private PersonalRecipe personalRecipe;
+    private Recipe recipe;
 }

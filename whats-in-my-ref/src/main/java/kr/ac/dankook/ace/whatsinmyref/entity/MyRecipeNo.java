@@ -5,12 +5,12 @@ import java.io.Serializable;
 public class MyRecipeNo implements Serializable {
 
     private int user;
-    private int personalRecipe;
+    private int recipe;
 
     public MyRecipeNo(){};
-    public MyRecipeNo(int user, int personalRecipe){
+    public MyRecipeNo(int user, int recipe){
         super();
         this.user = user;
-        this.personalRecipe = personalRecipe;
+        this.recipe = recipe;
     }
 }

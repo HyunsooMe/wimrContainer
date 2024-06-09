@@ -13,7 +13,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name="myBoard")
-@IdClass(MyBoard.class)
+@IdClass(MyBoardNo.class)
 public class MyBoard implements Serializable {
 
     @Id
@@ -23,7 +23,7 @@ public class MyBoard implements Serializable {
     private User user;
 
     @Id
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.REMOVE)
     @JsonBackReference
     @JoinColumn(name="bno")
     private Board board;
