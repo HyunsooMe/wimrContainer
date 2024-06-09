@@ -278,7 +278,7 @@ function displayRecipes(recipes) {
       title.addEventListener("click", function () {
         console.log("제목 클릭됨");
         const recipeName = this.getAttribute("data-name");
-        window.location.href = `/Wimr/recipe/${encodeURIComponent(recipeName)}`;
+        window.location.href = `/Wimr/recipe/getRecipeByTitle/${encodeURIComponent(recipeName)}`;
       });
     }
 
@@ -290,7 +290,7 @@ function displayRecipes(recipes) {
         const recipeName = recipeDiv
           .querySelector("h3")
           .getAttribute("data-name");
-        window.location.href = `/Wimr/recipe/${encodeURIComponent(recipeName)}`;
+        window.location.href = `/Wimr/recipe/getRecipeByTitle/${encodeURIComponent(recipeName)}`;
       });
     }
   });

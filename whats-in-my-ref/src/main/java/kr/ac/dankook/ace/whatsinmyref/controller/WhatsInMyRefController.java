@@ -35,6 +35,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import jakarta.servlet.http.HttpSession;
 import jakarta.websocket.server.PathParam;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
+
 
 
 @Controller
@@ -70,14 +76,29 @@ public class WhatsInMyRefController {
         return "index";
     }
 
-    @GetMapping("/recipe/{title}")
-    public String listRecipe(@PathVariable String title,HttpSession session, Model model) {
+    @GetMapping("/recipe/getRecipeByTitle/{title}")
+    public String getRecipe(@PathVariable String title,HttpSession session, Model model) {
+        int recipeNo=recipeService.getRecipeByTitleAndRecipenoLessThan(title,1000).getRecipeno();
+        return "redirect:/Wimr/recipe/"+recipeNo;
+    }
+    
+    @GetMapping("/recipe/which/{recipeno}")
+    public String isPersonalRecipe(@PathVariable int recipeno) {
+        if(personalRecipeService.getById(recipeno)!=null){
+            return "redirect:/Wimr/recipe/usermade/"+recipeno;
+        }
+        return "redirect:/Wimr/recipe/"+recipeno;
+    }
+    
+
+    @GetMapping("/recipe/{recipeno}")
+    public String listRecipe(@PathVariable int recipeno,HttpSession session, Model model) {
         //Ingredients 재료
         //Recipe : 사진, 정보
         //others : 영양 성분
         List<String> manualList = new ArrayList<>();
         List<String> manualImgList = new ArrayList<>();
-        recipeService.getRecipeByTitle(title).ifPresent(recipe -> {
+        recipeService.getRecipeById(recipeno).ifPresent(recipe -> {
             List<String> others = List.of("열량 : " + recipe.getCalories(), "탄수화물 : " + recipe.getCarbohydrates() ,"단백질 :" + recipe.getProtein(), "지방 : " + recipe.getFat(), "나트륨 : " + recipe.getSodium());
             List<String> ingredient = Arrays.asList(recipe.getIngredient().split(","));
             List<Recipe> scrapRecipeList=new ArrayList<>();
@@ -125,19 +146,19 @@ public class WhatsInMyRefController {
         return "recipe";
     }
 
-    @GetMapping("/recipe/usermade/{title}")
-    public String listUserRecipe(@PathVariable String title,HttpSession session, Model model) {
+    @GetMapping("/recipe/usermade/{recipeno}")
+    public String listUserRecipe(@PathVariable int recipeno,HttpSession session, Model model) {
         //Ingredients 재료
         //Recipe : 사진, 정보
         //others : 영양 성분
         
         List<String> manualList = new ArrayList<>();
         List<String> manualImgList = new ArrayList<>();
-        recipeService.getRecipeByTitle(title).ifPresent(recipe -> {
+        recipeService.getRecipeById(recipeno).ifPresent(recipe -> {
             PersonalRecipe personalRecipe=personalRecipeService.getById(recipe.getRecipeno());
             personalRecipe.setViewCount(personalRecipe.getViewCount()+1);
             personalRecipeService.save(personalRecipe);
-            
+
             List<String> others = Arrays.asList(personalRecipe.getOthers().split("[,]"));
             List<String> ingredient = Arrays.asList(recipe.getIngredient().split(","));
             List<Recipe> scrapRecipeList=new ArrayList<>();
@@ -183,9 +204,9 @@ public class WhatsInMyRefController {
         return "recipe";
     }
 
-    @PostMapping("/recipe/{title}")
+    @PostMapping("/recipe/{recipeno}")
     @ResponseBody
-    public Map<String,String> addRecipeCmt(@PathVariable String title, RecipeCmt recipeCmt, HttpSession session, @RequestHeader(value = "Referer", required = false) String referer) throws UnsupportedEncodingException {
+    public Map<String,String> addRecipeCmt(@PathVariable int recipeno, RecipeCmt recipeCmt, HttpSession session, @RequestHeader(value = "Referer", required = false) String referer) throws UnsupportedEncodingException {
         final boolean success;
         Map<String,String> response=new HashMap<>();
 
@@ -198,7 +219,7 @@ public class WhatsInMyRefController {
             return response;
         }
 
-        Optional<Recipe> optionalRecipe = recipeService.getRecipeByTitle(title);
+        Optional<Recipe> optionalRecipe = recipeService.getRecipeById(recipeno);
         if (optionalRecipe.isPresent()) {
             Recipe recipe = optionalRecipe.get();
             recipeCmt.setTime(new Date());

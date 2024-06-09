@@ -109,7 +109,7 @@
                         <textarea id="commentContentInput" rows="3" placeholder="댓글을 입력해주세요" maxlength="300" style="resize: none;"></textarea>
                         <div class="comment-sub-wrap flexible-font-size">
                             <div id="char-count">0/300</div>
-                            <div id="comment-btn-wrap" class="display-flex justify-content-center"><button type="button" id="comment-submit-btn" th:data-title="${recipe.title}" onclick="comment_check(this)"><span class="flexible-font-size">등록</span></button></div>
+                            <div id="comment-btn-wrap" class="display-flex justify-content-center"><button type="button" id="comment-submit-btn" th:data-recipeno="${recipe.recipeno}" onclick="comment_check(this)"><span class="flexible-font-size">등록</span></button></div>
                         </div>
                     </form>
                     <hr/>

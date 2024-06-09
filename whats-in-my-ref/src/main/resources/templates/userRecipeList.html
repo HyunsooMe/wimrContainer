@@ -43,7 +43,7 @@
               <th>조회수</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody th:if="${list != null}">
             <tr th:each="userrecipe : ${list}">
               <td th:text="${userrecipeStat.index+1}"></td>
               <td>
@@ -55,7 +55,7 @@
               <td>
                 <a
                   th:text="${recipeMap[userrecipe.recipeno].title}"
-                  th:href="'/Wimr/recipe/usermade/'+${recipeMap[userrecipe.recipeno].title}"
+                  th:href="'/Wimr/recipe/usermade/'+${userrecipe.recipeno}"
                 ></a>
               </td>
               <td

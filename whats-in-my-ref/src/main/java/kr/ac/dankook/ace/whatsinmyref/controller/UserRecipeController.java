@@ -94,7 +94,7 @@ public class UserRecipeController {
         personalRecipe=new PersonalRecipe(recipeNo,tip,((UserDTO)session.getAttribute("user")).getMemberNick(),new Date(),0);
         personalRecipeService.save(personalRecipe);
 
-        return "redirect:/Wimr/recipe/usermade/"+URLEncoder.encode(userRecipe.getTitle(),"UTF-8");
+        return "redirect:/Wimr/recipe/usermade/"+userRecipe.getRecipeno();
     }
 
 

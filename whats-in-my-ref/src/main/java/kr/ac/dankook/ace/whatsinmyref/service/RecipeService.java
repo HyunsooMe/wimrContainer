@@ -83,6 +83,10 @@ public class RecipeService {
             e.printStackTrace();
         }
     }
+
+    public Recipe getRecipeByTitleAndRecipenoLessThan(String title, int recipeno) {
+        return recipeRepository.findByTitleAndRecipenoLessThan(title,recipeno).get();
+    }
 }
 
 //    @Autowired

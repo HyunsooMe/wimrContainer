@@ -1,8 +1,8 @@
 //댓글의 입력 유무 체크
 function comment_check(element){
     var commentContent = document.getElementById("commentContentInput").value;
-    var recipeTitle=element.getAttribute("data-title");
-    var url="/Wimr/recipe/"+encodeURIComponent(recipeTitle);
+    var recipeNo=element.getAttribute("data-recipeno");
+    var url="/Wimr/recipe/"+encodeURIComponent(recipeNo);
     var formData = new FormData();
     formData.append("comment", commentContent);
 

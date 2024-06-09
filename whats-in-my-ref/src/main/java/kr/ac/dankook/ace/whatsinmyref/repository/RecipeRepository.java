@@ -16,4 +16,6 @@ public interface RecipeRepository extends JpaRepository<Recipe, Integer> {
     
     @Query("SELECT r FROM Recipe r ORDER BY r.likecount DESC")
     List<Recipe> findTop3ByLikecountDesc();
+
+    Optional<Recipe> findByTitleAndRecipenoLessThan(String title, int recipeno);
 }
