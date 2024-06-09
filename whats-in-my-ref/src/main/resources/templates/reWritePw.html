@@ -72,13 +72,13 @@
         <div th:if="${errorMessage}">
           <script th:inline="javascript">
             alert(/*[[${errorMessage}]]*/);
-            location.replace(/*[[${searchUrl}]]*/);
+            window.close();
           </script>
         </div>
         <div th:if="${successMessage}">
           <script th:inline="javascript">
             alert(/*[[${successMessage}]]*/);
-            location.replace(/*[[${searchUrl}]]*/);
+            window.close();
           </script>
         </div>
       </div>

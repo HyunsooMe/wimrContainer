@@ -20,6 +20,9 @@
   </head>
   <body>
     <header th:replace="~{fragments/header::header}"></header>
+    <div class="sidebar-wrap">
+      <div th:replace="~{fragments/sideNav::sidebar}" />
+    </div>
     <div class="board_wrap">
       <h2>게시글 상세보기</h2>
       <div class="table_wrap">
@@ -42,8 +45,8 @@
         <div id="content" th:text="${board.content}"></div>
       </div>
       <div class="btn">
-        <a th:href="@{/boardDelete(bno=${board.bno})}" id="delete">글 삭제</a>
-        <a th:href="@{/board/edit/{bno}(bno=${board.bno})}">글 수정</a>
+        <a th:href="@{/boardDelete(bno=${board.bno})}" id="delete" th:if="${session.user!=null and session.user.memberNick==board.nickname}">글 삭제</a>
+        <a th:href="@{/board/edit/{bno}(bno=${board.bno})}" th:if="${session.user!=null and session.user.memberNick==board.nickname}">글 수정</a>
         <a th:href="@{/boardList}">목록 보기</a>
       </div>
     </div>

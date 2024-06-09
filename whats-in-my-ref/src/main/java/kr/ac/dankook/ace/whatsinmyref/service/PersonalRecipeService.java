@@ -1,6 +1,5 @@
 package kr.ac.dankook.ace.whatsinmyref.service;
 
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -8,7 +7,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import kr.ac.dankook.ace.whatsinmyref.entity.PersonalRecipe;
-import kr.ac.dankook.ace.whatsinmyref.entity.UserRecipe;
 import kr.ac.dankook.ace.whatsinmyref.repository.PersonalRecipeRepository;
 
 @Service

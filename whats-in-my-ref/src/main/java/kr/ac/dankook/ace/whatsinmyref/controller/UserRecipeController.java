@@ -34,7 +34,6 @@ import kr.ac.dankook.ace.whatsinmyref.service.FileService;
 import kr.ac.dankook.ace.whatsinmyref.service.MyRecipeService;
 import kr.ac.dankook.ace.whatsinmyref.service.PersonalRecipeService;
 import kr.ac.dankook.ace.whatsinmyref.service.RecipeService;
-import kr.ac.dankook.ace.whatsinmyref.service.UserRecipeService;
 import lombok.RequiredArgsConstructor;
 
 @Controller
@@ -42,8 +41,6 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class UserRecipeController {
 
-    @Autowired
-    private UserRecipeService userRecipeService;
     @Autowired
     private FileService fileService;
     @Autowired
@@ -132,8 +129,8 @@ public class UserRecipeController {
 
         // recipeno를 키로 하고 recipe 객체를 값으로 하는 맵 생성
         Map<Integer, Recipe> recipeMap = recipeList.stream().collect(Collectors.toMap(Recipe::getRecipeno, recipe -> recipe));
+        
         model.addAttribute("recipeMap", recipeMap);
-
         model.addAttribute("list", personalRecipeList);
         model.addAttribute("recipes", recipeService.getAllRecipes());
         model.addAttribute("nowPage", nowPage);

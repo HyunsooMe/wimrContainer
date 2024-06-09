@@ -194,7 +194,7 @@ public class WhatsInMyRefController {
                 String kee = k2.concat(Integer.toString(i));
                 manualImgList.add(recipe.getManualImg().get(kee));
             }
-            model.addAttribute("nickname","정동재");
+            model.addAttribute("nickname",personalRecipe.getNickname());
             model.addAttribute("recipe", recipe);
             model.addAttribute("ingredients", ingredient);
             model.addAttribute("others", others);
@@ -327,30 +327,14 @@ public class WhatsInMyRefController {
             myRecipes=new ArrayList<Recipe>();
         }
 
-         //스크랩한 레시피 불러오기
-         if((scrapRecipes=scrapService.getAllRecipesBymemberNo(pageUser.getMemberNo()))==null){
-            scrapRecipes=new ArrayList<Recipe>();
-         }
-         model.addAttribute("pageUser", pageUser);
-         model.addAttribute("myBoardList", myBoards);
-         model.addAttribute("myRecipeList", myRecipes);
-         model.addAttribute("favoriteRecipeList", scrapRecipes);
-        //test
-        
-        List<boardDTO> boards=new ArrayList<boardDTO>();
-        boardDTO board1=new boardDTO();
-        boardDTO board2=new boardDTO();
-        boardDTO board3=new boardDTO();
-        boardDTO board4=new boardDTO();
-        board1.setTitle("캐나다 수도는 뭐야?");
-        board2.setTitle("캐나다 수도는 뭐야?2");
-        board3.setTitle("캐나다 수도는 뭐야?3");
-        board4.setTitle("캐나다 수도는 뭐야?4");
-        boards.add(board1);
-        boards.add(board2);
-        boards.add(board3);
-        boards.add(board4);
-        //test end
+        //스크랩한 레시피 불러오기
+        if((scrapRecipes=scrapService.getAllRecipesBymemberNo(pageUser.getMemberNo()))==null){
+        scrapRecipes=new ArrayList<Recipe>();
+        }
+        model.addAttribute("pageUser", pageUser);
+        model.addAttribute("myBoardList", myBoards);
+        model.addAttribute("myRecipeList", myRecipes);
+        model.addAttribute("favoriteRecipeList", scrapRecipes);
         return "myPage";
     }
 

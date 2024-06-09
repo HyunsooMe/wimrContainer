@@ -55,7 +55,7 @@
             class="display-flex align-items-center justify-content-center"
             th:if="${idSearchPerformed}"
           >
-            <div th:if="${masked_member_id!=null}">
+            <div th:if="${masked_member_id!=null}" class="display-flex">
               아이디는&nbsp;
               <div class="underline" th:text="${masked_member_id}"></div>
               &nbsp;입니다.

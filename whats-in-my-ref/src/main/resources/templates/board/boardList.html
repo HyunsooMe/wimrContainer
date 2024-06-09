@@ -20,11 +20,12 @@
   </head>
   <body>
     <header th:replace="~{fragments/header::header}"></header>
+    <div class="sidebar-wrap">
+      <div th:replace="~{fragments/sideNav::sidebar}" />
+    </div>
     <div class="board-wrap">
       <h2>자유게시판</h2>
-      <div class="sidebar-wrap">
-        <div th:replace="~{fragments/sideNav::sidebar}" />
-      </div>
+      
       <div class="table_wrap">
         <div class="sort-buttons">
           <a href="/boardList">최신순</a>
@@ -55,7 +56,7 @@
                   th:href="@{/boardView(bno=${board.bno})}"
                 ></a>
               </td>
-              <td th:text="${board.nickname}"></td>
+              <td ><a th:href="'/Wimr/myPage/'+ ${board.nickname}" ><span th:text="${board.nickname}"></span></a></td>
               <td
                 th:text="${#temporals.format(board.created_date, 'yyyy-MM-dd')}"
               ></td>

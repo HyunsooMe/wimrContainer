@@ -20,6 +20,9 @@
   </head>
   <body>
     <header th:replace="~{fragments/header::header}"></header>
+    <div class="sidebar-wrap">
+      <div th:replace="~{fragments/sideNav::sidebar}" />
+    </div>
     <div class="board_wrap">
       <h2>게시글 수정</h2>
       <form
