@@ -24,18 +24,14 @@
       <div th:replace="~{fragments/sideNav::sidebar}" />
     </div>
     <h2>나만의 레시피</h2>
-    <form
-      id="myRecipe"
-      method="post"
-      action="/userrecipe/register"
-      enctype="multipart/form-data"
-    >
+
+    <form id="myRecipe" method="post" th:action="@{Wimr/userrecipe/register}" enctype="multipart/form-data">
       <table>
         <tr>
           <td id="mainImg">대표 사진</td>
         </tr>
         <tr>
-          <td><input type="file" name="file" /></td>
+          <td><input type="file" name="mainImg" accept="image/*" required/></td>
         </tr>
         <tr>
           <td id="RCP_NM">레시피 제목</td>
@@ -87,33 +83,33 @@
             <td>
               <input
                 type="text"
-                name="stepDescription[]"
+                name="stepDescription"
                 placeholder="예) 채소를 먹기 좋게 다져주세요."
                 required
               />
-              <input type="file" name="stepImage[]" accept="image/*" />
+              <input type="file" name="manualImg" accept="image/*" />
             </td>
           </tr>
           <tr class="step">
             <td>
               <input
                 type="text"
-                name="stepDescription[]"
+                name="stepDescription"
                 placeholder="예) 채소를 먹기 좋게 다져주세요."
                 required
               />
-              <input type="file" name="stepImage[]" accept="image/*" />
+              <input type="file" name="manualImg" accept="image/*" />
             </td>
           </tr>
           <tr class="step">
             <td>
               <input
                 type="text"
-                name="stepDescription[]"
+                name="stepDescription"
                 placeholder="예) 채소를 먹기 좋게 다져주세요."
                 required
               />
-              <input type="file" name="stepImage[]" accept="image/*" />
+              <input type="file" name="manualImg" accept="image/*" />
             </td>
           </tr>
           <tr>
@@ -136,31 +132,40 @@
       </script>
     </div>
     <script>
+      const steps = document.getElementById("steps");
+      const stepElements = steps.getElementsByClassName("step");
+
       function addStep() {
-        const stepDiv = document.createElement("tr");
-        stepDiv.className = "step";
-        stepDiv.innerHTML = `
+        
+        if(stepElements.length < 20)
+        {var newStepDiv = document.createElement("tr");
+        newStepDiv.className = "step";
+        newStepDiv.innerHTML = `
               <td>
                   <input
                       type="text"
-                      name="stepDescription[]"
+                      name="stepDescription"
                       placeholder="예) 채소를 먹기 좋게 다져주세요."
                       required
                   />
-                  <input type="file" name="stepImage[]" accept="image/*" required />
+                  <input type="file" name="manualImg" accept="image/*"/>
               </td>
           `;
-        document.getElementById("steps").appendChild(stepDiv);
+        document.getElementById("steps").appendChild(newStepDiv);}
+        else{
+          alert("조리법은 20개 이하로 해주세요.")
+        }
       }
 
       function deleteStep() {
-        const steps = document.getElementById("steps");
-        const stepElements = steps.getElementsByClassName("step");
+        
 
         if (stepElements.length > 3) {
           steps.removeChild(stepElements[stepElements.length - 1]);
         }
       }
     </script>
+    <script src="/js/index.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
   </body>
 </html>

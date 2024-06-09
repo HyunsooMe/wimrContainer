@@ -16,14 +16,12 @@ import lombok.Setter;
 public class PersonalRecipe {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JoinColumn(name = "recipeno")
     private int recipeno;
 
-    private String manual;
+    private String others;
     private String nickname;
     private Date time;
-    private String viewCount;
-
+    private int viewCount;
 
 }

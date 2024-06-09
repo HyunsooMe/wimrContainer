@@ -1,6 +1,13 @@
 package kr.ac.dankook.ace.whatsinmyref.controller;
 
+import java.io.IOException;
+import java.net.URLEncoder;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.StringJoiner;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -16,8 +23,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import jakarta.servlet.http.HttpSession;
+import kr.ac.dankook.ace.whatsinmyref.dto.FileStorageProperties;
 import kr.ac.dankook.ace.whatsinmyref.dto.UserDTO;
+import kr.ac.dankook.ace.whatsinmyref.entity.PersonalRecipe;
+import kr.ac.dankook.ace.whatsinmyref.entity.Recipe;
 import kr.ac.dankook.ace.whatsinmyref.entity.UserRecipe;
+import kr.ac.dankook.ace.whatsinmyref.service.FileService;
+import kr.ac.dankook.ace.whatsinmyref.service.PersonalRecipeService;
+import kr.ac.dankook.ace.whatsinmyref.service.RecipeService;
 import kr.ac.dankook.ace.whatsinmyref.service.UserRecipeService;
 import lombok.RequiredArgsConstructor;
 
@@ -28,59 +42,97 @@ public class UserRecipeController {
 
     @Autowired
     private UserRecipeService userRecipeService;
-    
+    @Autowired
+    private FileService fileService;
+    @Autowired
+    private RecipeService recipeService;
+    @Autowired
+    private PersonalRecipeService personalRecipeService;
 
     // 레시피 등록폼 처리
     @PostMapping("/userrecipe/register")
-    public String registerPro(UserRecipe userrecipe,MultipartFile file) throws Exception{
+    public String registerPro(@RequestParam("recipe_title") String title,
+                            @RequestParam("ingredient") String ingredient,
+                            @RequestParam("tip") String tip,
+                            @RequestParam("stepDescription") String[] stepDescriptions,
+                            @RequestParam("manualImg") MultipartFile[] manualImages,
+                            @RequestParam("mainImg") MultipartFile mainImage,
+                            HttpSession session) throws Exception{
+        
+        Recipe userRecipe = new Recipe();
+        PersonalRecipe personalRecipe=null;
+        int recipeNo;
+        String extension;
+        String mainImagePath;
+        Map<String, String> manual = new HashMap<>();
+        Map<String, String> manualImg = new HashMap<>();
 
-        userRecipeService.write(userrecipe, file);
+        userRecipe.setTitle(title);
+        userRecipe.setIngredient(ingredient);
+        recipeService.saveRecipe(userRecipe);
+        //요리 메인 이미지 저장
+        recipeNo=recipeService.getRecipeByTitle(title).get().getRecipeno();
+        extension=mainImage.getOriginalFilename().substring(mainImage.getOriginalFilename().lastIndexOf("."));
+        mainImagePath=fileService.saveFile(mainImage,recipeNo,extension); //대표 이미지는 /recipeno/mainImage.
+        userRecipe.setPicture(mainImagePath);
+        
+        try {//대표 이미지는 /recipeno/manual0.
+            for (int i=0;i<stepDescriptions.length; i++) {
+                String manualKey = "MANUAL" + (i < 10 ? "0" : "") + Integer.toString(i+1);
+                String manualImgKey = "MANUAL_IMG" + (i < 10 ? "0" : "") + Integer.toString(i+1);
+                manual.put(manualKey, Integer.toString(i+1)+". "+stepDescriptions[i]);
+                manualImg.put(manualImgKey,fileService.saveManualFile(manualImages[i],recipeNo,i+1,extension));
+            }
+        } catch (IOException e) {
+                e.printStackTrace();
+        }
 
-        return "redirect:/userRecipe";
+        userRecipe.setManual(manual);
+        userRecipe.setManualImg(manualImg);
+        recipeService.saveRecipe(userRecipe);
+
+        personalRecipe=new PersonalRecipe(recipeNo,tip,((UserDTO)session.getAttribute("user")).getMemberNick(),new Date(),0);
+        personalRecipeService.save(personalRecipe);
+
+        return "redirect:/Wimr/recipe/usermade/"+URLEncoder.encode(userRecipe.getTitle(),"UTF-8");
     }
 
 
     // 게시글 목록
     @GetMapping("/userRecipes")
     public String userRecipeList(@ModelAttribute UserDTO userDTO, Model model, 
-                             @RequestParam(required = false, defaultValue = "id") String sort,
-                             @PageableDefault(page = 0, size = 10, sort = "id", direction = Sort.Direction.DESC) Pageable pageable){
+                             @RequestParam(required = false, defaultValue = "recipeno") String sort,
+                             @PageableDefault(page = 0, size = 10, sort = "recipeno", direction = Sort.Direction.DESC) Pageable pageable){
 
-        Page<UserRecipe> userRecipeList;
-         if ("viewcount".equals(sort)) {
-            userRecipeList = userRecipeService.userRecipeListByViewCount(pageable);
+        Page<PersonalRecipe> personalRecipeList;
+
+         if ("viewCount".equals(sort)) {
+            personalRecipeList = personalRecipeService.getPersonalRecipeListByViewCount(pageable);
          } else {
-             userRecipeList = userRecipeService.userRecipeList(pageable);
+             personalRecipeList = personalRecipeService.getPersonalRecipeList(pageable);
          }
 
         // 현재 페이지
-         int nowPage = userRecipeList.getPageable().getPageNumber() + 1;
+         int nowPage = personalRecipeList.getPageable().getPageNumber() + 1;
          // 시작 페이지
          int startPage = Math.max(nowPage - 4, 1);
          // 끝 페이지
-         int endPage = Math.min(nowPage + 5, userRecipeList.getTotalPages());
+         int endPage = Math.min(nowPage + 5, personalRecipeList.getTotalPages());
 
-        model.addAttribute("list", userRecipeList);
+
+        // 예시: recipe 리스트를 가져옴
+        List<Recipe> recipeList = recipeService.getAllRecipes();
+
+        // recipeno를 키로 하고 recipe 객체를 값으로 하는 맵 생성
+        Map<Integer, Recipe> recipeMap = recipeList.stream().collect(Collectors.toMap(Recipe::getRecipeno, recipe -> recipe));
+        model.addAttribute("recipeMap", recipeMap);
+
+        model.addAttribute("list", personalRecipeList);
+        model.addAttribute("recipes", recipeService.getAllRecipes());
         model.addAttribute("nowPage", nowPage);
         model.addAttribute("startPage", startPage);
         model.addAttribute("endPage", endPage);
         model.addAttribute("sort", sort);
         return "userRecipeList";
-    }
-
-    //게시글 상세보기
-    @GetMapping("/userRecipeView")
-    public String userRecipeView(Model model, Integer id){
-
-        // 게시글의 상세 정보를 불러와서 모델에 추가
-        UserRecipe userRecipe = userRecipeService.userRecipeView(id);
-        model.addAttribute("userrecipe", userRecipe);
-
-        // 요리 순서를 줄 단위로 분리하여 모델에 추가
-        List<String> steps = userRecipe.getStepAsList();
-        model.addAttribute("steps", steps);
-        model.addAttribute("userrecipe", userRecipeService.userRecipeView(id));
-        userRecipeService.increaseViewCount(id);
-        return "/userRecipeView";
     }
 }

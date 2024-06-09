@@ -2,11 +2,13 @@ package kr.ac.dankook.ace.whatsinmyref.controller;
 
 import kr.ac.dankook.ace.whatsinmyref.dto.UserDTO;
 import kr.ac.dankook.ace.whatsinmyref.dto.boardDTO;
+import kr.ac.dankook.ace.whatsinmyref.entity.PersonalRecipe;
 import kr.ac.dankook.ace.whatsinmyref.entity.Recipe;
 import kr.ac.dankook.ace.whatsinmyref.entity.RecipeCmt;
 import kr.ac.dankook.ace.whatsinmyref.entity.RecipeLikes;
 import kr.ac.dankook.ace.whatsinmyref.entity.Scrap;
 import kr.ac.dankook.ace.whatsinmyref.entity.User;
+import kr.ac.dankook.ace.whatsinmyref.service.PersonalRecipeService;
 import kr.ac.dankook.ace.whatsinmyref.service.RecipeCmtService;
 import kr.ac.dankook.ace.whatsinmyref.service.RecipeLikesService;
 import kr.ac.dankook.ace.whatsinmyref.service.RecipeService;
@@ -54,6 +56,8 @@ public class WhatsInMyRefController {
 
     @Autowired
     private RecipeLikesService recipeLikesService;
+    @Autowired
+    private PersonalRecipeService personalRecipeService;
 
     @GetMapping("")
     public String mainPage(Model model) {
@@ -108,6 +112,63 @@ public class WhatsInMyRefController {
                 else{
                     break;
                 }
+            }
+            model.addAttribute("recipe", recipe);
+            model.addAttribute("ingredients", ingredient);
+            model.addAttribute("others", others);
+            model.addAttribute("manualList", manualList);
+            model.addAttribute("manualImgList", manualImgList);
+            model.addAttribute("comments", recipeCmtService.findRecipeCmtsById(recipe.getRecipeno()));
+            model.addAttribute("likeList", likeRecipeList);
+            model.addAttribute("scrapList", scrapRecipeList);
+        });
+        return "recipe";
+    }
+
+    @GetMapping("/recipe/usermade/{title}")
+    public String listUserRecipe(@PathVariable String title,HttpSession session, Model model) {
+        //Ingredients 재료
+        //Recipe : 사진, 정보
+        //others : 영양 성분
+        
+        List<String> manualList = new ArrayList<>();
+        List<String> manualImgList = new ArrayList<>();
+        recipeService.getRecipeByTitle(title).ifPresent(recipe -> {
+            PersonalRecipe personalRecipe=personalRecipeService.getById(recipe.getRecipeno());
+            personalRecipe.setViewCount(personalRecipe.getViewCount()+1);
+            personalRecipeService.save(personalRecipe);
+            
+            List<String> others = Arrays.asList(personalRecipe.getOthers().split("[,]"));
+            List<String> ingredient = Arrays.asList(recipe.getIngredient().split(","));
+            List<Recipe> scrapRecipeList=new ArrayList<>();
+            List<Recipe> likeRecipeList=new ArrayList<>();
+            if(session.getAttribute("user")!=null)
+            {
+                UserDTO loginUser=(UserDTO)session.getAttribute("user");
+                scrapRecipeList=scrapService.getAllRecipesBymemberNo(loginUser.getMemberNo());
+                likeRecipeList=recipeLikesService.getAllRecipesBymemberNo(loginUser.getMemberNo());
+            }
+            
+            String k1 = "MANUAL0";
+            String k2 = "MANUAL_IMG0";
+
+            int i = 1;
+            int count=0;
+            while(true) {
+                String kee = k1.concat(Integer.toString(i));
+                if ((recipe.getManual().get(kee)!=null)&&!recipe.getManual().get(kee).isEmpty()) {
+                    System.out.println("good");
+                    manualList.add(recipe.getManual().get(kee));
+                    i++;
+                } else {
+                    count=i;
+                    i = 1;
+                    break;
+                }
+            }
+            for(;i<=count;i++){
+                String kee = k2.concat(Integer.toString(i));
+                manualImgList.add(recipe.getManualImg().get(kee));
             }
             model.addAttribute("nickname","정동재");
             model.addAttribute("recipe", recipe);

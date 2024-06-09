@@ -85,10 +85,11 @@
             </li>
             <hr/>
             <li id="recipeDetail"><h2><strong>Recipe</strong></h2>
-                <ul >
-                <div th:each="manual, index : ${manualList}">
+                <ul>
+                    <div style="margin-bottom: 20px;" th:each="manual, index : ${manualList}">
                     <li style="list-style: none; padding-left: 0;" th:text="${manual}"></li>
-                    <div class="manualImg-wrap" th:if="${manualImgList != null}"><img th:src="${manualImgList[index.index]}"/></div>
+                    <div class="manualImg-wrap" th:if="${manualImgList[index.index] != null}"><img th:src="${manualImgList[index.index]}"/></div>
+                    </div>
                 </ul>
             </li>
             <hr />
@@ -117,7 +118,7 @@
                     <div class="comment-box">
                             <div class="commenter display-flex">
                                 <div class="display-flex"><img style="height: 23px; border-radius: 50%;" src="/img/userDefaultImg.png"/><div class="name" th:text="${comment.nickname}"></div></div>
-                               <div class="date" th:text="${#dates.format(comment.time, 'yy-MM-dd-HH-mm')}"></div>
+                               <div class="date" th:text="${#dates.format(comment.time, 'yy-MM-dd HH:mm')}"></div>
                             </div>
                             <div class="comment-main-area">
                                 <div class="comment-content" th:text="${comment.comment}"></div>
