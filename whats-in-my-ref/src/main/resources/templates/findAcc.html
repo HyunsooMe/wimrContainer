@@ -75,12 +75,12 @@
             th:object="${userDTO}"
           >
             <div style="margin-left: 10px; font-size: larger">아이디:</div>
-            <input type="text" id="memberId" th:value="*{memberId}" />
+            <input type="text" id="memberId" th:field="*{memberId}" />
             <div id="idError" class="Error">
               <li>아이디를 입력해주세요.</li>
             </div>
             <div style="margin-left: 10px; font-size: larger">이메일:</div>
-            <input type="text" id="memberEmail" th:value="*{memberEmail}" />
+            <input type="text" id="memberEmail" th:field="*{memberEmail}" />
             <div id="emailError2" class="Error">
               <li>이메일을 입력해주세요.</li>
             </div>
@@ -88,6 +88,12 @@
               <button type="button" onclick="pwdCheck()">비밀번호 찾기</button>
             </div>
           </form>
+          <div th:if="${errorMessage}">
+            <script th:inline="javascript">
+              alert(/*[[${errorMessage}]]*/);
+              location.replace(/*[[${searchUrl}]]*/);
+            </script>
+          </div>
         </div>
       </div>
     </div>
