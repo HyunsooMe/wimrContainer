@@ -16,13 +16,13 @@ import lombok.Setter;
 public class MyRecipe {
 
     @Id
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.REMOVE)
     @JsonBackReference
     @JoinColumn(name="memberNo")
     private User user;
 
     @Id
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.REMOVE)
     @JsonBackReference
     @JoinColumn(name="recipeno")
     private Recipe recipe;
