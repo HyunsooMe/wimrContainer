@@ -111,6 +111,7 @@ label {
 #recipe-results {
   display: grid;
   grid-template-columns: repeat(4, 1fr); /* 4열 그리드로 설정 */
+  padding: 60px 0;
 }
 
 .recipe {
@@ -170,6 +171,7 @@ label {
   top: 50%;
   transform: translate(-50%, -50%);
   display: none; /* Initially hidden */
+  z-index: 102;
 }
 
 .loader img {

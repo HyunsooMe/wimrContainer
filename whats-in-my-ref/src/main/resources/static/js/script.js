@@ -196,11 +196,23 @@ checkboxes.forEach(function (checkbox) {
 // Function to show the loader
 function showLoader() {
   document.getElementById("loader").style.display = "block";
+  document.getElementById("overlayForLoading").style.display="block";
+  document.body.style.overflow = "hidden"; // Disable scrolling
 }
 
 // Function to hide the loader
 function hideLoader() {
   document.getElementById("loader").style.display = "none";
+  document.getElementById("overlayForLoading").style.display="none";
+  document.body.style.overflow = "auto"; // Enable scrolling
+}
+// api 호출 완료하면 자동 스크롤
+function scrollToResults() {
+  const recipeResults = document.getElementById("recipe-results");
+  recipeResults.scrollIntoView({
+    behavior: "smooth",
+    block: "start",
+  });
 }
 
 const findRecipeBtn = document.getElementById("findRecipeBtn");
@@ -215,6 +227,7 @@ function getFoodRecipe() {
     alert("재료를 입력하세요");
     return;
   }
+
 
   let apiUrl = `http://openapi.foodsafetykorea.go.kr/api/f415b345bda946528b8e/COOKRCP01/json/0/1000/`;
   showLoader();
@@ -233,6 +246,7 @@ function getFoodRecipe() {
         );
         console.log(filteredRecipes);
         displayRecipes(filteredRecipes);
+        scrollToResults();
       } else {
         console.error("Unexpected data structure", data);
       }
