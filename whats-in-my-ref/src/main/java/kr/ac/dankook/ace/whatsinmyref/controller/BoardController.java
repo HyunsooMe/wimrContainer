@@ -30,6 +30,11 @@ public class BoardController {
     private BoardService boardService;
     @Autowired
     private MyBoardService myBoardService;
+
+    @GetMapping("")
+    public String toMainPage(){
+        return "redirect:/Wimr";
+    }
     
      // 게시글 목록
      @GetMapping("/boardList")

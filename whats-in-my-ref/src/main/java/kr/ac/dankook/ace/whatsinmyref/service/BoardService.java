@@ -1,6 +1,8 @@
 package kr.ac.dankook.ace.whatsinmyref.service;
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -68,5 +70,13 @@ public class BoardService {
             // 필요한 경우 다른 필드도 추가
             boardRepository.save(existingBoard);
         }
+    }
+
+    public List<Board> getAllBoardsByNickname(String nickname) {
+        return boardRepository.findAllByNickname(nickname);
+    }
+
+    public void save(Board board) {
+        boardRepository.save(board);
     }
 }

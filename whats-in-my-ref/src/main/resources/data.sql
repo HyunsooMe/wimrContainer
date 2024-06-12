@@ -1,3 +1,5 @@
+CREATE DATABASE  IF NOT EXISTS `wimr` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `wimr`;
 -- MySQL dump 10.13  Distrib 8.0.36, for Win64 (x86_64)
 --
 -- Host: 127.0.0.1    Database: wimr
@@ -118,7 +120,6 @@ CREATE TABLE `member` (
 
 LOCK TABLES `member` WRITE;
 /*!40000 ALTER TABLE `member` DISABLE KEYS */;
-INSERT INTO `member` VALUES (1,'vwjdehdwov@naver.com','vwjdehdwov','정동재','d@ngjae3203');
 /*!40000 ALTER TABLE `member` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -147,6 +148,84 @@ CREATE TABLE `membercmt` (
 LOCK TABLES `membercmt` WRITE;
 /*!40000 ALTER TABLE `membercmt` DISABLE KEYS */;
 /*!40000 ALTER TABLE `membercmt` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `my_board`
+--
+
+DROP TABLE IF EXISTS `my_board`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `my_board` (
+  `bno` int NOT NULL,
+  `member_no` int NOT NULL,
+  PRIMARY KEY (`bno`,`member_no`),
+  KEY `FKs2un8uokbiv1348yovxsehghm` (`member_no`),
+  CONSTRAINT `FK26axtu1qqngc279bduufrp73w` FOREIGN KEY (`bno`) REFERENCES `board` (`bno`),
+  CONSTRAINT `FKs2un8uokbiv1348yovxsehghm` FOREIGN KEY (`member_no`) REFERENCES `member` (`member_no`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `my_board`
+--
+
+LOCK TABLES `my_board` WRITE;
+/*!40000 ALTER TABLE `my_board` DISABLE KEYS */;
+/*!40000 ALTER TABLE `my_board` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `my_recipe`
+--
+
+DROP TABLE IF EXISTS `my_recipe`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `my_recipe` (
+  `member_no` int NOT NULL,
+  `recipeno` int NOT NULL,
+  PRIMARY KEY (`member_no`,`recipeno`),
+  KEY `FKesh57wd8npj43j4so5fkuy0ax` (`recipeno`),
+  CONSTRAINT `FKesh57wd8npj43j4so5fkuy0ax` FOREIGN KEY (`recipeno`) REFERENCES `recipe` (`recipeno`),
+  CONSTRAINT `FKhjxq6fxfwpnlgs3jbm3ugbxut` FOREIGN KEY (`member_no`) REFERENCES `member` (`member_no`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `my_recipe`
+--
+
+LOCK TABLES `my_recipe` WRITE;
+/*!40000 ALTER TABLE `my_recipe` DISABLE KEYS */;
+/*!40000 ALTER TABLE `my_recipe` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `personal_recipe`
+--
+
+DROP TABLE IF EXISTS `personal_recipe`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `personal_recipe` (
+  `recipeno` int NOT NULL,
+  `view_count` int NOT NULL,
+  `time` datetime(6) DEFAULT NULL,
+  `nickname` varchar(255) DEFAULT NULL,
+  `others` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`recipeno`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `personal_recipe`
+--
+
+LOCK TABLES `personal_recipe` WRITE;
+/*!40000 ALTER TABLE `personal_recipe` DISABLE KEYS */;
+/*!40000 ALTER TABLE `personal_recipe` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -379,4 +458,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-06-08 17:42:21
+-- Dump completed on 2024-06-12  4:10:34

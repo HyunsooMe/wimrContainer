@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Configuration;
 
 import lombok.Data;
 
-// get file.upload.location from application.properties
+
 @Configuration
 @ConfigurationProperties(prefix = "file.upload")
 @Data

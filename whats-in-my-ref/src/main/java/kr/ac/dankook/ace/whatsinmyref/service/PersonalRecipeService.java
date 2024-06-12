@@ -1,6 +1,8 @@
 package kr.ac.dankook.ace.whatsinmyref.service;
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -32,6 +34,10 @@ public class PersonalRecipeService {
 
     public Page<PersonalRecipe> getPersonalRecipeList(Pageable pageable) {
         return personalRecipeRepository.findAll(pageable);
+    }
+
+    public List<PersonalRecipe> getAllByNickname(String prevNick) {
+        return personalRecipeRepository.findAllByNickname(prevNick);
     }
 
 }

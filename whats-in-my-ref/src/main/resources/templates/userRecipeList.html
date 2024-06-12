@@ -22,7 +22,7 @@
     <header th:replace="~{fragments/header::header}"></header>
     <div class="sidebar-wrap"><div th:replace="~{fragments/sideNav::sidebar}"/></div>
     <div class="board-wrap">
-      <h2>특별한 레시피</h2>
+      <h2>유저 레시피 게시판</h2>
       <div class="sidebar-wrap">
         <div th:replace="~{fragments/sideNav::sidebar}" />
       </div>
@@ -59,9 +59,9 @@
                   th:href="'/Wimr/recipe/usermade/'+${userrecipe.recipeno}"
                 ></a>
               </td>
-              <td
-                th:text="${userrecipe.nickname}"
-              ></td>
+              <td>
+                <a th:href="'/Wimr/myPage/'+ ${userrecipe.nickname}" ><span th:text="${userrecipe.nickname}"></span></a>
+              </td>
               <td
                 th:text="${#dates.format(userrecipe.time, 'yyyy-MM-dd')}"
               ></td>

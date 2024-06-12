@@ -9,6 +9,7 @@ import kr.ac.dankook.ace.whatsinmyref.entity.RecipeCmt;
 import kr.ac.dankook.ace.whatsinmyref.entity.RecipeLikes;
 import kr.ac.dankook.ace.whatsinmyref.entity.Scrap;
 import kr.ac.dankook.ace.whatsinmyref.entity.User;
+import kr.ac.dankook.ace.whatsinmyref.service.BoardService;
 import kr.ac.dankook.ace.whatsinmyref.service.MyBoardService;
 import kr.ac.dankook.ace.whatsinmyref.service.MyRecipeService;
 import kr.ac.dankook.ace.whatsinmyref.service.PersonalRecipeService;
@@ -38,10 +39,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import jakarta.servlet.http.HttpSession;
 import jakarta.websocket.server.PathParam;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 
 
@@ -67,6 +64,8 @@ public class WhatsInMyRefController {
     private MyRecipeService myRecipeService;
     @Autowired
     private MyBoardService myBoardService;
+    @Autowired
+    private BoardService boardService;
 
     @GetMapping("")
     public String mainPage(Model model) {
@@ -82,8 +81,9 @@ public class WhatsInMyRefController {
     @GetMapping("/recipe/getRecipeByTitle/{title}")
     public String getRecipe(@PathVariable String title,HttpSession session, Model model) {
         int recipeNo=recipeService.getRecipeByTitleAndRecipenoLessThan(title,1000).getRecipeno();
-        return "redirect:/Wimr/recipe/"+recipeNo;
+        return "redirect:/Wimr/recipe/which/"+recipeNo;
     }
+    
     
     @GetMapping("/recipe/which/{recipeno}")
     public String isPersonalRecipe(@PathVariable int recipeno) {
@@ -349,9 +349,14 @@ public class WhatsInMyRefController {
     }
 
     @PostMapping("/editProfile")
-    public String editProfile(@RequestParam String memberNick, @RequestParam String memberEmail, HttpSession session) throws UnsupportedEncodingException {
+    public String editProfile(@RequestParam String memberNick, @RequestParam String memberEmail, HttpSession session,RedirectAttributes redirectAttributes) throws UnsupportedEncodingException {
         UserDTO loginUser=(UserDTO)session.getAttribute("user");
         System.out.println("Before update: " + loginUser);
+        String prevNick=loginUser.getMemberNick();
+
+        if(userService.existsByMemberNick(memberNick)){
+            return "redirect:/Wimr/myPage/"+URLEncoder.encode(prevNick, "UTF-8");
+        }
 
         if(memberNick!=null){
             loginUser.setMemberNick(memberNick);
@@ -365,6 +370,21 @@ public class WhatsInMyRefController {
 
         userService.updateUser(loginUser);
         System.out.println("User updated");
+        //board의 nick 변경
+        if(boardService.getAllBoardsByNickname(prevNick)!=null){
+            for(Board board:boardService.getAllBoardsByNickname(prevNick)){
+                board.setNickname(memberNick);
+                boardService.save(board);
+            }
+        }
+
+        //recipe의 nick 변경
+        if(personalRecipeService.getAllByNickname(prevNick)!=null){
+            for(PersonalRecipe pRecipe:personalRecipeService.getAllByNickname(prevNick)){
+                pRecipe.setNickname(memberNick);
+                personalRecipeService.save(pRecipe);
+            }
+        }
         return "redirect:/Wimr/myPage/"+URLEncoder.encode(memberNick, "UTF-8");
     }
     

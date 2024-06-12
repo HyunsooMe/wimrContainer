@@ -97,6 +97,6 @@ function searchIngredients() {
 
 //레시피 화면 전환
 function redirectToRecipePage(element) {
-  var title = element.getAttribute('data-title');
-  window.location.href = '/Wimr/recipe/getRecipeByTitle/' + encodeURIComponent(title);
+  var recipeno = element.getAttribute('data-recipeno');
+  window.location.href = '/Wimr/recipe/which/' + encodeURIComponent(recipeno);
 }

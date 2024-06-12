@@ -56,3 +56,4 @@ function form_check() {
     form.submit();
     return true;
 }
+

@@ -242,7 +242,7 @@ function getFoodRecipe() {
       if (data && data.COOKRCP01 && data.COOKRCP01.row) {
         const recipes = data.COOKRCP01.row;
         const filteredRecipes = recipes.filter((recipe) =>
-          selectedItems.every((item) => recipe.RCP_PARTS_DTLS.includes(item))
+          selectedItems.some((item) => recipe.RCP_PARTS_DTLS.includes(item))
         );
         console.log(filteredRecipes);
         displayRecipes(filteredRecipes);
