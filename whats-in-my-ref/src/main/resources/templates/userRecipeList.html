@@ -77,7 +77,7 @@
             <!-- 페이지가 현재 페이지와 다를 때 -->
             <a
               th:if="${page != nowPage}"
-              th:href="@{/userRecipe(page = ${page-1})}"
+              th:href="@{/Wimr/userRecipes(page = ${page-1})}"
               th:text="${page}"
             ></a>
             <!-- 페이지가 현재 페이지와 같을 때 -->
