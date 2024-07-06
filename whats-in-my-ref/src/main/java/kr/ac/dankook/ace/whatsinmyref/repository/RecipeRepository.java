@@ -13,8 +13,8 @@ import java.util.Optional;
 @Repository
 public interface RecipeRepository extends JpaRepository<Recipe, Integer> {
     Optional<Recipe> findByTitle(String title);
-    
-    @Query("SELECT r FROM Recipe r ORDER BY r.likecount DESC")
+
+    @Query("SELECT r FROM Recipe r  ORDER BY r.likecount DESC")
     List<Recipe> findTop3ByLikecountDesc();
 
     Optional<Recipe> findByTitleAndRecipenoLessThan(String title, int recipeno);

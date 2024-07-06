@@ -1,7 +1,9 @@
 package kr.ac.dankook.ace.whatsinmyref.entity;
 
-import java.io.Serializable;
+import lombok.EqualsAndHashCode;
 
+import java.io.Serializable;
+@EqualsAndHashCode
 public class ScrapNo implements Serializable {
 
     private int user;
